@@ -10,14 +10,15 @@
     "seed": "node server/script/seed.js"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
+    "bcrypt": "^5.1.0",
     "fetch": "^1.1.0",
     "next": "13.2.4",
+    "next-auth": "^4.20.1",
     "node-fetch": "^3.3.1",
     "openai": "^3.2.1",
     "pg": "^8.10.0",
