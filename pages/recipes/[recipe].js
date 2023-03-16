@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import fetch from "node-fetch";
 import styles from "../../styles/index.module.css";
 import { useRouter } from 'next/router';
 
