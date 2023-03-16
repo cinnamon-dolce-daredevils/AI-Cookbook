@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import Link from "next/link";
+import styles from "../../styles/index.module.css";
 
 const apiKey = "2513e401e1424711aabbf36076908290";
 
@@ -46,14 +47,14 @@ export default function AddIng() {
   }
 
   return (
-    <div>
+    <div className={styles.body}>
       <Head>
         <title>Pantry Popper</title>
         <link rel="icon" href="/images/forkman-removebg.png" />
       </Head>
 
-      <main>
-        <img src="/images/forkman-removebg.png" />
+      <main className={styles.main}>
+        <img src="/images/forkman-removebg.png" className={styles.icon} />
         <h3>Whatchu got in yo pantry?</h3>
         <form>
           <input
