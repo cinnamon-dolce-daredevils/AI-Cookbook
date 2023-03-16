@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import { Provider } from 'next-auth/client';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@emotion/react';
 // below are just roboto fonts from google
@@ -20,11 +20,15 @@ const theme = createTheme({
 });
 export default function App({ Component, pageProps }) {
   return (
+  <Provider session={pageProps.session}>
     <Layout>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <Component {...pageProps} />
+           <Component {...pageProps} />
       </ThemeProvider>
     </Layout>
+      </Provider>
   );
 }
+
+export default MyApp;
