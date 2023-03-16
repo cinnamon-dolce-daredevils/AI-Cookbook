@@ -1,4 +1,3 @@
-import { SessionProvider } from 'next-auth/react';
 import Layout from '@/components/Layout';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@emotion/react';
@@ -24,9 +23,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     <Layout>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-          <SessionProvider session={session} refetchInterval={5 * 60}>
             <Component {...pageProps} />
-          </SessionProvider>
       </ThemeProvider>
     </Layout>
   );
