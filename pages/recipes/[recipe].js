@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import fetch from "node-fetch";
 import styles from "../../styles/index.module.css";
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Recipe() {
   const [result, setResult] = useState();
@@ -47,11 +47,16 @@ export default function Recipe() {
     <div className={styles.body}>
       <Head>
         <title>{recipe}</title>
-        <link rel="icon" href="/images/forkman.jpg" />
+        <link rel="icon" href="/images/forkman-removebg.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/images/forkman.jpg" className={styles.icon} />
+        <img src="/images/forkman-removebg.png" className={styles.icon} />
+        <Link href={{
+          pathname: '/recipes'}}>
+          <div className={styles.back}> Choose Another Recipe</div>
+        </Link>
+
         <h3>{isLoading ? 'Loading...' : recipe}</h3>
         {isLoading ? (
           <img src="/images/fridge.gif" />
