@@ -6,14 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "node server/script/seed.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.11.0",
     "fetch": "^1.1.0",
     "next": "13.2.4",
     "node-fetch": "^3.3.1",
     "openai": "^3.2.1",
+    "pg": "^8.10.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sequelize": "^6.29.3"
   }
 }

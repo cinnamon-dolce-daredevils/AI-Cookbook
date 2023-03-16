@@ -3,12 +3,16 @@
 const db = require('./db');
 
 const User = require('./models/User');
+const Pantry = require('./models/Pantry')
 
 //associations could go here!
+
+
 
 module.exports = {
   db,
   models: {
     User,
+    Pantry
   },
 };
