@@ -1,4 +1,5 @@
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
+import Layout from '@/components/Layout';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@emotion/react';
 // below are just roboto fonts from google
@@ -18,17 +19,17 @@ const theme = createTheme({
     },
   },
 });
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
-  <Provider session={pageProps.session}>
     <Layout>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-           <Component {...pageProps} />
+          <SessionProvider session={session} refetchInterval={5 * 60}>
+            <Component {...pageProps} />
+          </SessionProvider>
       </ThemeProvider>
     </Layout>
-      </Provider>
   );
 }
 
-export default MyApp;
+export default App;
