@@ -41,7 +41,7 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
   });
   const farmBoyOrange = createTheme({
     palette: {
-      mode: 'dark',
+      mode: 'light',
       primary: {
         //
         main: '#ef6c00',
@@ -62,7 +62,6 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
     <ThemeProvider theme={farmBoyOrange}>
       <Layout>
         <div>
-          {' '}
           <ToggleButtonGroup
             backgroundColor="secondary"
             color="secondary"
