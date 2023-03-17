@@ -15,7 +15,7 @@ import { green, purple } from '@mui/material/colors';
 
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
-
+const [supabase] = useState(() => createBrowserSupabaseClient());
   const purpleDirtyDark = createTheme({
     palette: {
       theme: 'dark',
