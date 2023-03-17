@@ -6,12 +6,17 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { createTheme } from '@mui/system';
+import { useTheme } from '@mui/material/styles';
+function Header () {
 
-const Header = () => {
+  const theme = useTheme();
   return (
-    <AppBar position="static" color="primary">
-      <Toolbar>
+    <AppBar
+      position="static"
+      color={theme.primary}
+      backgroundColor={theme.primary}
+    >
+      <Toolbar color={theme.secondary} backgroundColor={theme.primary}>
         <IconButton
           size="large"
           edge="start"
@@ -21,8 +26,14 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
+        <Typography
+          color="theme.secondary"
+          backgroundColor={theme.primary}
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        >
+          Pantry Popper
         </Typography>
         <Button color="inherit">Login</Button>
       </Toolbar>
