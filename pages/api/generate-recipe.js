@@ -16,10 +16,12 @@ export default async function (req, res) {
   }
 
   const ingredients = req.body.ingredients || '';
-  if (ingredients.trim().length === 0) {
+  const selectedRecipe = req.body.selectedRecipe || '';
+  
+  if (ingredients.trim().length === 0 || selectedRecipe.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid ingredient",
+        message: "Please enter valid ingredients and a selected recipe",
       }
     });
     return;
@@ -28,7 +30,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(ingredients),
+      prompt: generatePrompt(ingredients, selectedRecipe),
       temperature: 0.6,
       max_tokens: 900,
     });
@@ -49,16 +51,8 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(ingredients) {
+function generatePrompt(ingredients, selectedRecipe) {
   const capitalizedIngredients =
     ingredients[0].toUpperCase() + ingredients.slice(1).toLowerCase();
-  return `Suggest meals with recipes that contain only, but not necessarily all, of these ingredients.
-
-Ingredients: american cheese, mayo, turkey, white bread, tortilla, provalone.
-Meals: sandwich, turkey wrap, grilled cheese
-Ingredients: milk, cheese, eggs, four, sugar, salt
-Meals: cake, cupcake, cookies
-Ingredients: ${capitalizedIngredients}
-Meals: `;
+  return `Generate a detailed recipe for ${selectedRecipe}, using only these ingredients: ${capitalizedIngredients}, table salt, and water. Provide only the instructions and do not include the ingredients in the response.`;
 }
-

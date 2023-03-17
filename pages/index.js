@@ -18,6 +18,10 @@ const Home = () => {
         <Link href={'/ingredients'}>Add Ingredients</Link>
     </div>
   )
+    <>
+      <Link href={'/ingredients-recipes'}>Add Ingredients</Link>
+    </>
+  );
 }
 
 export default Home
