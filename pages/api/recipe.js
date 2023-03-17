@@ -1,7 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-import recipe from "../recipes/[recipe]";
 import { useRouter } from 'next/router';
-
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -18,11 +16,22 @@ export default async function (req, res) {
     return;
   }
 
+  const ingredients = req.body.ingredients || '';
+  const selectedRecipe = req.body.selectedRecipe || '';
+
+  if (ingredients.trim().length === 0 || selectedRecipe.trim().length === 0) {
+    res.status(400).json({
+      error: {
+        message: "Please enter valid ingredients and a selected recipe",
+      }
+    });
+    return;
+  }
+
   try {
-    const recipe = req.body.recipe || '';
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generateRecipe(recipe),
+      prompt: generatePrompt(ingredients, selectedRecipe),
       temperature: 0.6,
       max_tokens: 900,
     });
@@ -44,8 +53,8 @@ export default async function (req, res) {
   }
 }
 
-function generateRecipe(recipe) {
-    return `Generate a detailed recipe for ${recipe} only send the instructions, you do not need to send the ingredients`;
-  }
-  
-  
+function generatePrompt(ingredients, selectedRecipe) {
+  const capitalizedIngredients =
+    ingredients[0].toUpperCase() + ingredients.slice(1).toLowerCase();
+  return `Generate a detailed recipe for ${selectedRecipe}, using only these ingredients: ${capitalizedIngredients}, table salt, and water. Provide only the instructions and do not include the ingredients in the response.`;
+}

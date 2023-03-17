@@ -16,7 +16,44 @@
 
 .body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
+
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.724);
+  z-index: 100;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.loading h1 {
+  font-size: 7rem;
+  margin-bottom: 2rem;
+}
+
+.loading img {
+  width: 900px;
+  height: auto;
+}
+
 
 .main,
 .main input {
@@ -32,7 +69,7 @@
   padding-top: 60px;
 }
 .main .icon {
-  width: 200px;
+  width: 100px;
 }
 .main h3 {
   font-size: 32px;
@@ -72,18 +109,19 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #f5f5f5;
+  background-color: #e3e3e3;
   color: #000000;
   text-align: center;
   text-decoration: none;
-  padding-right: 60px;
-  padding-left: 60px;
-  padding-bottom: 60px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  width: 900px;
+  width: 55%;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
+  border: 1px solid #b5b5b5;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 20px;
   line-height: 1.5;
@@ -94,8 +132,45 @@
 .recipe:hover {
   background-color: #ffffff;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+
 }
 
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 10px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.suggestions li {
+  background-color: #7d598f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin: 5px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  line-height: 1.5;
+  word-spacing: 0.25em;
+  white-space: pre-wrap;
+}
+
+.suggestions li:hover {
+  background-color: #4b4b4b;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
 
 .result {
   display: flex;
@@ -109,7 +184,7 @@
   display: block;
   padding: 20px;
   border-radius: 10px;
-  background-color: #d1d1d1;
+  background-color: #ffffff;
   color: #292929;
   text-align: center;
   text-decoration: none;
@@ -126,14 +201,15 @@
 }
 
 .ingredientsList {
-  position: absolute;
+  position: fixed;
   left: 0;
-  top: 0;
+  top: 65px;
   width: 20%;
+  align-items: center;
   height: 100%;
   overflow-y: scroll;
   padding: 1rem;
-  background-color: #313131;
+  background-color: #42004b;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -141,19 +217,51 @@
   padding: 0.5rem;
   border-bottom: 1px solid #a900c0;
   cursor: pointer;
+  color: #e0e0e0;
 }
 
 .ingredientItem:hover {
-  background-color: #695074;
+  background-color: #56007b;
+  border-radius: 10px;
+}
+
+.mealList {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  right: 0;
+  top: 65px;
+  width: 20%;
+  align-items: center;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 1rem;
+  background-color: #42004b;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  
+}
+
+.mealItem {
+  padding: 0.5rem;
+  border-bottom: 1px solid #a900c0;
+  cursor: pointer;
+  color: #e0e0e0;
+}
+
+.mealItem:hover {
+  background-color: #56007b;
+  border-radius: 10px;
 }
 
 .ingredientDetails {
   position: fixed;
-  right: 0;
-  top: 0;
+  top: 80px;
+  left: 25%;
   width: 30%;
-  height: 100%;
-  padding: 1rem;
+  height: 50%;
+  padding: 20px;
   background-color: rgb(123, 123, 123);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   overflow-y: scroll;
