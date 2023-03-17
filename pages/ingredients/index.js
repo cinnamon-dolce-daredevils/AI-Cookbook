@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 
 import Link from "next/link";
-import styles from "../../styles/index.module.css";
+
 
 const apiKey = "2513e401e1424711aabbf36076908290";
 

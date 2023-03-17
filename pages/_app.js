@@ -1,84 +1,44 @@
 import * as React from 'react';
-import Layout from '@/components/Layout';
-import '@/styles/globals.css';
-import { ThemeProvider, Typography } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 // below are just roboto fonts from google
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import Layout from '@/components/Layout';
 //imports theme
 import { CssBaseline, createTheme } from '@mui/material';
-import { orange, blue, red } from '@mui/material/colors';
+import { green, purple } from '@mui/material/colors';
 
-// import toggle
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-// import switch
-import Switch from '@mui/material/Switch';
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
-  // theme selector
-  const [alignment, setAlignment] = React.useState('web');
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
 
-  
-  const purpleDrankKing = createTheme({
+  const purpleDirtyDark = createTheme({
     palette: {
-      mode: 'light',
+      theme: 'dark',
       primary: {
-        // a light purple
-        main: '#7e57c2',
+        main: '#8e24aa',
       },
       secondary: {
-        // a grassy green
         main: '#43a047',
       },
-    },
-  });
-  const farmBoyOrange = createTheme({
-    palette: {
-      mode: 'light',
-      primary: {
-        //
-        main: '#ef6c00',
+      background: {
+        default: '#212121',
       },
-      secondary: {
-        main: '#fbc02d',
+      text: {
+        primary: '#fafafa',
+        secondary: '#eeeeee',
+        disabled: '#9e9e9e',
+        hint: '#eeeeee',
       },
     },
   });
-  // should put theme in theme provider when options are made
-  let themeSelector = (theme) => {
-    return theme;
-  };
 
-  const [theme, setTheme] = React.useState('farmBoyOrange')
-  // made a div to easily change colors for now
+  const themeSetter = purpleDirtyDark
   return (
-    <ThemeProvider theme={farmBoyOrange}>
+    <ThemeProvider theme={themeSetter}>
       <Layout>
-        <div>
-          <ToggleButtonGroup
-            backgroundColor="secondary"
-            color="secondary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            aria-label="Platform"
-          >
-            <p>Choose your theme!!!</p>
-            <ToggleButton color="primary" value="purpleDrankKing">
-              Purple Drank King
-            </ToggleButton>
-            <ToggleButton value="farmBoyOrange">Farm Boy Orange</ToggleButton>
-            <p> Dark Mode Toggle</p>
-            <Switch {...label} defaultChecked />
-          </ToggleButtonGroup>
-        </div>
+        
         <CssBaseline />
         <Component {...pageProps} />
       </Layout>
