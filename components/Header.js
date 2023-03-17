@@ -7,16 +7,17 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '@mui/material/styles';
+
+// are colors being set here?
 function Header () {
 
   const theme = useTheme();
   return (
     <AppBar
       position="static"
-      color={theme.primary}
-      backgroundColor={theme.primary}
+      backgroundColor='secondary'
     >
-      <Toolbar color={theme.secondary} backgroundColor={theme.primary}>
+      <Toolbar backgroundColor='secondary'>
         <IconButton
           size="large"
           edge="start"
