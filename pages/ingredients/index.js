@@ -113,7 +113,7 @@ export default function AddIng() {
             onChange={handleInputChange}
           />
         </form>
-        <ul>
+        <ul className={styles.suggestions}>
           {suggestions.map((suggestion, index) => (
             <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
               {suggestion.name}
