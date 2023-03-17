@@ -1,12 +1,24 @@
-import { Inter } from 'next/font/google';
+import { Auth } from '@supabase/auth-ui-react'
+import { ThemeSupa } from '@supabase/auth-ui-shared'
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Link from 'next/link';
+import Account from '@/components/Account';
 
-const inter = Inter({ subsets: ['latin'] });
+const Home = () => {
+  const session = useSession()
+  const supabase = useSupabaseClient()
 
-export default function Home() {
   return (
-    <>
-      <Link href={'/ingredients'}>Add Ingredients</Link>
-    </>
-  );
+    <div className="container" style={{ padding: '50px 0 100px 0' }}>
+      {!session ? (
+        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
+      ) : (
+        <Account session={session} />
+      )}
+        <Link href={'/ingredients'}>Add Ingredients</Link>
+    </div>
+  )
 }
+
+export default Home
+

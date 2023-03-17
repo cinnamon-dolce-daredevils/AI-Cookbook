@@ -1,3 +1,7 @@
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { SessionContextProvider } from '@supabase/auth-helpers-react'
+import { useState } from 'react'
+
 import Layout from '@/components/Layout';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@emotion/react';
@@ -18,12 +22,16 @@ const theme = createTheme({
     },
   },
 });
-function App({ Component, pageProps: { session, ...pageProps } }) {
+function App({ Component, pageProps }) {
+  const [supabase] = useState(() => createBrowserSupabaseClient())
+
   return (
     <Layout>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
+          <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
             <Component {...pageProps} />
+          </SessionContextProvider>
       </ThemeProvider>
     </Layout>
   );
