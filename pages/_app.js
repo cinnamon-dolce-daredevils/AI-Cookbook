@@ -15,6 +15,7 @@ import { green, purple } from '@mui/material/colors';
 
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
   const purpleDirtyDark = createTheme({
     palette: {
@@ -41,9 +42,8 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <ThemeProvider theme={themeSetter}>
       <Layout>
-        
         <CssBaseline />
-      <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
+          <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
             <Component {...pageProps} />
           </SessionContextProvider>
       </Layout>
