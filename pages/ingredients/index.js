@@ -1,9 +1,13 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import Link from "next/link";
 import styles from "../../styles/index.module.css";
 
+
 const apiKey = "2513e401e1424711aabbf36076908290";
+
+
 
 async function callAutocompleteApi(input) {
     const response = await fetch(
@@ -43,6 +47,8 @@ export default function AddIng() {
   const [ingredientsInput, setIngredientsInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedIngredient, setSelectedIngredient] = useState(null);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [expandedIngredient, setExpandedIngredient] = useState(null);
 
   async function handleInputChange(event) {
     const input = event.target.value;
@@ -61,13 +67,25 @@ export default function AddIng() {
     }
   }
 
+  function handleIngredientClick(ingredient) {
+    setExpandedIngredient(ingredient);
+  }
+  
+  function closeExpandedView() {
+    setExpandedIngredient(null);
+  }  
+
   async function handleSuggestionClick(suggestion) {
     setIngredientsInput("");
     setSuggestions([]);
   
     try {
       const ingredientDetails = await fetchIngredientDetails(suggestion.id);
-      setSelectedIngredient(ingredientDetails);
+      setSelectedIngredients((prevIngredients) => [
+        ...prevIngredients,
+        ingredientDetails,
+      ]);
+      setExpandedIngredient(null);
     } catch (error) {
       console.error(error);
       alert(error.message);
@@ -75,11 +93,12 @@ export default function AddIng() {
   }
   
   
+  
 
   return (
     <div className={styles.body}>
       <Head>
-        <title>Pantry Popper</title>
+        <title>Ingredient IQ</title>
         <link rel="icon" href="/images/forkman-removebg.png" />
       </Head>
   
@@ -129,11 +148,61 @@ export default function AddIng() {
   </>
 )}
 
-
-
-
-      </main>
-      <Link href={"/"}>Return to Home</Link>
+</main>
+    <div className={styles.ingredientsList}>
+      {selectedIngredients.map((ingredient, index) => (
+        <div
+          key={index}
+          className={styles.ingredientItem}
+          onClick={() => handleIngredientClick(ingredient)}
+        >
+          {ingredient.name}
+        </div>
+      ))}
     </div>
-  );
+    {expandedIngredient && (
+      <div className={styles.ingredientDetails} onClick={closeExpandedView}>
+        <p>{expandedIngredient.name}</p>
+        <img
+          src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
+          alt={expandedIngredient.name}
+        />
+        {expandedIngredient.nutrition &&
+          expandedIngredient.nutrition.nutrients && (
+            <>
+              <p>
+                Calories:{" "}
+                {expandedIngredient.nutrition.nutrients.find(
+                  (n) => n.name === "Calories"
+                )?.amount || "N/A"}{" "}
+                kcal
+              </p>
+              <p>
+                Carbs:{" "}
+                {expandedIngredient.nutrition.nutrients.find(
+                  (n) => n.name === "Carbohydrates"
+                )?.amount || "N/A"}{" "}
+                g
+              </p>
+              <p>
+                Fat:{" "}
+                {expandedIngredient.nutrition.nutrients.find(
+                  (n) => n.name === "Fat"
+                )?.amount || "N/A"}{" "}
+                g
+              </p>
+              <p>
+                Protein:{" "}
+                {expandedIngredient.nutrition.nutrients.find(
+                  (n) => n.name === "Protein"
+                )?.amount || "N/A"}{" "}
+                g
+              </p>
+            </>
+          )}
+      </div>
+    )}
+    <Link href={"/"}>Return to Home</Link>
+  </div>
+);
 }
