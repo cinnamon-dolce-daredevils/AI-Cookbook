@@ -9,6 +9,7 @@ const Home = () => {
   const supabase = useSupabaseClient()
 
   return (
+    <>
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       {!session ? (
         <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
@@ -16,10 +17,8 @@ const Home = () => {
         <Account session={session} />
       )}
         <Link href={'/ingredients'}>Add Ingredients</Link>
-    </div>
-  )
-    <>
       <Link href={'/ingredients-recipes'}>Add Ingredients</Link>
+    </div>
     </>
   );
 }
