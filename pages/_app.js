@@ -1,3 +1,6 @@
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { SessionContextProvider } from '@supabase/auth-helpers-react'
+import { useState } from 'react'
 import * as React from 'react';
 import Layout from '@/components/Layout';
 import '@/styles/globals.css';
@@ -17,15 +20,16 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 // import switch
 import Switch from '@mui/material/Switch';
 
-function App({ Component, pageProps: { session, ...pageProps } }) {
+function App({ Component, pageProps }) {
+  const [supabase] = useState(() => createBrowserSupabaseClient())
   // theme selector
   const [alignment, setAlignment] = React.useState('web');
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
-
   
+    
   const purpleDrankKing = createTheme({
     palette: {
       mode: 'light',
@@ -50,6 +54,15 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
         main: '#fbc02d',
       },
     },
+  return (
+    <Layout>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+          <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
+            <Component {...pageProps} />
+          </SessionContextProvider>
+      </ThemeProvider>
+    </Layout>
   });
   // should put theme in theme provider when options are made
   let themeSelector = (theme) => {
