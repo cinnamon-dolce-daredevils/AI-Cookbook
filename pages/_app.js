@@ -1,3 +1,6 @@
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { SessionContextProvider } from '@supabase/auth-helpers-react'
+import { useState } from 'react'
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material';
 // below are just roboto fonts from google
@@ -40,10 +43,11 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       <Layout>
         
         <CssBaseline />
-        <Component {...pageProps} />
+      <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
+            <Component {...pageProps} />
+          </SessionContextProvider>
       </Layout>
     </ThemeProvider>
   );
 }
-
 export default App;
