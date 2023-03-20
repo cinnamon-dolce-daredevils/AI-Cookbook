@@ -78,77 +78,74 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const purple1 = purple[500];
+  const purple1 = purple[600];
   return (
-    <Box
-      sx={{
-        display: 'flex',
-      }}
-    >
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            AI-Cookbook
-          </Typography>
-          <Box
-            sx={{
-              position: 'absolute',
-              right: '50px',
-            }}
-          >
-            <Button color="inherit">Login</Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Drawer
+    <>
+      <Box
         sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
+          display: 'flex',
         }}
-        variant="persistent"
-        anchor="left"
-        open={open}
       >
-        <DrawerHeader>
-          <div>Ingredients </div>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-      </Main>
-    </Box>
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              AI-Cookbook
+            </Typography>
+            <Box
+              sx={{
+                position: 'absolute',
+                right: '50px',
+              }}
+            >
+              <Button color="inherit">Login</Button>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <div styles={`backgroundColor: ${purple1}`}>
+          <Drawer
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+                backgroundColor: purple1,
+              },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+          >
+            <DrawerHeader >
+              <div>Ingredients </div>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'ltr' ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </DrawerHeader>
+            <Divider />
+            <List >
+              
+            </List>
+          </Drawer>
+        </div>
+        <Main open={open}>
+          test
+          <DrawerHeader />
+        </Main>
+      </Box>
+    </>
   );
 }
