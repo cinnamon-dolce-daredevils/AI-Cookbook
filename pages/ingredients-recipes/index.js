@@ -172,7 +172,7 @@ export default function IngredientRecipe() {
           ))}
         </div>
       </main>
-      
+
       {expandedIngredient && (
         <div className={styles.ingredientDetails} onClick={closeExpandedView}>
 <p>{expandedIngredient.name}</p>
