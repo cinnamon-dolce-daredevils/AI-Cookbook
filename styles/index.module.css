@@ -243,7 +243,7 @@
   background-color: #42004b;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  
+
 }
 
 .mealItem {
@@ -268,4 +268,11 @@
   background-color: rgb(123, 123, 123);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   overflow-y: scroll;
+}
+
+.favorite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -50px;
 }

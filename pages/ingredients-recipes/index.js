@@ -2,11 +2,22 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "../../styles/index.module.css";
 import Link from "next/link";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
+import { useSession } from "@supabase/auth-helpers-react";
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+)
 
 
 import { useEffect } from "react";
 import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
+
 import { Button } from "@mui/material";
+
+import { createClient } from "@supabase/supabase-js";
+
 
 export default function IngredientRecipe() {
 
@@ -17,9 +28,12 @@ export default function IngredientRecipe() {
   const [expandedIngredient, setExpandedIngredient] = useState(null);
   const [result, setResult] = useState();
   const [selectedRecipe, setSelectedRecipe] = useState("");
+  const [isFavorite, setIsFavorite] = useState(false);
 
-
-
+  let toggled = false;
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   async function handleInputChange(event) {
     const input = event.target.value;
@@ -38,9 +52,17 @@ export default function IngredientRecipe() {
     }
   }
 
-  function handleIngredientClick(ingredient) {
-    setExpandedIngredient(ingredient);
-  }
+  const session = useSession();
+let userId = null;
+
+if (session) {
+  userId = session.user.id;
+}
+
+async function handleIngredientClick (ingredient) {
+ setExpandedIngredient(ingredient)
+}
+
 
   function closeExpandedView() {
     setExpandedIngredient(null);
@@ -52,6 +74,49 @@ export default function IngredientRecipe() {
 
     try {
       const ingredientDetails = await fetchIngredientDetails(suggestion.id);
+      let fat = 0, calories = 0, protein = 0, carbs = 0;
+      for (let nutrient of ingredientDetails.nutrition.nutrients) {
+        switch (nutrient.name) {
+          case "Fat":
+            fat = nutrient.amount;
+            break;
+          case "Calories":
+            calories = nutrient.amount;
+            break;
+          case "Protein":
+            protein = nutrient.amount;
+            break;
+          case "Carbohydrates":
+            carbs = nutrient.amount;
+            break;
+          default:
+            // handle unknown nutrient
+            break;
+        }
+      }
+      if (!userId) {
+        console.log("user is not logged in");
+        return;
+      }
+      const { error } = await supabase
+        .from("pantry")
+        .insert([{
+          suggestion: [{
+            id: ingredientDetails.id,
+            name: ingredientDetails.name,
+            calories: calories,
+            fat: fat,
+            protein: protein,
+            carbs: carbs
+          }],
+          userId: userId
+        }]);
+
+      if (error) {
+        console.log("Error inserting data:", error);
+      } else {
+        console.log("Data inserted successfully:", ingredientDetails);
+      }
       setSelectedIngredients((prevIngredients) => [
         ...prevIngredients,
         ingredientDetails,
@@ -85,7 +150,7 @@ export default function IngredientRecipe() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        throw data.error || new Error(`Request failed with status ${response.status}`);
+        throw data.error || new Error(`Request failed with status: status ${response.status}`);
       }
 
       setResult(data.result);
@@ -97,7 +162,7 @@ export default function IngredientRecipe() {
   }
 
   async function fetchRecipe(recipe) {
-    setSelectedRecipe(""); 
+    setSelectedRecipe("");
     setResult((prevState) => ({ ...prevState, isLoading: true }));
     const ingredientsList = selectedIngredients
     .map((ingredient) => ingredient.name)
@@ -115,7 +180,7 @@ export default function IngredientRecipe() {
       },
       body: JSON.stringify({
         ingredients: ingredientsList,
-        selectedRecipe: recipe, 
+        selectedRecipe: recipe,
       }),
     });
 
@@ -140,7 +205,7 @@ export default function IngredientRecipe() {
         <title>Ingredient IQ</title>
         <link rel="icon" href="/images/forkman-removebg.png" />
       </Head>
-  
+
       <main className={styles.main}>
         <img src="/images/forkman-removebg.png" className={styles.icon} />
         <h3>Whatchu got in yo pantry?</h3>
@@ -154,7 +219,7 @@ export default function IngredientRecipe() {
           />
           <Button type="submit">Generate Meals</Button>
         </form>
-        <ul className={styles.suggestions}>
+        <ul className={styles.suFatggestions}>
           {suggestions.map((suggestion, index) => (
             <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
               {suggestion.name}
@@ -173,7 +238,7 @@ export default function IngredientRecipe() {
           ))}
         </div>
       </main>
-      
+
       {expandedIngredient && (
         <div className={styles.ingredientDetails} onClick={closeExpandedView}>
 <p>{expandedIngredient.name}</p>
@@ -216,7 +281,7 @@ export default function IngredientRecipe() {
           )}
         </div>
       )}
-  
+
 
   {result && typeof result === "string"}
 
@@ -245,15 +310,20 @@ export default function IngredientRecipe() {
         </div>
       </>
     )}
-
     {selectedRecipe && (
       <div className={styles.recipe}>
-        <h1>{}</h1>
+        <FavoriteIcon
+          className={styles.favorite}
+          style={{ fontSize: "50px", width: "50px", color: isFavorite ? "red" : "grey" }}
+          onClick={toggleFavorite}
+        />
         <h4>{selectedRecipe}</h4>
       </div>
     )}
+
   
       <Link style={{textDecoration: 'none', color: 'white'}} href={"/"}>Return to Home</Link>
+
     </div>
   );
 }
