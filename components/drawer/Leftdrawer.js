@@ -94,9 +94,11 @@ export default function PersistentDrawerLeft() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              AI-Cookbook
-            </Typography>
+            <Link href="/">
+              <Typography variant="h6" noWrap component="div">
+                AI-Cookbook
+              </Typography>
+            </Link>
             <Box
               sx={{
                 position: 'absolute',
@@ -126,9 +128,11 @@ export default function PersistentDrawerLeft() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              AI-Cookbook
-            </Typography>
+            <Link style={{ textDecoration: 'none', color: 'white' }} href="/">
+              <Typography variant="h6" noWrap component="div">
+                AI-Cookbook
+              </Typography>
+            </Link>
             <Box
               sx={{
                 position: 'absolute',
@@ -139,7 +143,7 @@ export default function PersistentDrawerLeft() {
             </Box>
           </Toolbar>
         </AppBar>
-        <div >
+        <div>
           <Drawer
             sx={{
               width: drawerWidth,

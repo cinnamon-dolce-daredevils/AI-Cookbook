@@ -3,7 +3,12 @@ import Link from 'next/link';
 const Home = () => {
   return (
     <>
-      <Link href={'/ingredients-recipes'}>Add Ingredients</Link>
+      <Link
+        style={{ textDecoration: 'none', color: 'white' }}
+        href={'/ingredients-recipes'}
+      >
+        Add Ingredients
+      </Link>
     </>
   );
 }

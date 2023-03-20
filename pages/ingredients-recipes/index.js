@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { useEffect } from "react";
 import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
+import { Button } from "@mui/material";
 
 export default function IngredientRecipe() {
 
@@ -151,7 +152,7 @@ export default function IngredientRecipe() {
             value={ingredientsInput}
             onChange={handleInputChange}
           />
-          <button type="submit">Generate Meals</button>
+          <Button type="submit">Generate Meals</Button>
         </form>
         <ul className={styles.suggestions}>
           {suggestions.map((suggestion, index) => (
@@ -252,7 +253,7 @@ export default function IngredientRecipe() {
       </div>
     )}
   
-      <Link href={"/"}>Return to Home</Link>
+      <Link style={{textDecoration: 'none', color: 'white'}} href={"/"}>Return to Home</Link>
     </div>
   );
 }
