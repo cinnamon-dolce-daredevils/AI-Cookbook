@@ -13,7 +13,11 @@ const supabase = createClient(
 
 import { useEffect } from "react";
 import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
+
+import { Button } from "@mui/material";
+
 import { createClient } from "@supabase/supabase-js";
+
 
 export default function IngredientRecipe() {
 
@@ -213,7 +217,7 @@ async function handleIngredientClick (ingredient) {
             value={ingredientsInput}
             onChange={handleInputChange}
           />
-          <button type="submit">Generate Meals</button>
+          <Button type="submit">Generate Meals</Button>
         </form>
         <ul className={styles.suFatggestions}>
           {suggestions.map((suggestion, index) => (
@@ -317,7 +321,9 @@ async function handleIngredientClick (ingredient) {
       </div>
     )}
 
-      <Link href={"/"}>Return to Home</Link>
+  
+      <Link style={{textDecoration: 'none', color: 'white'}} href={"/"}>Return to Home</Link>
+
     </div>
   );
 }

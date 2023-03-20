@@ -6,13 +6,17 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Link from 'next/link';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+
+
+
 export default function AccountMenu() {
+  const supabase = useSupabaseClient();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -73,9 +77,11 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
-          <Avatar className="Menutext" /> Profile
-        </MenuItem>
+        <Link href="/profile">
+          <MenuItem sx={{ color: 'black', textDecoration: 'none' }} onClick={handleClose}>
+            <Avatar className="Menutext" /> Profile
+          </MenuItem>
+        </Link>
         <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
           <Avatar /> My account
         </MenuItem>
@@ -86,12 +92,17 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+        <Link href="/">
+          <MenuItem
+            onClick={() => supabase.auth.signOut()}
+            sx={{ color: 'black', textDecoration: 'none' }}
+          >
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </Link>
       </Menu>
     </>
   );
