@@ -19,6 +19,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Button } from '@mui/material';
 import styles from '../../styles/leftdrawer.module.css';
+import { purple } from '@mui/material/colors';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -77,9 +78,13 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const purple1 = purple[500];
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box
+      sx={{
+        display: 'flex',
+      }}
+    >
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -94,10 +99,12 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap component="div">
             AI-Cookbook
           </Typography>
-          <Box sx={{
-            position: 'absolute',
-            right: '50px'
-          }}>
+          <Box
+            sx={{
+              position: 'absolute',
+              right: '50px',
+            }}
+          >
             <Button color="inherit">Login</Button>
           </Box>
         </Toolbar>
