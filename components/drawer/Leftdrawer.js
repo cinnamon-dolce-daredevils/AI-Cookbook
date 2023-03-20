@@ -81,37 +81,6 @@ export default function PersistentDrawerLeft() {
   };
   const purple1 = purple[600];
   return (
-    <Box
-      sx={{
-        display: 'flex',
-      }}
-    >
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            AI-Cookbook
-          </Typography>
-          <Box
-            sx={{
-              position: 'absolute',
-              right: '50px',
-            }}
-          >
-            <Button color="inherit">
-            <Link href={'/profile'}>Profile</Link></Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Drawer
     <>
       <Box
         sx={{
@@ -138,7 +107,41 @@ export default function PersistentDrawerLeft() {
                 right: '50px',
               }}
             >
-              <Button color="inherit">Login</Button>
+              <Button color="inherit">
+                <Link href={'/profile'}>Profile</Link>
+              </Button>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+        }}
+      >
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              AI-Cookbook
+            </Typography>
+            <Box
+              sx={{
+                position: 'absolute',
+                right: '50px',
+              }}
+            >
+              <Button color="inherit">
+                <Link href={'/profile'}>Profile</Link>
+              </Button>
             </Box>
           </Toolbar>
         </AppBar>
@@ -157,7 +160,7 @@ export default function PersistentDrawerLeft() {
             anchor="left"
             open={open}
           >
-            <DrawerHeader >
+            <DrawerHeader>
               <div>Ingredients </div>
               <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? (
@@ -168,9 +171,7 @@ export default function PersistentDrawerLeft() {
               </IconButton>
             </DrawerHeader>
             <Divider />
-            <List >
-              
-            </List>
+            <List></List>
           </Drawer>
         </div>
         <Main open={open}>
