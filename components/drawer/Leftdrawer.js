@@ -11,15 +11,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+
 import { Button } from '@mui/material';
+import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import { purple } from '@mui/material/colors';
+import AccountSettings from './AccountSettings';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -62,7 +59,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+  // necessary for content to be Loginbelow app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
@@ -78,77 +75,108 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const purple1 = purple[500];
+  const purple1 = purple[600];
   return (
-    <Box
-      sx={{
-        display: 'flex',
-      }}
-    >
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            AI-Cookbook
-          </Typography>
-          <Box
-            sx={{
-              position: 'absolute',
-              right: '50px',
-            }}
-          >
-            <Button color="inherit">Login</Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Drawer
+    <>
+      <Box
         sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
+          display: 'flex',
         }}
-        variant="persistent"
-        anchor="left"
-        open={open}
       >
-        <DrawerHeader>
-          <div>Ingredients </div>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-      </Main>
-    </Box>
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Link href="/">
+              <Typography variant="h6" noWrap component="div">
+                AI-Cookbook
+              </Typography>
+            </Link>
+            <Box
+              sx={{
+                position: 'absolute',
+                right: '50px',
+              }}
+            >
+              <Button color="inherit">
+                <Link href={'/profile'}>Profile</Link>
+              </Button>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+        }}
+      >
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Link style={{ textDecoration: 'none', color: 'white' }} href="/">
+              <Typography variant="h6" noWrap component="div">
+                AI-Cookbook
+              </Typography>
+            </Link>
+            <Box
+              sx={{
+                position: 'absolute',
+                right: '50px',
+              }}
+            >
+              <AccountSettings />
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <div>
+          <Drawer
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+                backgroundColor: purple1,
+              },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+          >
+            <DrawerHeader>
+              <div> My Ingredients </div>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'ltr' ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </DrawerHeader>
+            <Divider />
+            <List></List>
+          </Drawer>
+        </div>
+        <Main open={open}>
+          test
+          <DrawerHeader />
+        </Main>
+      </Box>
+    </>
   );
 }

@@ -12,7 +12,7 @@ import PersistentDrawerLeft from './drawer/Leftdrawer';
 
 
 
-// are colors being set here?
+// Leftdrawer houses code for navbar
 function Header () {
 
   const theme = useTheme();

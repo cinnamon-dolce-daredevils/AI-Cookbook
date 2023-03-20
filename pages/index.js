@@ -23,8 +23,12 @@ const Home = () => {
   return (
     <>
       <p>{trivia}</p>
-      <Link href={'/ingredients-recipes'}>Add Ingredients</Link>
-      <Link href={'/profile'}>Profile</Link>
+      <Link
+        style={{ textDecoration: 'none', color: 'white' }}
+        href={'/ingredients-recipes'}
+      >
+        Add Ingredients
+      </Link>
     </>
   );
 }
