@@ -4,7 +4,6 @@ const Home = () => {
   return (
     <>
       <Link href={'/ingredients-recipes'}>Add Ingredients</Link>
-      <Link href={'/profile'}>Profile</Link>
     </>
   );
 }
