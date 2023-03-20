@@ -11,16 +11,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import { purple } from '@mui/material/colors';
+import AccountSettings from './AccountSettings';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -139,13 +135,11 @@ export default function PersistentDrawerLeft() {
                 right: '50px',
               }}
             >
-              <Button color="inherit">
-                <Link href={'/profile'}>Profile</Link>
-              </Button>
+              <AccountSettings />
             </Box>
           </Toolbar>
         </AppBar>
-        <div styles={`backgroundColor: ${purple1}`}>
+        <div >
           <Drawer
             sx={{
               width: drawerWidth,
@@ -161,7 +155,7 @@ export default function PersistentDrawerLeft() {
             open={open}
           >
             <DrawerHeader>
-              <div>Ingredients </div>
+              <div> My Ingredients </div>
               <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? (
                   <ChevronLeftIcon />
