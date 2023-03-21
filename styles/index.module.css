@@ -24,11 +24,10 @@
   color: #ffffff;
   text-align: center;
   max-width: 66%;
-  margin: 0 auto;
+  margin: 50px auto;
 }
 
 .container {
-  margin: 30px;
   text-align: center;
 }
 
@@ -101,8 +100,8 @@
   align-items: center;
   padding-top: 60px;
 }
-.main .icon {
-  width: 100px;
+.icon {
+  width: 300px;
 }
 .main h3 {
   font-size: 32px;

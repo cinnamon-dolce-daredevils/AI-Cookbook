@@ -1,4 +1,21 @@
 .alignRight {
   display: flex !important;
   justify-content: right !important;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 15vw;
+}
+
+.logo img {
+  display: block;
+  height: auto;
+  max-width: 100%;
 }
