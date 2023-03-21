@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getRandomFoodTrivia } from './api/ingApi';
+import styles from '../styles/index.module.css';
 
 const Home = () => {
   const [trivia, setTrivia] = useState("");
@@ -22,13 +23,15 @@ const Home = () => {
 
   return (
     <>
-      <p>{trivia}</p>
-      <Link
+      <p className={styles.trivia}>{trivia}</p>
+      <div className={styles.container}>
+      <Link className={styles.link}
         style={{ textDecoration: 'none', color: 'white' }}
         href={'/ingredients-recipes'}
       >
         Add Ingredients
       </Link>
+      </div>
     </>
   );
 }
