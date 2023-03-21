@@ -91,7 +91,7 @@
 .main input {
   font-size: 16px;
   line-height: 24px;
-  color: #353740;
+  color: #101010;
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
 .main {
@@ -107,7 +107,7 @@
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #c4c4c4;
+  color: #696969;
   margin: 16px 0 40px;
 }
 .main form {
@@ -121,15 +121,15 @@
   border-radius: 4px;
   margin-bottom: 24px;
   outline-color: #10a37f;
-  color: #f5f5f5;
+  color: #3a3a3a;
 }
 .main ::placeholder {
-  color: #8e8ea0;
+  color: #373737;
   opacity: 1;
 }
 .main input[type="submit"] {
   padding: 12px 0;
-  color: #fff;
+  color: #181818;
   background-color: #10a37f;
   border: none;
   border-radius: 4px;

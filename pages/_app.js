@@ -11,8 +11,6 @@ import '@fontsource/roboto/700.css';
 import Layout from '@/components/Layout';
 //imports theme
 import { CssBaseline, createTheme } from '@mui/material';
-import { green, purple } from '@mui/material/colors';
-
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
 

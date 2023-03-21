@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -12,13 +12,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import { purple } from '@mui/material/colors';
 import AccountSettings from './AccountSettings';
-import Logo from '../Logo';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -61,7 +59,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be Loginbelow app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
@@ -77,14 +74,12 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
   const purple1 = purple[600];
+
   return (
     <>
-      <Box
-        sx={{
-          display: 'flex',
-        }}
-      >
+      <Box sx={{ display: 'flex' }}>
         <AppBar position="fixed" open={open}>
           <Toolbar>
             <IconButton
@@ -101,6 +96,7 @@ export default function PersistentDrawerLeft() {
                 AI-Cookbook
               </Typography>
             </Link>
+
             <Box
               sx={{
                 position: 'absolute',
@@ -131,10 +127,9 @@ export default function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
             <div className={styles.container}>
-              <Link href="/" style={{textDecoration: 'none'}}>
-                <img src="/images/AICB_BotW-trimmy.png" className={styles.logo} />
-
-              </Link>
+            <Link href="/" className={styles.glitch} data-glitch="AI Cookbook">
+  AI Cookbook
+</Link>
             </div>
             <Box
               sx={{
