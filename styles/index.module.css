@@ -217,6 +217,9 @@
 }
 
 .ingredientItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 0.5rem;
   border-bottom: 1px solid #a900c0;
   cursor: pointer;

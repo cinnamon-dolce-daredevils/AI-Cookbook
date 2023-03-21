@@ -27,7 +27,8 @@ export default function IngredientRecipe() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [expandedIngredient, setExpandedIngredient] = useState(null);
   const [result, setResult] = useState();
-  const [selectedRecipe, setSelectedRecipe] = useState("");
+  const [selectedRecipe, setSelectedRecipe] = useState('');
+  console.log(selectedRecipe)
   const [isFavorite, setIsFavorite] = useState(false);
 
   let toggled = false;
@@ -109,7 +110,10 @@ async function handleIngredientClick (ingredient) {
             protein: protein,
             carbs: carbs
           }],
-          userId: userId
+          userId: userId,
+
+
+           
         }]);
 
       if (error) {
@@ -124,9 +128,9 @@ async function handleIngredientClick (ingredient) {
         )
 
         if (existingIngredient !== -1){
-          const newIngredient = [...prevIngredients];
-          newIngredient[existingIngredient].quantity +=1;
-          return newIngredient
+          const allIngredients = [...prevIngredients];
+          allIngredients[existingIngredient].quantity +=1;
+          return allIngredients
         } else {
           return [
             ...prevIngredients,
@@ -248,8 +252,8 @@ async function handleIngredientClick (ingredient) {
               className={styles.ingredientItem}
               onClick={() => handleIngredientClick(ingredient)}
             >
-              {ingredient.name}
-              <span>{ingredient.quantity}</span>
+              <div>{ingredient.name}</div>
+              <div>{ingredient.quantity}</div>
             </div>
           ))}
         </div>
