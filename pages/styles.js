@@ -6,7 +6,8 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Switch from '@mui/material/Switch';
 import { createTheme } from '@mui/system';
 
-// go to /styles to access this page
+// reminder: go to /styles to access this page. this is a prototype of
+// the dark mode light mode idea
 
 const styles = () => {
     const farmBoyOrange = createTheme({
