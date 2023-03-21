@@ -12,6 +12,12 @@ import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button'; 
 
 
 
@@ -19,6 +25,8 @@ export default function AccountMenu() {
   const supabase = useSupabaseClient();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const handleSettingsOpen = () => { setSettingsOpen(true); }; const handleSettingsClose = () => { setSettingsOpen(false); }; 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -40,13 +48,12 @@ export default function AccountMenu() {
             <AccountCircleIcon fontSize="large" sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
+    </Box>
+    <Menu
+      anchorEl={anchorEl}
+      id="account-menu"
+      open={open}
+      onClose={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -86,24 +93,28 @@ export default function AccountMenu() {
           <Avatar /> My account
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
+        <MenuItem onClick={handleSettingsOpen} sx={{ color: 'black' }}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <Link href="/">
-          <MenuItem
-            onClick={() => supabase.auth.signOut()}
-            sx={{ color: 'black', textDecoration: 'none' }}
-          >
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
-        </Link>
-      </Menu>
-    </>
-  );
+        <Dialog open={settingsOpen} onClose={handleSettingsClose}> <DialogTitle>Settings</DialogTitle> <DialogContent> <form noValidate autoComplete="off"> <TextField id="notifyTimeInDays" label="Days before expiration for notifications" type="number" InputLabelProps={{ shrink: true, }} fullWidth /> </form> </DialogContent> <DialogActions> <Button onClick={handleSettingsClose}>Cancel</Button> <Button onClick={handleSettingsClose}>Save</Button> </DialogActions>       </Dialog>
+      <Link href="/">
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            supabase.auth.signOut();
+          }}
+          sx={{ color: 'black', textDecoration: 'none' }}
+        >
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Link>
+    </Menu>
+  </>
+);
 }

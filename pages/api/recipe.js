@@ -56,5 +56,5 @@ export default async function (req, res) {
 function generatePrompt(ingredients, selectedRecipe) {
   const capitalizedIngredients =
     ingredients[0].toUpperCase() + ingredients.slice(1).toLowerCase();
-  return `Generate a detailed recipe for ${selectedRecipe}, using only these ingredients: ${capitalizedIngredients}, table salt, black pepper, cooking oil, and water. please write out the calories, fat, protein, and carbs for the meal as well. Please send it as markdown`;
+  return `Please generate a detailed recipe for ${selectedRecipe}, using only, but not necessarily all of these ingredients: ${capitalizedIngredients}, table salt, black pepper, cooking oil, and water. please write out the calories, fat, protein, and carbs for the meal as well. Please send it as markdown. `;
 }

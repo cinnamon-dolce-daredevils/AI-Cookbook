@@ -1,4 +1,4 @@
-const apiKey = '2513e401e1424711aabbf36076908290';
+const apiKey = '528d6e974d124631a86eba6bb6d97794';
 
 export async function getRandomFoodTrivia() {
   const url = `https://api.spoonacular.com/food/trivia/random?apiKey=${apiKey}`;
