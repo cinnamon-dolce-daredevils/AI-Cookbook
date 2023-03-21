@@ -33,13 +33,6 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
         secondary: '#eeeeee',
         disabled: '#9e9e9e',
         hint: '#eeeeee',
-      },
-      MuiMenuItem: {
-        styleOverrides: {
-          root: {
-            color: 'blue'
-          }
-        }
       }
     },
   });

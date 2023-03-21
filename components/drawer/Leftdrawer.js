@@ -18,6 +18,7 @@ import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import { purple } from '@mui/material/colors';
 import AccountSettings from './AccountSettings';
+import Logo from '../Logo';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -130,16 +131,17 @@ export default function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
             <div className={styles.container}>
-            <Link href="/">
-              <img src="/images/AICB_BotW-trimmy.png" className={styles.logo} />
-            </Link>
+              <Link href="/" style={{textDecoration: 'none'}}>
+                <img src="/images/AICB_BotW-trimmy.png" className={styles.logo} />
+
+              </Link>
             </div>
             <Box
               sx={{
                 position: 'absolute',
                 right: '50px',
               }}
-              >
+            >
               <AccountSettings />
             </Box>
           </Toolbar>
