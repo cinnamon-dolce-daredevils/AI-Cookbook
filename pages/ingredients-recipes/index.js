@@ -27,7 +27,8 @@ export default function IngredientRecipe() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [expandedIngredient, setExpandedIngredient] = useState(null);
   const [result, setResult] = useState();
-  const [selectedRecipe, setSelectedRecipe] = useState("");
+  const [selectedRecipe, setSelectedRecipe] = useState('');
+  console.log(selectedRecipe)
   const [isFavorite, setIsFavorite] = useState(false);
 
   let toggled = false;
@@ -109,7 +110,10 @@ async function handleIngredientClick (ingredient) {
             protein: protein,
             carbs: carbs
           }],
-          userId: userId
+          userId: userId,
+
+
+           
         }]);
 
       if (error) {
@@ -117,10 +121,25 @@ async function handleIngredientClick (ingredient) {
       } else {
         console.log("Data inserted successfully:", ingredientDetails);
       }
-      setSelectedIngredients((prevIngredients) => [
-        ...prevIngredients,
-        ingredientDetails,
-      ]);
+      setSelectedIngredients((prevIngredients) => {
+        //check if the ingredient already exists
+        const existingIngredient = prevIngredients.findIndex(
+          (ingredient)=> ingredient.id === ingredientDetails.id
+        )
+
+        if (existingIngredient !== -1){
+          const allIngredients = [...prevIngredients];
+          allIngredients[existingIngredient].quantity +=1;
+          return allIngredients
+        } else {
+          return [
+            ...prevIngredients,
+          {...ingredientDetails, quantity: 1}]
+        }
+        
+      });
+
+      
       setExpandedIngredient(null);
     } catch (error) {
       console.error(error);
@@ -233,7 +252,8 @@ async function handleIngredientClick (ingredient) {
               className={styles.ingredientItem}
               onClick={() => handleIngredientClick(ingredient)}
             >
-              {ingredient.name}
+              <div>{ingredient.name}</div>
+              <div>{ingredient.quantity}</div>
             </div>
           ))}
         </div>
