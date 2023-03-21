@@ -221,8 +221,8 @@ async function handleIngredientClick (ingredient) {
   return (
     <div className={styles.body}>
       <Head>
-        <title>AI Cookbook</title>
-        <link rel="icon" href="/images/forkman-removebg.png" />
+        <title>Ingredient IQ</title>
+        <link rel="icon" href="images/AICB_TopG-trimmy.png" />
       </Head>
 
       <main className={styles.main}>
