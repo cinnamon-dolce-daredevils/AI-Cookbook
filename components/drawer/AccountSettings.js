@@ -11,12 +11,11 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import GradeIcon from '@mui/icons-material/Grade';
 
 
 export default function AccountMenu() {
-  const supabase = useSupabaseClient();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -27,7 +26,7 @@ export default function AccountMenu() {
   };
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', paddingRight: '0' }}>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -95,17 +94,6 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <Link href="/">
-          <MenuItem
-            onClick={() => supabase.auth.signOut()}
-            sx={{ color: 'black', textDecoration: 'none' }}
-          >
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
-        </Link>
       </Menu>
     </>
   );
