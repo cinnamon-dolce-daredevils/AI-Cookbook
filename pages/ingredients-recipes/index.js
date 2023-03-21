@@ -117,10 +117,25 @@ async function handleIngredientClick (ingredient) {
       } else {
         console.log("Data inserted successfully:", ingredientDetails);
       }
-      setSelectedIngredients((prevIngredients) => [
-        ...prevIngredients,
-        ingredientDetails,
-      ]);
+      setSelectedIngredients((prevIngredients) => {
+        //check if the ingredient already exists
+        const existingIngredient = prevIngredients.findIndex(
+          (ingredient)=> ingredient.id === ingredientDetails.id
+        )
+
+        if (existingIngredient !== -1){
+          const newIngredient = [...prevIngredients];
+          newIngredient[existingIngredient].quantity +=1;
+          return newIngredient
+        } else {
+          return [
+            ...prevIngredients,
+          {...ingredientDetails, quantity: 1}]
+        }
+        
+      });
+
+      
       setExpandedIngredient(null);
     } catch (error) {
       console.error(error);
@@ -234,6 +249,7 @@ async function handleIngredientClick (ingredient) {
               onClick={() => handleIngredientClick(ingredient)}
             >
               {ingredient.name}
+              <span>{ingredient.quantity}</span>
             </div>
           ))}
         </div>
