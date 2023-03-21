@@ -222,7 +222,7 @@ async function handleIngredientClick (ingredient) {
     <div className={styles.body}>
       <Head>
         <title>Ingredient IQ</title>
-        <link rel="icon" href="/images/forkman-removebg.png" />
+        <link rel="icon" href="images/AICB_TopG-trimmy.png" />
       </Head>
 
       <main className={styles.main}>

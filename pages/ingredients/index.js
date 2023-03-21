@@ -98,11 +98,14 @@ export default function AddIng() {
     <div className={styles.body}>
       <Head>
         <title>Ingredient IQ</title>
-        <link rel="icon" href="/images/forkman-removebg.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+        <link rel="manifest" href="/site.webmanifest"/>
       </Head>
-      
+
       <main className={styles.main}>
-        <img src="/images/forkman-removebg.png" className={styles.icon} />
+        <img src="/images/favicon.ico" className={styles.icon} />
         <h3>Whatchu got in yo pantry?</h3>
         <form>
           <input
@@ -121,87 +124,102 @@ export default function AddIng() {
           ))}
         </ul>
         {selectedIngredient && (
-  <>
-    <p>{selectedIngredient.name}</p>
-    <img src={`https://spoonacular.com/cdn/ingredients_100x100/${selectedIngredient.image}`} alt={selectedIngredient.name} />
-    {selectedIngredient.nutrition && selectedIngredient.nutrition.nutrients && (
-      <>
-        <p>
-          Calories:{" "}
-          {selectedIngredient.nutrition.nutrients.find((n) => n.name === "Calories")?.amount || "N/A"} kcal
-        </p>
-        <p>
-          Carbs:{" "}
-          {selectedIngredient.nutrition.nutrients.find((n) => n.name === "Carbohydrates")?.amount || "N/A"} g
-        </p>
-        <p>
-          Fat:{" "}
-          {selectedIngredient.nutrition.nutrients.find((n) => n.name === "Fat")?.amount || "N/A"} g
-        </p>
-        <p>
-          Protein:{" "}
-          {selectedIngredient.nutrition.nutrients.find((n) => n.name === "Protein")?.amount || "N/A"} g
-        </p>
-      </>
-    )}
-  </>
-)}
-
-</main>
-    <div className={styles.ingredientsList}>
-      {selectedIngredients.map((ingredient, index) => (
-        <div
-          key={index}
-          className={styles.ingredientItem}
-          onClick={() => handleIngredientClick(ingredient)}
-        >
-          {ingredient.name}
-        </div>
-      ))}
-    </div>
-    {expandedIngredient && (
-      <div className={styles.ingredientDetails} onClick={closeExpandedView}>
-        <p>{expandedIngredient.name}</p>
-        <img
-          src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
-          alt={expandedIngredient.name}
-        />
-        {expandedIngredient.nutrition &&
-          expandedIngredient.nutrition.nutrients && (
-            <>
-              <p>
-                Calories:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Calories"
-                )?.amount || "N/A"}{" "}
-                kcal
-              </p>
-              <p>
-                Carbs:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Carbohydrates"
-                )?.amount || "N/A"}{" "}
-                g
-              </p>
-              <p>
-                Fat:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Fat"
-                )?.amount || "N/A"}{" "}
-                g
-              </p>
-              <p>
-                Protein:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Protein"
-                )?.amount || "N/A"}{" "}
-                g
-              </p>
-            </>
-          )}
+          <>
+            <p>{selectedIngredient.name}</p>
+            <img
+              src={`https://spoonacular.com/cdn/ingredients_100x100/${selectedIngredient.image}`}
+              alt={selectedIngredient.name}
+            />
+            {selectedIngredient.nutrition &&
+              selectedIngredient.nutrition.nutrients && (
+                <>
+                  <p>
+                    Calories:{' '}
+                    {selectedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Calories'
+                    )?.amount || 'N/A'}{' '}
+                    kcal
+                  </p>
+                  <p>
+                    Carbs:{' '}
+                    {selectedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Carbohydrates'
+                    )?.amount || 'N/A'}{' '}
+                    g
+                  </p>
+                  <p>
+                    Fat:{' '}
+                    {selectedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Fat'
+                    )?.amount || 'N/A'}{' '}
+                    g
+                  </p>
+                  <p>
+                    Protein:{' '}
+                    {selectedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Protein'
+                    )?.amount || 'N/A'}{' '}
+                    g
+                  </p>
+                </>
+              )}
+          </>
+        )}
+      </main>
+      <div className={styles.ingredientsList}>
+        {selectedIngredients.map((ingredient, index) => (
+          <div
+            key={index}
+            className={styles.ingredientItem}
+            onClick={() => handleIngredientClick(ingredient)}
+          >
+            {ingredient.name}
+          </div>
+        ))}
       </div>
-    )}
-    <Link href={"/"}>Return to Home</Link>
-  </div>
-);
+      {expandedIngredient && (
+        <div className={styles.ingredientDetails} onClick={closeExpandedView}>
+          <p>{expandedIngredient.name}</p>
+          <img
+            src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
+            alt={expandedIngredient.name}
+          />
+          {expandedIngredient.nutrition &&
+            expandedIngredient.nutrition.nutrients && (
+              <>
+                <p>
+                  Calories:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Calories'
+                  )?.amount || 'N/A'}{' '}
+                  kcal
+                </p>
+                <p>
+                  Carbs:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Carbohydrates'
+                  )?.amount || 'N/A'}{' '}
+                  g
+                </p>
+                <p>
+                  Fat:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Fat'
+                  )?.amount || 'N/A'}{' '}
+                  g
+                </p>
+                <p>
+                  Protein:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Protein'
+                  )?.amount || 'N/A'}{' '}
+                  g
+                </p>
+              </>
+            )}
+        </div>
+      )}
+      <Link href={'/'}>Return to Home</Link>
+    </div>
+  );
 }
