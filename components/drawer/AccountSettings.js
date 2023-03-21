@@ -12,7 +12,7 @@ import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
-
+import GradeIcon from '@mui/icons-material/Grade';
 
 
 export default function AccountMenu() {
@@ -78,12 +78,15 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Link href="/profile">
-          <MenuItem sx={{ color: 'black', textDecoration: 'none' }} onClick={handleClose}>
+          <MenuItem
+            sx={{ color: 'black', textDecoration: 'none' }}
+            onClick={handleClose}
+          >
             <Avatar className="Menutext" /> Profile
           </MenuItem>
         </Link>
-        <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
-          <Avatar /> My account
+        <MenuItem sx={{ color: 'black', mr:'auto' }} onClick={handleClose}>
+          <GradeIcon /> Favorites
         </MenuItem>
         <Divider />
         <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
