@@ -226,7 +226,7 @@ async function handleIngredientClick (ingredient) {
       </Head>
 
       <main className={styles.main}>
-        <img src="/images/forkman-removebg.png" className={styles.icon} />
+        <img src="/images/AICB_LogG.png" className={styles.icon} />
         <h3>Whatchu got in yo pantry?</h3>
         <form onSubmit={onSubmit}>
           <input

@@ -23,8 +23,9 @@ const Home = () => {
 
   return (
     <>
-      <p className={styles.trivia}>{trivia}</p>
       <div className={styles.container}>
+      <img src="/images/AICB_LogG.png" className={styles.icon} />
+      <p className={styles.trivia}>{trivia}</p>
       <Link className={styles.link}
         style={{ textDecoration: 'none', color: 'white' }}
         href={'/ingredients-recipes'}
