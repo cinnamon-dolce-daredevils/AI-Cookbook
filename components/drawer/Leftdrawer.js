@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
+
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
@@ -128,17 +129,17 @@ export default function PersistentDrawerLeft() {
             >
               <MenuIcon />
             </IconButton>
-            <Link style={{ textDecoration: 'none', color: 'white' }} href="/">
-              <Typography variant="h6" noWrap component="div">
-                AI-Cookbook
-              </Typography>
+            <div className={styles.container}>
+            <Link href="/">
+              <img src="/images/AICB_BotW-trimmy.png" className={styles.logo} />
             </Link>
+            </div>
             <Box
               sx={{
                 position: 'absolute',
                 right: '50px',
               }}
-            >
+              >
               <AccountSettings />
             </Box>
           </Toolbar>
