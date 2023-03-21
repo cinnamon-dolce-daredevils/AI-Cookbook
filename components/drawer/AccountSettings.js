@@ -12,19 +12,13 @@ import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
 
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button'; 
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+
 import GradeIcon from '@mui/icons-material/Grade';
 
 
 
 export default function AccountMenu() {
-  const supabase = useSupabaseClient();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
@@ -37,7 +31,7 @@ export default function AccountMenu() {
   };
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', paddingRight: '0' }}>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -104,22 +98,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <Dialog open={settingsOpen} onClose={handleSettingsClose}> <DialogTitle>Settings</DialogTitle> <DialogContent> <form noValidate autoComplete="off"> <TextField id="notifyTimeInDays" label="Days before expiration for notifications" type="number" InputLabelProps={{ shrink: true, }} fullWidth /> </form> </DialogContent> <DialogActions> <Button onClick={handleSettingsClose}>Cancel</Button> <Button onClick={handleSettingsClose}>Save</Button> </DialogActions>       </Dialog>
-      <Link href="/">
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            supabase.auth.signOut();
-          }}
-          sx={{ color: 'black', textDecoration: 'none' }}
-        >
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Link>
-    </Menu>
-  </>
-);
+      </Menu>
+    </>
+  );
 }

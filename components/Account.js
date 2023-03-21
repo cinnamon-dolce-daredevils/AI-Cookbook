@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Avatar from './Avatar'
 import Link from 'next/link'
+import { Button, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient()
@@ -85,7 +87,7 @@ export default function Account({ session }) {
         <input id="email" type="text" value={session.user.email} disabled />
       </div>
       <div>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Update Username</label>
         <input
           id="username"
           type="text"
@@ -94,34 +96,38 @@ export default function Account({ session }) {
         />
       </div>
       <div>
-        <button
+        <Button
           className="button primary block"
           onClick={() => updateProfile({ username, avatar_url })}
           disabled={loading}
         >
-          {loading ? 'Loading ...' : 'Update'}
-        </button>
+          {loading ? 'Loading ...' : 'SUBMIT'}
+        </Button>
       </div>
-      <Avatar
-      uid={user.id}
-      url={avatar_url}
-      size={150}
-      onUpload={(url) => {
-        setAvatarUrl(url)
-        updateProfile({ username, avatar_url: url })
-      }}
-    />
-
-      <div>
-        <button className="button block" onClick={() => supabase.auth.signOut()}>
-          Sign Out
-        </button>
-      </div>
-      <div>
-        <button className="button block">
-          <Link href={'/'}>Return Home</Link>
-        </button>
-      </div>
+      <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative', left: '30px'}}>
+        <Typography sx={{textAlign: 'center', position: 'relative', right: '29px'}} variant="h6"> Upload or Change Profile Picture</Typography>
+        <Button variant="outlined" sx={{ position: 'relative', right: '29px' }}>
+          <Avatar
+            styles={{ backgroundColor: 'blue' }}
+            uid={user.id}
+            url={avatar_url}
+            size={250}
+            onUpload={(url) => {
+              setAvatarUrl(url);
+              updateProfile({ username, avatar_url: url });
+            }}
+          />
+        </Button>
+      </Box>
+      <br></br>
+      <Button
+        sx={{ p: '5px 30px', position: 'relative', right: '29px', top: '20px' }}
+        color="error"
+        variant="outlined"
+        onClick={() => supabase.auth.signOut()}
+      >
+        Sign Out
+      </Button>
     </div>
-  )
+  );
 }
