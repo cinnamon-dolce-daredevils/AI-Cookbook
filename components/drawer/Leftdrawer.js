@@ -94,40 +94,6 @@ export default function PersistentDrawerLeft() {
             >
               <MenuIcon />
             </IconButton>
-            <Link href="/">
-              <Typography variant="h6" noWrap component="div">
-                AI-Cookbook
-              </Typography>
-            </Link>
-            <Box
-              sx={{
-                position: 'absolute',
-                right: '50px',
-              }}
-            >
-              <Button color="inherit">
-                <Link href={'/profile'}>Profile</Link>
-              </Button>
-            </Box>
-          </Toolbar>
-        </AppBar>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-        }}
-      >
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Link style={{ textDecoration: 'none', color: 'white' }} href="/">
               <Typography variant="h6" noWrap component="div">
                 AI-Cookbook
