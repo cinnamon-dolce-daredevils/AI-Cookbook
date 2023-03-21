@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from "openai";
-import { useRouter } from 'next/router';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -35,7 +34,7 @@ export default async function (req, res) {
       temperature: 0.6,
       max_tokens: 900,
     });
-    
+
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case

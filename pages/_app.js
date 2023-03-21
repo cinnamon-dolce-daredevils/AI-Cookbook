@@ -11,8 +11,6 @@ import '@fontsource/roboto/700.css';
 import Layout from '@/components/Layout';
 //imports theme
 import { CssBaseline, createTheme } from '@mui/material';
-import { green, purple } from '@mui/material/colors';
-
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
 
@@ -35,13 +33,6 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
         secondary: '#eeeeee',
         disabled: '#9e9e9e',
         hint: '#eeeeee',
-      },
-      MuiMenuItem: {
-        styleOverrides: {
-          root: {
-            color: 'blue'
-          }
-        }
       }
     },
   });

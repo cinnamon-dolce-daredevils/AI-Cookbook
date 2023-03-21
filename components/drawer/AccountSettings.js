@@ -11,6 +11,7 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
+
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -18,6 +19,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'; 
+import GradeIcon from '@mui/icons-material/Grade';
 
 
 
@@ -85,12 +87,15 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Link href="/profile">
-          <MenuItem sx={{ color: 'black', textDecoration: 'none' }} onClick={handleClose}>
+          <MenuItem
+            sx={{ color: 'black', textDecoration: 'none' }}
+            onClick={handleClose}
+          >
             <Avatar className="Menutext" /> Profile
           </MenuItem>
         </Link>
-        <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
-          <Avatar /> My account
+        <MenuItem sx={{ color: 'black', mr:'auto' }} onClick={handleClose}>
+          <GradeIcon /> Favorites
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleSettingsOpen} sx={{ color: 'black' }}>

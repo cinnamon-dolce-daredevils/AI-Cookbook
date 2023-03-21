@@ -10,7 +10,6 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 )
 
-
 import { useEffect } from "react";
 import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
 
@@ -27,13 +26,36 @@ export default function IngredientRecipe() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [expandedIngredient, setExpandedIngredient] = useState(null);
   const [result, setResult] = useState();
-  const [selectedRecipe, setSelectedRecipe] = useState("");
+  const [selectedRecipe, setSelectedRecipe] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
 
-  let toggled = false;
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  const addToFavorites = async (recipeName, userId) => {
+    try {
+      const { data, error } = await supabase.from('favorites').insert([{ recipeName, userId }]);
+      if (error) throw error;
+      console.log('Added to favorites:', data);
+    } catch (error) {
+      console.log('Error inserting into favorites:', error.message);
+    }
   };
+
+  const toggleFavorite = async (recipe) => {
+    try {
+      if (isFavorite) {
+        // Remove from favorites
+        const { data, error } = await supabase.from('favorites').delete().match({ recipeName: recipe.name, userId });
+        if (error) throw error;
+        console.log('Removed from favorites:', data);
+      } else {
+        // Add to favorites
+        await addToFavorites(recipe.name, userId);
+      }
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.log('Error toggling favorite:', error.message);
+    }
+  };
+
 
   async function handleInputChange(event) {
     const input = event.target.value;
@@ -90,12 +112,11 @@ async function handleIngredientClick (ingredient) {
             carbs = nutrient.amount;
             break;
           default:
-            // handle unknown nutrient
             break;
         }
       }
       if (!userId) {
-        console.log("user is not logged in");
+        console.error("user is not logged in");
         return;
       }
       const { error } = await supabase
@@ -109,18 +130,30 @@ async function handleIngredientClick (ingredient) {
             protein: protein,
             carbs: carbs
           }],
-          userId: userId
+          userId: userId,
         }]);
 
       if (error) {
-        console.log("Error inserting data:", error);
-      } else {
-        console.log("Data inserted successfully:", ingredientDetails);
+        console.error("Error inserting data:", error);
       }
-      setSelectedIngredients((prevIngredients) => [
-        ...prevIngredients,
-        ingredientDetails,
-      ]);
+      setSelectedIngredients((prevIngredients) => {
+        //check if the ingredient already exists
+        const existingIngredient = prevIngredients.findIndex(
+          (ingredient)=> ingredient.id === ingredientDetails.id
+        )
+
+        if (existingIngredient !== -1){
+          const allIngredients = [...prevIngredients];
+          allIngredients[existingIngredient].quantity +=1;
+          return allIngredients
+        } else {
+          return [
+            ...prevIngredients,
+          {...ingredientDetails, quantity: 1}]
+        }
+
+      });
+
       setExpandedIngredient(null);
     } catch (error) {
       console.error(error);
@@ -128,10 +161,8 @@ async function handleIngredientClick (ingredient) {
     }
   }
 
-
   async function onSubmit(event) {
     event.preventDefault();
-
 
     const ingredientsList = selectedIngredients.map((ingredient) => ingredient.name).join(", ");
     if (!ingredientsList) {
@@ -203,7 +234,7 @@ async function handleIngredientClick (ingredient) {
     <div className={styles.body}>
       <Head>
         <title>AI Cookbook</title>
-        <link rel="icon" href="/images/forkman-removebg.png" />
+        <link rel="icon" href="images/AICB_TopG-trimmy.png" />
       </Head>
 
       <main className={styles.main}>
@@ -233,7 +264,8 @@ async function handleIngredientClick (ingredient) {
               className={styles.ingredientItem}
               onClick={() => handleIngredientClick(ingredient)}
             >
-              {ingredient.name}
+              <div>{ingredient.name}</div>
+              <div>{ingredient.quantity}</div>
             </div>
           ))}
         </div>
@@ -241,7 +273,7 @@ async function handleIngredientClick (ingredient) {
 
       {expandedIngredient && (
         <div className={styles.ingredientDetails} onClick={closeExpandedView}>
-<p>{expandedIngredient.name}</p>
+          <p>{expandedIngredient.name}</p>
         <img
           src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
           alt={expandedIngredient.name}
@@ -310,18 +342,21 @@ async function handleIngredientClick (ingredient) {
         </div>
       </>
     )}
-    {selectedRecipe && (
-      <div className={styles.recipe}>
-        <FavoriteIcon
-          className={styles.favorite}
-          style={{ fontSize: "50px", width: "50px", color: isFavorite ? "red" : "grey" }}
-          onClick={toggleFavorite}
-        />
-        <h4>{selectedRecipe}</h4>
-      </div>
-    )}
+{selectedRecipe && (
+  <div className={styles.recipe}>
+    <FavoriteIcon
+        className={styles.favorite}
+        style={{ fontSize: "50px", width: "50px", color: isFavorite ? "red" : "grey" }}
+        onClick={() => {
+          toggleFavorite(selectedRecipe);
+        }}
+      />
+    <h4>{selectedRecipe}</h4>
+    {isFavorite && <p>Recipe added to favorites!</p>}
+  </div>
+)}
 
-  
+
       <Link style={{textDecoration: 'none', color: 'white'}} href={"/"}>Return to Home</Link>
 
     </div>

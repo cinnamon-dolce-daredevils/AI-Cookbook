@@ -17,7 +17,6 @@ import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import { purple } from '@mui/material/colors';
 import AccountSettings from './AccountSettings';
-
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -137,7 +136,7 @@ export default function PersistentDrawerLeft() {
                 position: 'absolute',
                 right: '50px',
               }}
-              >
+            >
               <AccountSettings />
             </Box>
           </Toolbar>
