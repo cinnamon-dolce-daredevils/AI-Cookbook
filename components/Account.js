@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react'
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
-import Avatar from './Avatar'
-import Link from 'next/link'
-import { Button, Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { useState, useEffect } from 'react';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Avatar from './Avatar';
+import Link from 'next/link';
+import {
+  Button,
+  FormControl,
+  Input,
+  InputLabel,
+  Typography,
+} from '@mui/material';
+import { Box } from '@mui/system';
 
 export default function Account({ session }) {
-  const supabase = useSupabaseClient()
-  const user = useUser()
-  const [loading, setLoading] = useState(true)
-  const [username, setUsername] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
+  const supabase = useSupabaseClient();
+  const user = useUser();
+  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState(null);
+  const [avatar_url, setAvatarUrl] = useState(null);
 
   useEffect(() => {
-    getProfile()
-  }, [session])
-
+    getProfile();
+  }, [session]);
 
   async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -26,75 +31,82 @@ export default function Account({ session }) {
           prompt: 'consent',
         },
       },
-    })
+    });
   }
   async function signout() {
-    const { error } = await supabase.auth.signOut()
+    const { error } = await supabase.auth.signOut();
   }
 
   async function getProfile() {
     try {
-      setLoading(true)
+      setLoading(true);
 
       let { data, error, status } = await supabase
         .from('profiles')
         .select(`username, avatar_url`)
         .eq('id', user.id)
-        .single()
+        .single();
 
       if (error && status !== 406) {
-        throw error
+        throw error;
       }
 
       if (data) {
-        setUsername(data.username)
-        setAvatarUrl(data.avatar_url)
+        setUsername(data.username);
+        setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
-      alert('Error loading user data!')
-      console.log(error)
+      alert('Error loading user data!');
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   async function updateProfile({ username, avatar_url }) {
     try {
-      setLoading(true)
+      setLoading(true);
 
       const updates = {
         id: user.id,
         username,
         avatar_url,
         updated_at: new Date().toISOString(),
-      }
+      };
 
-      let { error } = await supabase.from('profiles').upsert(updates)
-      if (error) throw error
-      alert('Profile updated!')
+      let { error } = await supabase.from('profiles').upsert(updates);
+      if (error) throw error;
+      alert('Profile updated!');
     } catch (error) {
-      alert('Error updating the data!')
-      console.log(error)
+      alert('Error updating the data!');
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   return (
-    <div className="form-widget">
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="username">Update Username</label>
-        <input
-          id="username"
-          type="text"
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
+    <FormControl>
+      <label> Account Email</label>
+      <Input
+        label="goal description"
+        id="email"
+        type="text"
+        value={session.user.email}
+        disabled
+      />
+      <br />
+      <br></br>
+      <label htmlFor="username">Update Username</label>
+      <Input
+        sx={{color: 'black'}}
+        label="goal description"
+        id="username"
+        type="text"
+        value={username || ''}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+
       <div>
         <Button
           className="button primary block"
@@ -104,8 +116,21 @@ export default function Account({ session }) {
           {loading ? 'Loading ...' : 'SUBMIT'}
         </Button>
       </div>
-      <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative', left: '30px'}}>
-        <Typography sx={{textAlign: 'center', position: 'relative', right: '29px'}} variant="h6"> Upload or Change Profile Picture</Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          left: '30px',
+        }}
+      >
+        <Typography
+          sx={{ textAlign: 'center', position: 'relative', right: '29px' }}
+          variant="h6"
+        >
+          {' '}
+          Upload or Change Profile Picture
+        </Typography>
         <Button variant="outlined" sx={{ position: 'relative', right: '29px' }}>
           <Avatar
             styles={{ backgroundColor: 'blue' }}
@@ -121,13 +146,12 @@ export default function Account({ session }) {
       </Box>
       <br></br>
       <Button
-        sx={{ p: '5px 30px', position: 'relative', right: '29px', top: '20px' }}
         color="error"
         variant="outlined"
         onClick={() => supabase.auth.signOut()}
       >
         Sign Out
       </Button>
-    </div>
+    </FormControl>
   );
 }
