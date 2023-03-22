@@ -86,7 +86,9 @@ export default function AccountMenu() {
           </MenuItem>
         </Link>
         <MenuItem sx={{ color: 'black', mr:'auto' }} onClick={handleClose}>
+          <Link href={'/favorites'}>
           <GradeIcon /> Favorites
+          </Link>
         </MenuItem>
         <Divider />
         <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
