@@ -3,6 +3,7 @@
 // const apiKey = '12b7e9bb35064303bdf958fe79ba7449';
 const apiKey = '4dc4e6d25bc644deb1222169d40f5ed1';
 
+
 export async function getRandomFoodTrivia() {
   const url = `https://api.spoonacular.com/food/trivia/random?apiKey=${apiKey}`;
   const response = await fetch(url);
