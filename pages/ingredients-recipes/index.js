@@ -28,29 +28,27 @@ export default function IngredientRecipe() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [expandedIngredient, setExpandedIngredient] = useState(null);
   const [result, setResult] = useState();
+
+
   const [selectedRecipe, setSelectedRecipe] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
-
-  const addToFavorites = async (recipeName, userId) => {
+  const addToFavorites = async (selectedRecipe, userId) => {
     try {
-      const { data, error } = await supabase.from('favorites').insert([{ recipeName, userId }]);
+      const { data, error } = await supabase.from('favorites').insert([{ selectedRecipe, userId }]);
       if (error) throw error;
-      console.log('Added to favorites:', data);
     } catch (error) {
       console.log('Error inserting into favorites:', error.message);
     }
   };
-
-  const toggleFavorite = async (recipe) => {
+  const toggleFavorite = async (selectedRecipe) => {
     try {
       if (isFavorite) {
         // Remove from favorites
-        const { data, error } = await supabase.from('favorites').delete().match({ recipeName: recipe.name, userId });
+        const { data, error } = await supabase.from('favorites').delete().match({ selectedRecipe, userId });
         if (error) throw error;
-        console.log('Removed from favorites:', data);
       } else {
         // Add to favorites
-        await addToFavorites(recipe.name, userId);
+        await addToFavorites(selectedRecipe, userId);
       }
       setIsFavorite(!isFavorite);
     } catch (error) {

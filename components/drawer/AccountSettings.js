@@ -18,10 +18,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
 import GradeIcon from '@mui/icons-material/Grade';
 
 export default function AccountMenu() {
-  const supabase = useSupabaseClient();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
@@ -53,7 +53,7 @@ export default function AccountMenu() {
   }
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', paddingRight: '0' }}>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -110,8 +110,10 @@ export default function AccountMenu() {
             <Avatar className="Menutext" /> Profile
           </MenuItem>
         </Link>
-        <MenuItem sx={{ color: 'black', mr: 'auto' }} onClick={handleClose}>
+        <MenuItem sx={{ color: 'black', mr:'auto' }} onClick={handleClose}>
+          <Link href={'/favorites'}>
           <GradeIcon /> Favorites
+          </Link>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleSettingsOpen} sx={{ color: 'black' }}>
