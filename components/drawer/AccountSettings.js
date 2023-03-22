@@ -11,24 +11,46 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
-
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 import GradeIcon from '@mui/icons-material/Grade';
-
-
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
-  const handleSettingsOpen = () => { setSettingsOpen(true); }; const handleSettingsClose = () => { setSettingsOpen(false); }; 
+  const handleSettingsOpen = () => { setSettingsOpen(true); };
+  const handleSettingsClose = () => { setSettingsOpen(false); };
+  const [notificationDays, setNotificationDays] = React.useState(0);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  async function saveUserNotificationSettings() {
+    const { user } = supabase.auth.user();
+    const { data, error } = await supabase
+      .from('UserProfile')
+      .update({ notification_days_before_expiration: notificationDays })
+      .match({ id: user.id });
+
+    if (error) {
+      console.error('Error updating user settings:', error);
+    } else {
+      console.log('User settings updated successfully:', data);
+      handleSettingsClose();
+    }
+  }
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', paddingRight: '0' }}>
@@ -44,12 +66,12 @@ export default function AccountMenu() {
             <AccountCircleIcon fontSize="large" sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip>
-    </Box>
-    <Menu
-      anchorEl={anchorEl}
-      id="account-menu"
-      open={open}
-      onClose={handleClose}
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -100,7 +122,47 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-      </Menu>
-    </>
-  );
+        <Dialog open={settingsOpen} onClose={handleSettingsClose}>
+  <DialogTitle sx={{ color: 'black' }}>Settings</DialogTitle>
+  <DialogContent sx={{ padding: (theme) => theme.spacing(3) }}>
+    <form noValidate autoComplete="off">
+      <TextField
+        id="notifyTimeInDays"
+        label="Days before expiration for notifications"
+        type="number"
+        InputLabelProps={{ shrink: true }}
+        value={notificationDays}
+        onChange={(e) => setNotificationDays(e.target.value)}
+        fullWidth
+        sx={{
+          marginTop: (theme) => theme.spacing(2),
+          marginBottom: (theme) => theme.spacing(2),
+          '& .MuiInputLabel-root': { color: 'black' },
+          '& .MuiInputBase-root': { color: 'black' },
+        }}
+      />
+    </form>
+  </DialogContent>
+  <DialogActions sx={{ color: 'black' }}>
+    <Button onClick={handleSettingsClose}>Cancel</Button>
+    <Button onClick={saveUserNotificationSettings}>Save</Button>
+  </DialogActions>
+</Dialog>
+        <Link href="/">
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              supabase.auth.signOut();
+            }}
+            sx={{ color: 'black', textDecoration: 'none' }}
+          >
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </Link>
+    </Menu>
+  </>
+);
 }

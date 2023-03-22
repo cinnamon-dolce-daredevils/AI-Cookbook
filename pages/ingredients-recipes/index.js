@@ -3,6 +3,8 @@ import { useState } from "react";
 import styles from "../../styles/index.module.css";
 import Link from "next/link";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ReactMarkdown from "react-markdown";
+
 
 import { useSession } from "@supabase/auth-helpers-react";
 const supabase = createClient(
@@ -236,7 +238,6 @@ async function handleIngredientClick (ingredient) {
       </Head>
 
       <main className={styles.main}>
-        <img src="/images/AICB_LogG.png" className={styles.icon} />
         <h3>Whatchu got in yo pantry?</h3>
         <form onSubmit={onSubmit}>
           <input
@@ -349,10 +350,11 @@ async function handleIngredientClick (ingredient) {
           toggleFavorite(selectedRecipe);
         }}
       />
-    <h4>{selectedRecipe}</h4>
+    <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
     {isFavorite && <p>Recipe added to favorites!</p>}
   </div>
 )}
+
 
 
       <Link style={{textDecoration: 'none', color: 'white'}} href={"/"}>Return to Home</Link>
