@@ -4,22 +4,33 @@ import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Link from 'next/link';
 import Account from '@/components/Account';
 import styles from '../../styles/signin.module.css'
+import { Button, Card, Paper } from '@mui/material';
+
 
 const Profile = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
-
   return (
-    <>
-    <div className={styles.container}>
-      {!session ? (
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" providers={['google']}/>
+    <Paper className={styles.container}>
+      <h1 style={{ textAlign: 'center' }}> User Settings</h1>
+      <div className={styles.container}>
+        {!session ? (
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            theme="dark"
+            providers={['google']}
+          />
         ) : (
           <Account session={session} />
-          )}
-    </div>
-          <Link className={styles.links} href={'/'}>Return Home</Link>
-    </>
+        )}
+      </div>
+      <Button variant="contained">
+        <Link className={styles.links} href={'/'}>
+          Return Home
+        </Link>
+      </Button>
+    </Paper>
   );
 }
 

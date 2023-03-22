@@ -11,14 +11,18 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
+
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+
 import GradeIcon from '@mui/icons-material/Grade';
 
 
+
 export default function AccountMenu() {
-  const supabase = useSupabaseClient();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const handleSettingsOpen = () => { setSettingsOpen(true); }; const handleSettingsClose = () => { setSettingsOpen(false); }; 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,7 +31,7 @@ export default function AccountMenu() {
   };
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', paddingRight: '0' }}>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -40,13 +44,12 @@ export default function AccountMenu() {
             <AccountCircleIcon fontSize="large" sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
+    </Box>
+    <Menu
+      anchorEl={anchorEl}
+      id="account-menu"
+      open={open}
+      onClose={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -91,23 +94,12 @@ export default function AccountMenu() {
           </Link>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ color: 'black' }} onClick={handleClose}>
+        <MenuItem onClick={handleSettingsOpen} sx={{ color: 'black' }}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <Link href="/">
-          <MenuItem
-            onClick={() => supabase.auth.signOut()}
-            sx={{ color: 'black', textDecoration: 'none' }}
-          >
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
-        </Link>
       </Menu>
     </>
   );
