@@ -3,6 +3,9 @@ import { useState } from "react";
 import styles from "../../styles/index.module.css";
 import Link from "next/link";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ReactMarkdown from "react-markdown";
+import { useSelectedPersonality } from '../../components/useSelectedPersonality';
+
 
 import { useSession } from "@supabase/auth-helpers-react";
 
@@ -23,6 +26,7 @@ export default function IngredientRecipe({data}) {
   
   const [ingredientsInput, setIngredientsInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const { selectedPersonality, handleChangePersonality } = useSelectedPersonality();
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [expandedIngredient, setExpandedIngredient] = useState(null);
@@ -42,11 +46,9 @@ export default function IngredientRecipe({data}) {
   const toggleFavorite = async (selectedRecipe) => {
     try {
       if (isFavorite) {
-        // Remove from favorites
         const { data, error } = await supabase.from('favorites').delete().match({ selectedRecipe, userId });
         if (error) throw error;
       } else {
-        // Add to favorites
         await addToFavorites(selectedRecipe, userId);
       }
       setIsFavorite(!isFavorite);
@@ -55,6 +57,11 @@ export default function IngredientRecipe({data}) {
     }
   };
 
+  useEffect(() => {
+    if (selectedRecipe) {
+      fetchRecipe(selectedRecipe, selectedPersonality);
+    }
+  }, [selectedPersonality]);  
 
   async function handleInputChange(event) {
     const input = event.target.value;
@@ -137,7 +144,6 @@ async function handleIngredientClick (ingredient) {
         console.error("Error inserting data:", error);
       }
       setSelectedIngredients((prevIngredients) => {
-        //check if the ingredient already exists
         const existingIngredient = prevIngredients.findIndex(
           (ingredient)=> ingredient.id === ingredientDetails.id
         )
@@ -192,7 +198,7 @@ async function handleIngredientClick (ingredient) {
     }
   }
 
-  async function fetchRecipe(recipe) {
+  async function fetchRecipe(recipe, selectedPersonality) {
     setSelectedRecipe("");
     setResult((prevState) => ({ ...prevState, isLoading: true }));
     const ingredientsList = selectedIngredients
@@ -203,6 +209,7 @@ async function handleIngredientClick (ingredient) {
     return;
   }
 
+
   try {
     const response = await fetch("/api/recipe", {
       method: "POST",
@@ -212,6 +219,7 @@ async function handleIngredientClick (ingredient) {
       body: JSON.stringify({
         ingredients: ingredientsList,
         selectedRecipe: recipe,
+        personality: selectedPersonality,
       }),
     });
 
@@ -229,7 +237,6 @@ async function handleIngredientClick (ingredient) {
   }
 }
 
-
   return (
     <div className={styles.body}>
       <Head>
@@ -238,7 +245,6 @@ async function handleIngredientClick (ingredient) {
       </Head>
 
       <main className={styles.main}>
-        <img src="/images/AICB_LogG.png" className={styles.icon} />
         <h3>Whatchu got in yo pantry?</h3>
         <form onSubmit={onSubmit}>
           <input
@@ -312,7 +318,7 @@ async function handleIngredientClick (ingredient) {
               <div
                 key={index}
                 className={styles.mealItem}
-                onClick={() => fetchRecipe(recipe)}
+                onClick={() => fetchRecipe(recipe, selectedPersonality)}
               >
                 {recipe}
               </div>
@@ -339,10 +345,11 @@ async function handleIngredientClick (ingredient) {
           toggleFavorite(selectedRecipe);
         }}
       />
-    <h4>{selectedRecipe}</h4>
+    <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
     {isFavorite && <p>Recipe added to favorites!</p>}
   </div>
 )}
+
 
 
       <Link style={{textDecoration: 'none', color: 'white'}} href={"/"}>Return to Home</Link>

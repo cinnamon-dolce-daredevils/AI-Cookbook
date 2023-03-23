@@ -11,24 +11,50 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
-
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
-
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import GradeIcon from '@mui/icons-material/Grade';
-
-
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const personalityChangeListeners = new Set();
   const open = Boolean(anchorEl);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
-  const handleSettingsOpen = () => { setSettingsOpen(true); }; const handleSettingsClose = () => { setSettingsOpen(false); }; 
+  const handleSettingsOpen = () => { setSettingsOpen(true); };
+  const handleSettingsClose = () => { setSettingsOpen(false); };
+  const [selectedPersonality, setSelectedPersonality] = React.useState('normalAI');
+
+  const storePersonalityInLocalStorage = (selectedPersonality) => {
+    localStorage.setItem('selectedPersonality', selectedPersonality);
+  };
+
+  React.useEffect(() => {
+    const storedPersonality = localStorage.getItem('selectedPersonality');
+    if (storedPersonality) {
+      setSelectedPersonality(storedPersonality);
+    }
+  }, []);
+
+  const handleChangePersonality = (event) => {
+    const newPersonality = event.target.value;
+    setSelectedPersonality(newPersonality);
+    storePersonalityInLocalStorage(newPersonality);
+    window.location.reload();
+  };
+  
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', paddingRight: '0' }}>
@@ -44,12 +70,12 @@ export default function AccountMenu() {
             <AccountCircleIcon fontSize="large" sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip>
-    </Box>
-    <Menu
-      anchorEl={anchorEl}
-      id="account-menu"
-      open={open}
-      onClose={handleClose}
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -100,7 +126,106 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-      </Menu>
-    </>
-  );
+        <Dialog open={settingsOpen} onClose={handleSettingsClose}>
+        <DialogTitle sx={{ color: 'black' }}>Settings</DialogTitle>
+        <DialogContent sx={{ padding: (theme) => theme.spacing(3) }}>
+          <form noValidate autoComplete="off">
+            <RadioGroup
+              aria-label="personality"
+              name="personality"
+              value={selectedPersonality}
+              onChange={handleChangePersonality}
+              sx={{
+                marginTop: (theme) => theme.spacing(2),
+                marginBottom: (theme) => theme.spacing(2),
+                color: 'black',
+              }}
+            >
+              <FormControlLabel
+                value="normalAI"
+                control={<Radio />}
+                label="Normal AI"
+                sx={{ color: 'black' }}
+              />
+              <FormControlLabel
+                value="snoopDogg"
+                control={<Radio />}
+                label="Snoop Dogg"
+                sx={{ color: 'black' }}
+              />
+              <FormControlLabel
+                value="marthaStewart"
+                control={<Radio />}
+                label="Martha Stewart"
+                sx={{ color: 'black' }}
+              />
+              <FormControlLabel
+                value="emerilLagasse"
+                control={<Radio />}
+                label="Emeril Lagasse"
+                sx={{ color: 'black' }}
+              />
+              <FormControlLabel
+                value="samuelJackson"
+                control={<Radio />}
+                label="Samuel L. Jackson"
+                sx={{ color: 'black' }}
+              />
+              <FormControlLabel
+                value="gordonRamsay"
+                control={<Radio />}
+                label="Gordon Ramsay"
+                sx={{ color: 'black' }}
+              />
+                            <FormControlLabel
+                value="bobRoss"
+                control={<Radio />}
+                label="Bob Ross"
+                sx={{ color: 'black' }}
+              />
+                            <FormControlLabel
+                value="juliaChild"
+                control={<Radio />}
+                label="Julia Child"
+                sx={{ color: 'black' }}
+              />
+                            <FormControlLabel
+                value="christopherWalken"
+                control={<Radio />}
+                label="Christopher Walken"
+                sx={{ color: 'black' }}
+              />
+                            <FormControlLabel
+                value="morganFreeman"
+                control={<Radio />}
+                label="Morgan Freeman"
+                sx={{ color: 'black' }}
+              />
+                            <FormControlLabel
+                value="guyFieri"
+                control={<Radio />}
+                label="Guy Fieri"
+                sx={{ color: 'black' }}
+              />
+            </RadioGroup>
+          </form>
+        </DialogContent>
+      </Dialog>
+        <Link href="/">
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              supabase.auth.signOut();
+            }}
+            sx={{ color: 'black', textDecoration: 'none' }}
+          >
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </Link>
+    </Menu>
+  </>
+);
 }
