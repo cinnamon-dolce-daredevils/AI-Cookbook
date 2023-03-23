@@ -53,6 +53,21 @@
   animation: glitch 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both 5;
 }
 
+.ingredientItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid #a900c0;
+  cursor: pointer;
+  color: #e0e0e0;
+}
+
+.ingredientItem:hover {
+  background-color: #56007b;
+  border-radius: 10px;
+}
+
 @media only screen and (max-width: 400px) {
   .glitch {
     font-size: 3em;

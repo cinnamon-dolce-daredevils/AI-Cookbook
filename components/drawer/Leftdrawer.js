@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -84,36 +84,40 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+const [pantryItems, setPantryItems] = useState([])
+console.log(pantryItems, 'this is pantryitems')
 const  session  = useSession();
 let userId = null;
 if(session){
   userId = session.user.id
 }
 
-console.log(session.user.id)
+console.log(session)
 
 async function getIngredientsList() {
-	const { user, error } = await session;
-	if (user) {
-		userId = user.id;
+	if (session && session.user) {
+		userId = session.user.id;
 		try {
-			const { data, error: existingError } = await supabase
+			const { data: suggestion, error: existingError } = await supabase
 				.from("pantry")
 				.select("suggestion")
-        .eq("userId", userId)
-        
-				
-			console.log(data) ;
+				.eq("userId", userId);
+        console.log(suggestion)
+
+			setPantryItems(suggestion)
 		} catch (error) {
 			console.error(error);
-			alert(error.message);
+			// alert(error.message);
 		}
 	} else {
 		console.log("Session is null");
 	}
 }
 
-getIngredientsList()
+useEffect(()=>{
+ getIngredientsList(userId) 
+}, [userId])
+
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -223,8 +227,17 @@ getIngredientsList()
             </DrawerHeader>
             <Divider />
             <List>
-              {/* where we should call supabase to get
-                  ingredients */}
+              {pantryItems.map((item, index)=>{
+                return (
+									<div className={styles.ingredientItem}>
+										<div key={index}>{item.suggestion[0].name}</div>
+										<div>
+                      qty
+                    </div>
+                    
+									</div>
+								);
+              })}
             </List>
           </Drawer>
         </div>
