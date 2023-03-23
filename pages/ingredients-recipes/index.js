@@ -14,7 +14,7 @@ const supabase = createClient(
 )
 
 import { useEffect } from "react";
-import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
+import { callAutocompleteApi, fetchIngredientDetails } from "../api/ingredientApi";
 
 
 export default function IngredientRecipe({data}) {
@@ -35,7 +35,7 @@ export default function IngredientRecipe({data}) {
       const { data, error } = await supabase.from('favorites').insert([{ selectedRecipe, userId }]);
       if (error) throw error;
     } catch (error) {
-      console.log('Error inserting into favorites:', error.message);
+      console.error('Error inserting into favorites:', error.message);
     }
   };
   const toggleFavorite = async (selectedRecipe) => {
@@ -48,7 +48,7 @@ export default function IngredientRecipe({data}) {
       }
       setIsFavorite(!isFavorite);
     } catch (error) {
-      console.log('Error toggling favorite:', error.message);
+      console.error('Error toggling favorite:', error.message);
     }
   };
 
@@ -99,7 +99,6 @@ async function handleIngredientClick (ingredient) {
     try {
       const ingredientDetails = await fetchIngredientDetails(suggestion.id);
       let fat = 0, calories = 0, protein = 0, carbs = 0;
-      console.log(ingredientDetails.image)
       for (let nutrient of ingredientDetails.nutrition.nutrients) {
         switch (nutrient.name) {
           case "Fat":
