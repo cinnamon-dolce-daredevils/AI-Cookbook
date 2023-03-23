@@ -103,7 +103,7 @@ async function handleIngredientClick (ingredient) {
 
     try {
       const ingredientDetails = await fetchIngredientDetails(suggestion.id);
-      let fat = 0, calories = 0, protein = 0, carbs = 0;
+      let fat = 0, calories = 0, protein = 0, carbs = 0, image = "";
       for (let nutrient of ingredientDetails.nutrition.nutrients) {
         switch (nutrient.name) {
           case "Fat":
@@ -118,6 +118,8 @@ async function handleIngredientClick (ingredient) {
           case "Carbohydrates":
             carbs = nutrient.amount;
             break;
+          case "image":
+            image = ingredientDetails.image;
           default:
             break;
         }
@@ -135,7 +137,8 @@ async function handleIngredientClick (ingredient) {
             calories: calories,
             fat: fat,
             protein: protein,
-            carbs: carbs
+            carbs: carbs,
+            image: image
           }],
           userId: userId,
         }]);
@@ -254,7 +257,9 @@ async function handleIngredientClick (ingredient) {
             value={ingredientsInput}
             onChange={handleInputChange}
           />
-          <Button type="submit">Generate Meals</Button>
+          <Button variant="contained" type="submit">
+            Generate Meals
+          </Button>
         </form>
         <ul className={styles.suFatggestions}>
           {suggestions.map((suggestion, index) => (
@@ -268,92 +273,93 @@ async function handleIngredientClick (ingredient) {
       {expandedIngredient && (
         <div className={styles.ingredientDetails} onClick={closeExpandedView}>
           <p>{expandedIngredient.name}</p>
-        <img
-          src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
-          alt={expandedIngredient.name}
-        />
-        {expandedIngredient.nutrition &&
-          expandedIngredient.nutrition.nutrients && (
-            <>
-              <p>
-                Calories:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Calories"
-                )?.amount || "N/A"}{" "}
-                kcal
-              </p>
-              <p>
-                Carbs:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Carbohydrates"
-                )?.amount || "N/A"}{" "}
-                g
-              </p>
-              <p>
-                Fat:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Fat"
-                )?.amount || "N/A"}{" "}
-                g
-              </p>
-              <p>
-                Protein:{" "}
-                {expandedIngredient.nutrition.nutrients.find(
-                  (n) => n.name === "Protein"
-                )?.amount || "N/A"}{" "}
-                g
-              </p>
-            </>
-          )}
+          <img
+            src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
+            alt={expandedIngredient.name}
+          />
+          {expandedIngredient.nutrition &&
+            expandedIngredient.nutrition.nutrients && (
+              <>
+                <p>
+                  Calories:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Calories'
+                  )?.amount || 'N/A'}{' '}
+                  kcal
+                </p>
+                <p>
+                  Carbs:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Carbohydrates'
+                  )?.amount || 'N/A'}{' '}
+                  g
+                </p>
+                <p>
+                  Fat:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Fat'
+                  )?.amount || 'N/A'}{' '}
+                  g
+                </p>
+                <p>
+                  Protein:{' '}
+                  {expandedIngredient.nutrition.nutrients.find(
+                    (n) => n.name === 'Protein'
+                  )?.amount || 'N/A'}{' '}
+                  g
+                </p>
+              </>
+            )}
         </div>
       )}
 
+      {result && typeof result === 'string'}
 
-  {result && typeof result === "string"}
-
-{result &&
-  !result.isLoading && typeof result === "string" && (
-    <div className={styles.mealList}>
-      {result.split(", ").map((recipe, index) => (
-              <div
-                key={index}
-                className={styles.mealItem}
-                onClick={() => fetchRecipe(recipe, selectedPersonality)}
-              >
-                {recipe}
-              </div>
-            ))}
+      {result && !result.isLoading && typeof result === 'string' && (
+        <div className={styles.mealList}>
+          {result.split(', ').map((recipe, index) => (
+            <div
+              key={index}
+              className={styles.mealItem}
+              onClick={() => fetchRecipe(recipe, selectedPersonality)}
+            >
+              {recipe}
+            </div>
+          ))}
         </div>
       )}
 
-    {result && result.isLoading && (
-      <>
-      <div className={styles.loadingOverlay}>
-      <div className={styles.loading}>
-        <h1>Loading...</h1>
-        <img src="/images/fridge.gif" />
+      {result && result.isLoading && (
+        <>
+          <div className={styles.loadingOverlay}>
+            <div className={styles.loading}>
+              <h1>Loading...</h1>
+              <img src="/images/fridge.gif" />
+            </div>
+          </div>
+        </>
+      )}
+      {selectedRecipe && (
+        <div className={styles.recipe}>
+          <FavoriteIcon
+            className={styles.favorite}
+            style={{
+              fontSize: '50px',
+              width: '50px',
+              color: isFavorite ? 'red' : 'grey',
+            }}
+            onClick={() => {
+              toggleFavorite(selectedRecipe);
+            }}
+          />
+          <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
+          {isFavorite && <p>Recipe added to favorites!</p>}
         </div>
-        </div>
-      </>
-    )}
-{selectedRecipe && (
-  <div className={styles.recipe}>
-    <FavoriteIcon
-        className={styles.favorite}
-        style={{ fontSize: "50px", width: "50px", color: isFavorite ? "red" : "grey" }}
-        onClick={() => {
-          toggleFavorite(selectedRecipe);
-        }}
-      />
-    <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
-    {isFavorite && <p>Recipe added to favorites!</p>}
-  </div>
-)}
+      )}
 
-
-
-      <Link style={{textDecoration: 'none', color: 'white'}} href={"/"}>Return to Home</Link>
-
+      <Link style={{ textDecoration: 'none', color: 'white' }} href={'/'}>
+        Return to Home
+      </Link>
     </div>
   );
 }
