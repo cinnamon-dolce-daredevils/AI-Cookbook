@@ -8,6 +8,11 @@ import { useSelectedPersonality } from '../../components/useSelectedPersonality'
 
 
 import { useSession } from "@supabase/auth-helpers-react";
+
+
+import { Button } from "@mui/material";
+
+import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -16,13 +21,9 @@ const supabase = createClient(
 import { useEffect } from "react";
 import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
 
-import { Button } from "@mui/material";
 
-import { createClient } from "@supabase/supabase-js";
-
-
-export default function IngredientRecipe() {
-
+export default function IngredientRecipe({data}) {
+  
   const [ingredientsInput, setIngredientsInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const { selectedPersonality, handleChangePersonality } = useSelectedPersonality();
@@ -82,6 +83,7 @@ export default function IngredientRecipe() {
   const session = useSession();
 let userId = null;
 
+  // sets the userId to the person who is signed in
 if (session) {
   userId = session.user.id;
 }
@@ -261,18 +263,6 @@ async function handleIngredientClick (ingredient) {
             </li>
           ))}
         </ul>
-        <div className={styles.ingredientsList}>
-          {selectedIngredients.map((ingredient, index) => (
-            <div
-              key={index}
-              className={styles.ingredientItem}
-              onClick={() => handleIngredientClick(ingredient)}
-            >
-              <div>{ingredient.name}</div>
-              <div>{ingredient.quantity}</div>
-            </div>
-          ))}
-        </div>
       </main>
 
       {expandedIngredient && (
@@ -367,3 +357,29 @@ async function handleIngredientClick (ingredient) {
     </div>
   );
 }
+
+
+
+// export async function getServerSideProps(context) {
+//   const session = useSession(context);
+//   let userId = null;
+
+//   // sets the userId to the person who is signed in
+//   if (session) {
+//     userId = session.user.id;
+//   }
+  
+
+
+//   const { data } = await supabase
+//     .from('pantry')
+//     .select('suggestion')
+//     .eq('userId', userId);
+//   console.log(data);
+
+//   return {
+//     props: {
+//       suggestion: data,
+//     },
+//   };
+// }

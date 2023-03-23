@@ -11,13 +11,33 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import { purple } from '@mui/material/colors';
 import AccountSettings from './AccountSettings';
 const drawerWidth = 240;
+ import { useSession } from "@supabase/auth-helpers-react";
+ import { createClient } from "@supabase/supabase-js";
+
+  const supabase = createClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL,
+		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+	);
+
+  console.log(supabase.auth)
+  
+  
+  
+
+  
+
+
+// Connecting to Supabase
+// import { supabase } from '@supabase/supabase-js';
+
+
+
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -64,6 +84,37 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+const  session  = useSession();
+let userId = null;
+if(session){
+  userId = session.user.id
+}
+
+console.log(session.user.id)
+
+async function getIngredientsList() {
+	const { user, error } = await session;
+	if (user) {
+		userId = user.id;
+		try {
+			const { data, error: existingError } = await supabase
+				.from("pantry")
+				.select("suggestion")
+        .eq("userId", userId)
+        
+				
+			console.log(data) ;
+		} catch (error) {
+			console.error(error);
+			alert(error.message);
+		}
+	} else {
+		console.log("Session is null");
+	}
+}
+
+getIngredientsList()
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -127,9 +178,13 @@ export default function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
             <div className={styles.container}>
-            <Link href="/" className={styles.glitch} data-glitch="AI Cookbook">
-  AI Cookbook
-</Link>
+              <Link
+                href="/"
+                className={styles.glitch}
+                data-glitch="AI Cookbook"
+              >
+                AI Cookbook
+              </Link>
             </div>
             <Box
               sx={{
@@ -167,7 +222,10 @@ export default function PersistentDrawerLeft() {
               </IconButton>
             </DrawerHeader>
             <Divider />
-            <List></List>
+            <List>
+              {/* where we should call supabase to get
+                  ingredients */}
+            </List>
           </Drawer>
         </div>
         <Main open={open}>
@@ -178,3 +236,4 @@ export default function PersistentDrawerLeft() {
     </>
   );
 }
+
