@@ -117,7 +117,7 @@ async function getIngredientsList() {
 
 useEffect(()=>{
  getIngredientsList(userId) 
-}, [userId])
+}, [userId, pantryItems])
 
 
   const theme = useTheme();
