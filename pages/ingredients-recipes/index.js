@@ -23,7 +23,7 @@ import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
 
 
 export default function IngredientRecipe({data}) {
-  
+
   const [ingredientsInput, setIngredientsInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const { selectedPersonality, handleChangePersonality } = useSelectedPersonality();
@@ -61,7 +61,7 @@ export default function IngredientRecipe({data}) {
     if (selectedRecipe) {
       fetchRecipe(selectedRecipe, selectedPersonality);
     }
-  }, [selectedPersonality]);  
+  }, [selectedPersonality]);
 
   async function handleInputChange(event) {
     const input = event.target.value;
@@ -103,7 +103,8 @@ async function handleIngredientClick (ingredient) {
 
     try {
       const ingredientDetails = await fetchIngredientDetails(suggestion.id);
-      let fat = 0, calories = 0, protein = 0, carbs = 0, image = "";
+      let fat = 0, calories = 0, protein = 0, carbs = 0;
+      console.log(ingredientDetails.image)
       for (let nutrient of ingredientDetails.nutrition.nutrients) {
         switch (nutrient.name) {
           case "Fat":
@@ -118,8 +119,6 @@ async function handleIngredientClick (ingredient) {
           case "Carbohydrates":
             carbs = nutrient.amount;
             break;
-          case "image":
-            image = ingredientDetails.image;
           default:
             break;
         }
@@ -138,7 +137,7 @@ async function handleIngredientClick (ingredient) {
             fat: fat,
             protein: protein,
             carbs: carbs,
-            image: image
+            image: ingredientDetails.image
           }],
           userId: userId,
         }]);
@@ -374,7 +373,7 @@ async function handleIngredientClick (ingredient) {
 //   if (session) {
 //     userId = session.user.id;
 //   }
-  
+
 
 
 //   const { data } = await supabase

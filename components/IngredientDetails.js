@@ -56,6 +56,11 @@ const IngredientDetails = (props) => {
                   >
                       qty: {props.item.quantity}
                       <br/>
+                      <img
+                      src={`https://spoonacular.com/cdn/ingredients_100x100/${props.item.suggestion[0].image}`}
+                      alt={props.item.suggestion[0].name}
+                      />
+                      <br/>
                       Here is a basic description of stuff so the dialog box is bigger
                       <br/>
             Fat: {props.item.suggestion[0].fat}
