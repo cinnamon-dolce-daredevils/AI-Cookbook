@@ -19,6 +19,7 @@ import AccountSettings from './AccountSettings';
 const drawerWidth = 240;
  import { useSession } from "@supabase/auth-helpers-react";
  import { createClient } from "@supabase/supabase-js";
+import IngredientDetails from '../IngredientDetails';
 
   const supabase = createClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -98,9 +99,9 @@ async function getIngredientsList() {
 	if (session && session.user) {
 		userId = session.user.id;
 		try {
-			const { data: suggestion, error: existingError } = await supabase
+			const { data: suggestion,  error: existingError } = await supabase
 				.from("pantry")
-				.select("suggestion")
+				.select("*")
 				.eq("userId", userId);
         console.log(suggestion)
 
@@ -132,6 +133,9 @@ useEffect(()=>{
 
   const purple1 = purple[600];
 
+  const handleIngredientClick = () => {
+    console.log('hello')
+  }
   return (
     <>
       <Box sx={{ display: 'flex' }}>
@@ -227,16 +231,13 @@ useEffect(()=>{
             </DrawerHeader>
             <Divider />
             <List>
+              
               {pantryItems.map((item, index)=>{
                 return (
-									<div className={styles.ingredientItem}>
-										<div key={index}>{item.suggestion[0].name}</div>
-										<div>
-                      qty
-                    </div>
-                    
-									</div>
-								);
+                  <>
+                    <IngredientDetails item={item} index={index} />
+                  </>
+                );
               })}
             </List>
           </Drawer>
