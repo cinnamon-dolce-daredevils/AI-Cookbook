@@ -5,13 +5,8 @@ import Link from "next/link";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ReactMarkdown from "react-markdown";
 import { useSelectedPersonality } from '../../components/useSelectedPersonality';
-
-
 import { useSession } from "@supabase/auth-helpers-react";
-
-
 import { Button } from "@mui/material";
-
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -260,7 +255,7 @@ async function handleIngredientClick (ingredient) {
             Generate Meals
           </Button>
         </form>
-        <ul className={styles.suFatggestions}>
+        <ul className={styles.suggestions}>
           {suggestions.map((suggestion, index) => (
             <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
               {suggestion.name}
