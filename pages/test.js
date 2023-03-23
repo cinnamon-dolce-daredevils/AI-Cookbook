@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { createClient } from '@supabase/supabase-js';
 import { useSession } from '@supabase/auth-helpers-react';
-import SidebarIngredient from '@/components/SidebarIngredient';
 // (connects our app with supabase tables)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
