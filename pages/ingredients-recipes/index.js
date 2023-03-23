@@ -5,6 +5,11 @@ import Link from "next/link";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { useSession } from "@supabase/auth-helpers-react";
+
+
+import { Button } from "@mui/material";
+
+import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -13,10 +18,6 @@ const supabase = createClient(
 import { useEffect } from "react";
 import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
 
-import { Button } from "@mui/material";
-
-import { createClient } from "@supabase/supabase-js";
-import { getSession } from 'next-auth/client';
 
 export default function IngredientRecipe({data}) {
   
@@ -352,26 +353,26 @@ async function handleIngredientClick (ingredient) {
 
 
 
-export async function getServerSideProps(context) {
-  const session = useSession(context);
-  let userId = null;
+// export async function getServerSideProps(context) {
+//   const session = useSession(context);
+//   let userId = null;
 
-  // sets the userId to the person who is signed in
-  if (session) {
-    userId = session.user.id;
-  }
+//   // sets the userId to the person who is signed in
+//   if (session) {
+//     userId = session.user.id;
+//   }
   
 
 
-  const { data } = await supabase
-    .from('pantry')
-    .select('suggestion')
-    .eq('userId', userId);
-  console.log(data);
+//   const { data } = await supabase
+//     .from('pantry')
+//     .select('suggestion')
+//     .eq('userId', userId);
+//   console.log(data);
 
-  return {
-    props: {
-      suggestion: data,
-    },
-  };
-}
+//   return {
+//     props: {
+//       suggestion: data,
+//     },
+//   };
+// }

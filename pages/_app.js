@@ -40,12 +40,12 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   const themeSetter = purpleDirtyDark
   return (
     <ThemeProvider theme={themeSetter}>
+      <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
       <Layout>
         <CssBaseline />
-          <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
             <Component {...pageProps} />
-          </SessionContextProvider>
-      </Layout>
+      </Layout> 
+      </SessionContextProvider>
     </ThemeProvider>
   );
 }
