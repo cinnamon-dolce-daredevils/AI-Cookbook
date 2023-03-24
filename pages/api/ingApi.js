@@ -2,7 +2,7 @@
 
 
 export async function getRandomFoodTrivia() {
-  const url = `https://api.spoonacular.com/food/trivia/random?apiKey=${apiKey}`;
+  const url = `https://api.spoonacular.com/food/trivia/random?apiKey=${process.env.apiKey}`;
   const response = await fetch(url);
 
   if (!response.ok) {
