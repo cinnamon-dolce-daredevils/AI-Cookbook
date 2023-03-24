@@ -1,9 +1,8 @@
-export const apiKey = '528d6e974d124631a86eba6bb6d97794';
 
 
 export async function callAutocompleteApi(input) {
   const response = await fetch(
-    `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${apiKey}&query=${encodeURIComponent(
+    `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.apiKey}&query=${encodeURIComponent(
       input
     )}&number=10&metaInformation=true`
   );
