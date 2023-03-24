@@ -26,7 +26,6 @@ import IngredientDetails from '../IngredientDetails';
 		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 	);
 
-  console.log(supabase.auth)
   
   
   
@@ -86,14 +85,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
 const [pantryItems, setPantryItems] = useState([])
-console.log(pantryItems, 'this is pantryitems')
 const  session  = useSession();
 let userId = null;
 if(session){
   userId = session.user.id
 }
 
-console.log(session)
 
 async function getIngredientsList() {
 	if (session && session.user) {
@@ -103,7 +100,6 @@ async function getIngredientsList() {
 				.from("pantry")
 				.select("*")
 				.eq("userId", userId);
-        console.log(suggestion)
 
 			setPantryItems(suggestion)
 		} catch (error) {
@@ -133,9 +129,6 @@ useEffect(()=>{
 
   const purple1 = purple[600];
 
-  const handleIngredientClick = () => {
-    console.log('hello')
-  }
   return (
     <>
       <Box sx={{ display: 'flex' }}>
