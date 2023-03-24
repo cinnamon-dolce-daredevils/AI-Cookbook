@@ -17,7 +17,7 @@ export async function callAutocompleteApi(input) {
 
 export async function fetchIngredientDetails(id) {
   const response = await fetch(
-    `https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${apiKey}&amount=100&unit=grams`
+    `https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${process.env.apiKey}&amount=100&unit=grams`
   );
 
   if (response.status !== 200) {
