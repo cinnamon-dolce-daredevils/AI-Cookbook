@@ -76,13 +76,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
 const [pantryItems, setPantryItems] = useState([])
+const [suggestions, setSuggestions]=useState()
 
 
 const  session  = useSession();
-let userId = session?.user?.id;
+let userId = null
 
 async function getIngredientsList() {
-	if (session && session.user) {
+	
 		userId = session.user.id;
 		try {
 			const { data: suggestion,  error: existingError } = await supabase
@@ -90,21 +91,19 @@ async function getIngredientsList() {
 				.select("*")
 				.eq("userId", userId);
 
-			setPantryItems(suggestion)
+			  setPantryItems(suggestion)
+        setSuggestions(suggestion.length)
 		} catch (error) {
 			console.error(error);
 			// alert(error.message);
 		}
-	} else {
-		console.log("Session is null");
-	}
+	
 }
 
+
 useEffect(() => {
-  if (userId) {
-    getIngredientsList(userId);
-  }
-}, [userId, pantryItems]);
+    getIngredientsList()
+}, [pantryItems]);
 
 
 
