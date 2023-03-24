@@ -15,8 +15,8 @@ export default async function (req, res) {
     return;
   }
 
-  const ingredients = req.body.ingredients || '';
-  if (ingredients.trim().length === 0) {
+  const ingredientsList = req.body.ingredients || '';
+  if (ingredientsList.trim().length === 0) {
     res.status(400).json({
       error: {
         message: "Please enter a valid ingredient",
@@ -28,7 +28,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(ingredients),
+      prompt: generatePrompt(ingredientsList),
       temperature: 0.6,
       max_tokens: 900,
     });
@@ -49,9 +49,9 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(ingredients) {
+function generatePrompt(ingredientsList) {
   const capitalizedIngredients =
-    ingredients[0].toUpperCase() + ingredients.slice(1).toLowerCase();
+    ingredientsList[0].toUpperCase() + ingredientsList.slice(1).toLowerCase();
   return `Suggest meals with recipes that contain only, but not necessarily all, of these ingredients.
 
 Ingredients: american cheese, mayo, turkey, white bread, tortilla, provalone.
@@ -61,4 +61,5 @@ Meals: cake, cupcake, cookies
 Ingredients: ${capitalizedIngredients}
 Meals: `;
 }
+
 

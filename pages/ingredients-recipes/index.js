@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../../styles/index.module.css";
 import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -8,22 +8,17 @@ import { useSelectedPersonality } from "../../components/useSelectedPersonality"
 import { useSession } from "@supabase/auth-helpers-react";
 import { Button } from "@mui/material";
 import { createClient } from "@supabase/supabase-js";
+import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
 const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_URL,
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-import { useEffect } from "react";
-import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
-
 export default function IngredientRecipe({ data }) {
 	const [ingredientsInput, setIngredientsInput] = useState("");
 	const [suggestions, setSuggestions] = useState([]);
-	const { selectedPersonality, handleChangePersonality } =
-		useSelectedPersonality();
-	const [selectedIngredient, setSelectedIngredient] = useState(null);
-	const [selectedIngredients, setSelectedIngredients] = useState([]);
-	console.log(selectedIngredient);
+	const { selectedPersonality, handleChangePersonality } = useSelectedPersonality();
+    const [ingredientNames, setIngredientNames] = useState([]);
 	const [expandedIngredient, setExpandedIngredient] = useState(null);
 	const [result, setResult] = useState();
 
@@ -95,173 +90,172 @@ export default function IngredientRecipe({ data }) {
 		setExpandedIngredient(null);
 	}
 
-	async function handleSuggestionClick(suggestion) {
-		setIngredientsInput("");
-		setSuggestions([]);
+    async function handleSuggestionClick(suggestion) {
+        setIngredientsInput("");
+        setSuggestions([]);
+      
+        try {
+          const ingredientDetails = await fetchIngredientDetails(suggestion.id);
+          let fat = 0,
+            calories = 0,
+            protein = 0,
+            carbs = 0;
+          console.log(ingredientDetails.image);
+          for (let nutrient of ingredientDetails.nutrition.nutrients) {
+            switch (nutrient.name) {
+              case "Fat":
+                fat = nutrient.amount;
+                break;
+              case "Calories":
+                calories = nutrient.amount;
+                break;
+              case "Protein":
+                protein = nutrient.amount;
+                break;
+              case "Carbohydrates":
+                carbs = nutrient.amount;
+                break;
+              default:
+                break;
+            }
+          }
+          if (!userId) {
+            console.error("user is not logged in");
+            return;
+          }
+          const { error } = await supabase.from("pantry").insert([
+            {
+              suggestion: [
+                {
+                  id: ingredientDetails.id,
+                  name: ingredientDetails.name,
+                  calories: calories,
+                  fat: fat,
+                  protein: protein,
+                  carbs: carbs,
+                  image: ingredientDetails.image,
+                },
+              ],
+              userId: userId,
+            },
+          ]);
+      
+          if (error) {
+            console.error("Error inserting data:", error);
+          }
+      
+          // Update the ingredientNames state here
+          setIngredientNames((prevIngredientNames) => [
+            ...prevIngredientNames,
+            ingredientDetails.name,
+          ]);
+      
+          setExpandedIngredient(null);
+        } catch (error) {
+          console.error(error);
+          alert(error.message);
+        }
+      }
+      
 
-		try {
-			const ingredientDetails = await fetchIngredientDetails(suggestion.id);
-			let fat = 0,
-				calories = 0,
-				protein = 0,
-				carbs = 0;
-			console.log(ingredientDetails.image);
-			for (let nutrient of ingredientDetails.nutrition.nutrients) {
-				switch (nutrient.name) {
-					case "Fat":
-						fat = nutrient.amount;
-						break;
-					case "Calories":
-						calories = nutrient.amount;
-						break;
-					case "Protein":
-						protein = nutrient.amount;
-						break;
-					case "Carbohydrates":
-						carbs = nutrient.amount;
-						break;
-					default:
-						break;
-				}
-			}
-			if (!userId) {
-				console.error("user is not logged in");
-				return;
-			}
-			const { error } = await supabase.from("pantry").insert([
-				{
-					suggestion: [
-						{
-							id: ingredientDetails.id,
-							name: ingredientDetails.name,
-							calories: calories,
-							fat: fat,
-							protein: protein,
-							carbs: carbs,
-							image: ingredientDetails.image,
-						},
-					],
-					userId: userId,
-				},
-			]);
+    async function onSubmit(event) {
+        event.preventDefault();
+    
+        const { data, error: existingError } = await supabase
+            .from("pantry")
+            .select("suggestion")
+            .eq("userId", userId);
+    
+        if (existingError) {
+            console.error("Error fetching data:", existingError);
+            return;
+        }
+    
+        const ingredientNames = data.map(suggestion => suggestion.suggestion[0].name);
+    
+        const ingredientsList = ingredientNames.join(", ");
+    
+        if (!ingredientsList) {
+            alert("Please select at least one ingredient.");
+            return;
+        }
+    
+        try {
+            const response = await fetch("/api/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ingredients: ingredientsList }),
+            });
+    
+            const data = await response.json();
+            if (response.status !== 200) {
+                throw (
+                    data.error ||
+                    new Error(`Request failed with status: status ${response.status}`)
+                );
+            }
+    
+            setResult(data.result);
+            setIngredientsInput("");
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
+    }
+    
 
-			if (error) {
-				console.error("Error inserting data:", error);
-			}
-			// setSelectedIngredients((prevIngredients) => {
-			// 	const existingIngredient = prevIngredients.findIndex(
-			// 		(ingredient) => ingredient.id === ingredientDetails.id
-			// 	);
-
-			// 	if (existingIngredient !== -1) {
-			// 		const allIngredients = [...prevIngredients];
-			// 		allIngredients[existingIngredient].quantity += 1;
-			// 		return allIngredients;
-			// 	} else {
-			// 		return [...prevIngredients, { ...ingredientDetails, quantity: 1 }];
-			// 	}
-			// }
-      // );
-
-			setExpandedIngredient(null);
-		} catch (error) {
-			console.error(error);
-			alert(error.message);
-		}
-	}
-
-	async function onSubmit(event) {
-		event.preventDefault();
-		const { data, error: existingError } = await supabase
-			.from("pantry")
-			.select("suggestion")
-			.eq("userId", userId);
-
-		data.forEach((suggestions) => {
-			console.log(suggestions.suggestion[0].name);
-			if (selectedIngredients.length > 0) {
-				setSelectedIngredients([
-					...selectedIngredients,
-					suggestions.suggestion[0].name,
-				]);
-			} else {
-				setSelectedIngredients([suggestions.suggestion[0].name]);
-			}
-		});
-
-		const ingredientsList = selectedIngredients
-			.map((ingredient) => ingredient.name)
-			.join(", ");
-		if (!ingredientsList) {
-			alert("Please select at least one ingredient.");
-			return;
-		}
-
-		try {
-			const response = await fetch("/api/generate", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ ingredients: ingredientsList }),
-			});
-
-			const data = await response.json();
-			if (response.status !== 200) {
-				throw (
-					data.error ||
-					new Error(`Request failed with status: status ${response.status}`)
-				);
-			}
-
-			setResult(data.result);
-			setIngredientsInput("");
-		} catch (error) {
-			console.error(error);
-			alert(error.message);
-		}
-	}
-
-	async function fetchRecipe(recipe, selectedPersonality) {
-		setSelectedRecipe("");
-		setResult((prevState) => ({ ...prevState, isLoading: true }));
-		const ingredientsList = selectedIngredients
-			.map((ingredient) => ingredient.name)
-			.join(", ");
-		if (!ingredientsList) {
-			alert("Please select at least one ingredient.");
-			return;
-		}
-
-		try {
-			const response = await fetch("/api/recipe", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					ingredients: ingredientsList,
-					selectedRecipe: recipe,
-					personality: selectedPersonality,
-				}),
-			});
-
-			const data = await response.json();
-			if (response.status !== 200) {
-				throw (
-					data.error ||
-					new Error(`Request failed with status ${response.status}`)
-				);
-			}
-
-			setSelectedRecipe(data.result);
-			setResult((prevState) => ({ ...prevState, isLoading: false }));
-		} catch (error) {
-			console.error(error);
-			alert(error.message);
-			setResult((prevState) => ({ ...prevState, isLoading: false }));
-		}
-	}
+    async function fetchRecipe(recipe, selectedPersonality) {
+        const { data: ingredientsData, error: existingError } = await supabase
+        .from("pantry")
+        .select("suggestion")
+        .eq("userId", userId);
+    
+    if (existingError) {
+        console.error("Error fetching data:", existingError);
+        return;
+    }    
+        setSelectedRecipe("");
+        setResult((prevState) => ({ ...prevState, isLoading: true }));
+        const ingredientNames = ingredientsData.map(suggestion => suggestion.suggestion[0].name);
+        const ingredientsList = ingredientNames.join(", ");        
+        if (!ingredientsList) {
+            alert("Please select at least one ingredient.");
+            return;
+        }
+    
+        try {
+            const response = await fetch("/api/recipe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ingredients: ingredientsList,
+                    selectedRecipe: recipe,
+                    personality: selectedPersonality,
+                }),
+            });
+    
+            const data = await response.json();
+            if (response.status !== 200) {
+                throw (
+                    data.error ||
+                    new Error(`Request failed with status ${response.status}`)
+                );
+            }
+    
+            setSelectedRecipe(data.result);
+            setResult((prevState) => ({ ...prevState, isLoading: false }));
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+            setResult((prevState) => ({ ...prevState, isLoading: false }));
+        }
+    }
+    
+    
 
 	return (
 		<div className={styles.body}>
@@ -344,7 +338,7 @@ export default function IngredientRecipe({ data }) {
 						<div
 							key={index}
 							className={styles.mealItem}
-							onClick={() => fetchRecipe(recipe, selectedPersonality)}
+							onClick={(event) => fetchRecipe(recipe, selectedPersonality)}
 						>
 							{recipe}
 						</div>
@@ -386,25 +380,3 @@ export default function IngredientRecipe({ data }) {
 		</div>
 	);
 }
-
-// export async function getServerSideProps(context) {
-//   const session = useSession(context);
-//   let userId = null;
-
-//   // sets the userId to the person who is signed in
-//   if (session) {
-//     userId = session.user.id;
-//   }
-
-//   const { data } = await supabase
-//     .from('pantry')
-//     .select('suggestion')
-//     .eq('userId', userId);
-//   console.log(data);
-
-//   return {
-//     props: {
-//       suggestion: data,
-//     },
-//   };
-// }

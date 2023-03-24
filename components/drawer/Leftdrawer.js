@@ -231,14 +231,9 @@ useEffect(()=>{
             </DrawerHeader>
             <Divider />
             <List>
-              
-              {pantryItems.map((item, index)=>{
-                return (
-                  <>
-                    <IngredientDetails item={item} index={index} />
-                  </>
-                );
-              })}
+            {pantryItems.map((item, index) => (
+  <IngredientDetails item={item} index={index} key={item.id} />
+))}
             </List>
           </Drawer>
         </div>
