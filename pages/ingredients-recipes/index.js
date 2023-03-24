@@ -254,8 +254,6 @@ export default function IngredientRecipe({ data }) {
             setResult((prevState) => ({ ...prevState, isLoading: false }));
         }
     }
-    
-    
 
 	return (
 		<div className={styles.body}>

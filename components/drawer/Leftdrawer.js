@@ -27,6 +27,7 @@ import IngredientDetails from '../IngredientDetails';
 	);
 
 
+
   
   
   
@@ -87,12 +88,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft() {
 const [pantryItems, setPantryItems] = useState([])
 
+
 const  session  = useSession();
 let userId = null;
 if(session){
   userId = session.user.id
 }
-
 
 
 async function getIngredientsList() {
@@ -103,7 +104,6 @@ async function getIngredientsList() {
 				.from("pantry")
 				.select("*")
 				.eq("userId", userId);
-       
 
 			setPantryItems(suggestion)
 		} catch (error) {
@@ -133,9 +133,6 @@ useEffect(()=>{
 
   const purple1 = purple[600];
 
-  const handleIngredientClick = () => {
-    console.log('hello')
-  }
   return (
     <>
       <Box sx={{ display: 'flex' }}>
