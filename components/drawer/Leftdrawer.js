@@ -26,6 +26,8 @@ import IngredientDetails from '../IngredientDetails';
 		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 	);
 
+
+
   
   
   
@@ -85,6 +87,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
 const [pantryItems, setPantryItems] = useState([])
+
+
 const  session  = useSession();
 let userId = null;
 if(session){
@@ -224,14 +228,9 @@ useEffect(()=>{
             </DrawerHeader>
             <Divider />
             <List>
-              
-              {pantryItems.map((item, index)=>{
-                return (
-                  <>
-                    <IngredientDetails item={item} index={index} />
-                  </>
-                );
-              })}
+            {pantryItems.map((item, index) => (
+  <IngredientDetails item={item} index={index} key={item.id} />
+))}
             </List>
           </Drawer>
         </div>
