@@ -8,7 +8,7 @@ import { useSelectedPersonality } from "../../components/useSelectedPersonality"
 import { useSession } from "@supabase/auth-helpers-react";
 import { Button } from "@mui/material";
 import { createClient } from "@supabase/supabase-js";
-import { callAutocompleteApi, fetchIngredientDetails } from "./ingredientApi";
+import { callAutocompleteApi, fetchIngredientDetails } from "../api/ingredientApi";
 const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_URL,
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
