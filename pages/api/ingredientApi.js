@@ -2,7 +2,7 @@
 
 export async function callAutocompleteApi(input) {
   const response = await fetch(
-    `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.NEXT_PUBLIC_APIKEY}&query=${encodeURIComponent(
+    `https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&query=${encodeURIComponent(
       input
     )}&number=10&metaInformation=true`
   );
@@ -17,7 +17,7 @@ export async function callAutocompleteApi(input) {
 
 export async function fetchIngredientDetails(id) {
   const response = await fetch(
-    `https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${process.env.NEXT_PUBLIC_APIKEY}&amount=100&unit=grams`
+    `https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&amount=100&unit=grams`
   );
 
   if (response.status !== 200) {
