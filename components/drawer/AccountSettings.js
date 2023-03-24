@@ -211,20 +211,6 @@ export default function AccountMenu() {
           </form>
         </DialogContent>
       </Dialog>
-        <Link href="/">
-          <MenuItem
-            onClick={() => {
-              handleClose();
-              supabase.auth.signOut();
-            }}
-            sx={{ color: 'black', textDecoration: 'none' }}
-          >
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
-        </Link>
     </Menu>
   </>
 );
