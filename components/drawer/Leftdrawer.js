@@ -156,8 +156,9 @@ useEffect(() => {
                 AI Cookbook
               </Link>
             </div>
-
+              <div style={{position: 'absolute', right: '100px'}}>
             <ThemeChooser />
+            </div>
             <Box
               sx={{
                 position: 'absolute',

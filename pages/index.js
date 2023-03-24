@@ -40,20 +40,9 @@ const Home = () => {
             Add Ingredients
           </Link>
         ) : (
-          <Button>
-            <Link
-              className={styles.link}
-              style={{
-                backgroundColor: theme.palette.primary.main,
-                textDecoration: 'none',
-                color: 'white',
-              }}
-              href={'/profile'}
-            >
-              {' '}
-              Signup/Login
-            </Link>
-          </Button>
+          <Link href={'/profile'}>
+            <Button variant="contained"> Signup/Login</Button>
+          </Link>
         )}
       </div>
     </>

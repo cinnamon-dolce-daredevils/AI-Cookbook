@@ -13,8 +13,8 @@ const ThemeChooser = () => {
   };
   return (
     <>
-      <Button variant="contained"sx={{ p: 1, color: theme.palette.common.white }}onClick={ handleToggle}>
-        {isOn  ? 'Light Mode' : 'Dark Mode'}
+      <Button variant="contained"sx={{color: theme.palette.common.white }}onClick={ handleToggle}>
+        {isOn  ? '🌤️' : '🌙'}
       </Button>
      
     </>

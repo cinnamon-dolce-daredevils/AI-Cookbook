@@ -170,9 +170,8 @@ export default function AccountMenu() {
             >
               Choose a Color Theme
             </Typography>
-            <div style={{position: 'relative', right: '500px'}}>
+            
               <ThemeChooser />
-            </div>
 
             <form noValidate autoComplete="off">
               <Typography
