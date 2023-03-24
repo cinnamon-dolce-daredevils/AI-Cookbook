@@ -90,11 +90,7 @@ const [pantryItems, setPantryItems] = useState([])
 
 
 const  session  = useSession();
-let userId = null;
-if(session){
-  userId = session.user.id
-}
-
+let userId = session?.user?.id;
 
 async function getIngredientsList() {
 	if (session && session.user) {
@@ -115,9 +111,12 @@ async function getIngredientsList() {
 	}
 }
 
-useEffect(()=>{
- getIngredientsList(userId) 
-}, [userId, pantryItems])
+useEffect(() => {
+  if (userId) {
+    getIngredientsList(userId);
+  }
+}, [userId, pantryItems]);
+
 
 
   const theme = useTheme();
