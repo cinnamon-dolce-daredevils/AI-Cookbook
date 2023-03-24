@@ -20,8 +20,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import GradeIcon from '@mui/icons-material/Grade';
 import { Typography } from '@mui/material';
 import ThemeChooser from '../ThemeChooser';
+import { useTheme } from '@emotion/react';
 
 export default function AccountMenu() {
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const personalityChangeListeners = new Set();
   const open = Boolean(anchorEl);
@@ -91,12 +93,14 @@ export default function AccountMenu() {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
+            backgroundColor: theme.palette.secondary.main,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
               color: 'black',
+              backgroundColor: 'white',
             },
             '&:before': {
               content: '""',
@@ -109,43 +113,71 @@ export default function AccountMenu() {
               bgcolor: 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
+              backgroundColor: theme.palette.secondary.main,
             },
           },
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link href="/profile">
-          <MenuItem
-            sx={{ color: 'black', textDecoration: 'none' }}
-            onClick={handleClose}
-          >
+        <Link style={{ textDecoration: 'none' }} href="/profile">
+          <MenuItem sx={{ color: 'white' }} onClick={handleClose}>
             <Avatar className="Menutext" /> Profile
           </MenuItem>
         </Link>
-        <MenuItem sx={{ color: 'black', mr: 'auto' }} onClick={handleClose}>
-          <Link href={'/favorites'}>
-            <GradeIcon /> Favorites
+        <MenuItem
+          sx={{ color: theme.palette.text.primary, mr: 'auto' }}
+          onClick={handleClose}
+        >
+          <Link
+            style={{
+              color: theme.palette.text.primary,
+              textDecoration: 'none',
+            }}
+            href={'/favorites'}
+          >
+            <GradeIcon sx={{ color: theme.palette.text.primary, mr: 1 }} />
+            Favorites
           </Link>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleSettingsOpen} sx={{ color: 'black' }}>
+        <MenuItem
+          onClick={handleSettingsOpen}
+          sx={{ color: theme.palette.text.primary }}
+        >
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Settings fontSize="small" sx={{ color: 'white' }} />
           </ListItemIcon>
           Settings
         </MenuItem>
         <Dialog open={settingsOpen} onClose={handleSettingsClose}>
-          <DialogTitle sx={{ color: 'black' }}>Settings</DialogTitle>
-          <DialogContent sx={{ padding: (theme) => theme.spacing(3) }}>
-            <Typography sx={{ color: 'black', fontWeight: 'bold' }}>
+          <DialogTitle
+            sx={{
+              color: theme.palette.text.primary,
+              backgroundColor: theme.palette.secondary.main,
+            }}
+          >
+            Settings
+          </DialogTitle>
+          <DialogContent
+            sx={{
+              backgroundColor: theme.palette.secondary.main,
+              padding: (theme) => theme.spacing(3),
+            }}
+          >
+            <Typography
+              sx={{ color: theme.palette.common.white, fontWeight: 'bold' }}
+            >
               Choose a Color Theme
             </Typography>
-            <ThemeChooser/>
-
+            <div style={{position: 'relative', right: '500px'}}>
+              <ThemeChooser />
+            </div>
 
             <form noValidate autoComplete="off">
-              <Typography sx={{ color: 'black', fontWeight: 'bold' }}>
+              <Typography
+                sx={{ color: theme.palette.common.white, fontWeight: 'bold' }}
+              >
                 Choose a Famous Person to Help You Cook
               </Typography>
               <RadioGroup

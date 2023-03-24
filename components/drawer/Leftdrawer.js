@@ -120,7 +120,7 @@ useEffect(() => {
   };
 
   const purple1 = purple[600];
-
+//style={{backgroundColor: theme.palette.secondary}}
   return (
     <>
       <Box
@@ -128,14 +128,22 @@ useEffect(() => {
           display: 'flex',
         }}
       >
-        <AppBar position="fixed" open={open}>
+        <AppBar
+          sx={{ backgroundColor: theme.palette.primary.main }}
+          position="fixed"
+          open={open}
+        >
           <Toolbar>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+              sx={{
+                mr: 2,
+                backgroundColor: theme.palette.primary,
+                ...(open && { display: 'none' }),
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -148,7 +156,7 @@ useEffect(() => {
                 AI Cookbook
               </Link>
             </div>
-            
+
             <ThemeChooser />
             <Box
               sx={{
@@ -168,7 +176,7 @@ useEffect(() => {
               '& .MuiDrawer-paper': {
                 width: drawerWidth,
                 boxSizing: 'border-box',
-                backgroundColor: purple1,
+                backgroundColor: theme.palette.secondary.main,
               },
             }}
             variant="persistent"
@@ -187,7 +195,6 @@ useEffect(() => {
             </DrawerHeader>
             <Divider />
             <List>
-
               {pantryItems.map((item, index) => {
                 return (
                   <>
@@ -195,7 +202,6 @@ useEffect(() => {
                   </>
                 );
               })}
-
             </List>
           </Drawer>
         </div>

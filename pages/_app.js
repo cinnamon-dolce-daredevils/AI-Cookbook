@@ -13,10 +13,31 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { purple } from '@mui/material/colors';
 
 
-function App({ Component, pageProps: { session, ...pageProps } }) {
+function App({ Component, pageProps: { session, mode,  ...pageProps } }) {
 const [supabase] = useState(() => createBrowserSupabaseClient());
+const [newTheme, setNewTheme] = useState('light')
+  const lightMode = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: '#2A3D45',
+      },
+      secondary: {
+        main: '#C17C74',
+      },
+      background: {
+        default: '#a9927d',
+      },
+      text: {
+        primary: '#f2f4f3',
+        secondary: '#f2f4f3',
+        disabled: '#9e9e9e',
+        hint: '#f2f4f3',
+      },
+    },
+  });
 
-  const purpleDirtyDark = createTheme({
+  const darkMode = createTheme({
     palette: {
       // 'mode' is outdated. needs to be called theme
       mode: 'light',
@@ -34,11 +55,11 @@ const [supabase] = useState(() => createBrowserSupabaseClient());
         secondary: '#eeeeee',
         disabled: '#9e9e9e',
         hint: '#eeeeee',
-      }
+      },
     },
   });
 
-  const themeSetter = purpleDirtyDark
+  const themeSetter = lightMode
   return (
     <ThemeProvider theme={themeSetter}>
       <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
