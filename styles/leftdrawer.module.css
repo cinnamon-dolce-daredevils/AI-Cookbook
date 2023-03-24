@@ -65,7 +65,6 @@
 
 .ingredientItem:hover {
   background-color: #56007b;
-  border-radius: 10px;
 }
 
 @media only screen and (max-width: 400px) {

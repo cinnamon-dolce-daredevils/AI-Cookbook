@@ -100,7 +100,6 @@ export default function IngredientRecipe({ data }) {
             calories = 0,
             protein = 0,
             carbs = 0;
-          console.log(ingredientDetails.image);
           for (let nutrient of ingredientDetails.nutrition.nutrients) {
             switch (nutrient.name) {
               case "Fat":
