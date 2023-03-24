@@ -300,7 +300,6 @@
 
 .ingredientItem:hover {
   background-color: #56007b;
-  border-radius: 10px;
 }
 
 .mealList {
@@ -330,7 +329,6 @@
 
 .mealItem:hover {
   background-color: #56007b;
-  border-radius: 10px;
 }
 
 .ingredientDetails {

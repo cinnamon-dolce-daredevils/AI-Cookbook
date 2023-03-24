@@ -17,14 +17,13 @@ export default async function (req, res) {
     return;
   }
 
-  const ingredients = req.body.ingredients || "";
-  const selectedRecipe = req.body.selectedRecipe || "";
-
-  if (ingredients.trim().length === 0 || selectedRecipe.trim().length === 0) {
+  const ingredientsList = req.body.ingredients || '';
+  const selectedRecipe = req.body.selectedRecipe || '';
+  if (ingredientsList.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter valid ingredients and a selected recipe",
-      },
+        message: "Please enter a valid ingredient",
+      }
     });
     return;
   }
@@ -32,7 +31,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(ingredients, selectedRecipe, req.body.personality),
+      prompt: generatePrompt(ingredientsList, selectedRecipe, req.body.personality),
       temperature: 0.6,
       max_tokens: 900,
     });
@@ -54,9 +53,9 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(ingredients, selectedRecipe, personality) {
+function generatePrompt(ingredientsList, selectedRecipe, personality) {
   const capitalizedIngredients =
-    ingredients[0].toUpperCase() + ingredients.slice(1).toLowerCase();
+    ingredientsList[0].toUpperCase() + ingredientsList.slice(1).toLowerCase();
   return `Write a detailed recipe for ${selectedRecipe} using the following ingredients: ${capitalizedIngredients}, table salt, black pepper, cooking oil, and water. You may not need all of them. Include the calories, fat, protein, and carbs for the meal. Present it in markdown format. Write the recipe the way ${personality} talks and don't be afraid to exaggerate it if need be. Make sure to write the instructions for the recipe as if they were being spoken by ${personality}. Say the recipe is written by them, and make sure to use their vernacular, style, language, and mannerisms.`;
 }
 

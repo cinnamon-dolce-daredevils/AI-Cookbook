@@ -76,12 +76,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
 const [pantryItems, setPantryItems] = useState([])
-const  session  = useSession();
-let userId = null;
-if(session){
-  userId = session.user.id
-}
 
+
+const  session  = useSession();
+let userId = session?.user?.id;
 
 async function getIngredientsList() {
 	if (session && session.user) {
@@ -102,9 +100,12 @@ async function getIngredientsList() {
 	}
 }
 
-useEffect(()=>{
- getIngredientsList(userId) 
-}, [userId, pantryItems])
+useEffect(() => {
+  if (userId) {
+    getIngredientsList(userId);
+  }
+}, [userId, pantryItems]);
+
 
 
   const theme = useTheme();
@@ -186,6 +187,7 @@ useEffect(()=>{
             </DrawerHeader>
             <Divider />
             <List>
+
               {pantryItems.map((item, index) => {
                 return (
                   <>
@@ -193,6 +195,7 @@ useEffect(()=>{
                   </>
                 );
               })}
+
             </List>
           </Drawer>
         </div>
