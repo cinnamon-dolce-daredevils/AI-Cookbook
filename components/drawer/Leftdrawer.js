@@ -20,21 +20,12 @@ const drawerWidth = 240;
  import { useSession } from "@supabase/auth-helpers-react";
  import { createClient } from "@supabase/supabase-js";
 import IngredientDetails from '../IngredientDetails';
+import ThemeChooser from '../ThemeChooser';
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
-  const supabase = createClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-	);
-
-  
-  
-  
-
-  
-
-
-// Connecting to Supabase
-// import { supabase } from '@supabase/supabase-js';
 
 
 
@@ -131,37 +122,6 @@ useEffect(()=>{
 
   return (
     <>
-      <Box sx={{ display: 'flex' }}>
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Link href="/">
-              <Typography variant="h6" noWrap component="div">
-                AI-Cookbook
-              </Typography>
-            </Link>
-
-            <Box
-              sx={{
-                position: 'absolute',
-                right: '50px',
-              }}
-            >
-              <Button color="inherit">
-                <Link href={'/profile'}>Profile</Link>
-              </Button>
-            </Box>
-          </Toolbar>
-        </AppBar>
-      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -187,6 +147,8 @@ useEffect(()=>{
                 AI Cookbook
               </Link>
             </div>
+            
+            <ThemeChooser />
             <Box
               sx={{
                 position: 'absolute',
@@ -224,8 +186,7 @@ useEffect(()=>{
             </DrawerHeader>
             <Divider />
             <List>
-              
-              {pantryItems.map((item, index)=>{
+              {pantryItems.map((item, index) => {
                 return (
                   <>
                     <IngredientDetails item={item} index={index} />

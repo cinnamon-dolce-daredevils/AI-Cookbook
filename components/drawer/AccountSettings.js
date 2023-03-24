@@ -18,6 +18,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import GradeIcon from '@mui/icons-material/Grade';
+import { Typography } from '@mui/material';
+import ThemeChooser from '../ThemeChooser';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -57,7 +59,14 @@ export default function AccountMenu() {
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', paddingRight: '0' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+          paddingRight: '0',
+        }}
+      >
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -114,9 +123,9 @@ export default function AccountMenu() {
             <Avatar className="Menutext" /> Profile
           </MenuItem>
         </Link>
-        <MenuItem sx={{ color: 'black', mr:'auto' }} onClick={handleClose}>
+        <MenuItem sx={{ color: 'black', mr: 'auto' }} onClick={handleClose}>
           <Link href={'/favorites'}>
-          <GradeIcon /> Favorites
+            <GradeIcon /> Favorites
           </Link>
         </MenuItem>
         <Divider />
@@ -127,91 +136,100 @@ export default function AccountMenu() {
           Settings
         </MenuItem>
         <Dialog open={settingsOpen} onClose={handleSettingsClose}>
-        <DialogTitle sx={{ color: 'black' }}>Settings</DialogTitle>
-        <DialogContent sx={{ padding: (theme) => theme.spacing(3) }}>
-          <form noValidate autoComplete="off">
-            <RadioGroup
-              aria-label="personality"
-              name="personality"
-              value={selectedPersonality}
-              onChange={handleChangePersonality}
-              sx={{
-                marginTop: (theme) => theme.spacing(2),
-                marginBottom: (theme) => theme.spacing(2),
-                color: 'black',
-              }}
-            >
-              <FormControlLabel
-                value="normalAI"
-                control={<Radio />}
-                label="Normal AI"
-                sx={{ color: 'black' }}
-              />
-              <FormControlLabel
-                value="snoopDogg"
-                control={<Radio />}
-                label="Snoop Dogg"
-                sx={{ color: 'black' }}
-              />
-              <FormControlLabel
-                value="marthaStewart"
-                control={<Radio />}
-                label="Martha Stewart"
-                sx={{ color: 'black' }}
-              />
-              <FormControlLabel
-                value="emerilLagasse"
-                control={<Radio />}
-                label="Emeril Lagasse"
-                sx={{ color: 'black' }}
-              />
-              <FormControlLabel
-                value="samuelJackson"
-                control={<Radio />}
-                label="Samuel L. Jackson"
-                sx={{ color: 'black' }}
-              />
-              <FormControlLabel
-                value="gordonRamsay"
-                control={<Radio />}
-                label="Gordon Ramsay"
-                sx={{ color: 'black' }}
-              />
-                            <FormControlLabel
-                value="bobRoss"
-                control={<Radio />}
-                label="Bob Ross"
-                sx={{ color: 'black' }}
-              />
-                            <FormControlLabel
-                value="juliaChild"
-                control={<Radio />}
-                label="Julia Child"
-                sx={{ color: 'black' }}
-              />
-                            <FormControlLabel
-                value="christopherWalken"
-                control={<Radio />}
-                label="Christopher Walken"
-                sx={{ color: 'black' }}
-              />
-                            <FormControlLabel
-                value="morganFreeman"
-                control={<Radio />}
-                label="Morgan Freeman"
-                sx={{ color: 'black' }}
-              />
-                            <FormControlLabel
-                value="guyFieri"
-                control={<Radio />}
-                label="Guy Fieri"
-                sx={{ color: 'black' }}
-              />
-            </RadioGroup>
-          </form>
-        </DialogContent>
-      </Dialog>
-    </Menu>
-  </>
-);
+          <DialogTitle sx={{ color: 'black' }}>Settings</DialogTitle>
+          <DialogContent sx={{ padding: (theme) => theme.spacing(3) }}>
+            <Typography sx={{ color: 'black', fontWeight: 'bold' }}>
+              Choose a Color Theme
+            </Typography>
+            <ThemeChooser/>
+
+
+            <form noValidate autoComplete="off">
+              <Typography sx={{ color: 'black', fontWeight: 'bold' }}>
+                Choose a Famous Person to Help You Cook
+              </Typography>
+              <RadioGroup
+                aria-label="personality"
+                name="personality"
+                value={selectedPersonality}
+                onChange={handleChangePersonality}
+                sx={{
+                  marginTop: (theme) => theme.spacing(2),
+                  marginBottom: (theme) => theme.spacing(2),
+                  color: 'black',
+                }}
+              >
+                <FormControlLabel
+                  value="normalAI"
+                  control={<Radio />}
+                  label="Normal AI"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="snoopDogg"
+                  control={<Radio />}
+                  label="Snoop Dogg"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="marthaStewart"
+                  control={<Radio />}
+                  label="Martha Stewart"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="emerilLagasse"
+                  control={<Radio />}
+                  label="Emeril Lagasse"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="samuelJackson"
+                  control={<Radio />}
+                  label="Samuel L. Jackson"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="gordonRamsay"
+                  control={<Radio />}
+                  label="Gordon Ramsay"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="bobRoss"
+                  control={<Radio />}
+                  label="Bob Ross"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="juliaChild"
+                  control={<Radio />}
+                  label="Julia Child"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="christopherWalken"
+                  control={<Radio />}
+                  label="Christopher Walken"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="morganFreeman"
+                  control={<Radio />}
+                  label="Morgan Freeman"
+                  sx={{ color: 'black' }}
+                />
+                <FormControlLabel
+                  value="guyFieri"
+                  control={<Radio />}
+                  label="Guy Fieri"
+                  sx={{ color: 'black' }}
+                />
+              </RadioGroup>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </Menu>
+    </>
+  );
 }
