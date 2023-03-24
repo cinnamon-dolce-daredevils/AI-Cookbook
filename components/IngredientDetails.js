@@ -51,7 +51,7 @@ const IngredientDetails = (props) => {
         </DialogTitle>
         <DialogContent sx={{ color: 'black' }}>
           <DialogContentText
-            sx={{ color: 'black' }}
+            sx={{ color: 'black', p:2 }}
             id="alert-dialog-slide-description"
                   >
                       qty: {props.item.quantity}
@@ -61,15 +61,13 @@ const IngredientDetails = (props) => {
                       alt={props.item.suggestion[0].name}
                       />
                       <br/>
-                      Here is a basic description of stuff so the dialog box is bigger
-                      <br/>
-            Fat: {props.item.suggestion[0].fat}
+            Fat: {props.item.suggestion[0].fat} grams
             <br />
-            Protein: {props.item.suggestion[0].protein}
+            Protein: {props.item.suggestion[0].protein} grams
             <br />
-            Carbs: {props.item.suggestion[0].carbs}
+            Carbs: {props.item.suggestion[0].carbs} grams
             <br />
-            Calories: {props.item.suggestion[0].calories}
+            Calories: {props.item.suggestion[0].calories} grams
           </DialogContentText>
         </DialogContent>
         <DialogActions>
