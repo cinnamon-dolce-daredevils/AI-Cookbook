@@ -357,28 +357,3 @@ async function handleIngredientClick (ingredient) {
   );
 }
 
-
-
-// export async function getServerSideProps(context) {
-//   const session = useSession(context);
-//   let userId = null;
-
-//   // sets the userId to the person who is signed in
-//   if (session) {
-//     userId = session.user.id;
-//   }
-
-
-
-//   const { data } = await supabase
-//     .from('pantry')
-//     .select('suggestion')
-//     .eq('userId', userId);
-//   console.log(data);
-
-//   return {
-//     props: {
-//       suggestion: data,
-//     },
-//   };
-// }
