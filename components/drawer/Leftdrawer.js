@@ -200,7 +200,6 @@ useEffect(() => {
           </Drawer>
         </div>
         <Main open={open}>
-          test
           <DrawerHeader />
         </Main>
       </Box>
