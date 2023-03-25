@@ -74,13 +74,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
+  const {ingredientNames} = props
 const [pantryItems, setPantryItems] = useState([])
 const [suggestions, setSuggestions]=useState()
 
 
 const  session  = useSession();
-let userId = null
+let userId = session?.user?.id
 
 async function getIngredientsList() {
 	
@@ -103,7 +104,7 @@ async function getIngredientsList() {
 
 useEffect(() => {
     getIngredientsList()
-}, [pantryItems]);
+}, [ingredientNames]);
 
 
 
