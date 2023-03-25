@@ -11,6 +11,7 @@ import Layout from '@/components/Layout';
 import { createTheme, ThemeProvider} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { purple } from '@mui/material/colors';
+import { MyProvider } from './myState';
 
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
@@ -41,12 +42,14 @@ const [supabase] = useState(() => createBrowserSupabaseClient());
   const themeSetter = purpleDirtyDark
   return (
     <ThemeProvider theme={themeSetter}>
+      <MyProvider>
       <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
       <Layout>
         <CssBaseline />
             <Component {...pageProps} />
       </Layout> 
       </SessionContextProvider>
+      </MyProvider>
     </ThemeProvider>
   );
 }
