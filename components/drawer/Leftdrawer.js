@@ -84,7 +84,7 @@ const  session  = useSession();
 let userId = session?.user?.id
 
 async function getIngredientsList() {
-	
+	if(session && session.user){
 		userId = session.user.id;
 		try {
 			const { data: suggestion,  error: existingError } = await supabase
@@ -98,7 +98,7 @@ async function getIngredientsList() {
 			console.error(error);
 			// alert(error.message);
 		}
-	
+	}
 }
 
 
