@@ -8,21 +8,35 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import styles from './../styles/leftdrawer.module.css';
 import "react-widgets/styles.css";
-import { DropdownList, NumberPicker } from 'react-widgets';
+import { Combobox, DropdownList, NumberPicker } from 'react-widgets';
+import { createClient } from '@supabase/supabase-js';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="right" ref={ref} {...props} />;
 });
 
 
 const IngredientDetails = (props) => {
+	const supabase = createClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL,
+		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+	);
   const [open, setOpen] = React.useState(false);
-  console.log(props)
+  const [quantity, setQuantity] = React.useState('');
+  const [unit, setUnit] = React.useState('')
+
+ 
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleQuantChange = async() => {
+	const { data, error } = await supabase
+		.from("pantry")
+		// .select({ quantity: quantity, unit: unit })
+		.update({ quantity: quantity, unit: unit })
+		.eq("id", props.item.id);
     setOpen(false);
   };
 
@@ -46,7 +60,7 @@ const IngredientDetails = (props) => {
 				open={open}
 				TransitionComponent={Transition}
 				keepMounted
-				onClose={handleClose}
+				// onClose={handleSubmit}
 				aria-describedby='alert-dialog-slide-description'
 			>
 				<DialogTitle sx={{ color: "black" }}>
@@ -58,7 +72,7 @@ const IngredientDetails = (props) => {
 						id='alert-dialog-slide-description'
 					>
 						<strong style={{ fontSize: "18px" }}>Ingredient Facts</strong>
-						<br /> per serving: {" "}
+						<br /> per serving:{" "}
 						{props.item.suggestion[0].amount + props.item.suggestion[0].unit}
 						<br />
 						<img
@@ -74,19 +88,35 @@ const IngredientDetails = (props) => {
 						<br />
 						Calories: {props.item.suggestion[0].calories} kcal
 					</DialogContentText>
-          <label>Quantity</label>
-          <div style={{display:'flex'}}>
-          <NumberPicker
-          precision={1}
-          defaultValue={1}
-          step={0.1}/>
-          <DropdownList
-          defaultValue='servings'
-          data={['servings', 'grams', 'kilograms', 'ounces', 'pounds', 'mL', 'tablespoons', 'cups' ]}/>
-          </div>
+					<label>Quantity</label>
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<NumberPicker
+							precision={1}
+							defaultValue={props.item.quantity}
+							step={0.1}
+							id='servingQuant'
+							onChange={(evt) => setQuantity(evt)}
+						/>
+						<Combobox
+							dropUp
+							defaultValue={props.item.unit}
+							data={[
+								"servings",
+								"grams",
+								"kilograms",
+								"ounces",
+								"pounds",
+								"mL",
+								"tablespoons",
+								"cups",
+							]}
+							id='servingUnit'
+							onChange={(evt) => setUnit(evt)}
+						/>
+					</div>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose}>Submit</Button>
+					<Button onClick={handleQuantChange}>Submit</Button>
 				</DialogActions>
 			</Dialog>
 		</div>
