@@ -4,6 +4,7 @@ import { useSession } from '@supabase/auth-helpers-react';
 import ReactMarkdown from "react-markdown";
 import styles from "../../styles/index.module.css";
 import { Button } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -12,6 +13,7 @@ const supabase = createClient(
 
 const FavoritesPage = (userId) => {
   const [userFavorites, setUserFavorites] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(true);
   const session = useSession();
   if(session){
     userId = session.user.id
@@ -30,6 +32,35 @@ const FavoritesPage = (userId) => {
     };
     fetchFavorites(userId);
   }, [userId]);
+
+
+  const addToFavorites = async (selectedRecipe, userId) => {
+		try {
+			const { data, error } = await supabase
+				.from("favorites")
+				.insert([{ selectedRecipe, userId }]);
+			if (error) throw error;
+		} catch (error) {
+			console.log("Error inserting into favorites:", error.message);
+		}
+	};
+
+  const toggleFavorite = async (selectedRecipe) => {
+		try {
+			if (isFavorite) {
+				const { data, error } = await supabase
+					.from("favorites")
+					.delete()
+					.match({ selectedRecipe, userId });
+				if (error) throw error;
+			} else {
+				await addToFavorites(selectedRecipe, userId);
+			}
+			setIsFavorite(!isFavorite);
+		} catch (error) {
+			console.log("Error toggling favorite:", error.message);
+		}
+	};
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -53,6 +84,18 @@ const FavoritesPage = (userId) => {
       <ul className={styles.recipeMulti}>
         {userFavorites[currentIndex] && (
           <li key={currentIndex} className={styles.recipe}>
+            {!isFavorite && <p>Recipe removed from Favorites</p>}
+						<FavoriteIcon
+							className={styles.favorite}
+							style={{
+								fontSize: "50px",
+								width: "50px",
+								color: isFavorite ? "red" : "grey",
+							}}
+							onClick={() => {
+								toggleFavorite(userFavorites[currentIndex].selectedRecipe);
+							}}
+						/>
             <ReactMarkdown>{userFavorites[currentIndex].selectedRecipe}</ReactMarkdown>
           </li>
         )}
