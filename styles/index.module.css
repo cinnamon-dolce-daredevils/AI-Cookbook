@@ -149,6 +149,14 @@
   gap: 40px;
 }
 
+.recipeMulti {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 25px;
+}
+
 .recipe {
   display: flex;
   flex-direction: column;
@@ -185,6 +193,14 @@
   color: #34495e;
   margin-bottom: 10px;
   text-align: center;
+}
+
+.navButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 35px;  
 }
 
 .recipe ul,
