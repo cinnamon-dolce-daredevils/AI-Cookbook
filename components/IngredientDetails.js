@@ -10,6 +10,7 @@ import styles from './../styles/leftdrawer.module.css';
 import "react-widgets/styles.css";
 import { Combobox, DropdownList, NumberPicker } from 'react-widgets';
 import { createClient } from '@supabase/supabase-js';
+import Deleteicon from "@mui/icons-material/DeleteRounded";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="right" ref={ref} {...props} />;
@@ -51,7 +52,7 @@ const IngredientDetails = (props) => {
 				{props.item.suggestion[0].name}
 				<div>
 					<div key={props.index}></div>
-					<div>qty</div>
+					<Deleteicon></Deleteicon>
 				</div>
 			</div>
 
@@ -60,7 +61,7 @@ const IngredientDetails = (props) => {
 				open={open}
 				TransitionComponent={Transition}
 				keepMounted
-				// onClose={handleSubmit}
+				onClose={()=>setOpen(false)}
 				aria-describedby='alert-dialog-slide-description'
 			>
 				<DialogTitle sx={{ color: "black" }}>
