@@ -11,7 +11,7 @@ const Profile = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
   return (
-    <Paper className={styles.container}>
+    <Paper elevation={12} className={styles.container}>
       <h1 style={{ textAlign: 'center' }}> User Settings</h1>
       <div className={styles.container}>
         {!session ? (

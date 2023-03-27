@@ -58,13 +58,13 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
-  border-bottom: 1px solid #a900c0;
+  border-bottom: 1px solid #10a37f;
   cursor: pointer;
   color: #e0e0e0;
 }
 
 .ingredientItem:hover {
-  background-color: #56007b;
+  background-color: #10a37f;
 }
 
 @media only screen and (max-width: 400px) {

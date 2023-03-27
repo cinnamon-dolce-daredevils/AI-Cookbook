@@ -1,23 +1,32 @@
 import { useTheme } from '@emotion/react';
-import { Button, FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
-import React, {useState} from 'react';
-
-
-
+import { Button } from '@mui/material';
+import React, { useState, createContext, useContext } from 'react';
+import { Context } from "../pages/_app"
+// trying to carry over the word light or dark to another component
 const ThemeChooser = () => {
+  let [mode, setMode] = useState('lightMode');
   const theme = useTheme();
-  const [isOn, setIsOn] = useState(false);
+  let [isLightMode, setIsLightMode] =useContext(Context);
   const handleToggle = () => {
-    setIsOn((prevState) => !prevState);
+    setIsLightMode(!isLightMode);
+    if (isLightMode == true) {
+      setMode('darkMode');
+      console.log(mode);
+    } else {
+      setMode('lightMode');
+      console.log(mode);
+    }
   };
   return (
-    <>
-      <Button variant="contained"sx={{ p: 1, color: theme.palette.common.white }}onClick={ handleToggle}>
-        {isOn  ? 'Light Mode' : 'Dark Mode'}
+
+      <Button
+        variant="contained"
+        sx={{ color: theme.palette.common.white }}
+        onClick={handleToggle}
+      >
+        {mode}
       </Button>
-     
-    </>
+
   );
 };
-
 export default ThemeChooser;

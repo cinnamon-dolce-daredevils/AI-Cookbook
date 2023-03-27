@@ -1,53 +1,46 @@
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
-import React, { useState } from 'react'
-// below are just roboto fonts from google
+import React, { useState, createContext, useContext } from 'react'
+// below are roboto fonts from google
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Layout from '@/components/Layout';
 //imports theme
-import { createTheme, ThemeProvider} from '@mui/material';
+import { ThemeProvider} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import { purple } from '@mui/material/colors';
+// should only be used for TS. awaiting import { createEmotionCache } from '../src/createEmotionCache';
+//the below line replaces the above line
 
+import { lightMode, darkMode } from '../styles/themes'
+
+export const Context = React.createContext();
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
-const [supabase] = useState(() => createBrowserSupabaseClient());
-
-  const purpleDirtyDark = createTheme({
-    palette: {
-      // 'mode' is outdated. needs to be called theme
-      mode: 'light',
-      primary: {
-        main: purple[600],
-      },
-      secondary: {
-        main: '#43a047',
-      },
-      background: {
-        default: '#212121',
-      },
-      text: {
-        primary: '#fafafa',
-        secondary: '#eeeeee',
-        disabled: '#9e9e9e',
-        hint: '#eeeeee',
-      }
-    },
-  });
-
-  const themeSetter = purpleDirtyDark
+  let themeSetter = lightMode;
+  let [mode, setMode] = useState('lightMode');
+  let [isLightMode, setIsLightMode] = useState(true);
+  const [supabase] = useState(() => createBrowserSupabaseClient());
+  if (isLightMode == true) {
+    themeSetter = lightMode;
+  } else {
+    themeSetter = darkMode;
+  }
   return (
-    <ThemeProvider theme={themeSetter}>
-      <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
-      <Layout>
-        <CssBaseline />
+    <Context.Provider value={[isLightMode, setIsLightMode]}>
+      <ThemeProvider theme={themeSetter}>
+        <SessionContextProvider
+          supabaseClient={supabase}
+          initialSession={pageProps.initialSession}
+        >
+          <Layout>
+            <CssBaseline />
             <Component {...pageProps} />
-      </Layout> 
-      </SessionContextProvider>
+          </Layout>
+        </SessionContextProvider>
     </ThemeProvider>
+  </Context.Provider>
   );
 }
 export default App;
