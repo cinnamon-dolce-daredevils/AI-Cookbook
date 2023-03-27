@@ -37,7 +37,9 @@ const Home = () => {
             style={{ textDecoration: 'none', color: 'white' }}
             href={'/ingredients-recipes'}
           >
-            Add Ingredients
+            <Button sx={{ backgroundColor: theme.palette.secondary.main }}>
+              Add Ingredients
+            </Button>
           </Link>
         ) : (
           <Link style={{ textDecoration: 'none' }} href={'/profile'}>
