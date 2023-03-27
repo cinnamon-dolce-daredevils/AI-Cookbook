@@ -40,8 +40,18 @@ const Home = () => {
             Add Ingredients
           </Link>
         ) : (
-          <Link href={'/profile'}>
-            <Button variant="contained"> Signup/Login</Button>
+          <Link style={{ textDecoration: 'none' }} href={'/profile'}>
+            <Button
+              sx={{
+                color: 'white',
+                backgroundColor: theme.palette.secondary.main,
+                textDecoration: 'none',
+              }}
+              variant="contained"
+            >
+              {' '}
+              Signup/Login
+            </Button>
           </Link>
         )}
       </div>
