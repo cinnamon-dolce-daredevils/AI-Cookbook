@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -103,7 +104,7 @@ async function getIngredientsList() {
 
 useEffect(() => {
     getIngredientsList()
-}, [ingredientNames]);
+}, [ingredientNames, []]);
 
 
 
@@ -196,9 +197,7 @@ useEffect(() => {
             <List>
               {pantryItems.map((item, index) => {
                 return (
-                  <>
-                    <IngredientDetails item={item} index={index} />
-                  </>
+                    <IngredientDetails item={item} index={index} key={uuidv4()}/>
                 );
               })}
             </List>

@@ -43,6 +43,7 @@ const IngredientDetails = (props) => {
   };
 
   const handleDeleteIcon = async()=>{
+	console.log(props.item.id)
 	const {data, error} = await supabase
 	.from('pantry')
 	.delete()
