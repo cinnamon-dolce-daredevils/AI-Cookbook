@@ -33,11 +33,10 @@ const Home = () => {
         <p className={styles.trivia}>{trivia}</p>
         {session ? (
           <Link
-            className={styles.link}
             style={{ textDecoration: 'none', color: 'white' }}
             href={'/ingredients-recipes'}
           >
-            <Button sx={{ backgroundColor: theme.palette.secondary.main }}>
+            <Button sx={{ backgroundColor: theme.palette.common.black }}>
               Add Ingredients
             </Button>
           </Link>
