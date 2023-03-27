@@ -258,127 +258,132 @@ export default function IngredientRecipe({ data }) {
     }
 
 	return (
-		<>
-		<PersistentDrawerLeft ingredientNames = {ingredientNames}/>
-			<div className={styles.body}>
-				<Head>
-					<title>AI Cookbook</title>
-					<link rel='icon' href='images/AICB_TopG-trimmy.png' />
-				</Head>
+    <>
+      <PersistentDrawerLeft ingredientNames={ingredientNames} />
+      <div className={styles.body}>
+        <Head>
+          <title>AI Cookbook</title>
+          <link rel="icon" href="images/AICB_TopG-trimmy.png" />
+        </Head>
 
-				<main className={styles.main}>
-					<h3>Whatchu got in yo pantry?</h3>
-					<form onSubmit={onSubmit}>
-						<input
-							type='text'
-							name='ingredients'
-							placeholder='Enter your ingredients'
-							value={ingredientsInput}
-							onChange={handleInputChange}
-						/>
-						<Button sx={{color: theme.palette.secondary.main}} variant='contained' type='submit'>
-							Generate Meals
-						</Button>
-					</form>
-					<ul className={styles.suggestions}>
-						{suggestions.map((suggestion, index) => (
-							<li key={index} onClick={() => handleSuggestionClick(suggestion)}>
-								{suggestion.name}
-							</li>
-						))}
-					</ul>
-				</main>
+        <main className={styles.main}>
+          <h3>Whatchu got in yo pantry?</h3>
+          <form onSubmit={onSubmit}>
+            <input
+              type="text"
+              name="ingredients"
+              placeholder="Enter your ingredients"
+              value={ingredientsInput}
+              onChange={handleInputChange}
+            />
+            <Button
+              sx={{ color: theme.palette.common.white }}
+              variant="contained"
+              type="submit"
+            >
+              Generate Meals
+            </Button>
+          </form>
+          <ul className={styles.suggestions}>
+            {suggestions.map((suggestion, index) => (
+              <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
+                {suggestion.name}
+              </li>
+            ))}
+          </ul>
+        </main>
 
-				{expandedIngredient && (
-					<div className={styles.ingredientDetails} onClick={closeExpandedView}>
-						<p>{expandedIngredient.name}</p>
-						<img
-							src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
-							alt={expandedIngredient.name}
-						/>
-						{expandedIngredient.nutrition &&
-							expandedIngredient.nutrition.nutrients && (
-								<>
-									<p>
-										Calories:{" "}
-										{expandedIngredient.nutrition.nutrients.find(
-											(n) => n.name === "Calories"
-										)?.amount || "N/A"}{" "}
-										kcal
-									</p>
-									<p>
-										Carbs:{" "}
-										{expandedIngredient.nutrition.nutrients.find(
-											(n) => n.name === "Carbohydrates"
-										)?.amount || "N/A"}{" "}
-										g
-									</p>
-									<p>
-										Fat:{" "}
-										{expandedIngredient.nutrition.nutrients.find(
-											(n) => n.name === "Fat"
-										)?.amount || "N/A"}{" "}
-										g
-									</p>
-									<p>
-										Protein:{" "}
-										{expandedIngredient.nutrition.nutrients.find(
-											(n) => n.name === "Protein"
-										)?.amount || "N/A"}{" "}
-										g
-									</p>
-								</>
-							)}
-					</div>
-				)}
+        {expandedIngredient && (
+          <div className={styles.ingredientDetails} onClick={closeExpandedView}>
+            <p>{expandedIngredient.name}</p>
+            <img
+              src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
+              alt={expandedIngredient.name}
+            />
+            {expandedIngredient.nutrition &&
+              expandedIngredient.nutrition.nutrients && (
+                <>
+                  <p>
+                    Calories:{' '}
+                    {expandedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Calories'
+                    )?.amount || 'N/A'}{' '}
+                    kcal
+                  </p>
+                  <p>
+                    Carbs:{' '}
+                    {expandedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Carbohydrates'
+                    )?.amount || 'N/A'}{' '}
+                    g
+                  </p>
+                  <p>
+                    Fat:{' '}
+                    {expandedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Fat'
+                    )?.amount || 'N/A'}{' '}
+                    g
+                  </p>
+                  <p>
+                    Protein:{' '}
+                    {expandedIngredient.nutrition.nutrients.find(
+                      (n) => n.name === 'Protein'
+                    )?.amount || 'N/A'}{' '}
+                    g
+                  </p>
+                </>
+              )}
+          </div>
+        )}
 
-				{result && typeof result === "string"}
+        {result && typeof result === 'string'}
 
-				{result && !result.isLoading && typeof result === "string" && (
-					<div className={styles.mealList}>
-						{result.split(", ").map((recipe, index) => (
-							<div
-								key={index}
-								className={styles.mealItem}
-								onClick={(event) => fetchRecipe(recipe, selectedPersonality)}
-							>
-								{recipe}
-							</div>
-						))}
-					</div>
-				)}
+        {result && !result.isLoading && typeof result === 'string' && (
+          <div>
+            {/* mealList starts here */}
+            {result.split(', ').map((recipe, index) => (
+              <div
+                key={index}
+                className={styles.mealItem}
+                onClick={(event) => fetchRecipe(recipe, selectedPersonality)}
+              >
+                {recipe}
+              </div>
+            ))}
+          </div>
+        )}
 
-				{result && result.isLoading && (
-					<>
-						<div className={styles.loadingOverlay}>
-							<div className={styles.loading}>
-								<h1>Loading...</h1>
-								<img src='/images/fridge.gif' />
-							</div>
-						</div>
-					</>
-				)}
-				{selectedRecipe && (
-					<div className={styles.recipe}>
-						{isFavorite && <p>Recipe added to favorites!</p>}
-						<FavoriteIcon
-							className={styles.favorite}
-							style={{
-								fontSize: "50px",
-								width: "50px",
-								color: isFavorite ? "red" : "grey",
-							}}
-							onClick={() => {
-								toggleFavorite(selectedRecipe);
-							}}
-						/>
-						<ReactMarkdown>{selectedRecipe}</ReactMarkdown>
-					</div>
-				)}
-				<Link style={{ textDecoration: "none", color: "white" }} href={"/"}>
-					Return to Home
-				</Link>
-			</div>
-		</>
-	);
+        {result && result.isLoading && (
+          <>
+            <div className={styles.loadingOverlay}>
+              <div className={styles.loading}>
+                <h1>Loading...</h1>
+                <img src="/images/fridge.gif" />
+              </div>
+            </div>
+          </>
+        )}
+        {selectedRecipe && (
+          <div className={styles.recipe}>
+            {isFavorite && <p>Recipe added to favorites!</p>}
+            <FavoriteIcon
+              className={styles.favorite}
+              style={{
+                fontSize: '50px',
+                width: '50px',
+                color: isFavorite ? 'red' : 'grey',
+              }}
+              onClick={() => {
+                toggleFavorite(selectedRecipe);
+              }}
+            />
+            <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
+          </div>
+        )}
+        <Link style={{ textDecoration: 'none', color: 'white' }} href={'/'}>
+          Return to Home
+        </Link>
+      </div>
+    </>
+  );
 }

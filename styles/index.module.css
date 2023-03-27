@@ -35,14 +35,14 @@
 .link {
   text-decoration: none;
   color: #ffffff;
-  background-color: #a233f2;
+  background-color: #10a37f;
   padding: 10px 20px;
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
 }
 
 .link:hover {
-  background-color: #4f0070;
+  background-color: #10a37f;
 }
 
 
@@ -213,7 +213,7 @@
 .recipe blockquote {
   border-left: 4px solid #7f8c8d;
   padding-left: 1em;
-  color: #7f8c8d;
+  color: #10a37f;
   font-style: italic;
   margin-bottom: 10px;
 }
@@ -235,7 +235,7 @@
 }
 
 .suggestions li {
-  background-color: #7d598f;
+  background-color: #10a37f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -258,7 +258,7 @@
 }
 
 .suggestions li:hover {
-  background-color: #4b4b4b;
+  background-color: #10a37f;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
@@ -300,7 +300,6 @@
   height: 100%;
   overflow-y: scroll;
   padding: 1rem;
-  background-color: #42004b;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -309,13 +308,13 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
-  border-bottom: 1px solid #a900c0;
+  border-bottom: 1px solid #e0e0e0;
   cursor: pointer;
   color: #e0e0e0;
 }
 
 .ingredientItem:hover {
-  background-color: #56007b;
+  background-color: #8f8d8d;
 }
 
 .mealList {
@@ -330,7 +329,6 @@
   height: 100%;
   overflow-y: scroll;
   padding: 1rem;
-  background-color: #42004b;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
@@ -338,13 +336,13 @@
 
 .mealItem {
   padding: 0.5rem;
-  border-bottom: 1px solid #a900c0;
+  border-bottom: 1px solid #10a37f;
   cursor: pointer;
   color: #e0e0e0;
 }
 
 .mealItem:hover {
-  background-color: #56007b;
+  background-color: #15c398;
 }
 
 .ingredientDetails {
