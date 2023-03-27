@@ -99,7 +99,7 @@ export default function IngredientRecipe({ data }) {
 
         try {
           const ingredientDetails = await fetchIngredientDetails(suggestion.id);
-		  console.log(ingredientDetails)
+		//   console.log(ingredientDetails)
           let fat = 0,
             calories = 0,
             protein = 0,
