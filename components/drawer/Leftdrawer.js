@@ -20,7 +20,6 @@ const drawerWidth = 240;
  import { useSession } from "@supabase/auth-helpers-react";
  import { createClient } from "@supabase/supabase-js";
 import IngredientDetails from '../IngredientDetails';
-import ThemeChooser from '../ThemeChooser';
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -157,7 +156,6 @@ useEffect(() => {
               </Link>
             </div>
               <div style={{position: 'absolute', right: '100px'}}>
-            <ThemeChooser />
             </div>
             <Box
               sx={{

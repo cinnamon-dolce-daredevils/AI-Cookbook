@@ -1,6 +1,6 @@
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
-import React, { useState } from 'react'
+import React, { useState, createContext, useContext } from 'react'
 // below are roboto fonts from google
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -10,22 +10,37 @@ import Layout from '@/components/Layout';
 //imports theme
 import { ThemeProvider} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import {lightMode, darkMode} from '../styles/themes'
+// should only be used for TS. awaiting import { createEmotionCache } from '../src/createEmotionCache';
+//the below line replaces the above line
 
-function App({ Component, pageProps: { session, mode,  ...pageProps } }) {
-const [supabase] = useState(() => createBrowserSupabaseClient());
-const [newTheme, setNewTheme] = useState('light')
+import { lightMode, darkMode } from '../styles/themes'
 
-  const themeSetter = lightMode
+export const Context = React.createContext();
+
+function App({ Component, pageProps: { session, ...pageProps } }) {
+  let themeSetter = lightMode;
+  let [mode, setMode] = useState('lightMode');
+  let [isLightMode, setIsLightMode] = useState(true);
+  const [supabase] = useState(() => createBrowserSupabaseClient());
+  if (isLightMode == true) {
+    themeSetter = lightMode;
+  } else {
+    themeSetter = darkMode;
+  }
   return (
-    <ThemeProvider theme={themeSetter}>
-      <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
-      <Layout>
-        <CssBaseline />
+    <Context.Provider value={[isLightMode, setIsLightMode]}>
+      <ThemeProvider theme={themeSetter}>
+        <SessionContextProvider
+          supabaseClient={supabase}
+          initialSession={pageProps.initialSession}
+        >
+          <Layout>
+            <CssBaseline />
             <Component {...pageProps} />
-      </Layout> 
-      </SessionContextProvider>
+          </Layout>
+        </SessionContextProvider>
     </ThemeProvider>
+  </Context.Provider>
   );
 }
 export default App;
