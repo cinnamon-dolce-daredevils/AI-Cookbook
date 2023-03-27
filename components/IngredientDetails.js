@@ -22,8 +22,8 @@ const IngredientDetails = (props) => {
 		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 	);
   const [open, setOpen] = React.useState(false);
-  const [quantity, setQuantity] = React.useState('');
-  const [unit, setUnit] = React.useState('')
+  const [quantity, setQuantity] = React.useState(props.item.quantity);
+  const [unit, setUnit] = React.useState(props.item.unit)
 
  
 
