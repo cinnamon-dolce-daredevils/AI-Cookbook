@@ -94,7 +94,7 @@ export default function IngredientRecipe({ data }) {
     async function handleSuggestionClick(suggestion) {
         setIngredientsInput("");
         setSuggestions([]);
-      
+
         try {
           const ingredientDetails = await fetchIngredientDetails(suggestion.id);
           let fat = 0,
@@ -139,47 +139,47 @@ export default function IngredientRecipe({ data }) {
               userId: userId,
             },
           ]);
-      
+
           if (error) {
             console.error("Error inserting data:", error);
           }
-      
+
           // Update the ingredientNames state here
           setIngredientNames((prevIngredientNames) => [
             ...prevIngredientNames,
             ingredientDetails.name,
           ]);
-      
+
           setExpandedIngredient(null);
         } catch (error) {
           console.error(error);
           alert(error.message);
         }
       }
-      
+
 
     async function onSubmit(event) {
         event.preventDefault();
-    
+
         const { data, error: existingError } = await supabase
             .from("pantry")
             .select("suggestion")
             .eq("userId", userId);
-    
+
         if (existingError) {
             console.error("Error fetching data:", existingError);
             return;
         }
-    
+
         const ingredientNames = data.map(suggestion => suggestion.suggestion[0].name);
-    
+
         const ingredientsList = ingredientNames.join(", ");
-    
+
         if (!ingredientsList) {
             alert("Please select at least one ingredient.");
             return;
         }
-    
+
         try {
             const response = await fetch("/api/generate", {
                 method: "POST",
@@ -188,7 +188,7 @@ export default function IngredientRecipe({ data }) {
                 },
                 body: JSON.stringify({ ingredients: ingredientsList }),
             });
-    
+
             const data = await response.json();
             if (response.status !== 200) {
                 throw (
@@ -196,7 +196,7 @@ export default function IngredientRecipe({ data }) {
                     new Error(`Request failed with status: status ${response.status}`)
                 );
             }
-    
+
             setResult(data.result);
             setIngredientsInput("");
         } catch (error) {
@@ -204,27 +204,27 @@ export default function IngredientRecipe({ data }) {
             alert(error.message);
         }
     }
-    
+
 
     async function fetchRecipe(recipe, selectedPersonality) {
         const { data: ingredientsData, error: existingError } = await supabase
         .from("pantry")
         .select("suggestion")
         .eq("userId", userId);
-    
+
     if (existingError) {
         console.error("Error fetching data:", existingError);
         return;
-    }    
+    }
         setSelectedRecipe("");
         setResult((prevState) => ({ ...prevState, isLoading: true }));
         const ingredientNames = ingredientsData.map(suggestion => suggestion.suggestion[0].name);
-        const ingredientsList = ingredientNames.join(", ");        
+        const ingredientsList = ingredientNames.join(", ");
         if (!ingredientsList) {
             alert("Please select at least one ingredient.");
             return;
         }
-    
+
         try {
             const response = await fetch("/api/recipe", {
                 method: "POST",
@@ -237,7 +237,7 @@ export default function IngredientRecipe({ data }) {
                     personality: selectedPersonality,
                 }),
             });
-    
+
             const data = await response.json();
             if (response.status !== 200) {
                 throw (
@@ -245,7 +245,7 @@ export default function IngredientRecipe({ data }) {
                     new Error(`Request failed with status ${response.status}`)
                 );
             }
-    
+
             setSelectedRecipe(data.result);
             setResult((prevState) => ({ ...prevState, isLoading: false }));
         } catch (error) {
@@ -358,6 +358,7 @@ export default function IngredientRecipe({ data }) {
 				)}
 				{selectedRecipe && (
 					<div className={styles.recipe}>
+						{isFavorite && <p>Recipe added to favorites!</p>}
 						<FavoriteIcon
 							className={styles.favorite}
 							style={{
@@ -370,10 +371,8 @@ export default function IngredientRecipe({ data }) {
 							}}
 						/>
 						<ReactMarkdown>{selectedRecipe}</ReactMarkdown>
-						{isFavorite && <p>Recipe added to favorites!</p>}
 					</div>
 				)}
-
 				<Link style={{ textDecoration: "none", color: "white" }} href={"/"}>
 					Return to Home
 				</Link>
