@@ -10,12 +10,14 @@ import { Button } from "@mui/material";
 import { createClient } from "@supabase/supabase-js";
 import { callAutocompleteApi, fetchIngredientDetails } from "../api/ingredientApi";
 import PersistentDrawerLeft from "@/components/drawer/Leftdrawer";
+import { useTheme } from "@emotion/react";
 const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_URL,
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 export default function IngredientRecipe({ data }) {
+	const theme = useTheme();
 	const [ingredientsInput, setIngredientsInput] = useState("");
 	const [suggestions, setSuggestions] = useState([]);
 	const { selectedPersonality, handleChangePersonality } = useSelectedPersonality();
@@ -274,7 +276,7 @@ export default function IngredientRecipe({ data }) {
 							value={ingredientsInput}
 							onChange={handleInputChange}
 						/>
-						<Button variant='contained' type='submit'>
+						<Button sx={{color: theme.palette.secondary.main}} variant='contained' type='submit'>
 							Generate Meals
 						</Button>
 					</form>
