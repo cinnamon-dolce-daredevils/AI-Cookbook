@@ -27,10 +27,9 @@ const IngredientDetails = (props) => {
   const [quantity, setQuantity] = React.useState(props.item.quantity);
   const [unit, setUnit] = React.useState(props.item.unit)
 
- 
-
   const handleClickOpen = () => {
     setOpen(true);
+
   };
 
   const handleQuantChange = async() => {
@@ -42,11 +41,19 @@ const IngredientDetails = (props) => {
     setOpen(false);
   };
 
-  const handleDeleteIcon = async()=>{
+  const handleDeleteIcon = async(evt)=>{
+	evt.stopPropagation();
+	setOpen(false)
 	const {data, error} = await supabase
 	.from('pantry')
 	.delete()
 	.eq("id", props.item.id)
+
+	if(!data){
+		return(
+			<div>Deleting...</div>
+		)
+	}
   }
 
   return (
@@ -54,18 +61,18 @@ const IngredientDetails = (props) => {
 			<div
 				className={styles.ingredientItem}
 				sx={{ color: "white" }}
+				onClick={handleClickOpen}
 			>
-					<div variant='outlined'
-					onClick={handleClickOpen} key={props.index}>
+					<div variant='outlined' 
+					 key={props.index} >
 						{props.item.suggestion[0].name}
 					</div>
-					<IconButton onClick={handleDeleteIcon}>
+					<div>
+					<IconButton onClick={(event)=>handleDeleteIcon(event)}>
 						<Deleteicon/>
 					</IconButton>
-					
+					</div>
 			</div>
-
-			{/*                                      */}
 			<Dialog
 				open={open}
 				TransitionComponent={Transition}
@@ -104,7 +111,7 @@ const IngredientDetails = (props) => {
 							precision={1}
 							defaultValue={props.item.quantity}
 							step={0.1}
-							id='servingQuant'
+							className='servingQuant'
 							onChange={(evt) => setQuantity(evt)}
 						/>
 						<Combobox
@@ -120,7 +127,7 @@ const IngredientDetails = (props) => {
 								"tablespoons",
 								"cups",
 							]}
-							id='servingUnit'
+							className='servingUnit'
 							onChange={(evt) => setUnit(evt)}
 						/>
 					</div>
