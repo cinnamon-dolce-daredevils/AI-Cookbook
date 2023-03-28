@@ -77,12 +77,18 @@
   .glitch {
     font-size: 3em;
   }
+  .hidden{
+  display: none;
+  }
 }
 
 @media only screen and (max-width: 499px) and (min-width: 200px){
   .glitch {
     font-size: 1.5em;
   }
+  .hidden{
+  display: none;
+}
 }
 
 
@@ -108,7 +114,3 @@
   }
 }
 
-
-.hidden{
-  display: none;
-}

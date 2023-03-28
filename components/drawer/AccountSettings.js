@@ -207,7 +207,7 @@ export default function AccountMenu() {
                   control={<Radio />}
 
                   label="Spongebob Squarepants"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
 
                 />
                 <FormControlLabel
@@ -220,7 +220,7 @@ export default function AccountMenu() {
                   value="michaelJackson"
                   control={<Radio />}
                   label="Michael Jackson"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="arianaGrande"
@@ -229,7 +229,7 @@ export default function AccountMenu() {
                   label="Guy Fieri"
                   sx={{ color: 'white' }}
                   label="Ariana Grande"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
 
                 />
               </RadioGroup>

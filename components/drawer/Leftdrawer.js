@@ -151,7 +151,7 @@ useEffect(() => {
             <div className={styles.container}>
               <Link
                 href="/"
-                className={open ? styles.hidden: styles.glitch}
+                className={open ? `${styles.hidden} ${styles.glitch}` : styles.glitch}
                 data-glitch="AI Cookbook"
               >
                 AI Cookbook
