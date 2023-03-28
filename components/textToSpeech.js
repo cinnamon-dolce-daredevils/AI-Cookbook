@@ -1,12 +1,15 @@
 import axios from 'axios';
+import { useSelectedPersonality } from '@/components/useSelectedPersonality'; 
 
 const XI_API_KEY = process.env.NEXT_PUBLIC_ELEVEN_LABS_API_KEY;
-const voiceId = ' ';
-export async function textToSpeech(text, currentVoiceId) {
+
+export async function textToSpeech(text, selectedPersonality) {
+  const currentVoiceId = useSelectedPersonality(getVoiceIdForPersonality);
+  
   try {
     const cleanedText = text.replace(/[^a-zA-Z0-9\s/.-]+/g, '');
     const response = await axios.post(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+      `https://api.elevenlabs.io/v1/text-to-speech/${currentVoiceId}`,
       {
         text: cleanedText,
         voice_settings: {

@@ -13,7 +13,7 @@ import {
   fetchIngredientDetails,
 } from "../api/ingredientApi";
 import PersistentDrawerLeft from "@/components/drawer/Leftdrawer";
-import { textToSpeech } from "../textToSpeech";
+import { textToSpeech } from "../../components/textToSpeech";
 import { useTheme } from "@emotion/react";
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -62,7 +62,7 @@ export default function IngredientRecipe({ data }) {
 
 const playSelectedRecipe = async (currentVoiceId) => {
   try {
-    const audioBlob = await textToSpeech(selectedRecipe, currentVoiceId.toString());
+    const audioBlob = await textToSpeech(selectedRecipe, selectedPersonality);
     if (audioBlob) {
       const url = URL.createObjectURL(audioBlob);
       setAudioUrl(url);
@@ -98,7 +98,6 @@ const playSelectedRecipe = async (currentVoiceId) => {
 	const session = useSession();
 	let userId = null;
 
-	// sets the userId to the person who is signed in
 	if (session) {
 		userId = session.user.id;
 	}
@@ -117,7 +116,6 @@ const playSelectedRecipe = async (currentVoiceId) => {
 
         try {
           const ingredientDetails = await fetchIngredientDetails(suggestion.id);
-		//   console.log(ingredientDetails)
           let fat = 0,
             calories = 0,
             protein = 0,
@@ -167,7 +165,7 @@ const playSelectedRecipe = async (currentVoiceId) => {
             console.error("Error inserting data:", error);
           }
 
-          // Update the ingredientNames state here
+
           setIngredientNames((prevIngredientNames) => [
             ...prevIngredientNames,
             ingredientDetails.name,
