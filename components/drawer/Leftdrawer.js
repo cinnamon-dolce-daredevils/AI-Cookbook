@@ -25,6 +25,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
+import useSWR from 'swr'
 
 
 
@@ -77,47 +78,77 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft(props) {
   const {ingredientNames} = props
 const [pantryItems, setPantryItems] = useState([])
+
 const [suggestions, setSuggestions]=useState()
+
+  const theme = useTheme();
+	const [open, setOpen] = React.useState(false);
+
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
+
+	const handleDrawerClose = () => {
+		setOpen(false);
+	};
 
 
 const  session  = useSession();
 let userId = session?.user?.id
 
-async function getIngredientsList() {
-	if(session && session.user){
-		userId = session.user.id;
-		try {
-			const { data: suggestion,  error: existingError } = await supabase
-				.from("pantry")
-				.select("*")
-				.eq("userId", userId);
+// async function getIngredientsList() {
+// 	if(session && session.user){
+// 		userId = session.user.id;
+// 		try {
+// 			const { data: suggestion,  error: existingError } = await supabase
+// 				.from("pantry")
+// 				.select("*")
+// 				.eq("userId", userId);
 
-			  setPantryItems(suggestion)
-        setSuggestions(suggestion.length)
-		} catch (error) {
-			console.error(error);
-			// alert(error.message);
-		}
+// 			  setPantryItems(suggestion)
+//         setSuggestions(suggestion.length)
+// 		} catch (error) {
+// 			console.error(error);
+// 			// alert(error.message);
+// 		}
+// 	}
+// }
+
+
+// useEffect(() => {
+//     getIngredientsList()
+// }, [ingredientNames]);
+
+
+
+
+	const fetcher = (url) =>
+		fetch(url, {
+			method: "GET",
+		}).then((res) => res.json());
+
+  
+	const { data, error } = useSWR(`/api/suggestions?userId=${userId}`, fetcher, {
+		refreshInterval: 2000,
+	});
+
+  console.log(data.data)
+    useEffect(() => {
+			setPantryItems(data.data);
+	}, [data]);
+
+
+	if (error) {
+		return <div>Error loading suggestions</div>;
 	}
-}
+
+	if (!data) {
+		return <div>Loading suggestions...</div>;
+	}
 
 
-useEffect(() => {
-    getIngredientsList()
-}, [ingredientNames]);
+  
 
-
-
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const purple1 = purple[600];
 //style={{backgroundColor: theme.palette.secondary}}
