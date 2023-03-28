@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const XI_API_KEY = process.env.NEXT_PUBLIC_ELEVEN_LABS_API_KEY;
-const voiceId = 't6MIz2qWmjgDKIYWSjVq';
+const voiceId = ' ';
 export async function textToSpeech(text, currentVoiceId) {
   try {
     const cleanedText = text.replace(/[^a-zA-Z0-9\s/.-]+/g, '');

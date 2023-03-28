@@ -83,7 +83,7 @@ const FavoritesPage = (userId) => {
         </Button>
       <ul className={styles.recipeMulti}>
         {userFavorites[currentIndex] && (
-          <li key={currentIndex} className={styles.recipe}>
+          <li key={currentIndex} className={styles.fav}>
             {!isFavorite && <p>Recipe removed from Favorites</p>}
 						<FavoriteIcon
 							className={styles.favorite}
