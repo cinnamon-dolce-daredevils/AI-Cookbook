@@ -194,67 +194,67 @@ export default function AccountMenu() {
                   value="normalAI"
                   control={<Radio />}
                   label="Normal AI"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="snoopDogg"
                   control={<Radio />}
                   label="Snoop Dogg"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="marthaStewart"
                   control={<Radio />}
                   label="Martha Stewart"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="emerilLagasse"
                   control={<Radio />}
                   label="Emeril Lagasse"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="samuelJackson"
                   control={<Radio />}
                   label="Samuel L. Jackson"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="gordonRamsay"
                   control={<Radio />}
                   label="Gordon Ramsay"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="bobRoss"
                   control={<Radio />}
                   label="Bob Ross"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="juliaChild"
                   control={<Radio />}
                   label="Julia Child"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="christopherWalken"
                   control={<Radio />}
                   label="Christopher Walken"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="morganFreeman"
                   control={<Radio />}
                   label="Morgan Freeman"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="guyFieri"
                   control={<Radio />}
                   label="Guy Fieri"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
               </RadioGroup>
             </form>
