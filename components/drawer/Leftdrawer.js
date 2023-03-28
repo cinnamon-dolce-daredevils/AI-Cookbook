@@ -104,7 +104,7 @@ async function getIngredientsList() {
 
 useEffect(() => {
     getIngredientsList()
-}, [ingredientNames, []]);
+}, [ingredientNames]);
 
 
 
