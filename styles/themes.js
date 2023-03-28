@@ -13,12 +13,12 @@ export const lightMode = createTheme({
     // background: {
     //   default: '#a9927d',
     // },
-    text: {
-      primary: '#f2f4f3',
-      secondary: '#f2f4f3',
-      disabled: '#9e9e9e',
-      hint: '#f2f4f3',
-    },
+    // text: {
+    //   primary: '#f2f4f3',
+    //   secondary: '#f2f4f3',
+    //   disabled: '#9e9e9e',
+    //   hint: '#f2f4f3',
+    // },
   },
 });
 

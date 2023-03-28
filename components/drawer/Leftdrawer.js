@@ -185,7 +185,7 @@ useEffect(() => {
             open={open}
           >
             <DrawerHeader>
-              <div> My Ingredients </div>
+              <div style={{color: 'white'}}> My Ingredients </div>
               <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? (
                   <ChevronLeftIcon />
