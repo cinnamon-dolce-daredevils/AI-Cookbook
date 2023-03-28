@@ -12,7 +12,6 @@ export default async function Suggestion(req, res) {
     // const session = useSession();
     // const userId = session?.user?.id;
     const userId = req.query.userId
-    console.log(userId)
 	if (req.method === "GET") {
 		const { data, error } = await supabase
 			.from("pantry")
@@ -20,7 +19,7 @@ export default async function Suggestion(req, res) {
 			.eq("userId", userId);
 
 		if (error) {
-			return res.status(500).json({ message: error });
+			// return res.status(500).json({ message: error });
 		}
 
 		return res.status(200).json({ data });
