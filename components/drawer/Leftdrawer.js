@@ -130,9 +130,9 @@ let userId = session?.user?.id
 		refreshInterval: 2000,
 	});
 
-  console.log(data.data)
-    useEffect(() => {
-			setPantryItems(data.data);
+  useEffect(() => {
+    if(data){
+		setPantryItems(data.data)}
 	}, [data]);
 
 
