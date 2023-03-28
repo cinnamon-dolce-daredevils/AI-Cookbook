@@ -149,6 +149,7 @@
   gap: 40px;
 }
 
+
 .recipeMulti {
   display: flex;
   align-items: center;
@@ -156,6 +157,67 @@
   justify-content: space-between;
   gap: 25px;
 }
+
+.audio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url('https://i.pinimg.com/originals/83/3d/9e/833d9e17c5997c7125d636c47c926a1f.jpg');
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #b5b5b5;
+}
+
+.fav h1  {
+  font-family: 'Arial', sans-serif;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.fav h1,
+.fav h2,
+.fav h3,
+.fav h4,
+.fav h5,
+.fav h6 {
+  font-family: 'Arial', sans-serif;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.fav p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #34495e;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.fav ul,
+.fav ol {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #34495e;
+}
+
+.fav blockquote {
+  border-left: 4px solid #7f8c8d;
+  padding-left: 1em;
+  color: #7f8c8d;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
 
 .recipe {
   display: flex;

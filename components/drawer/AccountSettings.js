@@ -203,22 +203,12 @@ export default function AccountMenu() {
                   sx={{ color: 'white' }}
                 />
                 <FormControlLabel
-                  value="marthaStewart"
+                  value="spongebob"
                   control={<Radio />}
-                  label="Martha Stewart"
-                  sx={{ color: 'white' }}
-                />
-                <FormControlLabel
-                  value="emerilLagasse"
-                  control={<Radio />}
-                  label="Emeril Lagasse"
-                  sx={{ color: 'white' }}
-                />
-                <FormControlLabel
-                  value="samuelJackson"
-                  control={<Radio />}
-                  label="Samuel L. Jackson"
-                  sx={{ color: 'white' }}
+
+                  label="Spongebob Squarepants"
+                  sx={{ color: 'black' }}
+
                 />
                 <FormControlLabel
                   value="gordonRamsay"
@@ -227,34 +217,20 @@ export default function AccountMenu() {
                   sx={{ color: 'white' }}
                 />
                 <FormControlLabel
-                  value="bobRoss"
+                  value="michaelJackson"
                   control={<Radio />}
-                  label="Bob Ross"
-                  sx={{ color: 'white' }}
+                  label="Michael Jackson"
+                  sx={{ color: 'black' }}
                 />
                 <FormControlLabel
-                  value="juliaChild"
+                  value="arianaGrande"
                   control={<Radio />}
-                  label="Julia Child"
-                  sx={{ color: 'white' }}
-                />
-                <FormControlLabel
-                  value="christopherWalken"
-                  control={<Radio />}
-                  label="Christopher Walken"
-                  sx={{ color: 'white' }}
-                />
-                <FormControlLabel
-                  value="morganFreeman"
-                  control={<Radio />}
-                  label="Morgan Freeman"
-                  sx={{ color: 'white' }}
-                />
-                <FormControlLabel
-                  value="guyFieri"
-                  control={<Radio />}
+
                   label="Guy Fieri"
                   sx={{ color: 'white' }}
+                  label="Ariana Grande"
+                  sx={{ color: 'black' }}
+
                 />
               </RadioGroup>
             </form>

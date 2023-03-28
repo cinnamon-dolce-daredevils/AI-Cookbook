@@ -113,6 +113,7 @@ const FavoritesPage = (userId) => {
           )}
         </ul>
       </div>
+
     </>
   );
 };

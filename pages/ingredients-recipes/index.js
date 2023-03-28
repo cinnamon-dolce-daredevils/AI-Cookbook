@@ -8,12 +8,16 @@ import { useSelectedPersonality } from "../../components/useSelectedPersonality"
 import { useSession } from "@supabase/auth-helpers-react";
 import { Button } from "@mui/material";
 import { createClient } from "@supabase/supabase-js";
-import { callAutocompleteApi, fetchIngredientDetails } from "../api/ingredientApi";
+import {
+  callAutocompleteApi,
+  fetchIngredientDetails,
+} from "../api/ingredientApi";
 import PersistentDrawerLeft from "@/components/drawer/Leftdrawer";
+import { textToSpeech } from "../../components/textToSpeech";
 import { useTheme } from "@emotion/react";
 const supabase = createClient(
-	process.env.NEXT_PUBLIC_SUPABASE_URL,
-	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 export default function IngredientRecipe({ data }) {
@@ -53,6 +57,20 @@ export default function IngredientRecipe({ data }) {
 			console.log("Error toggling favorite:", error.message);
 		}
 	};
+  
+    const [audioUrl, setAudioUrl] = useState(null);
+
+const playSelectedRecipe = async (currentVoiceId) => {
+  try {
+    const audioBlob = await textToSpeech(selectedRecipe, selectedPersonality);
+    if (audioBlob) {
+      const url = URL.createObjectURL(audioBlob);
+      setAudioUrl(url);
+    }
+  } catch (error) {
+    console.error("Error playing the recipe:", error);
+  }
+};
 
 	useEffect(() => {
 		if (selectedRecipe) {
@@ -80,7 +98,6 @@ export default function IngredientRecipe({ data }) {
 	const session = useSession();
 	let userId = null;
 
-	// sets the userId to the person who is signed in
 	if (session) {
 		userId = session.user.id;
 	}
@@ -136,6 +153,8 @@ export default function IngredientRecipe({ data }) {
                   protein: protein,
                   carbs: carbs,
                   image: ingredientDetails.image,
+				  amount: ingredientDetails.amount,
+				  unit: ingredientDetails.unitShort
                 },
               ],
               userId: userId,
@@ -146,7 +165,7 @@ export default function IngredientRecipe({ data }) {
             console.error("Error inserting data:", error);
           }
 
-          // Update the ingredientNames state here
+
           setIngredientNames((prevIngredientNames) => [
             ...prevIngredientNames,
             ingredientDetails.name,
@@ -257,7 +276,7 @@ export default function IngredientRecipe({ data }) {
         }
     }
 
-	return (
+  return (
     <>
       <PersistentDrawerLeft ingredientNames={ingredientNames} />
       <div className={styles.body}>
@@ -365,18 +384,26 @@ export default function IngredientRecipe({ data }) {
         )}
         {selectedRecipe && (
           <div className={styles.recipe}>
-            {isFavorite && <p>Recipe added to favorites!</p>}
             <FavoriteIcon
               className={styles.favorite}
               style={{
-                fontSize: '50px',
-                width: '50px',
-                color: isFavorite ? 'red' : 'grey',
+                fontSize: "50px",
+                width: "50px",
+                color: isFavorite ? "red" : "grey",
               }}
               onClick={() => {
                 toggleFavorite(selectedRecipe);
-              }}
+            }}
             />
+            <div className={styles.audio} >
+                <button onClick={playSelectedRecipe}>Play Recipe</button>
+            {audioUrl && (
+                <audio controls src={audioUrl}>
+                Your browser does not support the audio element.
+              </audio>
+            )}
+            </div>
+            {isFavorite && <p>Recipe added to favorites!</p>}
             <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
           </div>
         )}
