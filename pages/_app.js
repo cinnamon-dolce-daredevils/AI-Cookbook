@@ -16,7 +16,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import { lightMode, darkMode } from '../styles/themes'
 
-// line below allows us to use the isLightMode and setIsLightMode 
+// line below allows us to use the isLightMode and setIsLightMode
 // in other files
 export const Context = React.createContext();
 
@@ -30,13 +30,13 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   } else {
     themeSetter = darkMode;
   }
-  return (<SessionContextProvider
-					supabaseClient={supabase}
-					initialSession={pageProps.initialSession}
-				>
+  return (
+	<SessionContextProvider
+		supabaseClient={supabase}
+		initialSession={pageProps.initialSession}
+	>
 		<Context.Provider value={[isLightMode, setIsLightMode]}>
 			<ThemeProvider theme={themeSetter}>
-				
 					<SWRConfig
 						value={{
 							refreshInterval: 5000,

@@ -26,10 +26,6 @@ const supabase = createClient(
 );
 import useSWR from 'swr'
 
-
-
-
-
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
@@ -96,7 +92,6 @@ const  session  = useSession();
 let userId = session?.user?.id
 
 
-
 let refreshRate = 2000
 
 
@@ -105,7 +100,7 @@ let refreshRate = 2000
 			method: "GET",
 		}).then((res) => res.json());
 
-  
+
 	const { data, error } = useSWR(`/api/suggestions?userId=${userId}`, fetcher, {
 		refreshInterval: refreshRate,
 	});

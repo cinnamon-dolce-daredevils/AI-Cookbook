@@ -8,7 +8,6 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
 import Dialog from '@mui/material/Dialog';
@@ -49,7 +48,7 @@ export default function AccountMenu() {
     storePersonalityInLocalStorage(newPersonality);
     window.location.reload();
   };
-  
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
