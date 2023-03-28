@@ -428,10 +428,10 @@ export default function IngredientRecipe({ data }) {
             <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
           </div>
         )}
-        <Link style={{ textDecoration: 'none', color: isLightMode ? 'black' : 'white' }} href={'/'}>
+        {/* <Link style={{ textDecoration: 'none', color: isLightMode ? 'black' : 'white' }} href={'/'}>
 
           Return to Home
-        </Link>
+        </Link> */}
       </div>
     </>
   );
