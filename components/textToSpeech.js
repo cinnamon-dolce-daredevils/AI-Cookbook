@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { useSelectedPersonality } from '@/components/useSelectedPersonality'; 
+import { getVoiceIdForPersonality } from './voiceUtils';
 
 const XI_API_KEY = process.env.NEXT_PUBLIC_ELEVEN_LABS_API_KEY;
 
 export async function textToSpeech(text, selectedPersonality) {
-  const currentVoiceId = useSelectedPersonality(getVoiceIdForPersonality);
-  
+  const currentVoiceId = getVoiceIdForPersonality(selectedPersonality);
+
   try {
     const cleanedText = text.replace(/[^a-zA-Z0-9\s/.-]+/g, '');
     const response = await axios.post(
