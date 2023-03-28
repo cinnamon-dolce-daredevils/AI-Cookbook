@@ -4,17 +4,17 @@ import React, { useState, createContext, useContext } from 'react';
 import { Context } from "../pages/_app"
 // trying to carry over the word light or dark to another component
 const ThemeChooser = () => {
-  let [mode, setMode] = useState('lightMode');
+  let [mode, setMode] = useState('darkMode');
   const theme = useTheme();
   let [isLightMode, setIsLightMode] =useContext(Context);
   const handleToggle = () => {
     setIsLightMode(!isLightMode);
     if (isLightMode == true) {
       setMode('darkMode');
-      console.log(mode);
+
     } else {
       setMode('lightMode');
-      console.log(mode);
+
     }
   };
   return (

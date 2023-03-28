@@ -18,9 +18,9 @@ import { lightMode, darkMode } from '../styles/themes'
 export const Context = React.createContext();
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
-  let themeSetter = lightMode;
-  let [mode, setMode] = useState('lightMode');
-  let [isLightMode, setIsLightMode] = useState(true);
+  let themeSetter = darkMode;
+  let [mode, setMode] = useState('darkMode');
+  let [isLightMode, setIsLightMode] = useState(false);
   const [supabase] = useState(() => createBrowserSupabaseClient());
   if (isLightMode == true) {
     themeSetter = lightMode;

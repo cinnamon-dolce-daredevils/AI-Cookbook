@@ -6,7 +6,6 @@ import Drawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -15,7 +14,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
-import { purple } from '@mui/material/colors';
+
 import AccountSettings from './AccountSettings';
 const drawerWidth = 240;
  import { useSession } from "@supabase/auth-helpers-react";
@@ -77,13 +76,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft(props) {
   const {ingredientNames} = props
 const [pantryItems, setPantryItems] = useState([])
-const [suggestions, setSuggestions]=useState()
+  const [suggestions, setSuggestions] = useState()
+  const [hidden, setHidden] = useState(false);
 
 
 const  session  = useSession();
 let userId = session?.user?.id
 
-async function getIngredientsList() {
+  async function getIngredientsList() {
+  
 	if(session && session.user){
 		userId = session.user.id;
 		try {
@@ -119,7 +120,7 @@ useEffect(() => {
     setOpen(false);
   };
 
-  const purple1 = purple[600];
+
 //style={{backgroundColor: theme.palette.secondary}}
   return (
     <>
@@ -150,7 +151,7 @@ useEffect(() => {
             <div className={styles.container}>
               <Link
                 href="/"
-                className={styles.glitch}
+                className={open ? `${styles.hidden} ${styles.glitch}` : styles.glitch}
                 data-glitch="AI Cookbook"
               >
                 AI Cookbook
