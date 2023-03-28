@@ -4,7 +4,7 @@ import { getRandomFoodTrivia } from './api/ingApi';
 import styles from '../styles/index.module.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { useTheme } from '@emotion/react';
-import { Button } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 
 const Home = () => {
   const theme = useTheme();
@@ -30,13 +30,22 @@ const Home = () => {
     <>
       <div className={styles.container}>
         <img src="/images/AICB_LogG.png" className={styles.icon} />
-        <p className={styles.trivia}>{trivia}</p>
+        <Container sx={{backgroundColor: theme.palette.primary.main}}>
+          <Typography>
+            {trivia}
+          </Typography>
+        </Container>
         {session ? (
           <Link
             style={{ textDecoration: 'none', color: 'white' }}
             href={'/ingredients-recipes'}
           >
-            <Button sx={{ backgroundColor: theme.palette.secondary.main, color: theme.palette.common.white }}>
+            <Button
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                color: theme.palette.common.white,
+              }}
+            >
               Add Ingredients
             </Button>
           </Link>

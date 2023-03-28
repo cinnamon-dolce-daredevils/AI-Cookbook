@@ -26,12 +26,15 @@ export const darkMode = createTheme({
   palette: {
     mode: 'dark',
     primary: {
+      // total black
       main: '#000000',
     },
     secondary: {
+      // dark gray
       main: '#2C3333',
     },
     background: {
+      // light bluish-gray
       default: '#343a40',
     },
     text: {
