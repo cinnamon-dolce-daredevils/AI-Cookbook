@@ -117,9 +117,7 @@ let refreshRate = 2000
 
 
 	if (error) {
-
 		return <div>Error loading suggestions</div>;
-    
 	}
 
 	if (!data) {
