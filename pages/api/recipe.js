@@ -56,6 +56,6 @@ export default async function (req, res) {
 function generatePrompt(ingredientsList, selectedRecipe, personality) {
   const capitalizedIngredients =
     ingredientsList[0].toUpperCase() + ingredientsList.slice(1).toLowerCase();
-  return `Write a detailed recipe for ${selectedRecipe} using the following ingredients: ${capitalizedIngredients}, table salt, black pepper, cooking oil, and water. You may not need all of them. Include the calories, fat, protein, and carbs for the meal. Present it in markdown format. Write the recipe the way ${personality} talks and don't be afraid to exaggerate it if need be. Make sure to write the instructions for the recipe as if they were being spoken by ${personality}. Say the recipe is written by them, and make sure to use their vernacular, style, language, and mannerisms.`;
+  return `Write a real recipe for ${selectedRecipe} using only, but not necesarily all the following ingredients: ${capitalizedIngredients}, table salt, black pepper, cooking oil, water and include the calories, fat, protein, and carbs for the meal, Make sure to present it in markdown format. Write the recipe the way ${personality} talks and don't be afraid to exaggerate it if need be. Make sure to write the instructions for the recipe as if they were being spoken by ${personality}. Say the recipe is written by them, and make sure to use their vernacular, style, language, and mannerisms.`;
 }
 

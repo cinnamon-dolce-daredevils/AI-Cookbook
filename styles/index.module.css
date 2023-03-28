@@ -57,6 +57,15 @@
   flex-direction: column;
 }
 
+.audio {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.audioControl {
+  margin: 10px;
+}
+
 .loadingOverlay {
   position: fixed;
   top: 0;
@@ -80,12 +89,13 @@
 }
 
 .loading h1 {
-  font-size: 7rem;
+  font-size: 5rem;
   margin-bottom: 2rem;
+  color: white;
 }
 
 .loading img {
-  width: 900px;
+  width: 600px;
   height: auto;
 }
 
@@ -141,7 +151,7 @@
 }
 
 .recipe-container {
-  max-width: 900px;
+  max-width: 1500px;
   margin: 40px auto;
   padding: 20px;
   background-color: #ffffff;
@@ -159,13 +169,6 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 25px;
-}
-
-.audio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .fav {
@@ -228,7 +231,7 @@
   justify-content: space-between;
   background-image: url('https://i.pinimg.com/originals/83/3d/9e/833d9e17c5997c7125d636c47c926a1f.jpg');
   padding: 20px;
-  width: 55%;
+  width: 75%;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid #b5b5b5;
@@ -424,7 +427,13 @@
 
 .favorite {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: -50px;
+  z-index: 2;
+}
+
+.favorite:hover {
+  cursor: pointer;
+  z-index: 2;
 }
