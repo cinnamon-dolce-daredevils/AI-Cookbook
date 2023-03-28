@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { getVoiceIdForPersonality } from './voiceUtils';
 
 export function useSelectedPersonality() {
-  const [selectedPersonality, setSelectedPersonality] = useState('normalAI');
+  const [selectedPersonality, setSelectedPersonality] = useState('Normal AI');
 
   useEffect(() => {
     const storedPersonality = localStorage.getItem('selectedPersonality');
@@ -20,25 +21,11 @@ export function useSelectedPersonality() {
     storePersonalityInLocalStorage(newPersonality);
   };
 
-  const getVoiceIdForPersonality = (selectedPersonality) => {
-    switch (selectedPersonality) {
-      case 'spongebob':
-        return 't6MIz2qWmjgDKIYWSjVq';
-      case 'snoopDogg':
-        return 'F6xWCOHzFNH7NLSxxKgk';
-      case 'gordonRamsay':
-        return 'I9J5r9wr9Y0Ta0Q1jhgh';
-      default:
-        return 'I9J5r9wr9Y0Ta0Q1jhgh';
-    }
-  };
-
   const currentVoiceId = getVoiceIdForPersonality(selectedPersonality);
 
   return {
     selectedPersonality,
     handleChangePersonality,
     currentVoiceId,
-    getVoiceIdForPersonality,
   };
 }
