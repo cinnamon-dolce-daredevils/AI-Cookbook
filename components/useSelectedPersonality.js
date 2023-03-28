@@ -29,7 +29,7 @@ export function useSelectedPersonality() {
       case 'gordonRamsay':
         return 'I9J5r9wr9Y0Ta0Q1jhgh';
       default:
-        return 't6MIz2qWmjgDKIYWSjVq';
+        return 'I9J5r9wr9Y0Ta0Q1jhgh';
     }
   };
 
@@ -39,5 +39,6 @@ export function useSelectedPersonality() {
     selectedPersonality,
     handleChangePersonality,
     currentVoiceId,
+    getVoiceIdForPersonality,
   };
 }
