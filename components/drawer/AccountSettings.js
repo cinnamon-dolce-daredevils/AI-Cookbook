@@ -90,15 +90,13 @@ export default function AccountMenu() {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
+            overflow: 'hidden',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
             backgroundColor: theme.palette.secondary.main,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
-              ml: -0.5,
-              mr: 1,
               color: 'black',
               backgroundColor: 'white',
             },
@@ -121,8 +119,8 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Link style={{ textDecoration: 'none' }} href="/profile">
-          <MenuItem sx={{ color: 'white' }} onClick={handleClose}>
-            <Avatar className="Menutext" /> Profile
+          <MenuItem sx={{ color: 'white', mr: 'auto' }} onClick={handleClose}>
+            <Avatar className="Menutext" /> <div style={{paddingLeft: '10px'}}>Profile </div>
           </MenuItem>
         </Link>
         <MenuItem
@@ -131,20 +129,17 @@ export default function AccountMenu() {
         >
           <Link
             style={{
-              color: theme.palette.text.primary,
+              color: 'white',
               textDecoration: 'none',
             }}
             href={'/favorites'}
           >
-            <GradeIcon sx={{ color: theme.palette.text.primary, mr: 1 }} />
+            <GradeIcon sx={{ color: 'white', mr: 1 }} />
             Favorites
           </Link>
         </MenuItem>
         <Divider />
-        <MenuItem
-          onClick={handleSettingsOpen}
-          sx={{ color: theme.palette.text.primary }}
-        >
+        <MenuItem onClick={handleSettingsOpen} sx={{ color: 'white' }}>
           <ListItemIcon>
             <Settings fontSize="small" sx={{ color: 'white' }} />
           </ListItemIcon>
@@ -170,8 +165,8 @@ export default function AccountMenu() {
             >
               Choose a Color Theme
             </Typography>
-            
-              <ThemeChooser />
+
+            <ThemeChooser />
 
             <form noValidate autoComplete="off">
               <Typography
@@ -205,7 +200,9 @@ export default function AccountMenu() {
                 <FormControlLabel
                   value="Spongebob"
                   control={<Radio />}
+
                   label="Spongebob"
+
                   sx={{ color: 'white' }}
                 />
                 <FormControlLabel

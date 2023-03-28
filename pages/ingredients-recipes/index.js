@@ -1,5 +1,6 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { Context } from '../_app';
+import { useState, useEffect, useContext } from "react";
 import styles from "../../styles/index.module.css";
 import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -293,7 +294,7 @@ export default function IngredientRecipe({ data }) {
         </Head>
 
         <main className={styles.main}>
-          <h3>Whatchu got in yo pantry?</h3>
+          <h3 style={{textAlign: 'center'}}>Whatchu got in yo pantry?</h3>
           <form onSubmit={onSubmit}>
             <input
               type="text"
@@ -427,7 +428,8 @@ export default function IngredientRecipe({ data }) {
             <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
           </div>
         )}
-        <Link style={{ textDecoration: "none", color: "white" }} href={"/"}>
+        <Link style={{ textDecoration: 'none', color: isLightMode ? 'black' : 'white' }} href={'/'}>
+
           Return to Home
         </Link>
       </div>

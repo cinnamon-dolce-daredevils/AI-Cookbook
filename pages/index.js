@@ -5,6 +5,8 @@ import styles from '../styles/index.module.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { useTheme } from '@emotion/react';
 import { Button, Container, Typography } from '@mui/material';
+import { FullscreenExit } from '@mui/icons-material';
+import { auto } from '@popperjs/core';
 
 const Home = () => {
   const theme = useTheme();
@@ -29,12 +31,10 @@ const Home = () => {
   return (
     <>
       <div className={styles.container}>
-        <img src="/images/AICB_LogG.png" className={styles.icon} />
-        <Container sx={{backgroundColor: theme.palette.primary.main}}>
-          <Typography>
-            {trivia}
-          </Typography>
-        </Container>
+        <img src="/images/AICB_LogG.png" className={styles.icon} />{ trivia ? 
+        <Container sx={{ p: 1, m:1, backgroundColor: theme.palette.primary.main }}>
+          <Typography>{trivia}</Typography>
+        </Container> : null}
         {session ? (
           <Link
             style={{ textDecoration: 'none', color: 'white' }}
@@ -43,26 +43,29 @@ const Home = () => {
             <Button
               sx={{
                 backgroundColor: theme.palette.secondary.main,
-                color: theme.palette.common.white,
+                color: theme.palette.common.white, mt: 3
               }}
             >
               Add Ingredients
             </Button>
           </Link>
         ) : (
-          <Link style={{ textDecoration: 'none' }} href={'/profile'}>
-            <Button
-              sx={{
-                color: 'white',
-                backgroundColor: theme.palette.secondary.main,
-                textDecoration: 'none',
-              }}
-              variant="contained"
-            >
-              {' '}
-              Signup/Login
-            </Button>
-          </Link>
+          <>
+            <h3> Please Sign up or Login first!</h3>
+            <Link style={{ textDecoration: 'none' }} href={'/profile'}>
+              <Button
+                sx={{
+                  color: 'white',
+                  backgroundColor: theme.palette.secondary.main,
+                  textDecoration: 'none',
+                }}
+                variant="contained"
+              >
+                {' '}
+                Signup/Login
+              </Button>
+            </Link>
+          </>
         )}
       </div>
     </>

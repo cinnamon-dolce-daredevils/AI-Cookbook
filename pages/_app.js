@@ -16,6 +16,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import { lightMode, darkMode } from '../styles/themes'
 
+// line below allows us to use the isLightMode and setIsLightMode 
+// in other files
 export const Context = React.createContext();
 
 function App({ Component, pageProps: { session, ...pageProps } }) {

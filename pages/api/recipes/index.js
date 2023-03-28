@@ -1,11 +1,12 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
+import { Typography } from "@mui/material";
 
 export default function RecipeAI() {
   const [ingredientsInput, setIngredientsInput] = useState("");
   const [result, setResult] = useState();
-
+   let [isLightMode, setIsLightMode] = useContext(Context);
   async function onSubmit(event) {
     event.preventDefault();
     try {
@@ -64,7 +65,6 @@ export default function RecipeAI() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/images/forkman-removebg.png" className={styles.icon} />
         <h3>Whatchu got in yo pantry?</h3>
         <form onSubmit={onSubmit}>
           <input
@@ -77,18 +77,20 @@ export default function RecipeAI() {
           <input type="submit" value="Generate meals" />
         </form>
         {result && (
-  <div className={styles.result}>
-    {result.split(", ").map((recipe, index) => (
-      <Link key={index} href={`/recipes/${recipe}`}>{recipe}
-      </Link>
-    ))}
-  </div>
-)}
+          <div className={styles.result}>
+            {result.split(', ').map((recipe, index) => (
+              <Link key={index} href={`/recipes/${recipe}`}>
+                {recipe}
+              </Link>
+            ))}
+          </div>
+        )}
       </main>
-      <Button href="/">
-
-      </Button>
-      <Link href={"/"}>Return to Home</Link>
+      <Button href="/"></Button>
+      <Typography sx={{color: isLightMode ? 'black' : 'white'}}>
+        
+        <Link style={{color: isLightMode ? 'black' : 'black'}} href={'/'}>Return to Home</Link>
+      </Typography>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { Context } from "../pages/_app"
 const ThemeChooser = () => {
   let [mode, setMode] = useState('darkMode');
   const theme = useTheme();
+  // isLightMode controls the theme and can switch from light to dark
   let [isLightMode, setIsLightMode] =useContext(Context);
   const handleToggle = () => {
     setIsLightMode(!isLightMode);
