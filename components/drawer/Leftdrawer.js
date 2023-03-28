@@ -95,29 +95,9 @@ const [pantryItems, setPantryItems] = useState([])
 const  session  = useSession();
 let userId = session?.user?.id
 
-// async function getIngredientsList() {
-// 	if(session && session.user){
-// 		userId = session.user.id;
-// 		try {
-// 			const { data: suggestion,  error: existingError } = await supabase
-// 				.from("pantry")
-// 				.select("*")
-// 				.eq("userId", userId);
-// 			  setPantryItems(suggestion)
-//         setSuggestions(suggestion.length)
-// 		} catch (error) {
-// 			console.error(error);
-// 			// alert(error.message);
-// 		}
-// 	}
-// }
 
 
-// useEffect(() => {
-//     getIngredientsList()
-// }, [ingredientNames]);
-
-
+let refreshRate = 2000
 
 
 	const fetcher = (url) =>
@@ -127,17 +107,19 @@ let userId = session?.user?.id
 
   
 	const { data, error } = useSWR(`/api/suggestions?userId=${userId}`, fetcher, {
-		refreshInterval: 2000,
+		refreshInterval: refreshRate,
 	});
 
   useEffect(() => {
-    if(data){
+    if(session && userId && data){
 		setPantryItems(data.data)}
 	}, [data]);
 
 
 	if (error) {
+
 		return <div>Error loading suggestions</div>;
+    
 	}
 
 	if (!data) {
@@ -145,11 +127,6 @@ let userId = session?.user?.id
 	}
 
 
-  
-
-
-
-//style={{backgroundColor: theme.palette.secondary}}
   return (
     <>
       <Box
