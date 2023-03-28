@@ -3,7 +3,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Link from 'next/link';
 import Account from '@/components/Account';
-import { Button, Card, Paper } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import { Box } from '@mui/system';
 
 
@@ -11,7 +11,7 @@ const Profile = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
   return (
-    <Box >
+    <Box>
       <Paper elevation={12} >
         <h1 style={{ textAlign: 'center' }}> User Settings</h1>
         <div >

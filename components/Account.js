@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Avatar from './Avatar';
-import Link from 'next/link';
 import {
   Button,
   FormControl,
   Input,
-  InputLabel,
+  TextField,
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
@@ -88,8 +87,7 @@ export default function Account({ session }) {
   return (
     <FormControl>
       <label> Account Email</label>
-      <Input
-        label="goal description"
+      <TextField
         id="email"
         type="text"
         value={session.user.email}
