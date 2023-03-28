@@ -278,7 +278,7 @@ const playSelectedRecipe = async (currentVoiceId) => {
 
   return (
     <>
-      <PersistentDrawerLeft ingredientNames={ingredientNames} />
+      {/* <PersistentDrawerLeft ingredientNames={ingredientNames} /> */}
       <div className={styles.body}>
         <Head>
           <title>AI Cookbook</title>
