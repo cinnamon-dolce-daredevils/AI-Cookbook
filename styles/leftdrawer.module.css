@@ -67,11 +67,25 @@
   background-color: #10a37f;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 800px) {
+  .glitch {
+    font-size: 5em;
+  }
+}
+
+@media only screen and (max-width: 799px) and (min-width: 500px){
   .glitch {
     font-size: 3em;
   }
 }
+
+@media only screen and (max-width: 499px) and (min-width: 200px){
+  .glitch {
+    font-size: 1.5em;
+  }
+}
+
+
 
 @keyframes glitch {
   0% {
@@ -92,4 +106,9 @@
   to {
     transform: translate(0);
   }
+}
+
+
+.hidden{
+  display: none;
 }

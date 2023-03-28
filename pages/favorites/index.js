@@ -75,32 +75,45 @@ const FavoritesPage = (userId) => {
   return (
     <>
       <div className={styles.navButtons}>
-        <Button variant='contained' onClick={handlePrevClick} disabled={currentIndex === 0}>
+        <Button
+          sx={{ color: 'white' }}
+          variant="contained"
+          onClick={handlePrevClick}
+          disabled={currentIndex === 0}
+        >
           Prev
         </Button>
-        <Button variant='contained' onClick={handleNextClick} disabled={currentIndex === userFavorites.length - 1}>
+        <Button
+          sx={{ color: 'white' }}
+          variant="contained"
+          onClick={handleNextClick}
+          disabled={currentIndex === userFavorites.length - 1}
+        >
           Next
         </Button>
-      <ul className={styles.recipeMulti}>
-        {userFavorites[currentIndex] && (
-          <li key={currentIndex} className={styles.fav}>
-            {!isFavorite && <p>Recipe removed from Favorites</p>}
-						<FavoriteIcon
-							className={styles.favorite}
-							style={{
-								fontSize: "50px",
-								width: "50px",
-								color: isFavorite ? "red" : "grey",
-							}}
-							onClick={() => {
-								toggleFavorite(userFavorites[currentIndex].selectedRecipe);
-							}}
-						/>
-            <ReactMarkdown>{userFavorites[currentIndex].selectedRecipe}</ReactMarkdown>
-          </li>
-        )}
-      </ul>
-        </div>
+        <ul className={styles.recipeMulti}>
+          {userFavorites[currentIndex] && (
+            <li key={currentIndex} className={styles.recipe}>
+              {!isFavorite && <p>Recipe removed from Favorites</p>}
+              <FavoriteIcon
+                className={styles.favorite}
+                style={{
+                  fontSize: '50px',
+                  width: '50px',
+                  color: isFavorite ? 'red' : 'grey',
+                }}
+                onClick={() => {
+                  toggleFavorite(userFavorites[currentIndex].selectedRecipe);
+                }}
+              />
+              <ReactMarkdown>
+                {userFavorites[currentIndex].selectedRecipe}
+              </ReactMarkdown>
+            </li>
+          )}
+        </ul>
+      </div>
+
     </>
   );
 };

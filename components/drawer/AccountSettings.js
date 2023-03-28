@@ -194,25 +194,27 @@ export default function AccountMenu() {
                   value="normalAI"
                   control={<Radio />}
                   label="Normal AI"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="snoopDogg"
                   control={<Radio />}
                   label="Snoop Dogg"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="spongebob"
                   control={<Radio />}
+
                   label="Spongebob Squarepants"
                   sx={{ color: 'black' }}
+
                 />
                 <FormControlLabel
                   value="gordonRamsay"
                   control={<Radio />}
                   label="Gordon Ramsay"
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'white' }}
                 />
                 <FormControlLabel
                   value="michaelJackson"
@@ -223,8 +225,12 @@ export default function AccountMenu() {
                 <FormControlLabel
                   value="arianaGrande"
                   control={<Radio />}
+
+                  label="Guy Fieri"
+                  sx={{ color: 'white' }}
                   label="Ariana Grande"
                   sx={{ color: 'black' }}
+
                 />
               </RadioGroup>
             </form>
