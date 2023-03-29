@@ -74,6 +74,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.724);
   z-index: 100;
+  color: white;
 }
 
 .loading {
