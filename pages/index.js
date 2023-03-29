@@ -29,8 +29,8 @@ const Home = () => {
   return (
     <>
       <div className={styles.container}>
-        <img src="/images/AICB_LogG.png" className={styles.icon} />{ trivia ?
-        <Container sx={{ p: 1, m:1, backgroundColor: theme.palette.primary.main }}>
+        <img src="/images/AICB_LogG.png" className={styles.icon} />{ trivia ? 
+        <Container sx={{ p: 1, m:1, textAlign: 'center' }}>
           <Typography>{trivia}</Typography>
         </Container> : null}
         {session ? (
