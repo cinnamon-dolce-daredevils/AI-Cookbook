@@ -24,7 +24,7 @@ const Profile = () => {
 									default: {
 										colors: {
 											brand: "green",
-											brandAccent: "darkgreeb",
+											brandAccent: "darkgreen",
 										},
 									},
 								},

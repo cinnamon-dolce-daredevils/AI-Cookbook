@@ -136,43 +136,52 @@ let refreshRate = 2000
           open={open}
         >
           <Toolbar>
-          <IconButton
-  color="inherit"
-  aria-label="open drawer"
-  onClick={handleDrawerOpen}
-  edge="start"
-  sx={{
-    mr: 2,
-    backgroundColor: theme.palette.primary,
-    ...(open && { display: 'none' }),
-  }}
->
-  <Badge badgeContent={pantryItems.length} color="error" sx={{
-    '& .MuiBadge-badge': {
-      background: 'purple',
-    },
-  }}>
-    <KitchenTwoToneIcon />
-  </Badge>
-</IconButton>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                mr: 2,
+                backgroundColor: theme.palette.primary,
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <Badge
+                badgeContent={pantryItems.length}
+                color="error"
+                sx={{
+                  '& .MuiBadge-badge': {
+                    background: 'purple',
+                  },
+                }}
+              >
+                <KitchenTwoToneIcon />
+              </Badge>
+            </IconButton>
             <div className={styles.container}>
               <Link
                 href="/"
-                className={open ? `${styles.hidden} ${styles.glitch}` : styles.glitch}
+                className={
+                  open ? `${styles.hidden} ${styles.glitch}` : styles.glitch
+                }
                 data-glitch="AI Cookbook"
               >
                 AI Cookbook
               </Link>
             </div>
-              <div style={{position: 'absolute', right: '100px'}}>
-            </div>
+            <div style={{ position: 'absolute', right: '100px' }}></div>
             <Box
               sx={{
                 position: 'absolute',
                 right: '50px',
+                display: 'flex',
               }}
             >
-             
+              <Link style={{textDecoration: 'none', color: 'white'}} href='about-us'>
+                <h1>About Us</h1>
+              </Link>
+
               <AccountSettings />
             </Box>
           </Toolbar>
@@ -193,7 +202,7 @@ let refreshRate = 2000
             open={open}
           >
             <DrawerHeader>
-              <div style={{color: 'white'}}> My Pantry </div>
+              <div style={{ color: 'white' }}> My Pantry </div>
               <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? (
                   <ChevronLeftIcon />
@@ -206,7 +215,7 @@ let refreshRate = 2000
             <List>
               {pantryItems.map((item, index) => {
                 return (
-                    <IngredientDetails item={item} index={index} key={uuidv4()}/>
+                  <IngredientDetails item={item} index={index} key={uuidv4()} />
                 );
               })}
             </List>
