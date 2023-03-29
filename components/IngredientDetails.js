@@ -4,17 +4,17 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import styles from './../styles/leftdrawer.module.css';
 import "react-widgets/styles.css";
-import { Combobox, DropdownList, NumberPicker } from 'react-widgets';
+import { Combobox, NumberPicker } from 'react-widgets';
 import { createClient } from '@supabase/supabase-js';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import { IconButton } from '@mui/material';
 import { useMute } from './MuteContext';
+import Box from '@mui/material/Box';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="right" ref={ref} {...props} />;
@@ -77,7 +77,7 @@ const IngredientDetails = (props) => {
 				sx={{ color: "white" }}
 				onClick={handleClickOpen}
 			>
-					<div variant='outlined' 
+					<div variant='outlined'
 					 key={props.index} >
 						{props.item.suggestion[0].name}
 					</div>
@@ -101,26 +101,30 @@ const IngredientDetails = (props) => {
     <strong>{props.item.suggestion[0].name}</strong>
   </DialogTitle>
   <DialogContent sx={{ color: 'black' }}  className={styles.dialogBox}>
-    <DialogContentText
-      sx={{ color: 'black', p: 2 }}
-      id='alert-dialog-slide-description'
-    ><div className={styles.nutrtionFacts}>Nutrition Facts</div>
-      <div className={styles.perServing}><span className={styles.fatLabel}>per serving:{" "}</span>
-						{props.item.suggestion[0].amount + props.item.suggestion[0].unit}</div>
-      <div className={styles.calories}>
-        <span className={styles.caloriesLabel}>Calories:</span>
-        {props.item.suggestion[0].calories} kcal
-      </div>
-      <div className={styles.fat}>
-        <span className={styles.fatLabel}>Fat:</span> {props.item.suggestion[0].fat} grams
-      </div>
-      <div className={styles.carbs}>
-        <span className={styles.carbsLabel}>Carbohydrates:</span> {props.item.suggestion[0].carbs} grams
-      </div>
-      <div className={styles.protein}>
-        <span className={styles.proteinLabel}>Protein:</span> {props.item.suggestion[0].protein} grams
-      </div>
-      </DialogContentText>
+  <Box
+  sx={{ color: 'black', p: 2 }}
+  id='alert-dialog-slide-description'
+>
+  <Box>
+    <Box className={styles.nutrtionFacts}>Nutrition Facts</Box>
+    <Box className={styles.perServing}><span className={styles.fatLabel}>per serving:{" "}</span>
+      {props.item.suggestion[0].amount + props.item.suggestion[0].unit}</Box>
+    <Box className={styles.calories}>
+      <span className={styles.caloriesLabel}>Calories:</span>
+      {props.item.suggestion[0].calories} kcal
+    </Box>
+    <Box className={styles.fat}>
+      <span className={styles.fatLabel}>Fat:</span> {props.item.suggestion[0].fat} grams
+    </Box>
+    <Box className={styles.carbs}>
+      <span className={styles.carbsLabel}>Carbohydrates:</span> {props.item.suggestion[0].carbs} grams
+    </Box>
+    <Box className={styles.protein}>
+      <span className={styles.proteinLabel}>Protein:</span> {props.item.suggestion[0].protein} grams
+    </Box>
+  </Box>
+</Box>
+
       <img
         className={styles.nutritionImg}
         src={`https://spoonacular.com/cdn/ingredients_100x100/${props.item.suggestion[0].image}`}
