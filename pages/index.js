@@ -5,8 +5,6 @@ import styles from '../styles/index.module.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { useTheme } from '@emotion/react';
 import { Button, Container, Typography } from '@mui/material';
-import { FullscreenExit } from '@mui/icons-material';
-import { auto } from '@popperjs/core';
 
 const Home = () => {
   const theme = useTheme();
@@ -23,10 +21,10 @@ const Home = () => {
         alert(error.message);
       }
     };
-  
+
     fetchTrivia();
   }, []);
-  
+
 
   return (
     <>
