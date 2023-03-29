@@ -149,7 +149,7 @@ let refreshRate = 2000
 >
   <Badge badgeContent={pantryItems.length} color="error" sx={{
     '& .MuiBadge-badge': {
-      background: 'radial-gradient(circle, rgba(0,255,0) 0%, rgba(128,0,128) 100%)',
+      background: 'purple',
     },
   }}>
     <KitchenTwoToneIcon />
@@ -192,7 +192,7 @@ let refreshRate = 2000
             open={open}
           >
             <DrawerHeader>
-              <div style={{color: 'white'}}> My Ingredients </div>
+              <div style={{color: 'white'}}> My Pantry </div>
               <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? (
                   <ChevronLeftIcon />

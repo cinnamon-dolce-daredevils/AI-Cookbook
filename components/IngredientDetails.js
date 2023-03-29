@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -10,7 +11,8 @@ import styles from './../styles/leftdrawer.module.css';
 import "react-widgets/styles.css";
 import { Combobox, DropdownList, NumberPicker } from 'react-widgets';
 import { createClient } from '@supabase/supabase-js';
-import Deleteicon from "@mui/icons-material/DeleteRounded";
+import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import { IconButton } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -26,6 +28,8 @@ const IngredientDetails = (props) => {
   const [open, setOpen] = React.useState(false);
   const [quantity, setQuantity] = React.useState(props.item.quantity);
   const [unit, setUnit] = React.useState(props.item.unit)
+  const [hoverDelete, setHoverDelete] = useState(false);
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -68,8 +72,11 @@ const IngredientDetails = (props) => {
 						{props.item.suggestion[0].name}
 					</div>
 					<div>
-					<IconButton onClick={(event)=>handleDeleteIcon(event)}>
-						<Deleteicon/>
+					<IconButton onMouseEnter={() => setHoverDelete(true)}
+  onMouseLeave={() => setHoverDelete(false)}
+  onClick={(event) => handleDeleteIcon(event)}
+>
+  {hoverDelete ? <DeleteTwoToneIcon sx={{ color: "purple" }} /> : <DeleteIcon />}
 					</IconButton>
 					</div>
 			</div>
