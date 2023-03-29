@@ -7,16 +7,19 @@ const ThemeChooser = () => {
   let [mode, setMode] = useState('darkMode');
   const theme = useTheme();
   // isLightMode controls the theme and can switch from light to dark
-  let [isLightMode, setIsLightMode] = useContext(Context);
+  let [isLightMode, setIsLightMode] =useContext(Context);
   const handleToggle = () => {
     setIsLightMode(!isLightMode);
     if (isLightMode == true) {
       setMode('darkMode');
+
     } else {
       setMode('lightMode');
+
     }
   };
   return (
+
       <Button
         variant="contained"
         sx={{ color: theme.palette.common.white }}

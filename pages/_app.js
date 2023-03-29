@@ -1,6 +1,6 @@
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
-import React, { useState, createContext, useContext } from 'react'
+import React, { useState } from 'react'
 import { SWRConfig } from "swr";
 // below are roboto fonts from google
 import '@fontsource/roboto/300.css';
@@ -31,10 +31,10 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     themeSetter = darkMode;
   }
   return (
-	<SessionContextProvider
+		<SessionContextProvider
 		supabaseClient={supabase}
 		initialSession={pageProps.initialSession}
-	>
+		>
 		<Context.Provider value={[isLightMode, setIsLightMode]}>
 			<ThemeProvider theme={themeSetter}>
 					<SWRConfig

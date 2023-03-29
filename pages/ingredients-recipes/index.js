@@ -294,7 +294,8 @@ export default function IngredientRecipe({ data }) {
         </Head>
 
         <main className={styles.main}>
-          <h3 style={{textAlign: 'center'}}>Whatchu got in yo pantry?</h3>
+        {ingredientsInput ? "" : <h3 style={{textAlign: 'center', color: "white"}}>Please use the input box below to enter the food items you would like to use for your recipe!</h3>}
+          <p style={{textAlign: 'center', color: 'white'}}><em>Generated recipes assume you have <b>Black Pepper, Table Salt, Cooking Oil, and Water</b></em></p>
           <form onSubmit={onSubmit}>
             <input
               type="text"

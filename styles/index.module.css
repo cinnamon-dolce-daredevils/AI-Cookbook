@@ -116,6 +116,7 @@
 }
 .icon {
   width: 300px;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 20));
 }
 .main h3 {
   font-size: 32px;
@@ -269,7 +270,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border-radius: 35px;  
+  border-radius: 35px;
 }
 
 .recipe ul,
@@ -432,6 +433,7 @@
   align-items: center;
   margin-bottom: -50px;
   z-index: 2;
+  position: absolute;
 }
 
 .favorite:hover {

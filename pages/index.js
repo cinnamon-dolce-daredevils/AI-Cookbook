@@ -5,8 +5,6 @@ import styles from '../styles/index.module.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { useTheme } from '@emotion/react';
 import { Button, Container, Typography } from '@mui/material';
-import { FullscreenExit } from '@mui/icons-material';
-import { auto } from '@popperjs/core';
 
 const Home = () => {
   const theme = useTheme();
@@ -23,15 +21,15 @@ const Home = () => {
         alert(error.message);
       }
     };
-  
+
     fetchTrivia();
   }, []);
-  
+
 
   return (
     <>
       <div className={styles.container}>
-        <img src="/images/AICB_LogG.png" className={styles.icon} />{ trivia ? 
+        <img src="/images/AICB_LogG.png" className={styles.icon} />{ trivia ?
         <Container sx={{ p: 1, m:1, backgroundColor: theme.palette.primary.main }}>
           <Typography>{trivia}</Typography>
         </Container> : null}

@@ -1,6 +1,3 @@
-
-
-
 export async function getRandomFoodTrivia() {
   const url = `https://api.spoonacular.com/food/trivia/random?apiKey=${process.env.NEXT_PUBLIC_API_KEY}`;
   const response = await fetch(url);
