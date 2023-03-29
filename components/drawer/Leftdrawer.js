@@ -14,6 +14,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
+import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
+import Badge from '@mui/material/Badge';
+
 
 import AccountSettings from './AccountSettings';
 const drawerWidth = 240;
@@ -133,19 +136,21 @@ let refreshRate = 2000
           open={open}
         >
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{
-                mr: 2,
-                backgroundColor: theme.palette.primary,
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
+          <IconButton
+  color="inherit"
+  aria-label="open drawer"
+  onClick={handleDrawerOpen}
+  edge="start"
+  sx={{
+    mr: 2,
+    backgroundColor: theme.palette.primary,
+    ...(open && { display: 'none' }),
+  }}
+>
+  <Badge badgeContent={pantryItems.length} color="error">
+    <KitchenTwoToneIcon />
+  </Badge>
+</IconButton>
             <div className={styles.container}>
               <Link
                 href="/"
