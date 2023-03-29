@@ -9,6 +9,7 @@ import { useSelectedPersonality } from "../../components/useSelectedPersonality"
 import { useSession } from "@supabase/auth-helpers-react";
 import { Button } from "@mui/material";
 import { createClient } from "@supabase/supabase-js";
+import { useMute } from "@/components/MuteContext";
 import {
   callAutocompleteApi,
   fetchIngredientDetails,
@@ -31,7 +32,7 @@ export default function IngredientRecipe({ data }) {
   const [ingredientNames, setIngredientNames] = useState([]);
   const [expandedIngredient, setExpandedIngredient] = useState(null);
   const [result, setResult] = useState();
-
+  const { isMuted } = useMute();
   const [selectedRecipe, setSelectedRecipe] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
   const addToFavorites = async (selectedRecipe, userId) => {
@@ -47,13 +48,17 @@ export default function IngredientRecipe({ data }) {
   const toggleFavorite = async (selectedRecipe) => {
     try {
       if (isFavorite) {
+        if (!isMuted) {
+        playAudio('/audio/Short.m4a');}
         const { data, error } = await supabase
           .from("favorites")
           .delete()
           .match({ selectedRecipe, userId });
         if (error) throw error;
       } else {
-        await addToFavorites(selectedRecipe, userId);
+          await addToFavorites(selectedRecipe, userId);
+          if (!isMuted) {
+          playAudio('/audio/New Recording.m4a');}
       }
       setIsFavorite(!isFavorite);
     } catch (error) {
@@ -66,6 +71,8 @@ export default function IngredientRecipe({ data }) {
 
   const playSelectedRecipe = async () => {
     setAudioLoading(true);
+    if (!isMuted) {
+    playAudio('/audio/New Recording 5.m4a');}
     try {
       const audioBlob = await textToSpeech(selectedRecipe, selectedPersonality);
       if (audioBlob) {
@@ -84,6 +91,11 @@ export default function IngredientRecipe({ data }) {
       fetchRecipe(selectedRecipe, selectedPersonality);
     }
   }, [selectedPersonality]);
+
+  function playAudio(audioPath) {
+    const audio = new Audio(audioPath);
+    audio.play();
+  }  
 
   async function handleInputChange(event) {
     const input = event.target.value;
@@ -120,6 +132,8 @@ export default function IngredientRecipe({ data }) {
   async function handleSuggestionClick(suggestion) {
     setIngredientsInput("");
     setSuggestions([]);
+    if (!isMuted) {
+    playAudio('/audio/New Recording.m4a');}
 
     try {
       const ingredientDetails = await fetchIngredientDetails(suggestion.id);
@@ -186,6 +200,8 @@ export default function IngredientRecipe({ data }) {
 
   async function onSubmit(event) {
     event.preventDefault();
+    if (!isMuted) {
+    playAudio('/audio/New Recording 3.m4a');}
 
     const { data, error: existingError } = await supabase
       .from("pantry")
@@ -238,6 +254,8 @@ export default function IngredientRecipe({ data }) {
       .from("pantry")
       .select("suggestion")
       .eq("userId", userId);
+      if (!isMuted) {
+      playAudio('/audio/New Recording 4.m4a');}
 
     if (existingError) {
       console.error("Error fetching data:", existingError);
@@ -294,8 +312,8 @@ export default function IngredientRecipe({ data }) {
         </Head>
 
         <main className={styles.main}>
-        {ingredientsInput ? "" : <h3 style={{textAlign: 'center', color: "white"}}>Please use the input box below to enter the food items you would like to use for your recipe!</h3>}
-          <p style={{textAlign: 'center', color: 'white'}}><em>Generated recipes assume you have <b>Black Pepper, Table Salt, Cooking Oil, and Water</b></em></p>
+        {ingredientsInput ? "" : <h3 style={{textAlign: 'center', color: "orange"}}>Please use the input box below to enter the food items you would like to use for your recipe!</h3>}
+          <p style={{textAlign: 'center', color: 'orange'}}><em>Generated recipes assume you have <b>Black Pepper, Table Salt, Cooking Oil, and Water</b></em></p>
           <form onSubmit={onSubmit}>
             <input
               type="text"

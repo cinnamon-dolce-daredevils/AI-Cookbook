@@ -48,15 +48,18 @@ const FavoritesPage = (userId) => {
   const toggleFavorite = async (selectedRecipe) => {
 		try {
 			if (isFavorite) {
-				const { data, error } = await supabase
-					.from("favorites")
-					.delete()
-					.match({ selectedRecipe, userId });
+        playAudio('/audio/Short.m4a');
+        const { data, error } = await supabase
+        .from("favorites")
+        .delete()
+        .match({ selectedRecipe, userId });
 				if (error) throw error;
 			} else {
 				await addToFavorites(selectedRecipe, userId);
 			}
 			setIsFavorite(!isFavorite);
+                playAudio('/audio/New Recording.m4a');
+
 		} catch (error) {
 			console.log("Error toggling favorite:", error.message);
 		}

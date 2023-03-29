@@ -1,4 +1,3 @@
-// _app.js
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import React, { useState, useEffect } from 'react';
@@ -60,3 +59,4 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   );
 }
 export default App;
+
