@@ -26,9 +26,11 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   let [isLightMode, setIsLightMode] = useState(false);
   const [supabase] = useState(() => createBrowserSupabaseClient());
   if (isLightMode == true) {
-    themeSetter = lightMode;
+	  themeSetter = lightMode;
+	  
   } else {
-    themeSetter = darkMode;
+	  themeSetter = darkMode;
+
   }
   return (
 		<SessionContextProvider
