@@ -20,6 +20,10 @@ import GradeIcon from '@mui/icons-material/Grade';
 import { Typography } from '@mui/material';
 import ThemeChooser from '../ThemeChooser';
 import { useTheme } from '@emotion/react';
+import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+import FormControl from '@mui/material/FormControl';
+import { useMute } from '../MuteContext';
 
 export default function AccountMenu() {
   const theme = useTheme();
@@ -30,10 +34,23 @@ export default function AccountMenu() {
   const handleSettingsOpen = () => { setSettingsOpen(true); };
   const handleSettingsClose = () => { setSettingsOpen(false); };
   const [selectedPersonality, setSelectedPersonality] = React.useState('normalAI');
+  const { isMuted, setIsMuted } = useMute();
 
   const storePersonalityInLocalStorage = (selectedPersonality) => {
     localStorage.setItem('selectedPersonality', selectedPersonality);
   };
+
+  const handleMuteChange = (event) => {
+    setIsMuted(event.target.checked);
+    localStorage.setItem('isMuted', event.target.checked);
+  };
+
+  React.useEffect(() => {
+    const storedMuteStatus = localStorage.getItem('isMuted');
+    if (storedMuteStatus) {
+      setIsMuted(storedMuteStatus === 'true');
+    }
+  }, []);
 
   React.useEffect(() => {
     const storedPersonality = localStorage.getItem('selectedPersonality');
@@ -218,6 +235,15 @@ export default function AccountMenu() {
                 />
               </RadioGroup>
             </form>
+            <FormControl component="fieldset">
+  <FormGroup>
+    <FormControlLabel
+      control={<Switch checked={isMuted} onChange={handleMuteChange} />}
+      label="Mute Sounds"
+      sx={{ color: 'white' }}
+    />
+  </FormGroup>
+</FormControl>
           </DialogContent>
         </Dialog>
       </Menu>

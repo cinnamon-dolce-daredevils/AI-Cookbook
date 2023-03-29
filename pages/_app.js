@@ -15,6 +15,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 //the below line replaces the above line
 
 import { lightMode, darkMode } from '../styles/themes'
+import MuteContext from '@/components/MuteContext';
 
 // line below allows us to use the isLightMode and setIsLightMode
 // in other files
@@ -25,6 +26,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   let [mode, setMode] = useState('darkMode');
   let [isLightMode, setIsLightMode] = useState(false);
   const [supabase] = useState(() => createBrowserSupabaseClient());
+  const [isMuted, setIsMuted] = useState(false);
   if (isLightMode == true) {
 	  themeSetter = lightMode;
 	  
@@ -37,6 +39,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
 		supabaseClient={supabase}
 		initialSession={pageProps.initialSession}
 		>
+    <MuteContext.Provider value={{ isMuted, setIsMuted }}>
 		<Context.Provider value={[isLightMode, setIsLightMode]}>
 			<ThemeProvider theme={themeSetter}>
 					<SWRConfig
@@ -51,6 +54,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
 					</SWRConfig>
 			</ThemeProvider>
 		</Context.Provider>
+    </MuteContext.Provider>
     </SessionContextProvider>
 	);
 }
