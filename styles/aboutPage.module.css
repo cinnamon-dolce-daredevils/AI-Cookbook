@@ -1,0 +1,23 @@
+.parallax {
+    position: relative;
+    bottom: 50px;
+    /* The image used */
+    background-image: url(".././public/images/pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg");
+
+    /* Set a specific height */
+    min-height: 1000px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container{
+    position: relative;
+    bottom: 50px;
+    height: 1000px;
+    background-color: black;
+    font-size: medium;
+}

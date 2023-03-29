@@ -11,27 +11,46 @@ const Profile = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   return (
-    <Box className={styles.box}>
-      <Paper className={styles.paper} elevation={12}>
-        <h1 style={{ textAlign: 'center' }}> User Settings</h1>
-        <div>
-          {!session ? (
-            <Auth
-              supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa }}
-              theme="dark"
-              providers={['google']}
-            />
-          ) : (
-            <Account session={session} />
-          )}
-        </div>
-        <Button href={'/'} sx={{ textDecoration: 'none', margin: '10px', position: 'relative', right: '50px'}} variant="contained">
-          Return Home
-        </Button>
-      </Paper>
-    </Box>
-  );
+		<Box className={styles.box}>
+			<Paper className={styles.paper} elevation={12}>
+				<h1 style={{ textAlign: "center" }}> User Settings</h1>
+				<div>
+					{!session ? (
+						<Auth
+							supabaseClient={supabase}
+							appearance={{
+								theme: ThemeSupa,
+								variables: {
+									default: {
+										colors: {
+											brand: "green",
+											brandAccent: "darkgreeb",
+										},
+									},
+								},
+							}}
+							theme='dark'
+							providers={["google"]}
+						/>
+					) : (
+						<Account session={session} />
+					)}
+				</div>
+				<Button
+					href={"/"}
+					sx={{
+						textDecoration: "none",
+						margin: "10px",
+						position: "relative",
+						right: "50px",
+					}}
+					variant='contained'
+				>
+					Return Home
+				</Button>
+			</Paper>
+		</Box>
+	);
 };
 
 export default Profile;

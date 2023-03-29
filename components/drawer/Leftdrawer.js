@@ -172,6 +172,7 @@ let refreshRate = 2000
                 right: '50px',
               }}
             >
+             
               <AccountSettings />
             </Box>
           </Toolbar>
