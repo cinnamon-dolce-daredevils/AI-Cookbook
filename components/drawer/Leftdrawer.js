@@ -147,7 +147,11 @@ let refreshRate = 2000
     ...(open && { display: 'none' }),
   }}
 >
-  <Badge badgeContent={pantryItems.length} color="error">
+  <Badge badgeContent={pantryItems.length} color="error" sx={{
+    '& .MuiBadge-badge': {
+      background: 'radial-gradient(circle, rgba(0,255,0) 0%, rgba(128,0,128) 100%)',
+    },
+  }}>
     <KitchenTwoToneIcon />
   </Badge>
 </IconButton>
