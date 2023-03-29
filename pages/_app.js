@@ -10,12 +10,14 @@ import Layout from '@/components/Layout';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { lightMode, darkMode } from '../styles/themes';
+import MuteContext from '@/components/MuteContext';
 
 export const Context = React.createContext();
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
   const [isLightMode, setIsLightMode] = useState(null);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -41,6 +43,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}
     >
+      <MuteContext.Provider value={{ isMuted, setIsMuted }}>
       <Context.Provider value={[isLightMode, setIsLightMode]}>
         <ThemeProvider theme={theme}>
           <SWRConfig
@@ -55,6 +58,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
           </SWRConfig>
         </ThemeProvider>
       </Context.Provider>
+      </MuteContext.Provider>
     </SessionContextProvider>
   );
 }
