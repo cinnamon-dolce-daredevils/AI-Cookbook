@@ -147,12 +147,17 @@ let refreshRate = 2000
                 ...(open && { display: 'none' }),
               }}
             >
+
+              {/* fridge badge is below */}
+
               <Badge
                 badgeContent={pantryItems.length}
                 color="error"
                 sx={{
                   '& .MuiBadge-badge': {
-                    background: 'purple',
+
+                    background: '#10a37f',
+
                   },
                 }}
               >

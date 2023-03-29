@@ -110,6 +110,7 @@ export default function Account({ session }) {
           className="button primary block"
           onClick={() => updateProfile({ username, avatar_url })}
           disabled={loading}
+          sx={{color: 'white'}}
         >
           {loading ? 'Loading ...' : 'SUBMIT'}
         </Button>
@@ -129,9 +130,9 @@ export default function Account({ session }) {
           {' '}
           Upload or Change Profile Picture
         </Typography>
-        <Button variant="outlined" sx={{ position: 'relative', right: '29px' }}>
+        <Button variant="outlined" sx={{ color: 'white', position: 'relative', right: '29px' }}>
           <Avatar
-            styles={{ backgroundColor: 'blue' }}
+            styles={{ backgroundColor: 'white' }}
             uid={user.id}
             url={avatar_url}
             size={250}

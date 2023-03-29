@@ -53,6 +53,70 @@
   animation: glitch 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both 5;
 }
 
+.dialogBox {
+  border: 10px inset black !important;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 30px;
+}
+
+.dialogTitle {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #ff7b00;
+  text-align: center;
+}
+
+.nutrtionFacts {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.perServing {
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 10px solid #333;
+  display: flex;
+  justify-content: space-between;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.calories {
+  font-weight: bold;
+  border-bottom: 5px solid #333;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.fat,
+.carbs,
+.protein {
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.fat,
+.carbs {
+  border-bottom: 1px solid #333;
+}
+
+.protein {
+  border-bottom: 10px solid #333;
+}
+
+.nutritionImg {
+  display: block;
+  margin: auto;
+  width: 120px;
+}
+
 .ingredientItem {
   display: flex;
   flex-direction: row;
