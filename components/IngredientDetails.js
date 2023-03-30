@@ -106,7 +106,7 @@ const IngredientDetails = (props) => {
   id='alert-dialog-slide-description'
 >
   <Box>
-    <Box className={styles.nutrtionFacts}>Nutrition Facts</Box>
+    <Box className={styles.nutritionFacts}>Nutrition Facts</Box>
     <Box className={styles.perServing}><span className={styles.fatLabel}>per serving:{" "}</span>
       {props.item.suggestion[0].amount + props.item.suggestion[0].unit}</Box>
     <Box className={styles.calories}>

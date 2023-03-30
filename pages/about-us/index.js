@@ -1,4 +1,4 @@
-import styles from '../../styles/aboutPage.module.css';
+import style from '../../styles/aboutPage.module.css';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -16,22 +16,48 @@ const Item = styled(Paper)(({ theme }) => ({
 const AboutPage = () => {
   return (
     <>
-      <Box>
-        <Typography m={5} p={2} align="center" variant="h2">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignContent: 'center',
+        }}
+      >
+        <Typography
+          m={5}
+          p={2}
+          align="center"
+          variant="h2"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center',
+            width: '80%',
+          }}
+        >
           Thank you for visiting our website! <br></br>
           <div style={{ height: '20px' }}></div>
-          <Typography>
+          <Typography
+            sx={{
+              width: '80%',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
             After three weeks of coding day and night, our team developed the
-            first version of AI Cookbook as a showcase of our skills <br></br>
-            after attending FullStack Academy. We'll continue making updates
-            until the near future, but we do hope you enjoy our site.<br></br>
-            We've dedicated this page to pull back the curtain and show how the
-            project was made!
+            first version of AI Cookbook as a showcase of our skills after
+            attending FullStack Academy. We'll continue making updates until the
+            near future, but we do hope you enjoy our site. We've dedicated this
+            page to pull back the curtain and show how the project was made!
           </Typography>
           <div style={{ height: '20px' }}></div>
         </Typography>
       </Box>
-      <div className={styles.parallax}></div>
+      <div className={style.parallax}></div>
 
       <Box height={400}>
         <Typography align="center" variant="h2" mt={2}>
@@ -55,7 +81,7 @@ const AboutPage = () => {
           culpa qui officia deserunt mollit anim id est laborum.
         </Typography>
       </Box>
-      <div className={styles.parallax2}></div>
+      <div className={style.parallax2}></div>
       <div style={{ margin: '20px' }}>
         <div style={{ height: '20px' }}></div>
         <Typography align="center" variant="h2">
@@ -110,7 +136,7 @@ const AboutPage = () => {
           </Grid>
         </Box>
       </div>
-      <div className={styles.parallax3}></div>
+      <div className={style.parallax3}></div>
     </>
   );
 };

@@ -68,7 +68,7 @@
   text-align: center;
 }
 
-.nutrtionFacts {
+.nutritionFacts {
   font-size: 30px;
   font-weight: bold;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -155,7 +155,15 @@
 }
 }
 
-
+.AboutUs{
+    font-family: Roboto, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3vw;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    margin: 0;
+    letter-spacing: 1px;
+}
 
 @keyframes glitch {
   0% {

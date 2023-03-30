@@ -195,9 +195,7 @@ let refreshRate = 2000
                 display: 'flex',
               }}
             >
-              <Link style={{textDecoration: 'none', color: 'white'}} href='about-us'>
-                <h1>About Us</h1>
-              </Link>
+            
 
               <AccountSettings />
             </Box>

@@ -1,6 +1,7 @@
 .parallax {
     position: relative;
     bottom: 50px;
+    width: 100vw;
     /* The image used */
     background-image: url(".././public/images/pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg");
 
@@ -73,3 +74,4 @@
     background-color: black;
     font-size: medium;
 }
+
