@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getVoiceIdForPersonality } from './voiceUtils';
 
 export function useSelectedPersonality() {
-  const [selectedPersonality, setSelectedPersonality] = useState('Normal AI');
+  const [selectedPersonality, setSelectedPersonality] = useState('AI');
 
   useEffect(() => {
     const storedPersonality = localStorage.getItem('selectedPersonality');

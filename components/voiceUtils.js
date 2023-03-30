@@ -8,9 +8,9 @@ export function getVoiceIdForPersonality(selectedPersonality) {
         return 'I9J5r9wr9Y0Ta0Q1jhgh';
         case 'Ariana Grande':
         return 'Nzp6zvMY9uj6oEsPVb5W';
-        case ' Normal AI':
-        return 'vlmcxmNL61bAsaoq86gk';
+        case ' AI':
+        return 'EXAVITQu4vr4xnSDxMaL';
         default:
-        return 'vlmcxmNL61bAsaoq86gk';
+        return 'EXAVITQu4vr4xnSDxMaL';
     }
   }
