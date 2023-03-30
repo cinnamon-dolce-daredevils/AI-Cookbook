@@ -67,9 +67,8 @@ const AboutPage = () => {
 					Meet The Devs
 				</Typography>
 				<br/>
-        {DevInfo.map((dev)=>{
-          //simpleGrow is in components/Dev.js
-          return <SimpleGrow name={dev.name} description={dev.description} linkedIn={dev.linkedIn} gitHub={dev.GitHub}/>
+        {DevInfo.map((dev, idx)=>{
+          return <SimpleGrow key={idx} name={dev.name} description={dev.description} linkedIn={dev.linkedIn} gitHub={dev.GitHub}/>
         })}
       </Box>
       <div className={style.parallax2}></div>
