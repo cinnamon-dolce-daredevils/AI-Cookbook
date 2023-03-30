@@ -16,14 +16,11 @@ import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
 import Badge from '@mui/material/Badge';
 import spoonImage from '../../public/images/spoon.png'
 import Image from 'next/image';
-
-
-
 import AccountSettings from './AccountSettings';
-const drawerWidth = 240;
- import { useSession } from "@supabase/auth-helpers-react";
- import { createClient } from "@supabase/supabase-js";
+import { useSession } from "@supabase/auth-helpers-react";
+import { createClient } from "@supabase/supabase-js";
 import IngredientDetails from '../IngredientDetails';
+const drawerWidth = 240;
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY

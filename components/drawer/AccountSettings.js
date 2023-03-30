@@ -25,16 +25,21 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControl from '@mui/material/FormControl';
 import { useMute } from '../MuteContext';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useSession } from '@supabase/auth-helpers-react';
+
+
+
 export default function AccountMenu() {
   const theme = useTheme();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isMuted, setIsMuted } = useMute();
+  const session = useSession();
   const personalityChangeListeners = new Set();
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const handleSettingsOpen = () => { setSettingsOpen(true); };
   const handleSettingsClose = () => { setSettingsOpen(false); };
   const [selectedPersonality, setSelectedPersonality] = React.useState('normalAI');
-  const { isMuted, setIsMuted } = useMute();
 
   const storePersonalityInLocalStorage = (selectedPersonality) => {
     localStorage.setItem('selectedPersonality', selectedPersonality);
@@ -140,16 +145,17 @@ export default function AccountMenu() {
             <div style={{ paddingLeft: '10px' }}>Profile </div>
           </MenuItem>
         </Link>
+        {session ?
         <MenuItem
           sx={{ color: theme.palette.text.primary }}
           onClick={handleClose}
         >
           <Link
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-            }}
-            href={'/favorites'}
+          style={{
+            color: 'white',
+            textDecoration: 'none',
+          }}
+          href={'/favorites'}
           >
             <GradeIcon sx={{ color: 'white', mr: 1 }} />
             <span style={{ position: 'relative', bottom: '5px' }}>
@@ -157,6 +163,7 @@ export default function AccountMenu() {
             </span>
           </Link>
         </MenuItem>
+         : null }
         <MenuItem
           sx={{ color: theme.palette.text.primary }}
           onClick={handleClose}
