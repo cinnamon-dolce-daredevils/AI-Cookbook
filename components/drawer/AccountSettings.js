@@ -44,8 +44,7 @@ export default function AccountMenu() {
   const [selectedPersonality, setSelectedPersonality] = React.useState("AI");
   const [tempSelectedPersonality, setTempSelectedPersonality] =
   React.useState(localStorage.getItem("selectedPersonality") || "AI");
-
-  const { isMuted, setIsMuted } = useMute();
+  
 
   const storePersonalityInLocalStorage = (selectedPersonality) => {
     localStorage.setItem("selectedPersonality", selectedPersonality);
