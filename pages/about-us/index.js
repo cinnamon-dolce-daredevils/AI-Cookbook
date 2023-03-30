@@ -143,6 +143,6 @@ const AboutPage = () => {
 			<div className={style.parallax3}></div>
 		</>
 	);
-};
+                  }
 
-export default AboutPage;
+export default AboutPage

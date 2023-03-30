@@ -8,10 +8,8 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Button } from '@mui/material';
 import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
@@ -195,7 +193,7 @@ let refreshRate = 2000
                 display: 'flex',
               }}
             >
-            
+
 
               <AccountSettings />
             </Box>
