@@ -16,7 +16,7 @@ import Link from 'next/link';
 import styles from '../../styles/leftdrawer.module.css';
 import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
 import Badge from '@mui/material/Badge';
-import spoonImage from '../../public/images/spoon.png'
+import pizzamans from '../../public/images/pizzamans.png'
 import Image from 'next/image';
 
 
@@ -210,6 +210,7 @@ let refreshRate = 2000
                 width: drawerWidth,
                 boxSizing: 'border-box',
                 backgroundColor: theme.palette.secondary.main,
+                filter: 'drop-shadow(5px 5px 19px rgba(0, 0, 0, 1))'
               },
             }}
             variant="persistent"
@@ -236,7 +237,7 @@ let refreshRate = 2000
             </List>
             <ImageContainer>
             {pantryItems.length <= 3 && (
-    <Image src={spoonImage} alt="Spoon" style={{ width: '100%', height: 'auto' }} />
+    <Image src={pizzamans} alt="Click on an ingredient to see it's nutrional facts!" style={{ width: '90%', height: 'auto', margin: 20, filter: 'drop-shadow(5px 5px 9px rgba(0, 0, 0, 1))' }} />
             )}
   </ImageContainer>
           </Drawer>
