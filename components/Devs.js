@@ -1,33 +1,47 @@
 import React from 'react'
 import styles from '../styles/aboutPage.module.css'
+import avatar from'../public/images/ryanpic.png'
 import Box from "@mui/material/Box";
 import Grow from "@mui/material/Grow";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, Typography } from '@mui/material';
+import { Avatar, Link, Typography } from '@mui/material';
+
 
 
 
 
 export default function SimpleGrow(props) {
 	const [checked, setChecked] = React.useState(false);
-    const {name, description, linkedIn, gitHub} = props
+    const {name, description, linkedIn, gitHub, avatar} = props
     
 	const handleClick = () => {
 		setChecked((prev) => !prev);
 	};
 
 	return (
-		<Box sx={{ height: 'auto'}}>
+		<Box sx={{ height: "auto"}}>
 			<Box
-				sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					cursor: "pointer",
+					flexDirection: "column",
+				}}
 				onClick={handleClick}
 			>
+				<Avatar alt={name} src={avatar} sx={{ width: 100, height: 100 }} />
 				<Typography variant='h5' sx={{ mr: 1 }}>
 					{name}
 				</Typography>
 			</Box>
-			<Box sx={checked?{display: "flex", flexDirection: "column" }:{display:'none'}}>
+			<Box
+				sx={
+					checked
+						? { display: "flex", flexDirection: "column" }
+						: { display: "none" }
+				}
+			>
 				<Grow in={checked}>
 					<Typography variant='body1' sx={{ p: 2 }}>
 						{description}
@@ -39,13 +53,12 @@ export default function SimpleGrow(props) {
 					style={{ transformOrigin: "0 0 0" }}
 					{...(checked ? { timeout: 1000 } : {})}
 				>
-					<Typography variant='body1' sx={{ p: 2 }}>
+					<Typography variant='body1' sx={{ p: 2, display:'flex', justifyContent:'space-between' }}>
 						<Link href={linkedIn}>
-							<FontAwesomeIcon icon={faLinkedin} />
-						</Link>
-						{" "}
+							<FontAwesomeIcon icon={faLinkedin} style={{ fontSize: "2em" }} />
+						</Link>{" "}
 						<Link href={gitHub}>
-							<FontAwesomeIcon icon={faGithub} />
+							<FontAwesomeIcon icon={faGithub} style={{ fontSize: "2em" }} />
 						</Link>
 					</Typography>
 				</Grow>
