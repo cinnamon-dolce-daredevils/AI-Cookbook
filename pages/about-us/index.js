@@ -4,7 +4,9 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Typography } from '@mui/material';
+import { FormControlLabel, Switch, Typography } from '@mui/material';
+import SimpleGrow from '@/components/Devs';
+import { DevInfo } from '@/script/devInfo';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
   ...theme.typography.body2,
@@ -15,6 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const AboutPage = () => {
   return (
+
     <>
       <Box
         sx={{
@@ -59,27 +62,16 @@ const AboutPage = () => {
       </Box>
       <div className={style.parallax}></div>
 
-      <Box height={400}>
-        <Typography align="center" variant="h2" mt={2}>
-          Meet The Devs
-        </Typography>
+			<Box height={1000}>
+				<Typography align='center' variant='h2' mt={2}>
+					Meet The Devs
+				</Typography>
 
-        <br></br>
-        <Typography variant="p" p={2}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          <br></br>
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          <br></br>
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          <br></br>
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          <br></br>
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          <br></br>
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          <br></br>
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Typography>
+
+				<br/>
+        {DevInfo.map((dev)=>{
+          return <SimpleGrow name={dev.name} description={dev.description} linkedIn={dev.linkedIn} gitHub={dev.GitHub}/>
+        })}
       </Box>
       <div className={style.parallax2}></div>
       <div style={{ margin: '20px' }}>
