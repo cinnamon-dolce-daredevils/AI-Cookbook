@@ -87,17 +87,12 @@ export default function Account({ session }) {
   return (
     <FormControl>
       <label> Account Email</label>
-      <TextField
-        id="email"
-        type="text"
-        value={session.user.email}
-        disabled
-      />
+      <TextField id="email" type="text" value={session.user.email} disabled />
       <br />
       <br></br>
       <label htmlFor="username">Update Username</label>
       <Input
-        sx={{color: 'black'}}
+        sx={{ color: 'gray'}}
         label="goal description"
         id="username"
         type="text"
@@ -107,10 +102,10 @@ export default function Account({ session }) {
 
       <div>
         <Button
-          className="button primary block"
+          variant="contained"
           onClick={() => updateProfile({ username, avatar_url })}
           disabled={loading}
-          sx={{color: 'white'}}
+          sx={{ color: 'white', mt:1, }}
         >
           {loading ? 'Loading ...' : 'SUBMIT'}
         </Button>
@@ -130,7 +125,10 @@ export default function Account({ session }) {
           {' '}
           Upload or Change Profile Picture
         </Typography>
-        <Button variant="outlined" sx={{ color: 'white', position: 'relative', right: '29px' }}>
+        <Button
+          variant="outlined"
+          sx={{ color: 'white', position: 'relative', right: '29px' }}
+        >
           <Avatar
             styles={{ backgroundColor: 'white' }}
             uid={user.id}
