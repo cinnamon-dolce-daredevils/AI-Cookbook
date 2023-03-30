@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import styles from "../../styles/index.module.css";
 import { Button } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import { useMute } from "@/components/MuteContext";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -14,6 +15,7 @@ const supabase = createClient(
 const FavoritesPage = (userId) => {
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavorite, setIsFavorite] = useState(true);
+  const { isMuted } = useMute();
   const session = useSession();
   if(session){
     userId = session.user.id
@@ -33,6 +35,10 @@ const FavoritesPage = (userId) => {
     fetchFavorites(userId);
   }, [userId]);
 
+  function playAudio(audioPath) {
+    const audio = new Audio(audioPath);
+    audio.play();
+  } 
 
   const addToFavorites = async (selectedRecipe, userId) => {
 		try {
@@ -48,7 +54,8 @@ const FavoritesPage = (userId) => {
   const toggleFavorite = async (selectedRecipe) => {
 		try {
 			if (isFavorite) {
-        playAudio('/audio/Short.m4a');
+        if (!isMuted) {
+        playAudio('/audio/Short.m4a');}
         const { data, error } = await supabase
         .from("favorites")
         .delete()
@@ -56,9 +63,10 @@ const FavoritesPage = (userId) => {
 				if (error) throw error;
 			} else {
 				await addToFavorites(selectedRecipe, userId);
+        if (!isMuted) {
+          playAudio('/audio/New Recording.m4a');}
 			}
 			setIsFavorite(!isFavorite);
-                playAudio('/audio/New Recording.m4a');
 
 		} catch (error) {
 			console.log("Error toggling favorite:", error.message);
