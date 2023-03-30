@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const AboutPage = () => {
     function SlideIn(props) {
-			const { children, window, delay = 0 } = props;
+			const { children, window, delay = 0 , direction = 'right'} = props;
 			const trigger = useScrollTrigger({
 				target: window && window(),
 				disableHysteresis: true,
@@ -27,7 +27,7 @@ const AboutPage = () => {
 
 			return (
 				<Slide
-					direction='right'
+					direction={direction}
 					in={trigger}
 					style={{ transitionDelay: `${delay}ms` }}
 				>
