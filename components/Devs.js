@@ -1,11 +1,10 @@
 import React from 'react'
-
+import styles from '../styles/aboutPage.module.css'
 import Box from "@mui/material/Box";
-import Switch from "@mui/material/Switch";
-import Paper from "@mui/material/Paper";
 import Grow from "@mui/material/Grow";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { Typography } from '@mui/material';
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, Typography } from '@mui/material';
 
 
 
@@ -19,7 +18,7 @@ export default function SimpleGrow(props) {
 	};
 
 	return (
-		<Box sx={{ height: 180 }}>
+		<Box sx={{ height: 'auto'}}>
 			<Box
 				sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
 				onClick={handleClick}
@@ -28,7 +27,7 @@ export default function SimpleGrow(props) {
 					{name}
 				</Typography>
 			</Box>
-			<Box sx={{ display: "flex" , flexDirection:'column'}}>
+			<Box sx={checked?{display: "flex", flexDirection: "column" }:{display:'none'}}>
 				<Grow in={checked}>
 					<Typography variant='body1' sx={{ p: 2 }}>
 						{description}
@@ -41,9 +40,13 @@ export default function SimpleGrow(props) {
 					{...(checked ? { timeout: 1000 } : {})}
 				>
 					<Typography variant='body1' sx={{ p: 2 }}>
-						LinkedinIcon: {linkedIn}
-                        <br/>
-                        GitHubIcon: {gitHub}
+						<Link href={linkedIn}>
+							<FontAwesomeIcon icon={faLinkedin} />
+						</Link>
+						{" "}
+						<Link href={gitHub}>
+							<FontAwesomeIcon icon={faGithub} />
+						</Link>
 					</Typography>
 				</Grow>
 			</Box>
