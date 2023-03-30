@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import { FormControlLabel, Switch, Typography } from '@mui/material';
 import SimpleGrow from '@/components/Devs';
 import { DevInfo } from '@/script/devInfo';
+import TechCard from '@/components/TechCard';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
   ...theme.typography.body2,
@@ -63,27 +64,28 @@ const AboutPage = () => {
       
 			<div className={style.parallax}></div>
 
-			<Box sx={{ minHeight: 500}}>
+			<Box sx={{ minHeight: 700}}>
 				<Typography align='center' variant='h2' my={2}>
 					Meet The Devs
 				</Typography>
 				<br />
-        <Box sx={{overflow:'auto', display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
+        <Grid container spacing={2}  sx={{overflow:'auto', display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
 				{DevInfo.map((dev) => {
 					//simpleGrow is in components/Dev.js
-					return (
-							<SimpleGrow
-								sx={{ height: "100%" , pb: '10px' }}
-								name={dev.name}
-								description={dev.description}
-								linkedIn={dev.linkedIn}
-								gitHub={dev.GitHub}
-                avatar = {dev.avatar}
-
-							/>
-					);
+          return (
+            <Grid item xs={6} md={ 3}>
+              <SimpleGrow
+                sx={{ height: '130%', pb: '10px' }}
+                name={dev.name}
+                description={dev.description}
+                linkedIn={dev.linkedIn}
+                gitHub={dev.GitHub}
+                avatar={dev.avatar}
+              />
+            </Grid>
+          );
 				})}
-        </Box>
+        </Grid>
 			</Box>
 			<div className={style.parallax2}></div>
 			<div style={{ margin: "20px" }}>
@@ -103,29 +105,7 @@ const AboutPage = () => {
 				>
 					<Grid container spacing={1}>
 						<Grid item xs={11} md={6}>
-							<Item>
-								<div style={{ padding: "40px" }}>
-									<Box
-										sx={{
-											position: "absolute",
-											backgroundColor: "blue",
-											height: "100px",
-										}}
-									>
-										Image will be here
-									</Box>
-									<Typography mt={5}> OpenAI</Typography>
-								</div>
-								<div style={{ height: "50px" }}></div>
-								<Typography>
-									OpenAI's API was utilized to generate personalized recipes
-									<br />
-									based on user-specified ingredients, leveraging its natural
-									<br />
-									language processing capabilities to create well-balanced meals
-									that incorporated have multiple lines
-								</Typography>
-							</Item>
+							<TechCard/>
 						</Grid>
 						<Grid item xs={11} md={6}>
 							<Item>
