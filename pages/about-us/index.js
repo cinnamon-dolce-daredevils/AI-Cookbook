@@ -66,8 +66,6 @@ const AboutPage = () => {
 				<Typography align='center' variant='h2' mt={2}>
 					Meet The Devs
 				</Typography>
-
-
 				<br/>
         {DevInfo.map((dev, idx)=>{
           return <SimpleGrow key={idx} name={dev.name} description={dev.description} linkedIn={dev.linkedIn} gitHub={dev.GitHub}/>
