@@ -24,7 +24,7 @@ import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControl from '@mui/material/FormControl';
 import { useMute } from '../MuteContext';
-
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 export default function AccountMenu() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -136,11 +136,12 @@ export default function AccountMenu() {
       >
         <Link style={{ textDecoration: 'none' }} href="/profile">
           <MenuItem sx={{ color: 'white', mr: 'auto' }} onClick={handleClose}>
-            <Avatar className="Menutext" /> <div style={{paddingLeft: '10px'}}>Profile </div>
+            <Avatar className="Menutext" />{' '}
+            <div style={{ paddingLeft: '10px' }}>Profile </div>
           </MenuItem>
         </Link>
         <MenuItem
-          sx={{ color: theme.palette.text.primary, mr: 'auto' }}
+          sx={{ color: theme.palette.text.primary }}
           onClick={handleClose}
         >
           <Link
@@ -151,7 +152,27 @@ export default function AccountMenu() {
             href={'/favorites'}
           >
             <GradeIcon sx={{ color: 'white', mr: 1 }} />
-            Favorites
+            <span style={{ position: 'relative', bottom: '5px' }}>
+              Favorites
+            </span>
+          </Link>
+        </MenuItem>
+        <MenuItem
+          sx={{ color: theme.palette.text.primary }}
+          onClick={handleClose}
+        >
+          <Link
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+            }}
+            href={'/about-us'}
+          >
+            <InfoOutlinedIcon sx={{ color: 'white', mr: 1 }} />
+            <span style={{ position: 'relative', bottom: '5px' }}>
+              {' '}
+              About Us
+            </span>
           </Link>
         </MenuItem>
         <Divider />
@@ -216,9 +237,7 @@ export default function AccountMenu() {
                 <FormControlLabel
                   value="Spongebob"
                   control={<Radio />}
-
                   label="Spongebob"
-
                   sx={{ color: 'white' }}
                 />
                 <FormControlLabel
@@ -236,14 +255,16 @@ export default function AccountMenu() {
               </RadioGroup>
             </form>
             <FormControl component="fieldset">
-  <FormGroup>
-    <FormControlLabel
-      control={<Switch checked={isMuted} onChange={handleMuteChange} />}
-      label="Mute Sounds"
-      sx={{ color: 'white' }}
-    />
-  </FormGroup>
-</FormControl>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch checked={isMuted} onChange={handleMuteChange} />
+                  }
+                  label="Mute Sounds"
+                  sx={{ color: 'white' }}
+                />
+              </FormGroup>
+            </FormControl>
           </DialogContent>
         </Dialog>
       </Menu>
