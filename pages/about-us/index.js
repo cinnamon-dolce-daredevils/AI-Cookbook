@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { FormControlLabel, Switch, Typography } from '@mui/material';
+import { FormControlLabel, Slide, Switch, Typography, useScrollTrigger } from '@mui/material';
 import SimpleGrow from '@/components/Devs';
 import { DevInfo } from '@/script/devInfo';
 import TechCard from '@/components/TechCard';
@@ -17,6 +17,24 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const AboutPage = () => {
+    function SlideIn(props) {
+			const { children, window, delay = 0 } = props;
+			const trigger = useScrollTrigger({
+				target: window && window(),
+				disableHysteresis: true,
+				threshold: 0,
+			});
+
+			return (
+				<Slide
+					direction='right'
+					in={trigger}
+					style={{ transitionDelay: `${delay}ms` }}
+				>
+					{children}
+				</Slide>
+			);
+		}
   return (
 		<>
 			<Box
@@ -64,13 +82,19 @@ const AboutPage = () => {
       
 			<div className={style.parallax}></div>
 
+
 			<Box sx={{ minHeight: 700}}>
+        <SlideIn delay={1000}>
+
 				<Typography align='center' variant='h2' my={2}>
 					Meet The Devs
 				</Typography>
+        </SlideIn>
 				<br />
+
+        <SlideIn delay={1500}>
         <Grid container spacing={2}  sx={{overflow:'auto', display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
-				{DevInfo.map((dev) => {
+				{DevInfo.map((dev, index) => {
 					//simpleGrow is in components/Dev.js
           return (
             <Grid item xs={6} md={ 3}>
@@ -86,6 +110,8 @@ const AboutPage = () => {
           );
 				})}
         </Grid>
+        </SlideIn>
+
 			</Box>
 			<div className={style.parallax2}></div>
 			<div style={{ margin: "20px" }}>
