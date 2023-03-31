@@ -17,6 +17,7 @@ import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
 import Badge from '@mui/material/Badge';
 import pizzamans from '../../public/images/pizzamans.png'
 import Image from 'next/image';
+import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
 import AccountSettings from './AccountSettings';
 import { useSession } from "@supabase/auth-helpers-react";
 import { createClient } from "@supabase/supabase-js";
