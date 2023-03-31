@@ -18,7 +18,7 @@ import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
 import Badge from '@mui/material/Badge';
 import pizzamans from '../../public/images/pizzamans.png'
 import Image from 'next/image';
-
+import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
 
 
 import AccountSettings from './AccountSettings';
@@ -127,13 +127,34 @@ let refreshRate = 2000
 
 
 	if (error) {
-		return <div>Error loading suggestions</div>;
-	}
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "30vh",
+          background: `url(${dancingLoad.src}) no-repeat center`,
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+        }}
+      />
+    );
+  }
 
-	if (!data) {
-		return <div>Loading suggestions...</div>;
-	}
-
+  if (!data) {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "30vh",
+          background: `url(${dancingLoad.src}) no-repeat center`,
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+        }}
+      />
+    );
+  }
+  
+  
 
   return (
     <>
