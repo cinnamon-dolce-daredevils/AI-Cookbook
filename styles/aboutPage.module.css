@@ -1,5 +1,4 @@
 .parallax {
-  width: auto;
   position: relative;
   bottom: 50px;
   /* The image used */
@@ -16,7 +15,6 @@
 }
 
 .parallax2 {
-  width: auto;
   position: relative;
   bottom: 50px;
   /* The image used */
@@ -33,7 +31,6 @@
 }
 
 .parallax3 {
-  width: auto;
   position: relative;
   bottom: 50px;
   /* The image used */
