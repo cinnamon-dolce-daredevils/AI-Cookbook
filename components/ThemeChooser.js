@@ -21,7 +21,7 @@ const ThemeChooser = () => {
   return (
     <Button
       variant="contained"
-      sx={{ color: theme.palette.text.primary }}
+      sx={{ color: 'white' }}
       onClick={handleToggle}
       key={buttonKey}
     >
