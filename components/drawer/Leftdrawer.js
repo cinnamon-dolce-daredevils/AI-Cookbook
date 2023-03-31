@@ -120,15 +120,33 @@ let refreshRate = 2000
 		setPantryItems(data.data)}
 	}, [data]);
 
-
 	if (error) {
-		return <div>Error loading suggestions</div>;
-	}
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "30vh",
+          background: `url(${dancingLoad.src}) no-repeat center`,
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+        }}
+      />
+    );
+  }
 
-	if (!data) {
-		return <div>Loading suggestions...</div>;
-	}
-
+  if (!data) {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "30vh",
+          background: `url(${dancingLoad.src}) no-repeat center`,
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+        }}
+      />
+    );
+  }
 
   return (
     <>
