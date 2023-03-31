@@ -11,12 +11,12 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Link from 'next/link';
-import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
 import styles from '../../styles/leftdrawer.module.css';
 import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
 import Badge from '@mui/material/Badge';
 import pizzamans from '../../public/images/pizzamans.png'
 import Image from 'next/image';
+import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
 import AccountSettings from './AccountSettings';
 import { useSession } from "@supabase/auth-helpers-react";
 import { createClient } from "@supabase/supabase-js";
@@ -232,7 +232,7 @@ let refreshRate = 2000
             open={open}
           >
             <DrawerHeader>
-              <div style={{ color: 'white' }}> My Pantry </div>
+              <div sx={{ color: theme.palette.mode==='light'?'white':'black' }}> My Pantry </div>
               <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? (
                   <ChevronLeftIcon />

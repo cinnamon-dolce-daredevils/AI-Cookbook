@@ -27,54 +27,52 @@ const Home = () => {
 
 
   return (
-		<>
-			<div className={styles.container}>
-				{theme.palette.mode === "dark" ? (
-					<img src='/images/AICB_LogoW.png' className={styles.icon} />
-				) : (
-					<img src='/images/AICB_Logo.png' className={styles.icon} />
-				)}
-				{trivia ? (
-					<Container sx={{ p: 1, m: 1, textAlign: "center" }}>
-						<Typography>{trivia}</Typography>
-					</Container>
-				) : null}
-				{session ? (
-					<Link
-						style={{ textDecoration: "none", color: "white" }}
-						href={"/ingredients-recipes"}
-					>
-						<Button
-							sx={{
-								backgroundColor: theme.palette.secondary.main,
-								color: theme.palette.common.white,
-								mt: 3,
-							}}
-						>
-							Add Ingredients
-						</Button>
-					</Link>
-				) : (
-					<>
-						<h3> Please Sign up or Login first!</h3>
-						<Link style={{ textDecoration: "none" }} href={"/profile"}>
-							<Button
-								sx={{
-									color: "white",
-									backgroundColor: theme.palette.secondary.main,
-									textDecoration: "none",
-								}}
-								variant='contained'
-							>
-								{" "}
-								Signup/Login
-							</Button>
-						</Link>
-					</>
-				)}
-			</div>
-		</>
-	);
+    <>
+      <div className={styles.container}>
+        <img src="/images/AICB_LogG.png" className={styles.icon} />
+        {session ? (
+          <Link
+            style={{ textDecoration: 'none', color: 'white' }}
+            href={'/ingredients-recipes'}
+          >
+            <Button
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                color: theme.palette.common.white, mt: 3
+              }}
+            >
+              Add Ingredients
+            </Button>
+          </Link>
+        ) : (
+          <>
+            <h3> Please Sign up or Login first!</h3>
+            <Link style={{ textDecoration: 'none' }} href={'/profile'}>
+              <Button
+                sx={{
+                  color: 'white',
+                  backgroundColor: theme.palette.secondary.main,
+                  textDecoration: 'none',
+                }}
+                variant="contained"
+              >
+                {' '}
+                Signup/Login
+              </Button>
+            </Link>
+          </>
+        )}
+      </div>
+      <div className={styles.triviaBox}>
+      <Container className={styles.triviaContainer}>
+        <img src="/images/cereal.png" className={styles.cereal} />
+    {trivia ? (
+        <p className={styles.trivia}>{trivia}</p>
+        ) : null}
+    </Container>
+  </div>
+    </>
+  );
 }
 
 export default Home;
