@@ -100,14 +100,6 @@ const AboutPage = () => {
 				<br />
 
 
-      <Box sx={{ minHeight: 700 }}>
-        <SlideIn delay={200}>
-          <Typography align="center" variant="h2" my={2}>
-            Meet The Devs
-          </Typography>
-        </SlideIn>
-        <br />
-
 
         <Grid
           container
