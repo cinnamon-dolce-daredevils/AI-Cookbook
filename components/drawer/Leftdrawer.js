@@ -232,7 +232,7 @@ let refreshRate = 2000
             open={open}
           >
             <DrawerHeader>
-              <div style={{ color: 'white' }}> My Pantry </div>
+              <div sx={{ color: theme.palette.mode==='light'?'white':'black' }}> My Pantry </div>
               <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? (
                   <ChevronLeftIcon />
