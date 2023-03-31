@@ -23,22 +23,22 @@ export const lightMode = createTheme({
 });
 
 export const darkMode = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#000000',
-    },
-    secondary: {
-      main: '#2C3333',
-    },
-    background: {
-      default: '#343a40',
-    },
-    text: {
-      primary: '#fafafa',
-      secondary: '#eeeeee',
-      disabled: '#9e9e9e',
-      hint: '#eeeeee',
-    },
-  },
+	palette: {
+		mode: "dark",
+		primary: {
+			main: "#0d1116",
+		},
+		secondary: {
+			main: "#28a37f",
+		},
+		background: {
+			default: "#1e1e22",
+		},
+		text: {
+			primary: "#fafafa",
+			secondary: "#eeeeee",
+			disabled: "#9e9e9e",
+			hint: "#eeeeee",
+		},
+	},
 });

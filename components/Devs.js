@@ -6,12 +6,14 @@ import Grow from "@mui/material/Grow";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Link, Typography } from '@mui/material';
+import { useTheme } from '@emotion/react';
 
 
 
 
 
 export default function SimpleGrow(props) {
+    const theme = useTheme()
 	const [checked, setChecked] = React.useState(false);
     const {name, description, linkedIn, gitHub, avatar} = props
     
@@ -20,7 +22,7 @@ export default function SimpleGrow(props) {
 	};
 
 	return (
-		<Box sx={{ height: "auto"}}>
+		<Box sx={{ height: "auto" }}>
 			<Box
 				sx={{
 					display: "flex",
@@ -53,9 +55,16 @@ export default function SimpleGrow(props) {
 					style={{ transformOrigin: "0 0 0" }}
 					{...(checked ? { timeout: 1000 } : {})}
 				>
-					<Typography variant='body1' sx={{ p: 2, display:'flex', justifyContent:'space-between' }}>
+					<Typography
+						variant='body1'
+						sx={{ p: 2, display: "flex", justifyContent: "space-between" }}
+					>
 						<Link href={linkedIn}>
-							<FontAwesomeIcon icon={faLinkedin} style={{ fontSize: "2em" }} />
+							<FontAwesomeIcon
+								icon={faLinkedin}
+								style={ { fontSize: "2em", color: "white" }	
+								}
+							/>
 						</Link>{" "}
 						<Link href={gitHub}>
 							<FontAwesomeIcon icon={faGithub} style={{ fontSize: "2em" }} />

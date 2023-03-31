@@ -303,155 +303,167 @@ export default function IngredientRecipe({ data }) {
   }
 
   return (
-    <>
-      {/* <PersistentDrawerLeft ingredientNames={ingredientNames} /> */}
-      <div className={styles.body}>
-        <Head>
-          <title>AI Cookbook</title>
-          <link rel="icon" href="images/AICB_TopG-trimmy.png" />
-        </Head>
+		<>
+			{/* <PersistentDrawerLeft ingredientNames={ingredientNames} /> */}
+			<div className={styles.body}>
+				<Head>
+					<title>AI Cookbook</title>
+					<link rel='icon' href='images/AICB_TopG-trimmy.png' />
+				</Head>
 
-        <main className={styles.main}>
-        {ingredientsInput ? "" : <h3 style={{textAlign: 'center', color: "orange"}}>Please use the input box below to enter the food items you would like to use for your recipe!</h3>}
-          <p style={{textAlign: 'center', color: 'orange'}}><em>Generated recipes assume you have <b>Black Pepper, Table Salt, Cooking Oil, and Water</b></em></p>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              name="ingredients"
-              placeholder="Enter your ingredients"
-              value={ingredientsInput}
-              onChange={handleInputChange}
-            />
-            <Button
-              sx={{ color: theme.palette.common.white }}
-              variant="contained"
-              type="submit"
-            >
-              Generate Meals
-            </Button>
-            <div className={styles.audioControl} >
-            {audioUrl && !audioLoading && (
-              <audio controls src={audioUrl}>
-                Your browser does not support the audio element.
-              </audio>
-            )}
-            </div>
-          </form>
-          <ul className={styles.suggestions}>
-            {suggestions.map((suggestion, index) => (
-              <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
-                {suggestion.name}
-              </li>
-            ))}
-          </ul>
-        </main>
+				<main className={styles.main}>
+					{ingredientsInput ? (
+						""
+					) : (
+						<h3 style={{ textAlign: "center", }}>
+							Please use the input box below to enter the food items you would
+							like to use for your recipe!
+						</h3>
+					)}
+					<p style={{ textAlign: "center", color: "orange" }}>
+						<em>
+							Generated recipes assume you have{" "}
+							<b>Black Pepper, Table Salt, Cooking Oil, and Water</b>
+						</em>
+					</p>
+					<form onSubmit={onSubmit}>
+						<input
+							type='text'
+							name='ingredients'
+							placeholder='Enter your ingredients'
+							value={ingredientsInput}
+							onChange={handleInputChange}
+						/>
+						<Button
+							sx={{ color: theme.palette.common.white }}
+							variant='contained'
+							type='submit'
+						>
+							Generate Meals
+						</Button>
+						<div className={styles.audioControl}>
+							{audioUrl && !audioLoading && (
+								<audio controls src={audioUrl}>
+									Your browser does not support the audio element.
+								</audio>
+							)}
+						</div>
+					</form>
+					<ul className={styles.suggestions}>
+						{suggestions.map((suggestion, index) => (
+							<li key={index} onClick={() => handleSuggestionClick(suggestion)}>
+								{suggestion.name}
+							</li>
+						))}
+					</ul>
+				</main>
 
-        {expandedIngredient && (
-          <div className={styles.ingredientDetails} onClick={closeExpandedView}>
-            <p>{expandedIngredient.name}</p>
-            <img
-              src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
-              alt={expandedIngredient.name}
-            />
-            {expandedIngredient.nutrition &&
-              expandedIngredient.nutrition.nutrients && (
-                <>
-                  <p>
-                    Calories:{" "}
-                    {expandedIngredient.nutrition.nutrients.find(
-                      (n) => n.name === "Calories"
-                    )?.amount || "N/A"}{" "}
-                    kcal
-                  </p>
-                  <p>
-                    Carbs:{" "}
-                    {expandedIngredient.nutrition.nutrients.find(
-                      (n) => n.name === "Carbohydrates"
-                    )?.amount || "N/A"}{" "}
-                    g
-                  </p>
-                  <p>
-                    Fat:{" "}
-                    {expandedIngredient.nutrition.nutrients.find(
-                      (n) => n.name === "Fat"
-                    )?.amount || "N/A"}{" "}
-                    g
-                  </p>
-                  <p>
-                    Protein:{" "}
-                    {expandedIngredient.nutrition.nutrients.find(
-                      (n) => n.name === "Protein"
-                    )?.amount || "N/A"}{" "}
-                    g
-                  </p>
-                </>
-              )}
-          </div>
-        )}
+				{expandedIngredient && (
+					<div className={styles.ingredientDetails} onClick={closeExpandedView}>
+						<p>{expandedIngredient.name}</p>
+						<img
+							src={`https://spoonacular.com/cdn/ingredients_100x100/${expandedIngredient.image}`}
+							alt={expandedIngredient.name}
+						/>
+						{expandedIngredient.nutrition &&
+							expandedIngredient.nutrition.nutrients && (
+								<>
+									<p>
+										Calories:{" "}
+										{expandedIngredient.nutrition.nutrients.find(
+											(n) => n.name === "Calories"
+										)?.amount || "N/A"}{" "}
+										kcal
+									</p>
+									<p>
+										Carbs:{" "}
+										{expandedIngredient.nutrition.nutrients.find(
+											(n) => n.name === "Carbohydrates"
+										)?.amount || "N/A"}{" "}
+										g
+									</p>
+									<p>
+										Fat:{" "}
+										{expandedIngredient.nutrition.nutrients.find(
+											(n) => n.name === "Fat"
+										)?.amount || "N/A"}{" "}
+										g
+									</p>
+									<p>
+										Protein:{" "}
+										{expandedIngredient.nutrition.nutrients.find(
+											(n) => n.name === "Protein"
+										)?.amount || "N/A"}{" "}
+										g
+									</p>
+								</>
+							)}
+					</div>
+				)}
 
-        {result && typeof result === "string"}
+				{result && typeof result === "string"}
 
-        {result && !result.isLoading && typeof result === "string" && (
-          <div>
-            {/* mealList starts here */}
-            {result.split(", ").map((recipe, index) => (
-              <div
-                key={index}
-                className={styles.mealItem}
-                onClick={(event) => fetchRecipe(recipe, selectedPersonality)}
-              >
-                {recipe}
-              </div>
-            ))}
-          </div>
-        )}
+				{result && !result.isLoading && typeof result === "string" && (
+					<div>
+						{/* mealList starts here */}
+						{result.split(", ").map((recipe, index) => (
+							<div
+								key={index}
+								className={styles.mealItem}
+								onClick={(event) => fetchRecipe(recipe, selectedPersonality)}
+							>
+								{recipe}
+							</div>
+						))}
+					</div>
+				)}
 
-        {result && result.isLoading && (
-          <>
-            <div className={styles.loadingOverlay}>
-              <div className={styles.loading}>
-                <h1>Loading...</h1>
-                <img src="/images/fridge.gif" />
-              </div>
-            </div>
-          </>
-        )}
-        {selectedRecipe && (
-          <div className={styles.recipe}>
-            <FavoriteIcon
-              className={styles.favorite}
-              style={{
-                fontSize: "50px",
-                color: isFavorite ? "red" : "grey",
-              }}
-              onClick={() => {
-                toggleFavorite(selectedRecipe);
-              }}
-            />
-            {audioLoading && (
-              <div className={styles.loadingOverlay}>
-                <div className={styles.loading}>
-                  <h1>Loading audio...</h1>
-                  <img src="/images/speech.gif" />
-                </div>
-              </div>
-            )}
-            <div className={styles.audio}>
-              <RecordVoiceOverIcon
-                onClick={playSelectedRecipe}
-                style={{ color: "gray", fontSize: "55px", cursor: "pointer" }}
-              />
-            </div>
+				{result && result.isLoading && (
+					<>
+						<div className={styles.loadingOverlay}>
+							<div className={styles.loading}>
+								<h1>Loading...</h1>
+								<img src='/images/fridge.gif' />
+							</div>
+						</div>
+					</>
+				)}
+				{selectedRecipe && (
+					<div className={styles.recipe}>
+						<FavoriteIcon
+							className={styles.favorite}
+							style={{
+								fontSize: "50px",
+								color: isFavorite ? "red" : "grey",
+							}}
+							onClick={() => {
+								toggleFavorite(selectedRecipe);
+							}}
+						/>
+						{audioLoading && (
+							<div className={styles.loadingOverlay}>
+								<div className={styles.loading}>
+									<h1>Loading audio...</h1>
+									<img src='/images/speech.gif' />
+								</div>
+							</div>
+						)}
+						<div className={styles.audio}>
+							<RecordVoiceOverIcon
+								onClick={playSelectedRecipe}
+								style={{ color: "gray", fontSize: "55px", cursor: "pointer" }}
+							/>
+						</div>
 
-            {isFavorite && <p>Recipe added to favorites!</p>}
-            <ReactMarkdown>{selectedRecipe}</ReactMarkdown>
-          </div>
-        )}
-        {/* <Link style={{ textDecoration: 'none', color: isLightMode ? 'black' : 'white' }} href={'/'}>
+						{isFavorite && <p>Recipe added to favorites!</p>}
+						<ReactMarkdown>{selectedRecipe}</ReactMarkdown>
+					</div>
+				)}
+				{/* <Link style={{ textDecoration: 'none', color: isLightMode ? 'black' : 'white' }} href={'/'}>
 
           Return to Home
         </Link> */}
-      </div>
-    </>
-  );
+			</div>
+		</>
+	);
 }

@@ -20,7 +20,7 @@ const AboutPage = () => {
 			const { children, window, delay = 0 , direction = 'right'} = props;
 			const trigger = useScrollTrigger({
 				target: window && window(),
-				disableHysteresis: true,
+				disableHysteresis: false,
 				threshold: 0,
 			});
 
@@ -66,7 +66,7 @@ const AboutPage = () => {
 							width: "80%",
 							flexDirection: "column",
 							justifyContent: "center",
-              mb:5
+							mb: 5,
 						}}
 					>
 						After three weeks of coding day and night, our team developed the
@@ -77,41 +77,50 @@ const AboutPage = () => {
 					</Typography>
 					<div style={{ height: "20px" }}></div>
 				</Typography>
-			</Box> 
-      
+			</Box>
+
 			<div className={style.parallax}></div>
 
-			<Box sx={{ minHeight: 500}}>
-        <SlideIn delay={1000}>
-				<Typography align='center' variant='h2' my={2}>
-					Meet The Devs
-				</Typography>
-        </SlideIn>
+			<Box sx={{ minHeight: 500 }}>
+				<SlideIn delay={1000}>
+					<Typography align='center' variant='h2' my={2}>
+						Meet The Devs
+					</Typography>
+				</SlideIn>
 				<br />
-       <SlideIn delay={1500}>
-        <Box sx={{overflow:'auto', display: "flex", flexDirection: "row", justifyContent:"space-evenly"}}>
-				{DevInfo.map((dev, index) => {
-					//simpleGrow is in components/Dev.js
-					return (
-							<SimpleGrow
-								sx={{ height: "100%", pb: "10px" }}
-								name={dev.name}
-								description={dev.description}
-								linkedIn={dev.linkedIn}
-								gitHub={dev.GitHub}
-								avatar={dev.avatar}
-							/>
-					);
-				})}
-        </Box>
-        </SlideIn>
+				<SlideIn delay={1500}>
+					<Box
+						sx={{
+							overflow: "auto",
+							display: "flex",
+							flexDirection: "row",
+							justifyContent: "space-evenly",
+						}}
+					>
+						{DevInfo.map((dev, index) => {
+							//simpleGrow is in components/Dev.js
+							return (
+								<SimpleGrow
+									sx={{ height: "100%", pb: "10px" }}
+									name={dev.name}
+									description={dev.description}
+									linkedIn={dev.linkedIn}
+									gitHub={dev.GitHub}
+									avatar={dev.avatar}
+								/>
+							);
+						})}
+					</Box>
+				</SlideIn>
 			</Box>
 			<div className={style.parallax2}></div>
 			<div style={{ margin: "20px" }}>
 				<div style={{ height: "20px" }}></div>
-				<Typography align='center' variant='h2'>
-					Technology Used
-				</Typography>
+				<SlideIn direction='left' delay={5000}>
+					<Typography align='center' variant='h2'>
+						Technology Used
+					</Typography>
+				</SlideIn>
 				<div style={{ height: "30px" }}></div>
 				<Box
 					sx={{
