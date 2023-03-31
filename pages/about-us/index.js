@@ -15,6 +15,7 @@ import SimpleGrow from '@/components/Devs';
 import { DevInfo } from '@/script/devInfo';
 import TechCard from '@/components/TechCard';
 import { techInfo } from '../../script/techInfo';
+import { useState } from 'react';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
   ...theme.typography.body2,
@@ -24,6 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const AboutPage = () => {
+  let [bongoIsSeen, setBongoIsSeen] = useState(true);
   function SlideIn(props) {
     const { children, window, delay = 0, direction = 'right' } = props;
     const trigger = useScrollTrigger({
@@ -111,7 +113,12 @@ const AboutPage = () => {
           {DevInfo.map((dev, index) => {
             //simpleGrow is in components/Dev.js
             return (
-              <SlideIn key={index} delay={1500 + index * 500} mountOnEnter unmountOnExit>
+              <SlideIn
+                key={index}
+                delay={1500 + index * 500}
+                mountOnEnter
+                unmountOnExit
+              >
                 <Grid sx={{ mb: '100px' }} item xs={5} md={3}>
                   <SimpleGrow
                     sx={{ height: '50px' }}
@@ -140,7 +147,7 @@ const AboutPage = () => {
             display: 'flex',
             flexDirection: 'column',
             m: '2',
-            height: '500px',
+            height: 'auto + 50px',
           }}
         >
           <Grid container spacing={1}>
@@ -148,12 +155,20 @@ const AboutPage = () => {
               return (
                 <>
                   <Grid item xs={11} md={6} key={index}>
-                    <TechCard src={tech.image} name={tech.name} key={index} description={tech.description} />
+                    <TechCard
+                      src={tech.image}
+                      name={tech.name}
+                      key={index}
+                      description={tech.description}
+                    />
                   </Grid>
                 </>
               );
             })}
           </Grid>
+          <p className={style.bongos}>
+            🌴🪘🌴 Bongo sound board provided by FSA Mentor Tim Miller 🌴🪘🌴
+          </p>
         </Box>
       </div>
       <div className={style.parallax3}></div>
