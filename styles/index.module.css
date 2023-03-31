@@ -95,7 +95,7 @@
 .main input {
   font-size: 16px;
   line-height: 24px;
-  color: #101010;
+  /* color: #101010; */
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
 .main {
@@ -106,13 +106,13 @@
 }
 .icon {
   width: 300px;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 20));
+  /* filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 20)); */
 }
 .main h3 {
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #696969;
+  /* color: #696969; */
   margin: 16px 0 40px;
 }
 .main form {
@@ -227,6 +227,10 @@
   gap: 25px;
 }
 
+.recipe h1, .recipe h2, .recipe h3, .recipe p {
+  margin-left: 50px;
+}
+
 .fav {
   display: flex;
   flex-direction: column;
@@ -287,7 +291,7 @@
   justify-content: space-between;
   background-image: url('https://i.pinimg.com/originals/83/3d/9e/833d9e17c5997c7125d636c47c926a1f.jpg');
   padding: 20px;
-  width: 75%;
+  max-width: 75%;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
   border: 1px solid #b5b5b5;
@@ -383,7 +387,8 @@
 
 .suggestions li:hover {
   background-color: #10a37f;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.Hard-Boiled Eggs
+  15);
   cursor: pointer;
 }
 

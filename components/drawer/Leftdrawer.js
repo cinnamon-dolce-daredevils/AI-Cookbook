@@ -8,24 +8,21 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Button } from '@mui/material';
 import Link from 'next/link';
+import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
 import styles from '../../styles/leftdrawer.module.css';
 import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
 import Badge from '@mui/material/Badge';
 import pizzamans from '../../public/images/pizzamans.png'
 import Image from 'next/image';
 import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
-
-
 import AccountSettings from './AccountSettings';
-const drawerWidth = 240;
- import { useSession } from "@supabase/auth-helpers-react";
- import { createClient } from "@supabase/supabase-js";
+import { useSession } from "@supabase/auth-helpers-react";
+import { createClient } from "@supabase/supabase-js";
 import IngredientDetails from '../IngredientDetails';
+const drawerWidth = 240;
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -125,7 +122,6 @@ let refreshRate = 2000
 		setPantryItems(data.data)}
 	}, [data]);
 
-
 	if (error) {
     return (
       <div
@@ -153,8 +149,6 @@ let refreshRate = 2000
       />
     );
   }
-  
-  
 
   return (
     <>
@@ -216,7 +210,7 @@ let refreshRate = 2000
                 display: 'flex',
               }}
             >
-            
+
 
               <AccountSettings />
             </Box>

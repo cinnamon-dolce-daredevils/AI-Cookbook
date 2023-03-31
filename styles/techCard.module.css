@@ -1,0 +1,25 @@
+.techHeader{
+    display: flex;
+
+
+    text-align: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+.techName{
+    margin-left: 50px;
+}
+.techCard{
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+}
+
+@media only screen and (max-width: 1000px){
+    .techCard{
+        height: 300px;
+        width: auto;
+    }
+}
