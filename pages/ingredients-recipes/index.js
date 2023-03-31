@@ -320,7 +320,7 @@ export default function IngredientRecipe({ data }) {
 							like to use for your recipe!
 						</h3>
 					)}
-					<p style={{ textAlign: "center", color: "orange" }}>
+					<p style={{ textAlign: "center" }}>
 						<em>
 							Generated recipes assume you have{" "}
 							<b>Black Pepper, Table Salt, Cooking Oil, and Water</b>
