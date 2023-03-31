@@ -25,7 +25,7 @@ const ThemeChooser = () => {
       onClick={handleToggle}
       key={buttonKey}
     >
-      {isLightMode ? 'lightMode' : 'darkMode'}
+      {isLightMode ? 'darkMode' : 'lightMode'}
     </Button>
   );
 };
