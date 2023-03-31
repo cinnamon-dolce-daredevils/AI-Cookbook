@@ -8,6 +8,7 @@ import { FormControlLabel, Slide, Switch, Typography, useScrollTrigger } from '@
 import SimpleGrow from '@/components/Devs';
 import { DevInfo } from '@/script/devInfo';
 import TechCard from '@/components/TechCard';
+import { techInfo } from '../../script/techInfo';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
   ...theme.typography.body2,
@@ -140,14 +141,7 @@ const AboutPage = () => {
               <TechCard />
             </Grid>
             <Grid item xs={11} md={6}>
-              <Item>
-                <Typography> Tech Name</Typography>
-                <Typography>
-                  Tech Description <br></br>
-                  should <br></br>
-                  have multiple lines
-                </Typography>
-              </Item>
+              <TechCard />
             </Grid>
           </Grid>
         </Box>
