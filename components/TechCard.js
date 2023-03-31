@@ -20,7 +20,7 @@ const TechCard = (props) => {
           <img
             src={src}
             alt="technology logo"
-            style={{ height: picSize, width: picSize }}
+            style={{ height: picSize, width: picSize,  padding: '10px' }}
           />
           <h1 className={style.techName}> {name} </h1>
         </div>

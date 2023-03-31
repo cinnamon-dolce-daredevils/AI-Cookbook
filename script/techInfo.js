@@ -7,7 +7,7 @@ export const techInfo = [
 	{
 		name: "OpenAI",
 		description: `We used the natural language processing power of chatGPT to generate recipes based on the ingredients you have in your pantry. It's like having a personal chef who knows how to create well-balanced and delicious dishes while also taking into consideration your nutritional needs.`,
-		image: `/images/OpenAI-logo.png`,
+		image: `/images/chatboy.png`,
 	},
 	{
 		name: "Spoonacular",
