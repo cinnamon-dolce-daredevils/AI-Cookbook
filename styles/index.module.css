@@ -143,12 +143,12 @@
 }
 
 .trivia {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   position: absolute;
   top: 8%;
   left: 50.5%;
   transform: translate(-50%, -50%);
-  font-size: 20px;
+  font-size: 18px;
   color: #000000;
   text-align: center;
   margin: 50px auto;
@@ -189,7 +189,7 @@
   filter: drop-shadow(12px 9px 5px rgba(0, 0, 0, 20));
 }
 
-@media (max-width: 468px) {
+@media (max-width: 600px) {
   .cereal {
     width: 100%;
   }
@@ -197,7 +197,7 @@
   .trivia {
     position: absolute;
     top: 14%;
-    font-size: 12px;
+    font-size: 11px;
     left: 50.5%;
     transform: translate(-50%, -50%);
     max-width: 90%;
