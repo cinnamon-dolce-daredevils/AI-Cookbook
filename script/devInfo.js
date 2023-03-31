@@ -15,7 +15,7 @@ export const DevInfo = [
 	},
 	{
 		name: "Ben Villafranca",
-		description: "hi, I am a good dev",
+		description: "Ben is a Marine veteran and college graduate of Rutgers - New Brunswick. If he isn't at his computer coding, he's probably running with his dog or cooking with his fiance.",
 		avatar: "/images/benpic.png",
 		linkedIn: "https://www.linkedin.com/in/ben-villafranca/",
 		GitHub: "https://github.com/bevilla203",

@@ -11,19 +11,17 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Link from 'next/link';
+import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
 import styles from '../../styles/leftdrawer.module.css';
 import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
 import Badge from '@mui/material/Badge';
-import spoonImage from '../../public/images/spoon.png'
+import pizzamans from '../../public/images/pizzamans.png'
 import Image from 'next/image';
-
-
-
 import AccountSettings from './AccountSettings';
-const drawerWidth = 240;
- import { useSession } from "@supabase/auth-helpers-react";
- import { createClient } from "@supabase/supabase-js";
+import { useSession } from "@supabase/auth-helpers-react";
+import { createClient } from "@supabase/supabase-js";
 import IngredientDetails from '../IngredientDetails';
+const drawerWidth = 240;
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -123,15 +121,33 @@ let refreshRate = 2000
 		setPantryItems(data.data)}
 	}, [data]);
 
-
 	if (error) {
-		return <div>Error loading suggestions</div>;
-	}
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "30vh",
+          background: `url(${dancingLoad.src}) no-repeat center`,
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+        }}
+      />
+    );
+  }
 
-	if (!data) {
-		return <div>Loading suggestions...</div>;
-	}
-
+  if (!data) {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "30vh",
+          background: `url(${dancingLoad.src}) no-repeat center`,
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+        }}
+      />
+    );
+  }
 
   return (
     <>
@@ -208,6 +224,7 @@ let refreshRate = 2000
                 width: drawerWidth,
                 boxSizing: 'border-box',
                 backgroundColor: theme.palette.secondary.main,
+                filter: 'drop-shadow(5px 5px 19px rgba(0, 0, 0, 1))'
               },
             }}
             variant="persistent"
@@ -234,7 +251,7 @@ let refreshRate = 2000
             </List>
             <ImageContainer>
             {pantryItems.length <= 3 && (
-    <Image src={spoonImage} alt="Spoon" style={{ width: '100%', height: 'auto' }} />
+    <Image src={pizzamans} alt="Click on an ingredient to see it's nutrional facts!" style={{ width: '90%', height: 'auto', margin: 20, filter: 'drop-shadow(5px 5px 9px rgba(0, 0, 0, 1))' }} />
             )}
   </ImageContainer>
           </Drawer>
