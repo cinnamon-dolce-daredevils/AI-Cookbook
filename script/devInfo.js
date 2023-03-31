@@ -23,7 +23,7 @@ export const DevInfo = [
 	{
 		name: "Jay Yuan",
 		description: "hi, I am a good dev",
-		avatar: "capstone-v2/public/images/ryanpic.png",
+		avatar: "/images/jaypic.png",
 		linkedIn: "https://www.linkedin.com/in/jayqyuan/",
 		GitHub: "https://github.com/jayqyuan",
 	},

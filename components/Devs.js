@@ -55,12 +55,32 @@ export default function SimpleGrow(props) {
 					style={{ transformOrigin: "0 0 0" }}
 					{...(checked ? { timeout: 1000 } : {})}
 				>
-					<Box variant='body1' sx={{ p: 2, display:'flex', justifyContent:'center' }}>
-						<Link href={linkedIn} sx={{mr: 2}} >
-							<FontAwesomeIcon icon={faLinkedin} style={{ fontSize: "2em", padding: 1 }} />
+					<Box
+						variant='body1'
+						sx={{
+							p: 2,
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						<Link href={linkedIn} sx={{ mr: 2 }}>
+							<FontAwesomeIcon
+								icon={faLinkedin}
+								style={{
+									fontSize: "2em",
+									padding: 1,
+									color: theme.palette.mode === "dark" ? "white" : "initial",
+								}}
+							/>
 						</Link>{" "}
 						<Link href={gitHub}>
-							<FontAwesomeIcon icon={faGithub} style={{ fontSize: "2em" }} />
+							<FontAwesomeIcon
+								icon={faGithub}
+								style={{
+									fontSize: "2em",
+									color: theme.palette.mode === "dark" ? "white" : "initial",
+								}}
+							/>
 						</Link>
 					</Box>
 				</Grow>

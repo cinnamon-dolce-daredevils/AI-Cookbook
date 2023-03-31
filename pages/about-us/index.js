@@ -67,7 +67,7 @@ const AboutPage = () => {
               width: '80%',
               flexDirection: 'column',
               justifyContent: 'center',
-              mb: 5,
+              mb: 10,
             }}
           >
             After three weeks of coding day and night, our team developed the
@@ -103,7 +103,7 @@ const AboutPage = () => {
           {DevInfo.map((dev, index) => {
             //simpleGrow is in components/Dev.js
             return (
-              <SlideIn delay={1500 + index * 500} mountOnEnter unmountOnExit>
+              <SlideIn key={index} delay={1500 + index * 500} mountOnEnter unmountOnExit>
                 <Grid sx={{ mb: '100px' }} item xs={5} md={3}>
                   <SimpleGrow
                     sx={{ height: '50px' }}
