@@ -86,9 +86,10 @@
 @media only screen and (max-width: 600px){
     .bongos{
         position: relative;
-        left: 15px;
+        left: auto;
         bottom: 25px;
-        width: 480px;
+        width: auto;
         font-size: 13px;
+        text-align: center;
     }
 }
