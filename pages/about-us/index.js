@@ -137,12 +137,14 @@ const AboutPage = () => {
           }}
         >
           <Grid container spacing={1}>
-            <Grid item xs={11} md={6}>
-              <TechCard />
-            </Grid>
-            <Grid item xs={11} md={6}>
-              <TechCard />
-            </Grid>
+            {techInfo.map((tech, index) => {
+              return (<>
+                <Grid item xs={11} md={6} key={index}>
+                  <TechCard src={tech.image} title={tech.name} key={index} />
+                </Grid>
+              </>)
+            
+            })}
           </Grid>
         </Box>
       </div>

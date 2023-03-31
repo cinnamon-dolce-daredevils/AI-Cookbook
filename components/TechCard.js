@@ -9,16 +9,20 @@ import style from '../styles/techCard.module.css';
 
 const TechCard = (props) => {
   let picSize = '150px';
+  
+  const { src, name } = props;
+
+  console.log(src);
   return (
     <>
       <div className={style.techCard}>
         <div className={style.techHeader}>
           <img
-            src="/"
+            src= {src}
             alt="technology logo"
             style={{ height: picSize, width: picSize }}
           />
-          <h1 className={style.techName}> Open AI </h1>
+          <h1 className={style.techName}> Tech Name </h1>
           {/* name and stuff should come in as props */}
         </div>
       </div>
