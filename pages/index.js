@@ -29,10 +29,7 @@ const Home = () => {
   return (
     <>
       <div className={styles.container}>
-        <img src="/images/AICB_LogG.png" className={styles.icon} />{ trivia ? 
-        <Container sx={{ p: 1, m:1, textAlign: 'center' }}>
-          <Typography>{trivia}</Typography>
-        </Container> : null}
+        <img src="/images/AICB_LogG.png" className={styles.icon} />
         {session ? (
           <Link
             style={{ textDecoration: 'none', color: 'white' }}
@@ -66,6 +63,14 @@ const Home = () => {
           </>
         )}
       </div>
+      <div className={styles.triviaBox}>
+      <Container className={styles.triviaContainer}>
+        <img src="/images/cereal.png" className={styles.cereal} />
+    {trivia ? (
+        <p className={styles.trivia}>{trivia}</p>
+        ) : null}
+    </Container>
+  </div>
     </>
   );
 }
