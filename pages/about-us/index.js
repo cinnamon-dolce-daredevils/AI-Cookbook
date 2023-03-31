@@ -4,7 +4,13 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { FormControlLabel, Slide, Switch, Typography, useScrollTrigger } from '@mui/material';
+import {
+  FormControlLabel,
+  Slide,
+  Switch,
+  Typography,
+  useScrollTrigger,
+} from '@mui/material';
 import SimpleGrow from '@/components/Devs';
 import { DevInfo } from '@/script/devInfo';
 import TechCard from '@/components/TechCard';
@@ -18,26 +24,25 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const AboutPage = () => {
-    function SlideIn(props) {
-			const { children, window, delay = 0 , direction = 'right'} = props;
-			const trigger = useScrollTrigger({
-				target: window && window(),
-				disableHysteresis: false,
-				threshold: 0,
-			});
+  function SlideIn(props) {
+    const { children, window, delay = 0, direction = 'right' } = props;
+    const trigger = useScrollTrigger({
+      target: window && window(),
+      disableHysteresis: false,
+      threshold: 0,
+    });
 
-			return (
-				<Slide
-					direction={direction}
-					in={trigger}
-					style={{ transitionDelay: `${delay}ms` }}
-				>
-					{children}
-				</Slide>
-			);
-		}
+    return (
+      <Slide
+        direction={direction}
+        in={trigger}
+        style={{ transitionDelay: `${delay}ms` }}
+      >
+        {children}
+      </Slide>
+    );
+  }
   return (
-
     <>
       <Box
         sx={{
@@ -138,12 +143,13 @@ const AboutPage = () => {
         >
           <Grid container spacing={1}>
             {techInfo.map((tech, index) => {
-              return (<>
-                <Grid item xs={11} md={6} key={index}>
-                  <TechCard src={tech.image} title={tech.name} key={index} />
-                </Grid>
-              </>)
-            
+              return (
+                <>
+                  <Grid item xs={11} md={6} key={index}>
+                    <TechCard src={tech.image} name={tech.name} key={index} description={tech.description} />
+                  </Grid>
+                </>
+              );
             })}
           </Grid>
         </Box>
@@ -151,6 +157,6 @@ const AboutPage = () => {
       <div className={style.parallax3}></div>
     </>
   );
-                  }
+};
 
-export default AboutPage
+export default AboutPage;
