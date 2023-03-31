@@ -105,7 +105,7 @@
 .main input {
   font-size: 16px;
   line-height: 24px;
-  color: #101010;
+  /* color: #101010; */
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
 .main {
@@ -116,13 +116,13 @@
 }
 .icon {
   width: 300px;
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 20));
+  /* filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 20)); */
 }
 .main h3 {
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #696969;
+  /* color: #696969; */
   margin: 16px 0 40px;
 }
 .main form {

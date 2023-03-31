@@ -21,7 +21,7 @@ const AboutPage = () => {
 			const { children, window, delay = 0 , direction = 'right'} = props;
 			const trigger = useScrollTrigger({
 				target: window && window(),
-				disableHysteresis: true,
+				disableHysteresis: false,
 				threshold: 0,
 			});
 
@@ -36,6 +36,7 @@ const AboutPage = () => {
 			);
 		}
   return (
+
     <>
       <Box
         sx={{

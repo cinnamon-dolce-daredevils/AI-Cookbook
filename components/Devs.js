@@ -6,12 +6,14 @@ import Grow from "@mui/material/Grow";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Link, Typography } from '@mui/material';
+import { useTheme } from '@emotion/react';
 
 
 
 
 
 export default function SimpleGrow(props) {
+    const theme = useTheme()
 	const [checked, setChecked] = React.useState(false);
     const {name, description, linkedIn, gitHub, avatar} = props
     
@@ -20,7 +22,7 @@ export default function SimpleGrow(props) {
 	};
 
 	return (
-		<Box sx={{ height: "auto"}}>
+		<Box sx={{ height: "auto" }}>
 			<Box
 				sx={{
 					display: "flex",
