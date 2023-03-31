@@ -67,7 +67,7 @@ const AboutPage = () => {
               width: '80%',
               flexDirection: 'column',
               justifyContent: 'center',
-              mb: 5,
+              mb: 10,
             }}
           >
             After three weeks of coding day and night, our team developed the
