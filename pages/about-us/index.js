@@ -100,6 +100,15 @@ const AboutPage = () => {
 				<br />
 
 
+      <Box sx={{ minHeight: 700 }}>
+        <SlideIn delay={200}>
+          <Typography align="center" variant="h2" my={2}>
+            Meet The Devs
+          </Typography>
+        </SlideIn>
+        <br />
+
+
         <Grid
           container
           spacing={2}
@@ -115,7 +124,7 @@ const AboutPage = () => {
             return (
               <SlideIn
                 key={index}
-                delay={1500 + index * 500}
+                delay={1000 + index * 500}
                 mountOnEnter
                 unmountOnExit
               >
