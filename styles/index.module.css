@@ -70,6 +70,13 @@
   color: white;
 }
 
+.loadingBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .loading {
   display: flex;
   flex-direction: column;
@@ -107,6 +114,7 @@
 }
 .icon {
   width: 300px;
+  margin: 40px;
   /* filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 20)); */
 }
 .main h3 {
@@ -144,17 +152,24 @@
 }
 
 .trivia {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  position: absolute;
-  top: 8%;
-  left: 50.5%;
+  font-family: 'Roboto', sans-serif;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 18px;
+  font-size: 28px;
+  font-weight: bold;
   color: #000000;
   text-align: center;
   margin: 50px auto;
   word-wrap: break-word; 
-  max-width: 45%;
+  max-width: 80%;
+  animation: slide-up 1s ease-out forwards;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+  text-shadow: 0 0 1px #ffffff;
 }
 
 @keyframes slide-up {
@@ -169,12 +184,7 @@
 }
 
 .triviaContainer {
-  position: relative;
-  text-align: center;
-  display: flex;
-  justify-content: center;
   margin: auto;
-  align-items: center;
   animation: slide-up 1s ease-out forwards;
 }
 
@@ -182,30 +192,15 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  bottom: -350px;
-}
-
-.cereal {
-  width: 50%;
-  filter: drop-shadow(12px 9px 5px rgba(0, 0, 0, 20));
 }
 
 @media (max-width: 600px) {
-  .cereal {
-    width: 100%;
-  }
-
   .trivia {
-    position: absolute;
-    top: 14%;
-    font-size: 11px;
-    left: 50.5%;
-    transform: translate(-50%, -50%);
-    max-width: 90%;
+    font-size: 20px;
     margin: 0 auto;
   }
-
 }
+
 
 .recipe-container {
   max-width: 1500px;
