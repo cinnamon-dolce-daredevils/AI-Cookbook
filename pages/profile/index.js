@@ -1,5 +1,5 @@
 import { Auth } from '@supabase/auth-ui-react';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Account from '@/components/Account';
@@ -12,15 +12,6 @@ const Profile = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   let [isLightMode] = useContext(Context);
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    if (token) {
-      router.push(`/reset-password?token=${token}`);
-    }
-  }, []);
-
 
   return (
     <Box className={styles.box}>

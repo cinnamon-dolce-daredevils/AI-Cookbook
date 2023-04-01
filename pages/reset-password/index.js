@@ -2,12 +2,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-console.log('Supabase URL:', supabaseUrl);
-console.log('Supabase Anon Key:', supabaseAnonKey);
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 import Link from 'next/link';
 
@@ -24,29 +21,21 @@ const ResetPassword = () => {
     setLoading(true);
     setError(null);
 
-    console.log('Submitting reset password form...', { email, token, password });
-
-    const response = await fetch('/api/reset-password', {
+    const response = await fetch(`/api/reset-password`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+    'apikey': SUPABASE_KEY },
       body: JSON.stringify({ email, token, password }),
     });
 
-    console.log('Reset password API response:', response);
-
     if (response.ok) {
       setSuccess(true);
-      console.log('Password reset successful:', email);
     } else {
       const { error } = await response.json();
       setError(error);
-      console.error('Reset password API error:', error);
     }
-
     setLoading(false);
   };
-
-
 
   return (
     <div>

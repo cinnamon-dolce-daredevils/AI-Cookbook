@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 export default function RecipeAI() {
   const [ingredientsInput, setIngredientsInput] = useState("");
   const [result, setResult] = useState();
-   let [isLightMode, setIsLightMode] = useContext(Context);
+   let [isLightMode] = useContext(Context);
   async function onSubmit(event) {
     event.preventDefault();
     try {
@@ -26,7 +26,6 @@ export default function RecipeAI() {
       setResult(data.result);
       setIngredientsInput("");
     } catch(error) {
-      // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
@@ -88,7 +87,7 @@ export default function RecipeAI() {
       </main>
       <Button href="/"></Button>
       <Typography sx={{color: isLightMode ? 'black' : 'white'}}>
-        
+
         <Link style={{color: isLightMode ? 'black' : 'black'}} href={'/'}>Return to Home</Link>
       </Typography>
     </div>
