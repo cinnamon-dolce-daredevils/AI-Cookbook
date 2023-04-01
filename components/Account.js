@@ -21,21 +21,6 @@ export default function Account({ session }) {
     getProfile();
   }, [session]);
 
-  async function signInWithGoogle() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        queryParams: {
-          access_type: 'offline',
-          prompt: 'consent',
-        },
-      },
-    });
-  }
-  async function signout() {
-    const { error } = await supabase.auth.signOut();
-  }
-
   async function getProfile() {
     try {
       setLoading(true);
@@ -56,7 +41,7 @@ export default function Account({ session }) {
       }
     } catch (error) {
       alert('Error loading user data!');
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }

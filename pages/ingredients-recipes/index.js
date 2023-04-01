@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { Context } from '../_app';
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import styles from "../../styles/index.module.css";
-import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ReactMarkdown from "react-markdown";
 import { useSelectedPersonality } from "../../components/useSelectedPersonality";
@@ -14,7 +12,6 @@ import {
   callAutocompleteApi,
   fetchIngredientDetails,
 } from "../api/ingredientApi";
-import PersistentDrawerLeft from "@/components/drawer/Leftdrawer";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import { textToSpeech } from "../../components/textToSpeech";
 import { useTheme } from "@emotion/react";
@@ -95,7 +92,7 @@ export default function IngredientRecipe({ data }) {
   function playAudio(audioPath) {
     const audio = new Audio(audioPath);
     audio.play();
-  }  
+  }
 
   async function handleInputChange(event) {
     const input = event.target.value;

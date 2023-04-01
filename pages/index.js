@@ -4,7 +4,7 @@ import { getRandomFoodTrivia } from './api/ingApi';
 import styles from '../styles/index.module.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { useTheme } from '@emotion/react';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container } from '@mui/material';
 
 const Home = () => {
   const theme = useTheme();
