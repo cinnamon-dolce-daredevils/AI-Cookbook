@@ -40,8 +40,8 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
 
   return (
     <SessionContextProvider
-      supabaseClient={supabase}
-      initialSession={pageProps.initialSession}
+    supabaseClient={supabase}
+    initialSession={pageProps.initialSession}
     >
       <MuteContext.Provider value={{ isMuted, setIsMuted }}>
       <Context.Provider value={[isLightMode, setIsLightMode]}>
@@ -50,7 +50,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
             value={{
               refreshInterval: 5000,
             }}
-          >
+            >
             <Layout>
               <CssBaseline />
               <Component {...pageProps} />
