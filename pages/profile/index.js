@@ -8,7 +8,6 @@ import { Box } from '@mui/system';
 import styles from '../../styles/profile.module.css';
 import { Context } from '../../pages/_app';
 
-
 const Profile = () => {
   const session = useSession();
   const supabase = useSupabaseClient();

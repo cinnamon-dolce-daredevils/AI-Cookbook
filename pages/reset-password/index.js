@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+console.log('Supabase URL:', supabaseUrl);
+console.log('Supabase Anon Key:', supabaseAnonKey);
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 import Link from 'next/link';
 
@@ -10,36 +17,26 @@ const ResetPassword = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const supabase = useSupabaseClient();
+  const { email, token } = router.query;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const token = router.query.token;
-    const email = router.query.email;
-    if (!token || !email) {
-      setError('Invalid password reset token or email.');
-      setLoading(false);
-      return;
-    }
+    console.log('Submitting reset password form...', { email, token, password });
 
-    console.log('Submitting reset password form...', { email, token, newPassword: password });
-
-    const response = await fetch(`/api/reset-password`, {
+    const response = await fetch('/api/reset-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, token, newPassword: password }),
+      body: JSON.stringify({ email, token, password }),
     });
 
     console.log('Reset password API response:', response);
 
     if (response.ok) {
-      await supabase.auth.signOut();
       setSuccess(true);
-      const { user } = await response.json();
-      console.log('Password update successful:', user);
+      console.log('Password reset successful:', email);
     } else {
       const { error } = await response.json();
       setError(error);
@@ -48,6 +45,8 @@ const ResetPassword = () => {
 
     setLoading(false);
   };
+
+
 
   return (
     <div>
@@ -77,4 +76,3 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
-
