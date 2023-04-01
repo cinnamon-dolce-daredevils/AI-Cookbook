@@ -38,7 +38,7 @@ const FavoritesPage = (userId) => {
   function playAudio(audioPath) {
     const audio = new Audio(audioPath);
     audio.play();
-  } 
+  }
 
   const addToFavorites = async (selectedRecipe, userId) => {
 		try {
@@ -98,7 +98,7 @@ const FavoritesPage = (userId) => {
           sx={{ color: 'white' }}
           variant="contained"
           onClick={handleNextClick}
-          disabled={currentIndex === userFavorites.length - 1}
+          disabled={currentIndex === userFavorites.length - 1 || userFavorites.length === 0}
         >
           Next
         </Button>
