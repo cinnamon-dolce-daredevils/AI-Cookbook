@@ -38,7 +38,9 @@ const Home = () => {
             <Button
               sx={{
                 backgroundColor: theme.palette.secondary.main,
-                color: theme.palette.common.white, mt: 3
+                color: theme.palette.common.white,
+                margin: '40px',
+                mt: 3
               }}
             >
               Add Ingredients
@@ -53,6 +55,7 @@ const Home = () => {
                   color: 'white',
                   backgroundColor: theme.palette.secondary.main,
                   textDecoration: 'none',
+                  margin: '40px',
                 }}
                 variant="contained"
               >
@@ -65,9 +68,11 @@ const Home = () => {
       </div>
       <div className={styles.triviaBox}>
       <Container className={styles.triviaContainer}>
-        <img src="/images/cereal.png" className={styles.cereal} />
+        {/* <img src="/images/cereal.png" className={styles.cereal} /> */}
     {trivia ? (
-        <p className={styles.trivia}>{trivia}</p>
+        <p  sx={{
+          color: theme.palette.common.main,
+        }} className={styles.trivia}>{trivia}</p>
         ) : null}
     </Container>
   </div>
