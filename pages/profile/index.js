@@ -1,5 +1,5 @@
 import { Auth } from '@supabase/auth-ui-react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Account from '@/components/Account';
@@ -7,16 +7,25 @@ import { Button, Paper } from '@mui/material';
 import { Box } from '@mui/system';
 import styles from '../../styles/profile.module.css';
 import { Context } from '../../pages/_app';
-import { useTheme } from '@emotion/react';
+
+
 const Profile = () => {
-  const theme = useTheme();
   const session = useSession();
   const supabase = useSupabaseClient();
-  let [isLightMode, setIsLightMode] = useContext(Context);
+  let [isLightMode] = useContext(Context);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    if (token) {
+      router.push(`/reset-password?token=${token}`);
+    }
+  }, []);
+
+
   return (
     <Box className={styles.box}>
       <Paper
-        // backgroundColor: theme.palette.secondary.main
         sx={{ color: isLightMode ? 'black' : 'white'}}
         className={styles.paper}
         elevation={12}
