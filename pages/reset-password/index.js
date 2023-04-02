@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -13,28 +12,23 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const router = useRouter();
-  const { email, token } = router.query;
 
-  const handleSubmit = async (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    const response = await fetch(`/api/reset-password`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json',
-    'apikey': SUPABASE_KEY },
-      body: JSON.stringify({ email, token, password }),
-    });
-
-    if (response.ok) {
-      setSuccess(true);
+    if (password.length < 6) {
+      setError("Password must be more than 6 characters long");
+      return;
     } else {
-      const { error } = await response.json();
-      setError(error);
+      const { data, error } = await supabase.auth.updateUser({
+        password: password,
+      });
+      if (data) {
+        setError(false);
+        setSuccess(true);
+      } else {
+        setError(true);
+      }
     }
-    setLoading(false);
   };
 
   return (
@@ -46,7 +40,7 @@ const ResetPassword = () => {
           <Link href="/profile">sign in</Link>.
         </p>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleReset}>
           <input
             type="password"
             placeholder="New Password"
