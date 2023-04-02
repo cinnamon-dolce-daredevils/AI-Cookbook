@@ -78,7 +78,7 @@ const Home = () => {
 				)}
 			</div>
       <div>
-       <h1 style={{width:'100%', textAlign:'center'}}>Why AI Cookbook?</h1>
+       <h1 style={{width:'100%', textAlign:'center', marginTop:'125px'}}>Why AI Cookbook?</h1>
        <Container>
         <div className={styles.reasons} direction='row'>
           {whyAICookbook.map((reason)=>{
@@ -86,10 +86,11 @@ const Home = () => {
           })}
         </div>
        </Container>
-
       </div>
-
+          <div className={styles.parallax}></div>
 			<div className={styles.triviaBox}>
+        <img src='/images/triviaIcon.png' style={{width:'150px', marginBottom:'0'}}/>
+        <h2 style={{textAlign:'center'}}>Want to impress your friends and win the next trivia night at your bar? </h2>
 				<Container className={styles.triviaContainer}>
          <TriviaSimpleGrow trivia = {trivia}/>
 					{/* ) : null} */}

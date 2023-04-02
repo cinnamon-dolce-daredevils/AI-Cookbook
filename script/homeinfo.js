@@ -20,6 +20,6 @@ export const whyAICookbook = [
 		iconUrl: "fun",
 		reason: "Have Fun!",
 		explanation:
-			"Cooking can be tiresome, so let our various AI personalities to give you an extra boost!",
+			"Cooking can be tiresome, so let our various AI personalities give an extra boost of motivation!",
 	},
 ];
