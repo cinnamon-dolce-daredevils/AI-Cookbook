@@ -5,25 +5,27 @@ import styles from '../styles/index.module.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { useTheme } from '@emotion/react';
 import { Button, Container } from '@mui/material';
+import TriviaSimpleGrow from '@/components/Trivia';
+import { whyAICookbook } from '@/script/homeinfo';
 
 const Home = () => {
   const theme = useTheme();
   const [trivia, setTrivia] = useState("");
   const session = useSession();
 
-  useEffect(() => {
-    const fetchTrivia = async () => {
-      try {
-        const trivia = await getRandomFoodTrivia();
-        setTrivia(trivia);
-      } catch (error) {
-        console.error(error);
-        alert(error.message);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchTrivia = async () => {
+  //     try {
+  //       const trivia = await getRandomFoodTrivia();
+  //       setTrivia(trivia);
+  //     } catch (error) {
+  //       console.error(error);
+  //       alert(error.message);
+  //     }
+  //   };
 
-    fetchTrivia();
-  }, []);
+  //   fetchTrivia();
+  // }, []);
 
 
   return (
@@ -37,7 +39,7 @@ const Home = () => {
 					}
 					className={styles.icon}
 				/>
-
+          <h1 style={{color:'white'}}>Take the stress out of everyday cooking with AI</h1>
 				{session ? (
 					<Link
 						style={{ textDecoration: "none", color: "white" }}
@@ -74,19 +76,21 @@ const Home = () => {
 					</>
 				)}
 			</div>
+      <div>
+       <h1 style={{width:'100%', textAlign:'center'}}>Why AI Cookbook?</h1>
+       <Container>
+        <div>
+          {whyAICookbook.map(reason=>{
+            
+          })}
+        </div>
+       </Container>
+
+      </div>
+
 			<div className={styles.triviaBox}>
 				<Container className={styles.triviaContainer}>
-					{/* <img src="/images/cereal.png" className={styles.cereal} /> */}
-					{/* {trivia ? ( */}
-					<p
-						style={{
-							color: "white",
-						}}
-						className={styles.trivia}
-					>
-						{/* {trivia} */}
-						trivia replacement
-					</p>
+         <TriviaSimpleGrow trivia = {trivia}/>
 					{/* ) : null} */}
 					<div>
 						What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
