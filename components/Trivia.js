@@ -54,7 +54,7 @@ const handleClick = async () => {
 			<Box
 				sx={
 					checked
-						? { display: "flex", alignItems: "center" }
+						? { display: "flex",textAlign: "center", justifyContent:'center' }
 						: { display: "none" }
 				}
 			>
