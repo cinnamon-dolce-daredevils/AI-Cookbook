@@ -506,3 +506,14 @@
   cursor: pointer;
   z-index: 2;
 }
+
+.reasons{
+  display: flex;
+  align-items: stretch;
+}
+
+.reasonCard{
+  min-width: 200px;
+  margin: 20px;
+  text-align: center;
+}
