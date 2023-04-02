@@ -4,80 +4,99 @@ import { getRandomFoodTrivia } from './api/ingApi';
 import styles from '../styles/index.module.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { useTheme } from '@emotion/react';
-import { Button, Container } from '@mui/material';
+import { Button, Container, Stack } from '@mui/material';
+import TriviaSimpleGrow from '@/components/Trivia';
+import { whyAICookbook } from '@/script/homeinfo';
+import ReasonCards from '@/components/homePage/WhyAICB';
 
 const Home = () => {
   const theme = useTheme();
   const [trivia, setTrivia] = useState("");
   const session = useSession();
 
-  useEffect(() => {
-    const fetchTrivia = async () => {
-      try {
-        const trivia = await getRandomFoodTrivia();
-        setTrivia(trivia);
-      } catch (error) {
-        console.error(error);
-        alert(error.message);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchTrivia = async () => {
+  //     try {
+  //       const trivia = await getRandomFoodTrivia();
+  //       setTrivia(trivia);
+  //     } catch (error) {
+  //       console.error(error);
+  //       alert(error.message);
+  //     }
+  //   };
 
-    fetchTrivia();
-  }, []);
+  //   fetchTrivia();
+  // }, []);
 
 
   return (
-    <>
-      <div className={styles.container}>
-        <img src="/images/AICB_LogG.png" className={styles.icon} />
-        {session ? (
-          <Link
-            style={{ textDecoration: 'none', color: 'white' }}
-            href={'/ingredients-recipes'}
-          >
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.main,
-                color: theme.palette.common.white,
-                margin: '40px',
-                mt: 3
-              }}
-            >
-              Add Ingredients
-            </Button>
-          </Link>
-        ) : (
-          <>
-            <h3> Please Sign up or Login first!</h3>
-            <Link style={{ textDecoration: 'none' }} href={'/profile'}>
-              <Button
-                sx={{
-                  color: 'white',
-                  backgroundColor: theme.palette.secondary.main,
-                  textDecoration: 'none',
-                  margin: '40px',
-                }}
-                variant="contained"
-              >
-                {' '}
-                Signup/Login
-              </Button>
-            </Link>
-          </>
-        )}
+		<>
+			<div className={styles.container}>
+				<img
+					src={
+						// theme.palette.mode === "dark"
+						"/images/AICB_LogoW.png"
+						// : "/images/AICB_Logo.png"
+					}
+					className={styles.icon}
+				/>
+          <h1 style={{color:'white'}}>Take the stress out of everyday cooking with AI</h1>
+				{session ? (
+					<Link
+						style={{ textDecoration: "none", color: "white" }}
+						href={"/ingredients-recipes"}
+					>
+						<Button
+							sx={{
+								backgroundColor: theme.palette.secondary.main,
+								color: theme.palette.common.white,
+								margin: "40px",
+								mt: 3,
+							}}
+						>
+							Add Ingredients
+						</Button>
+					</Link>
+				) : (
+					<>
+						<h3> Please Sign up or Login first!</h3>
+						<Link style={{ textDecoration: "none" }} href={"/profile"}>
+							<Button
+								sx={{
+									color: "white",
+									backgroundColor: theme.palette.secondary.main,
+									textDecoration: "none",
+									margin: "40px",
+								}}
+								variant='contained'
+							>
+								{" "}
+								Signup/Login
+							</Button>
+						</Link>
+					</>
+				)}
+			</div>
+      <div>
+       <h1 style={{width:'100%', textAlign:'center'}}>Why AI Cookbook?</h1>
+       <Container>
+        <div className={styles.reasons} direction='row'>
+          {whyAICookbook.map((reason)=>{
+            return <ReasonCards icon={reason.iconUrl} reason={reason.reason} explanation={reason.explanation}/>
+          })}
+        </div>
+       </Container>
+
       </div>
-      <div className={styles.triviaBox}>
-      <Container className={styles.triviaContainer}>
-        {/* <img src="/images/cereal.png" className={styles.cereal} /> */}
-    {trivia ? (
-        <p  sx={{
-          color: theme.palette.common.main,
-        }} className={styles.trivia}>{trivia}</p>
-        ) : null}
-    </Container>
-  </div>
-    </>
-  );
+
+			<div className={styles.triviaBox}>
+				<Container className={styles.triviaContainer}>
+         <TriviaSimpleGrow trivia = {trivia}/>
+					{/* ) : null} */}
+				</Container>
+			</div>
+		</>
+	);
 }
 
 export default Home;
