@@ -53,6 +53,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url('/images/background/pantryBG.jpg');
+    background-size: cover;
+    min-height: 650px;
+    width: 100%;
 }
 
 .audio {
