@@ -153,7 +153,7 @@ let refreshRate = 2000
     <>
       <Box
         sx={{
-          display: 'flex',
+          display: 'flex'
         }}
       >
         <AppBar

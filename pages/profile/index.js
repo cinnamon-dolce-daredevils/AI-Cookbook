@@ -16,7 +16,7 @@ const Profile = () => {
   return (
     <Box className={styles.box}>
       <Paper
-        sx={{ color: isLightMode ? 'black' : 'white'}}
+        sx={{  height: '0 auto', color: isLightMode ? 'black' : 'white'}}
         className={styles.paper}
         elevation={12}
       >

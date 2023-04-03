@@ -7,19 +7,30 @@ import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Link, Typography } from '@mui/material';
 import { useTheme } from '@emotion/react';
-
-
-
+import { useMute } from "@/components/MuteContext";
 
 
 export default function SimpleGrow(props) {
     const theme = useTheme()
 	const [checked, setChecked] = React.useState(false);
     const {name, description, linkedIn, gitHub, avatar} = props
+	const { isMuted } = useMute();
+
+	function playAudio(audioPath) {
+		const audio = new Audio(audioPath);
+		audio.play();
+	  } 	
     
-	const handleClick = () => {
+	  const handleClick = () => {
+		if (!isMuted) {
+		  if (checked) {
+			playAudio('/audio/Short.m4a');
+		  } else {
+			playAudio('/audio/New Recording.m4a');
+		  }
+		}
 		setChecked((prev) => !prev);
-	};
+	  };
 
 	return (
 		<Box sx={{ height: "auto" }}>

@@ -6,12 +6,31 @@
 
   /* Set a specific height */
   min-height: 600px;
-
+width: 100%;
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.Section{
+  position: relative;
+  background-color: #1e1e22;
+  width: 100%;
+  min-height: 100vh;
+  padding: 3em calc(20vw - 70px);
+  z-index: 1
+}
+
+.sticky {
+  margin-top: -100vh;
+  width: 100vw;
+  height: 100vh;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 0;
 }
 
 .parallax2 {
@@ -32,7 +51,7 @@
 
 .parallax3 {
   position: relative;
-  bottom: 50px;
+  bottom: -50px;
   /* The image used */
   background-image: url('../public/images/holly-stratton-ToswmEekSFI-unsplash.jpg');
 
@@ -59,20 +78,21 @@
 }
 
 .bongos {
-  width: 550px;
+  width: 0 auto;
   color: 'white';
   position: relative;
-  left: 1100px;
-  bottom: 30px;
+  bottom: 40px;
+  text-align: right;
+  z-index: 1;
 }
 
 @media only screen and (max-width: 600px){
     .bongos{
         position: relative;
-        left: 5px;
+        left: 0;
         bottom: 25px;
-        width: auto;
-        font-size: 13px;
+        width: 0 auto;
+        font-size: 10px;
         text-align: center;
     }
 }
