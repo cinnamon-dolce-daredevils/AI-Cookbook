@@ -8,7 +8,7 @@ export const DevInfo = [
 	},
 	{
 		name: "Cody DiBella",
-		description: "hi, I am a good dev",
+		description: "Cody is a tech enthusiast who loves diving into new challenges and expanding his knowledge. When he's not busy exploring the world of coding, you can find him playing video games and spending time with his wife, Hannah, and their two adorable dogs, Teach and Duncan.",
 		avatar: "/images/codypic.png",
 		linkedIn: "https://www.linkedin.com/in/codydibella/",
 		GitHub: "https://github.com/CodyDiBella",
