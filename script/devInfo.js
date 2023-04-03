@@ -2,7 +2,7 @@ export const DevInfo = [
 	{
 		name: "Ryan Pearl",
 		description: "Ryan is an Air Force Veteran, avid hockey fan and gym enthusiast. Coding has always been his dream, and the Military benefits have made that a reality!",
-		avatar: "/images/ryanpic.png",
+		avatar: "/images/ryanpic1.png",
 		linkedIn: "https://www.linkedin.com/in/ryanpearl48/",
 		GitHub: "https://github.com/ryanpearl48",
 	},
