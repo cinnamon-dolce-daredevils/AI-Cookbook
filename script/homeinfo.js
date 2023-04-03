@@ -12,7 +12,7 @@ export const whyAICookbook = [
 	},
 	{
 		iconUrl: "health",
-		reason: "Accountable for taste and health",
+		reason: "Taste and health",
 		explanation:
 			"Always know what you have and what  you will put in your body! ",
 	},

@@ -419,7 +419,7 @@ export default function IngredientRecipe({ data }) {
 					<>
 						<div className={styles.loadingOverlay}>
 							<div className={styles.loading}>
-								<h1>Loading...</h1>
+								<h2>Loading...</h2>
 								<img src='/images/fridge.gif' />
 							</div>
 						</div>
