@@ -6,31 +6,18 @@
 
 .container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 
-.links{
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-  margin-left: 20px;
-  font-size: medium;
-}
-.burgerLink{
-  color: white;
-  text-decoration: none;
-  display: none;
-}
-
 .glitch {
-  font-size: x-large;
+  font-size: 2vw;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   /* font-weight: bold; */
   text-decoration: none;
   text-transform: uppercase;
   position: relative;
-  margin-right: 20px;
+  margin: 0;
   color: #fff;
   letter-spacing: 5px;
 }
@@ -146,29 +133,17 @@
 
 @media only screen and (max-width: 800px) {
   .glitch {
-    font-size: x-large;
-  }
-  .links{
-    display: none;
-  }
-  .burgerLink{
-    display: block;
+    font-size: 5em;
   }
 }
 
 @media only screen and (max-width: 799px) and (min-width: 500px){
   .glitch {
-    font-size: x-large;
+    font-size: 3em;
   }
   .hidden{
   display: none;
   }
-  .links{
-    display: none;
-  }
-     .burgerLink {
-       display: block;
-     }
 }
 
 @media only screen and (max-width: 499px) and (min-width: 200px){
@@ -178,9 +153,6 @@
   .hidden{
   display: none;
 }
-.burgerLink {
-   display: block;
- }
 }
 
 .AboutUs{
