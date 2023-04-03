@@ -48,7 +48,6 @@ const AboutPage = () => {
       </Slide>
     );
   }
-  let parallaxStyles = `${style.parallax} ${style.sticky}`
   return (
     <>
       {/* <div className={parallaxStyles} style={{ minHeight: '200px' }}></div> */}
@@ -94,16 +93,6 @@ const AboutPage = () => {
           <div style={{ height: '20px' }}></div>
         </Typography>
       </Box>
-
-      <div className={style.parallax}></div>
-      <Box className={style.Section} sx={{ minHeight: 700 }}>
-        <SlideIn delay={500}>
-          <Typography align="center" variant="h2" my={2}>
-            Meet The Devs
-          </Typography>
-        </SlideIn>
-        <br />
-
         <Grid
           container
           spacing={2}
@@ -138,8 +127,9 @@ const AboutPage = () => {
           }).reverse()}
         </Grid>
       </Box>
-      <div className={style.parallax2}></div>
-      <div style={{ marginTop: '-50px', marginBottom: '-100px' }} className={style.Section}>
+      <div className={`${style.parallax2} ${style.parallax}`}></div>
+      <div style={{ margin: '20px' }}>
+        <div style={{ height: '20px' }}></div>
         <Typography align="center" variant="h2">
           Technology Used
         </Typography>
@@ -169,11 +159,11 @@ const AboutPage = () => {
               );
             })}
           </Grid>
+          <p className={style.bongos}>
+            🌴🪘🌴 Bongo sound board provided by FSA Instructor Tim Miller 🌴🪘🌴
+          </p>
         </Box>
       </div>
-      <p className={style.bongos}>
-        🌴🪘🌴 Bongo sound board provided by FSA Instructor Tim Miller 🌴🪘🌴
-      </p>
       <div className={style.parallax3}></div>
     </>
   );

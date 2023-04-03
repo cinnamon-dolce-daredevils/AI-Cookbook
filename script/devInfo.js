@@ -16,8 +16,8 @@ export const DevInfo = [
 	},
 	{
 		name: "Ben Villafranca",
-		description:
-			"Ben is a Marine veteran and college graduate of Rutgers - New Brunswick. If he isn't at his computer coding, he's probably running with his dog or cooking with his fiance.",
+		description: "Ben is a Marine veteran and college graduate of Rutgers - New Brunswick. He has a background in IT. If he isn't at his computer coding, he's probably running with his dog, Hope, or cooking with his fiance, Ananya.",
+
 		avatar: "/images/benpic.png",
 		linkedIn: "https://www.linkedin.com/in/ben-villafranca/",
 		GitHub: "https://github.com/bevilla203",
