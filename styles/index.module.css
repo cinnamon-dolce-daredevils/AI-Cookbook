@@ -1,3 +1,5 @@
+
+
 .removeUnderline{
   text-decoration: none;
 }
@@ -192,13 +194,17 @@
 }
 .triviaBox {
   /* position: fixed; */
-  min-width: 500px;
+  min-width: 0 auto;
   height: 100%;
-  margin-top: 150px;
-  margin-bottom: 250px;
+  margin: 50px 0;
+  /* margin-top: 50px;
+  margin-bottom: 50px; */
+  padding-bottom: 100px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
 }
 
 .triviaContainer {
@@ -207,6 +213,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 
@@ -518,15 +525,21 @@
 .reasons{
   display: flex;
   align-items: stretch;
+  justify-content: space-around;
   margin-bottom: 150px;
   margin-top: 100px;
+  height: auto;
+  padding-bottom: 100px;
+  
 }
 
 .reasonCard{
-  max-width: 250px;
+  max-width: 0 auto;
   margin: 20px;
   text-align: center;
 }
+
+
 
 .parallax {
   position: relative;
