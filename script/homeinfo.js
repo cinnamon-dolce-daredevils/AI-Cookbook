@@ -1,8 +1,8 @@
 export const whyAICookbook = [
 	{
 		iconUrl: "kitchen",
-		reason: "No more waste!",
-		explanation: "Pantry tracker means no more food waste",
+		reason: "No more waste",
+		explanation: "Pantry tracker means no more food waste!",
 	},
 	{
 		iconUrl: "time",
@@ -18,7 +18,7 @@ export const whyAICookbook = [
 	},
 	{
 		iconUrl: "fun",
-		reason: "Have Fun!",
+		reason: "Have Fun",
 		explanation:
 			"Cooking can be tiresome, so let our various AI personalities give an extra boost of motivation!",
 	},
