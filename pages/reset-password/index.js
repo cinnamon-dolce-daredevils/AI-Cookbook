@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import styles from '../../styles/profile.module.css'
+import Link from 'next/link';
+import { Button } from '@mui/material';
+import Box from '@mui/material';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-import Link from 'next/link';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -32,25 +35,30 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
-      <h1>Reset Password</h1>
+    <div className={styles.passReset}>
+      {success ? '' : <h1>Please Enter Your New Password</h1> }
       {success ? (
-        <p>
+        <h2 className={styles.pass}>
           Password has been reset successfully. You can now{' '}
-          <Link href="/profile">sign in</Link>.
-        </p>
+          <Link className={styles.link} href="/profile">sign in</Link>.
+        </h2>
       ) : (
-        <form onSubmit={handleReset}>
+        <form onSubmit={handleReset} className={styles.paper}>
           <input
+            sx={{ color: 'gray'}}
             type="password"
             placeholder="New Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" disabled={loading}>
-            {loading ? 'Loading...' : 'Reset Password'}
-          </button>
+          <Button
+          sx={{ color: 'white', textDecoration: 'none', margin: '10px' }}
+          variant='contained'
+          type="submit"
+          disabled={loading}>
+          {loading ? 'Loading...' : 'Reset Password'}
+          </Button>
           {error && <p>{error}</p>}
         </form>
       )}
