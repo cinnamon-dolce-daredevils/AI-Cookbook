@@ -14,26 +14,6 @@ width: 100%;
   background-size: cover;
 }
 
-.Section{
-  position: relative;
-  background-color: #1e1e22;
-  width: 100%;
-  min-height: 75vh;
-  padding: 0 calc(20vw - 70px);
-  z-index: 1
-}
-
-
-.sticky {
-  margin-top: -50vh;
-  width: 100vw;
-  height: 100vh;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
-  z-index: 0;
-}
-
 
 .parallax2 {
   position: relative;
