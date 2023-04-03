@@ -40,7 +40,9 @@ const Home = () => {
 					}
 					className={styles.icon}
 				/>
-          <h1 style={{color:'white'}}>Take the stress out of everyday cooking with AI</h1>
+				<h1 style={{ color: "white" }}>
+					Take the stress out of everyday cooking with AI
+				</h1>
 				{session ? (
 					<Link
 						style={{ textDecoration: "none", color: "white" }}
@@ -91,9 +93,8 @@ const Home = () => {
 			<Container className={styles.triviaBox}>
         <img src='/images/triviaIcon.png' style={{width:'150px', marginBottom:'0'}}/>
         <h2 style={{textAlign:'center'}}>Want to impress your friends and win the next trivia night at your bar? </h2>
-				<Container >
+				<Container className={styles.triviaContainer}>
 				  <TriviaSimpleGrow trivia={trivia} xs={12} />
-					{/* ) : null} */}
 				</Container>
 			</Container>
 		</>
