@@ -48,61 +48,60 @@ const AboutPage = () => {
       </Slide>
     );
   }
-  let parallaxStyles = `${style.parallax} ${style.sticky}`
   return (
-    <>
-      <div className={parallaxStyles} style={{ minHeight: '200px' }}></div>
-      <Box
-        className={style.Section}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignContent: 'center',
-        }}
-      >
-        <Typography
-          p={2}
-          align="center"
-          variant="h2"
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignContent: 'center',
-            width: '80%',
-          }}
-        >
-          Thank you for visiting our website! <br></br>
-          <div style={{ height: '20px' }}></div>
-          <Typography
-            sx={{
-              width: '80%',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              mb: 10,
-            }}
-          >
-            After three weeks of coding day and night, our team developed the
-            first version of AI Cookbook as a showcase of our skills after
-            attending FullStack Academy. We'll continue making updates until the
-            near future, but we do hope you enjoy our site. We've dedicated this
-            page to pull back the curtain and show how the project was made!
-          </Typography>
-          <div style={{ height: '20px' }}></div>
-        </Typography>
-      </Box>
+		<>
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+					alignContent: "center",
+				}}
+			>
+				<Typography
+					p={2}
+					align='center'
+					variant='h2'
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "center",
+						alignItems: "center",
+						alignContent: "center",
+						width: "80%",
+					}}
+				>
+					Thank you for visiting our website! <br></br>
+					<div style={{ height: "20px" }}></div>
+					<Typography
+						sx={{
+							width: "80%",
+							flexDirection: "column",
+							justifyContent: "center",
+							mb: 10,
+						}}
+					>
+						After three weeks of coding day and night, our team developed the
+						first version of AI Cookbook as a showcase of our skills after
+						attending FullStack Academy. We'll continue making updates until the
+						near future, but we do hope you enjoy our site. We've dedicated this
+						page to pull back the curtain and show how the project was made!
+					</Typography>
+					<div style={{ height: "20px" }}></div>
+				</Typography>
+			</Box>
 
-      <div className={style.parallax}></div>
-      <Box className={style.Section} sx={{ minHeight: 700 }}>
-        <SlideIn delay={500}>
-          <Typography align="center" variant="h2" my={2}>
-            Meet The Devs
-          </Typography>
-        </SlideIn>
-        <br />
+			<div className={style.parallax}></div>
+			<Box sx={{ minHeight: 700 }}>
+				<SlideIn delay={500}>
+					<Typography align='center' variant='h2' my={2}>
+						Meet The Devs
+					</Typography>
+				</SlideIn>
+				<br />
+
+
 
         <Grid
           container
@@ -138,8 +137,9 @@ const AboutPage = () => {
           }).reverse()}
         </Grid>
       </Box>
-      <div className={style.parallax2}></div>
-      <div style={{ marginTop: '-50px', marginBottom: '-100px' }} className={style.Section}>
+      <div className={`${style.parallax2} ${style.parallax}`}></div>
+      <div style={{ margin: '20px' }}>
+        <div style={{ height: '20px' }}></div>
         <Typography align="center" variant="h2">
           Technology Used
         </Typography>
@@ -169,11 +169,11 @@ const AboutPage = () => {
               );
             })}
           </Grid>
+          <p className={style.bongos}>
+            🌴🪘🌴 Bongo sound board provided by FSA Instructor Tim Miller 🌴🪘🌴
+          </p>
         </Box>
       </div>
-      <p className={style.bongos}>
-        🌴🪘🌴 Bongo sound board provided by FSA Instructor Tim Miller 🌴🪘🌴
-      </p>
       <div className={style.parallax3}></div>
     </>
   );
