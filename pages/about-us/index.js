@@ -51,13 +51,13 @@ const AboutPage = () => {
   let parallaxStyles = `${style.parallax} ${style.sticky}`
   return (
     <>
-      <div className={parallaxStyles} style={{ minHeight: '200px' }}></div>
+      {/* <div className={parallaxStyles} style={{ minHeight: '200px' }}></div> */}
       <Box
         className={style.Section}
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent:'center',
           alignItems: 'center',
           alignContent: 'center',
         }}

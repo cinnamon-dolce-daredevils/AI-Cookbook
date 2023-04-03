@@ -18,13 +18,14 @@ width: 100%;
   position: relative;
   background-color: #1e1e22;
   width: 100%;
-  min-height: 100vh;
-  padding: 3em calc(20vw - 70px);
+  min-height: 75vh;
+  padding: 0 calc(20vw - 70px);
   z-index: 1
 }
 
+
 .sticky {
-  margin-top: -100vh;
+  margin-top: -50vh;
   width: 100vw;
   height: 100vh;
   position: -webkit-sticky; /* Safari */
