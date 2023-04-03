@@ -59,20 +59,20 @@
 }
 
 .bongos {
-  width: 550px;
+  width: 0 auto;
   color: 'white';
   position: relative;
-  left: 1100px;
   bottom: 30px;
+  text-align: right;
 }
 
 @media only screen and (max-width: 600px){
     .bongos{
         position: relative;
-        left: 5px;
+        left: 0;
         bottom: 25px;
-        width: auto;
-        font-size: 13px;
+        width: 0 auto;
+        font-size: 10px;
         text-align: center;
     }
 }
