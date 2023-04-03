@@ -60,8 +60,8 @@ const handleClick = async () => {
 			>
 				<Grow in={checked}>
 					<Typography variant='body1' sx={{ p: 2 }}>
-						dummy trivia
-						{/* {trivia} */}
+						{/* dummy trivia */}
+						{trivia}
 					</Typography>
 				</Grow>
 				{/* Conditionally applies the timeout prop to change the entry speed. */}

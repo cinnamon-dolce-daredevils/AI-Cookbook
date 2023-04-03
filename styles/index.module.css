@@ -28,6 +28,7 @@
       background-image: url('/images/background/ingBG3-dark.jpg');
       background-size: cover;
       min-height: 650px;
+      width: 100%;
       
 }
 
@@ -534,7 +535,8 @@
   background-image: url('.././public/images/background/ingBG1.jpg');
 
   /* Set a specific height */
-  min-height: 300px;
+  min-height: 400px;
+  width: 100%;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;

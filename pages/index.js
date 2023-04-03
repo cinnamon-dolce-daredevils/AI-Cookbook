@@ -40,7 +40,9 @@ const Home = () => {
 					}
 					className={styles.icon}
 				/>
-          <h1 style={{color:'white'}}>Take the stress out of everyday cooking with AI</h1>
+				<h1 style={{ color: "white" }}>
+					Take the stress out of everyday cooking with AI
+				</h1>
 				{session ? (
 					<Link
 						style={{ textDecoration: "none", color: "white" }}
@@ -77,22 +79,36 @@ const Home = () => {
 					</>
 				)}
 			</div>
-      <div>
-       <h1 style={{width:'100%', textAlign:'center', marginTop:'125px'}}>Why AI Cookbook?</h1>
-       <Container>
-        <div className={styles.reasons} direction='row'>
-          {whyAICookbook.map((reason)=>{
-            return <ReasonCards icon={reason.iconUrl} reason={reason.reason} explanation={reason.explanation}/>
-          })}
-        </div>
-       </Container>
-      </div>
-          <div className={styles.parallax}></div>
+			<div>
+				<h1 style={{ width: "100%", textAlign: "center", marginTop: "125px" }}>
+					Why AI Cookbook?
+				</h1>
+				{"\n"}
+				<Container>
+					<div className={styles.reasons} direction='row'>
+						{whyAICookbook.map((reason) => {
+							return (
+								<ReasonCards
+									icon={reason.iconUrl}
+									reason={reason.reason}
+									explanation={reason.explanation}
+								/>
+							);
+						})}
+					</div>
+				</Container>
+			</div>
+			<div className={styles.parallax}></div>
 			<div className={styles.triviaBox}>
-        <img src='/images/triviaIcon.png' style={{width:'150px', marginBottom:'0'}}/>
-        <h2 style={{textAlign:'center'}}>Want to impress your friends and win the next trivia night at your bar? </h2>
+				<img
+					src='/images/triviaIcon.png'
+					style={{ width: "150px", marginBottom: "0" }}
+				/>
+				<h2 style={{ textAlign: "center" }}>
+					Want to impress your friends and win your favorite bar's trivia night?{" "}
+				</h2>
 				<Container className={styles.triviaContainer}>
-         <TriviaSimpleGrow trivia = {trivia}/>
+					<TriviaSimpleGrow trivia={trivia} />
 					{/* ) : null} */}
 				</Container>
 			</div>
