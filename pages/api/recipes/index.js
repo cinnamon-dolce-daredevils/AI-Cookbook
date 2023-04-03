@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState, useContext } from "react";
 import Link from "next/link";
 import { Typography } from "@mui/material";
-
+import styles from '../../../styles/index.module.css'
 export default function RecipeAI() {
   const [ingredientsInput, setIngredientsInput] = useState("");
   const [result, setResult] = useState();

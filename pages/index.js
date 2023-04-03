@@ -40,7 +40,7 @@ const Home = () => {
 					}
 					className={styles.icon}
 				/>
-				<h1 style={{ color: "white" }}>
+				<h1 style={{ color: "white", textAlign: 'center'}}>
 					Take the stress out of everyday cooking with AI
 				</h1>
 				{session ? (
@@ -90,13 +90,13 @@ const Home = () => {
        </Container>
       </div>
           <div className={styles.parallax}></div>
-			<Container className={styles.triviaBox}>
-        <img src='/images/triviaIcon.png' style={{width:'150px', marginBottom:'0'}}/>
-        <h2 style={{textAlign:'center'}}>Want to impress your friends and win the next trivia night at your bar? </h2>
-				<Container className={styles.triviaContainer}>
+		<div className={styles.triviaBox}>
+			  <img className={styles.triviaImg} src='/images/triviaIcon.png' style={{width:'150px', marginBottom:'0'}}/>
+        	<h2 style={{textAlign:'center'}}>Want to impress your friends and win the next trivia night at your bar? </h2>
+			<Container className={styles.triviaContainer}>
 				  <TriviaSimpleGrow trivia={trivia} xs={12} />
-				</Container>
 			</Container>
+		</div>
 		</>
 	);
 }
