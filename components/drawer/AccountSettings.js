@@ -149,14 +149,17 @@ export default function AccountMenu() {
 				transformOrigin={{ horizontal: "right", vertical: "top" }}
 				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 			>
-				<Link style={{ textDecoration: "none" }} href='/profile'>
-					<MenuItem sx={{ color: "white", mr: "auto" }} onClick={handleClose}>
-						<PersonOutlineIcon className='Menutext' />{" "}
-						<div style={{ paddingLeft: "10px" }}>Profile </div>
-					</MenuItem>
-				</Link>
 				{session ? (
 					<>
+						<Link style={{ textDecoration: "none" }} href='/profile'>
+							<MenuItem
+								sx={{ color: "white", mr: "auto" }}
+								onClick={handleClose}
+							>
+								<PersonOutlineIcon className='Menutext' />{" "}
+								<div style={{ paddingLeft: "10px" }}>Profile </div>
+							</MenuItem>
+						</Link>
 						<MenuItem
 							sx={{ color: theme.palette.text.primary }}
 							onClick={handleClose}
@@ -188,7 +191,14 @@ export default function AccountMenu() {
 							</Link>
 						</div>
 					</>
-				) : null}
+				) : (
+					<Link style={{ textDecoration: "none" }} href='/profile'>
+						<MenuItem sx={{ color: "white", mr: "auto" }} onClick={handleClose}>
+							<PersonOutlineIcon className='Menutext' />{" "}
+							<div style={{ paddingLeft: "10px" }}>Sign up/Login </div>
+						</MenuItem>
+					</Link>
+				)}
 				<div className={styles.burgerLink}>
 					<Link href={"/about-us"} className={styles.burgerLink}>
 						<MenuItem

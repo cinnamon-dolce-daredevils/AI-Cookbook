@@ -41,7 +41,7 @@ const Home = () => {
 					alt='Logo'
 					className={styles.icon}
 				/>
-				<h1 style={{ color: "white", textAlign: 'center'}}>
+				<h1 style={{ color: "white", textAlign: "center" }}>
 					Take the stress out of everyday cooking with AI
 				</h1>
 				{session ? (
@@ -62,7 +62,7 @@ const Home = () => {
 					</Link>
 				) : (
 					<>
-						<h3 style={{color: 'white'}}> Please Sign up or Login first!</h3>
+						<h3 style={{ color: "white" }}> Please Sign up or Login first!</h3>
 						<Link style={{ textDecoration: "none" }} href={"/profile"}>
 							<Button
 								sx={{
@@ -80,24 +80,85 @@ const Home = () => {
 					</>
 				)}
 			</div>
-      <div>
-       <h2 style={{width:'100%', textAlign:'center', marginTop:'125px'}}>Why AI Cookbook?</h2>
-       <Container>
-				  <Grid className={styles.reasons} container spacing={1}>
-          {whyAICookbook.map((reason, idx)=>{
-            return <ReasonCards key={idx} icon={reason.iconUrl} reason={reason.reason} explanation={reason.explanation}/>
-          })}
-        </Grid>
-       </Container>
-      </div>
-          <div className={styles.parallax}></div>
-		<div className={styles.triviaBox}>
-			  <img className={styles.triviaImg} alt='Trivia Icon' src='/images/triviaIcon.png' style={{width:'150px', marginBottom:'0'}}/>
-        	<h2 style={{textAlign:'center'}}>Want to impress your friends and win the next trivia night at your bar? </h2>
-			<Container className={styles.triviaContainer}>
-				  <TriviaSimpleGrow trivia={trivia} xs={12} />
-			</Container>
-		</div>
+			<div>
+				<h1 style={{ width: "100%", textAlign: "center", marginTop: "125px", marginBottom:'50px' }}>
+					Why AI Cookbook?
+				</h1>
+				<Container>
+					<Grid className={styles.reasons} container spacing={1}>
+						{whyAICookbook.map((reason, idx) => {
+							return (
+								<ReasonCards
+									key={idx}
+									icon={reason.iconUrl}
+									reason={reason.reason}
+									explanation={reason.explanation}
+								/>
+							);
+						})}
+						{session ? (
+							<div className={styles.whyButton}>
+								<h3>
+									{" "}
+									Find out more about it here!
+								</h3>
+								<Link
+									style={{ textDecoration: "none", color: "white" }}
+									href={"/ingredients-recipes"}
+								>
+									<Button
+										sx={{
+											backgroundColor: theme.palette.secondary.main,
+											color: theme.palette.common.white,
+											// margin: "40px",
+											// mt: 3,
+										}}
+									>
+										Add Ingredients
+									</Button>
+								</Link>
+							</div>
+						) : (
+							<div className={styles.whyButton}>
+								<h2 style={{ color: "white" }}>
+									{" "}
+									Start exploring now!
+								</h2>
+								<Link style={{ textDecoration: "none" }} href={"/profile"}>
+									<Button
+										sx={{
+											color: "white",
+											backgroundColor: theme.palette.secondary.main,
+											textDecoration: "none",
+											// margin: "40px",
+										}}
+										variant='contained'
+									>
+										{" "}
+										Signup/Login
+									</Button>
+								</Link>
+							</div>
+						)}
+					</Grid>
+				</Container>
+			</div>
+			<div className={styles.parallax}></div>
+			<div className={styles.triviaBox}>
+				<img
+					className={styles.triviaImg}
+					alt='Trivia Icon'
+					src='/images/triviaIcon.png'
+					style={{ width: "150px", marginBottom: "0" }}
+				/>
+				<h2 style={{ textAlign: "center" }}>
+					Want to impress your friends and win the next trivia night at your
+					bar?{" "}
+				</h2>
+				<Container className={styles.triviaContainer}>
+					<TriviaSimpleGrow trivia={trivia} xs={12} />
+				</Container>
+			</div>
 		</>
 	);
 }

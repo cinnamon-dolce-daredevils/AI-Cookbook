@@ -197,9 +197,9 @@ let refreshRate = 2000
 							>
 								AI Cookbook
 							</Link>
-							<Link href='/ingredients-recipes' className={styles.links}>
+							{userId?<Link href='/ingredients-recipes' className={styles.links}>
 								ADD INGREDIENTS
-							</Link>
+							</Link>:null}
 							<Link href='/about-us' className={styles.links}>
 								ABOUT US
 							</Link>
