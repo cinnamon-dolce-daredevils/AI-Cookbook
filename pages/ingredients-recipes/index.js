@@ -39,7 +39,7 @@ export default function IngredientRecipe({ data }) {
         .insert([{ selectedRecipe, userId }]);
       if (error) throw error;
     } catch (error) {
-      console.log("Error inserting into favorites:", error.message);
+      console.error("Error inserting into favorites:", error.message);
     }
   };
   const toggleFavorite = async (selectedRecipe) => {
@@ -59,7 +59,7 @@ export default function IngredientRecipe({ data }) {
       }
       setIsFavorite(!isFavorite);
     } catch (error) {
-      console.log("Error toggling favorite:", error.message);
+      console.error("Error toggling favorite:", error.message);
     }
   };
 
@@ -420,7 +420,7 @@ export default function IngredientRecipe({ data }) {
 						<div className={styles.loadingOverlay}>
 							<div className={styles.loading}>
 								<h2>Loading...</h2>
-								<img src='/images/fridge.gif' />
+								<img src='/images/fridge.gif' alt="Fridge Gif" />
 							</div>
 						</div>
 					</>
@@ -441,7 +441,7 @@ export default function IngredientRecipe({ data }) {
 							<div className={styles.loadingOverlay}>
 								<div className={styles.loading}>
 									<h1>Loading audio...</h1>
-									<img src='/images/speech.gif' />
+									<img src='/images/speech.gif' alt="Speech GIF"/>
 								</div>
 							</div>
 						)}

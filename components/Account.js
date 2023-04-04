@@ -63,7 +63,7 @@ export default function Account({ session }) {
       alert('Profile updated!');
     } catch (error) {
       alert('Error updating the data!');
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }

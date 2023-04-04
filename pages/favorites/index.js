@@ -47,7 +47,7 @@ const FavoritesPage = (userId) => {
 				.insert([{ selectedRecipe, userId }]);
 			if (error) throw error;
 		} catch (error) {
-			console.log("Error inserting into favorites:", error.message);
+			console.error("Error inserting into favorites:", error.message);
 		}
 	};
 
@@ -69,7 +69,7 @@ const FavoritesPage = (userId) => {
 			setIsFavorite(!isFavorite);
 
 		} catch (error) {
-			console.log("Error toggling favorite:", error.message);
+			console.error("Error toggling favorite:", error.message);
 		}
 	};
 

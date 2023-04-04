@@ -31,7 +31,6 @@ function playAudio(audioPath) {
 
 const IngredientDetails = (props) => {
   const theme = useTheme()
-  console.log(theme)
   const { isMuted } = useMute();
 	const supabase = createClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -51,7 +50,6 @@ const IngredientDetails = (props) => {
   const handleQuantChange = async() => {
 	const { data, error } = await supabase
 		.from("pantry")
-		// .select({ quantity: quantity, unit: unit })
 		.update({ quantity: quantity, unit: unit })
 		.eq("id", props.item.id);
     setOpen(false);

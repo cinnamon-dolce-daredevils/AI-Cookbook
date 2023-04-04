@@ -9,7 +9,6 @@ import CelebrationIcon from "@mui/icons-material/Celebration";
 
 export default function ReasonCards(props) {
 	const { icon, reason, explanation } = props;
-    console.log(icon)
 
     const renderIcon =()=>{
         switch (icon) {
