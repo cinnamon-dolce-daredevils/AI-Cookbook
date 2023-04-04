@@ -1,35 +1,35 @@
-import React from 'react'
-import styles from '../styles/aboutPage.module.css'
-import avatar from'../public/images/ryanpic.png'
+import React from "react";
+import styles from "../styles/aboutPage.module.css";
+import avatar from "../public/images/ryanpic.png";
 import Box from "@mui/material/Box";
 import Grow from "@mui/material/Grow";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Avatar, Link, Typography } from '@mui/material';
-import { useTheme } from '@emotion/react';
+import { Avatar, Link, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
 import { useMute } from "@/components/MuteContext";
 
 export default function SimpleGrow(props) {
-    const theme = useTheme()
+	const theme = useTheme();
 	const [checked, setChecked] = React.useState(false);
-    const {name, description, linkedIn, gitHub, avatar} = props
+	const { name, description, linkedIn, gitHub, avatar } = props;
 	const { isMuted } = useMute();
 
 	function playAudio(audioPath) {
 		const audio = new Audio(audioPath);
 		audio.play();
-	  }
+	}
 
-	  const handleClick = () => {
+	const handleClick = () => {
 		if (!isMuted) {
-		  if (checked) {
-			playAudio('/audio/Short.m4a');
-		  } else {
-			playAudio('/audio/New Recording.m4a');
-		  }
+			if (checked) {
+				playAudio("/audio/Short.m4a");
+			} else {
+				playAudio("/audio/New Recording.m4a");
+			}
 		}
 		setChecked((prev) => !prev);
-	  };
+	};
 
 	return (
 		<Box sx={{ height: "auto" }}>

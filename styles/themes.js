@@ -5,8 +5,8 @@ export const lightMode = createTheme({
 	palette: {
 		mode: "light",
 		primary: {
-			main: "#589981", 
-      // main: "#ff971A",
+			main: "#589981",
+			// main: "#ff971A",
 		},
 		secondary: {
 			main: "#bea9df",
@@ -15,7 +15,7 @@ export const lightMode = createTheme({
 			default: "#eae8e8", // Light background color
 		},
 		hover: {
-			main: "#ff4081",
+			main: "#2c3e50",
 		},
 
 		text: {
@@ -40,7 +40,7 @@ export const darkMode = createTheme({
 			default: "#1e1e22",
 		},
 		hover: {
-			main: "red",
+			main: "#2c3e50",
 		},
 		text: {
 			primary: "#fafafa",

@@ -10,13 +10,52 @@
   align-items: center;
 }
 
-.links{
+.links {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
   margin-left: 20px;
   font-size: medium;
+  position: relative;
 }
+
+.links:hover {
+  color:#767b81
+   /* change the text color on hover */
+}
+
+.links::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  /* set the line color */
+  transition: width 0.3s ease-in-out;
+  /* add transition effect */
+}
+
+.links:hover::after {
+  width: 100%;
+  /* show the line on hover */
+  animation: fill 1s forwards;
+  /* add fill animation */
+}
+
+@keyframes fill {
+  0% {
+    width: 0%;
+    /* start with no width */
+  }
+
+  100% {
+    width: 100%;
+    /* end with full width */
+  }
+}
+
 .burgerLink{
   color: white;
   text-decoration: none;
