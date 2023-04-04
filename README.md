@@ -1,15 +1,20 @@
 Description
-
+![Javascript](AI-CookBook-Screenshots/javascript.svg)
 
 
 
 ---
 The Pages of AI CookBook
 ---
-
+---
 **`Home Page Dark/Light Mode`**
 ![Home Page Dark Mode](AI-CookBook-Screenshots/homedarkmode.png)
 ![Home Page Light Mode](AI-CookBook-Screenshots/homelightmode.png)
+---
+---
+**`Settings Dark/Light Mode`**
+![Settings Dark Mode](AI-CookBook-Screenshots/settingsdarkmode.png)
+![Settings Light Mode](AI-CookBook-Screenshots/settingslightmode.png)
 ---
 
 ---
