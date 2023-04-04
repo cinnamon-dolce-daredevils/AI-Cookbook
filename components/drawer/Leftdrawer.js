@@ -150,117 +150,134 @@ let refreshRate = 2000
   }
 
   return (
-    <>
-      <Box
-        sx={{
-          display: 'flex'
-        }}
-      >
-        <AppBar
-          sx={{ backgroundColor: theme.palette.primary.main }}
-          position="fixed"
-          open={open}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{
-                mr: 2,
-                backgroundColor: theme.palette.primary,
-                ...(open && { display: 'none' }),
-              }}
-            >
+		<>
+			<Box
+				sx={{
+					display: "flex",
+				}}
+			>
+				<AppBar
+					sx={{ backgroundColor: theme.palette.primary.main }}
+					position='fixed'
+					open={open}
+				>
+					<Toolbar>
+						<IconButton
+							color='inherit'
+							aria-label='open drawer'
+							onClick={handleDrawerOpen}
+							edge='start'
+							sx={{
+								mr: 2,
+								backgroundColor: theme.palette.primary,
+								...(open && { display: "none" }),
+							}}
+						>
+							{/* fridge badge is below */}
 
-              {/* fridge badge is below */}
-
-              <Badge
-                badgeContent={pantryItems.length}
-                color="error"
-                sx={{
-                  '& .MuiBadge-badge': {
-
-                    background: '#10a37f',
-
-                  },
-                }}
-              >
-                <KitchenTwoToneIcon />
-              </Badge>
-            </IconButton>
-            <div className={styles.container}>
-              <Link
-                href="/"
-                className={
-                  open ? `${styles.hidden} ${styles.glitch}` : styles.glitch
-                }
-                data-glitch="AI Cookbook"
-              >
-                AI Cookbook
-              </Link>
-            </div>
-            <div style={{ position: 'absolute', right: '100px' }}></div>
-            <Box
-              sx={{
-                position: 'absolute',
-                right: '50px',
-                display: 'flex',
-              }}
-            >
-
-
-              <AccountSettings />
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <div>
-          <Drawer
-            sx={{
-              width: drawerWidth,
-              flexShrink: 0,
-              '& .MuiDrawer-paper': {
-                width: drawerWidth,
-                boxSizing: 'border-box',
-                backgroundColor: theme.palette.secondary.main,
-                filter: 'drop-shadow(5px 5px 19px rgba(0, 0, 0, 1))'
-              },
-            }}
-            variant="persistent"
-            anchor="left"
-            open={open}
-          >
-            <DrawerHeader>
-              <div sx={{ color: theme.palette.mode==='light'?'white':'black' }}> My Pantry </div>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'ltr' ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </DrawerHeader>
-            <Divider />
-            <List>
-              {pantryItems.map((item, index) => {
-                return (
-                  <IngredientDetails item={item} index={index} key={uuidv4()} />
-                );
-              })}
-            </List>
-            <ImageContainer>
-            {pantryItems.length <= 3 && (
-    <Image src={pizzamans} alt="Click on an ingredient to see it's nutrional facts!" style={{ width: '90%', height: 'auto', margin: 20, filter: 'drop-shadow(5px 5px 9px rgba(0, 0, 0, 1))' }} />
-            )}
-  </ImageContainer>
-          </Drawer>
-        </div>
-        <Main open={open}>
-          <DrawerHeader />
-        </Main>
-      </Box>
-    </>
-  );
+							<Badge
+								badgeContent={pantryItems.length}
+								color='error'
+								sx={{
+									"& .MuiBadge-badge": {
+										background: "#10a37f",
+									},
+								}}
+							>
+								<KitchenTwoToneIcon />
+							</Badge>
+						</IconButton>
+						<div className={styles.container}>
+							<Link
+								href='/'
+								className={
+									open ? `${styles.hidden} ${styles.glitch}` : styles.glitch
+								}
+								data-glitch='AI Cookbook'
+							>
+								AI Cookbook
+							</Link>
+							<Link href='/ingredients-recipes' className={styles.links}>
+								ADD INGREDIENTS
+							</Link>
+							<Link href='/about-us' className={styles.links}>
+								ABOUT US
+							</Link>
+						</div>
+						<div style={{ position: "absolute", right: "100px" }}></div>
+						<Box
+							sx={{
+								position: "absolute",
+								right: "50px",
+								display: "flex",
+							}}
+						>
+							<AccountSettings />
+						</Box>
+					</Toolbar>
+				</AppBar>
+				<div>
+					<Drawer
+						sx={{
+							width: drawerWidth,
+							flexShrink: 0,
+							"& .MuiDrawer-paper": {
+								width: drawerWidth,
+								boxSizing: "border-box",
+								backgroundColor: theme.palette.secondary.main,
+								filter: "drop-shadow(5px 5px 19px rgba(0, 0, 0, 1))",
+							},
+						}}
+						variant='persistent'
+						anchor='left'
+						open={open}
+					>
+						<DrawerHeader>
+							<div
+								sx={{
+									color: theme.palette.mode === "light" ? "white" : "black",
+								}}
+							>
+								{" "}
+								My Pantry{" "}
+							</div>
+							<IconButton onClick={handleDrawerClose}>
+								{theme.direction === "ltr" ? (
+									<ChevronLeftIcon />
+								) : (
+									<ChevronRightIcon />
+								)}
+							</IconButton>
+						</DrawerHeader>
+						<Divider />
+						<List>
+							{pantryItems.map((item, index) => {
+								return (
+									<IngredientDetails item={item} index={index} key={uuidv4()} />
+								);
+							})}
+						</List>
+						<ImageContainer>
+							{pantryItems.length <= 3 && (
+								<Image
+									src={pizzamans}
+									alt="Click on an ingredient to see it's nutrional facts!"
+									style={{
+										width: "90%",
+										height: "auto",
+										margin: 20,
+										filter: "drop-shadow(5px 5px 9px rgba(0, 0, 0, 1))",
+									}}
+								/>
+							)}
+						</ImageContainer>
+					</Drawer>
+				</div>
+				<Main open={open}>
+					<DrawerHeader />
+				</Main>
+			</Box>
+		</>
+	);
 }
 
