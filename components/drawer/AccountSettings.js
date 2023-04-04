@@ -1,4 +1,5 @@
 import * as React from "react";
+import styles from "../../styles/leftdrawer.module.css";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -26,7 +27,9 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControl from "@mui/material/FormControl";
 import { useMute } from "../MuteContext";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import AddTaskIcon from "@mui/icons-material/AddTask";
 import { useSession } from '@supabase/auth-helpers-react';
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 export default function AccountMenu() {
   const theme = useTheme();
   const { isMuted, setIsMuted } = useMute();
@@ -88,207 +91,225 @@ export default function AccountMenu() {
   };
 
   return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          textAlign: "center",
-          paddingRight: "0",
-        }}
-      >
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="medium"
-            sx={{ position: "relative", left: "35px" }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <AccountCircleIcon fontSize="large" sx={{ color: "white" }} />
-          </IconButton>
-        </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "hidden",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            backgroundColor: theme.palette.secondary.main,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              color: "black",
-              backgroundColor: "white",
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-              backgroundColor: theme.palette.secondary.main,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        <Link style={{ textDecoration: "none" }} href="/profile">
-          <MenuItem sx={{ color: "white", mr: "auto" }} onClick={handleClose}>
-            <Avatar className="Menutext" />{" "}
-            <div style={{ paddingLeft: "10px" }}>Profile </div>
-          </MenuItem>
-        </Link>
-        {session ?
-        <MenuItem
-          sx={{ color: theme.palette.text.primary }}
-          onClick={handleClose}
-        >
-          <Link
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
-          href={'/favorites'}
-          >
-            <GradeIcon sx={{ color: "white", mr: 1 }} />
-            <span style={{ position: "relative", bottom: "5px" }}>
-              Favorites
-            </span>
-          </Link>
-        </MenuItem>
-         : null }
-        <MenuItem
-          sx={{ color: theme.palette.text.primary }}
-          onClick={handleClose}
-        >
-          <Link
-            style={{
-              color: "white",
-              textDecoration: "none",
-            }}
-            href={"/about-us"}
-          >
-            <InfoOutlinedIcon sx={{ color: "white", mr: 1 }} />
-            <span style={{ position: "relative", bottom: "5px" }}>
-              {" "}
-              About Us
-            </span>
-          </Link>
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleSettingsOpen} sx={{ color: "white" }}>
-          <ListItemIcon>
-            <Settings fontSize="small" sx={{ color: "white" }} />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <Dialog open={settingsOpen} onClose={handleSettingsClose}>
-          <DialogTitle
-            sx={{
-              color: theme.palette.text.primary,
-              backgroundColor: theme.palette.secondary.main,
-            }}
-          >
-            Settings
-          </DialogTitle>
-          <DialogContent
-            sx={{
-              backgroundColor: theme.palette.secondary.main,
-              padding: (theme) => theme.spacing(3),
-            }}
-          >
-            <Typography
-              sx={{ color: theme.palette.common.white, fontWeight: "bold" }}
-            >
-              Choose a Color Theme
-            </Typography>
+		<>
+			<Box
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					textAlign: "center",
+					paddingRight: "0",
+				}}
+			>
+				<Tooltip title='Account settings'>
+					<IconButton
+						onClick={handleClick}
+						size='medium'
+						sx={{ position: "relative", left: "35px" }}
+						aria-controls={open ? "account-menu" : undefined}
+						aria-haspopup='true'
+						aria-expanded={open ? "true" : undefined}
+					>
+						<AccountCircleIcon fontSize='large' sx={{ color: "white" }} />
+					</IconButton>
+				</Tooltip>
+			</Box>
+			<Menu
+				anchorEl={anchorEl}
+				id='account-menu'
+				open={open}
+				onClose={handleClose}
+				PaperProps={{
+					elevation: 0,
+					sx: {
+						overflow: "hidden",
+						filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+						mt: 1.5,
+						backgroundColor: theme.palette.secondary.main,
+						"& .MuiAvatar-root": {
+							width: 32,
+							height: 32,
+							color: "black",
+							backgroundColor: "white",
+						},
+						"&:before": {
+							content: '""',
+							display: "block",
+							position: "absolute",
+							top: 0,
+							right: 14,
+							width: 10,
+							height: 10,
+							bgcolor: "background.paper",
+							transform: "translateY(-50%) rotate(45deg)",
+							zIndex: 0,
+							backgroundColor: theme.palette.secondary.main,
+						},
+					},
+				}}
+				transformOrigin={{ horizontal: "right", vertical: "top" }}
+				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+			>
+				<Link style={{ textDecoration: "none" }} href='/profile'>
+					<MenuItem sx={{ color: "white", mr: "auto" }} onClick={handleClose}>
+						<PersonOutlineIcon className='Menutext' />{" "}
+						<div style={{ paddingLeft: "10px" }}>Profile </div>
+					</MenuItem>
+				</Link>
+				{session ? (
+					<>
+						<MenuItem
+							sx={{ color: theme.palette.text.primary }}
+							onClick={handleClose}
+						>
+							<Link
+								style={{
+									color: "white",
+									textDecoration: "none",
+								}}
+								href={"/favorites"}
+							>
+								<GradeIcon sx={{ color: "white", mr: 1 }} />
+								<span style={{ position: "relative", bottom: "5px" }}>
+									Favorites
+								</span>
+							</Link>
+						</MenuItem>
+						<div className={styles.burgerLink}>
+							<Link href={"/ingredients-recipes"} className={styles.burgerLink}>
+								<MenuItem
+									sx={{ color: theme.palette.text.primary }}
+									onClick={handleClose}
+								>
+									<AddTaskIcon sx={{ color: "white", mr: 1, mb: 1.5 }} />
+									<span style={{ position: "relative", bottom: "5px" }}>
+										Add Ingredients
+									</span>
+								</MenuItem>
+							</Link>
+						</div>
+					</>
+				) : null}
+				<div className={styles.burgerLink}>
+					<Link href={"/about-us"} className={styles.burgerLink}>
+						<MenuItem
+							sx={{ color: theme.palette.text.primary }}
+							onClick={handleClose}
+						>
+							<InfoOutlinedIcon sx={{ color: "white", mr: 1, mb: 1.5 }} />
+							<span style={{ position: "relative", bottom: "5px" }}>
+								About Us
+							</span>
+						</MenuItem>
+					</Link>
+				</div>
+				<Divider />
+				<MenuItem onClick={handleSettingsOpen} sx={{ color: "white" }}>
+					<ListItemIcon>
+						<Settings
+							fontSize='small'
+							sx={{ color: "white", mr: 1, mb: 1.5 }}
+						/>
+					</ListItemIcon>
+					<span style={{ position: "relative", bottom: "5px", right: "5px" }}>
+						Settings
+					</span>
+				</MenuItem>
+				<Dialog open={settingsOpen} onClose={handleSettingsClose}>
+					<DialogTitle
+						sx={{
+							color: theme.palette.text.primary,
+							backgroundColor: theme.palette.secondary.main,
+						}}
+					>
+						Settings
+					</DialogTitle>
+					<DialogContent
+						sx={{
+							backgroundColor: theme.palette.secondary.main,
+							padding: (theme) => theme.spacing(3),
+						}}
+					>
+						<Typography
+							sx={{ color: theme.palette.common.white, fontWeight: "bold" }}
+						>
+							Choose a Color Theme
+						</Typography>
 
-            <ThemeChooser />
+						<ThemeChooser />
 
-            <form noValidate autoComplete="off">
-              <Typography
-                sx={{ color: theme.palette.common.white, fontWeight: "bold" }}
-              >
-                Choose a Famous Person to Help You Cook
-              </Typography>
-              <RadioGroup
-                aria-label="personality"
-                name="personality"
-                value={tempSelectedPersonality}
-                onChange={handleChangePersonality}
-                sx={{
-                  marginTop: (theme) => theme.spacing(2),
-                  marginBottom: (theme) => theme.spacing(2),
-                  color: "black",
-                }}
-              >
-                <FormControlLabel
-                  value="AI"
-                  control={<Radio />}
-                  label="AI"
-                  sx={{ color: "white" }}
-                />
-                <FormControlLabel
-                  value="Snoop Dogg"
-                  control={<Radio />}
-                  label="Snoop Dogg"
-                  sx={{ color: "white" }}
-                />
-                <FormControlLabel
-                  value="Spongebob"
-                  control={<Radio />}
-                  label="Spongebob"
-                  sx={{ color: "white" }}
-                />
-                <FormControlLabel
-                  value="Gordon Ramsay"
-                  control={<Radio />}
-                  label="Gordon Ramsay"
-                  sx={{ color: "white" }}
-                />
-                <FormControlLabel
-                  value="Ariana Grande"
-                  control={<Radio />}
-                  label="Ariana Grande"
-                  sx={{ color: "white" }}
-                />
-              </RadioGroup>
-              <Button
-            variant="contained"
-            onClick={handleApplyChanges}
-            sx={{ backgroundColor: theme.palette.primary.main, color: 'white' }}
-          >
-            Apply Changes
-          </Button>
-            </form>
-            <FormControl component="fieldset">
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Switch checked={isMuted} onChange={handleMuteChange} />
-                  }
-                  label="Mute Sounds"
-                  sx={{ color: "white" }}
-                />
-              </FormGroup>
-            </FormControl>
-          </DialogContent>
-        </Dialog>
-      </Menu>
-    </>
-  );
+						<form noValidate autoComplete='off'>
+							<Typography
+								sx={{ color: theme.palette.common.white, fontWeight: "bold" }}
+							>
+								Choose a Famous Person to Help You Cook
+							</Typography>
+							<RadioGroup
+								aria-label='personality'
+								name='personality'
+								value={tempSelectedPersonality}
+								onChange={handleChangePersonality}
+								sx={{
+									marginTop: (theme) => theme.spacing(2),
+									marginBottom: (theme) => theme.spacing(2),
+									color: "black",
+								}}
+							>
+								<FormControlLabel
+									value='AI'
+									control={<Radio />}
+									label='AI'
+									sx={{ color: "white" }}
+								/>
+								<FormControlLabel
+									value='Snoop Dogg'
+									control={<Radio />}
+									label='Snoop Dogg'
+									sx={{ color: "white" }}
+								/>
+								<FormControlLabel
+									value='Spongebob'
+									control={<Radio />}
+									label='Spongebob'
+									sx={{ color: "white" }}
+								/>
+								<FormControlLabel
+									value='Gordon Ramsay'
+									control={<Radio />}
+									label='Gordon Ramsay'
+									sx={{ color: "white" }}
+								/>
+								<FormControlLabel
+									value='Ariana Grande'
+									control={<Radio />}
+									label='Ariana Grande'
+									sx={{ color: "white" }}
+								/>
+							</RadioGroup>
+							<Button
+								variant='contained'
+								onClick={handleApplyChanges}
+								sx={{
+									backgroundColor: theme.palette.primary.main,
+									color: "white",
+								}}
+							>
+								Apply Changes
+							</Button>
+						</form>
+						<FormControl component='fieldset'>
+							<FormGroup>
+								<FormControlLabel
+									control={
+										<Switch checked={isMuted} onChange={handleMuteChange} />
+									}
+									label='Mute Sounds'
+									sx={{ color: "white" }}
+								/>
+							</FormGroup>
+						</FormControl>
+					</DialogContent>
+				</Dialog>
+			</Menu>
+		</>
+	);
 }
