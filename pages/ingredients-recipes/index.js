@@ -20,6 +20,11 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+export const metadata = {
+	title: 'Ingredients & Recipes',
+	description: 'Add or delete ingredients and generate recipes!'
+};
+
 export default function IngredientRecipe({ data }) {
   const theme = useTheme();
   const [ingredientsInput, setIngredientsInput] = useState("");

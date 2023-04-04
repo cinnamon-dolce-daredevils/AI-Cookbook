@@ -9,6 +9,12 @@ import TriviaSimpleGrow from '@/components/Trivia';
 import { whyAICookbook } from '@/script/homeinfo';
 import ReasonCards from '@/components/homePage/WhyAICB';
 
+
+export const metadata = {
+	title: 'AI CookBook',
+	description: 'First page of AI Cookbook'
+};
+
 const Home = () => {
   const theme = useTheme();
   const [trivia, setTrivia] = useState("");
