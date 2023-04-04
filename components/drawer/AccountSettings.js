@@ -1,36 +1,35 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import Settings from "@mui/icons-material/Settings";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Link from "next/link";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import GradeIcon from "@mui/icons-material/Grade";
-import { Typography } from "@mui/material";
-import Button from "@mui/material/Button";
-import ThemeChooser from "../ThemeChooser";
-import { useTheme } from "@emotion/react";
-import Switch from "@mui/material/Switch";
-import FormGroup from "@mui/material/FormGroup";
-import FormControl from "@mui/material/FormControl";
-import { useMute } from "../MuteContext";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Settings from '@mui/icons-material/Settings';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Link from 'next/link';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import GradeIcon from '@mui/icons-material/Grade';
+import { Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import ThemeChooser from '../ThemeChooser';
+import { useTheme } from '@emotion/react';
+import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+import FormControl from '@mui/material/FormControl';
+import { useMute } from '../MuteContext';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useSession } from '@supabase/auth-helpers-react';
 import style from '../../styles/animatedMenu.module.css';
-import MenuIcon1 from "../MenuIcon1";
-import { useState } from "react";
-
+import MenuIcon1 from '../MenuIcon1';
+import { useState } from 'react';
 
 export default function AccountMenu() {
   let [menuOpen, setMenuOpen] = useState(false);
@@ -49,29 +48,29 @@ export default function AccountMenu() {
     setSettingsOpen(false);
     console.log(settingsOpen);
   };
-  const [selectedPersonality, setSelectedPersonality] = React.useState("AI");
-  const [tempSelectedPersonality, setTempSelectedPersonality] =
-  React.useState(localStorage.getItem("selectedPersonality") || "AI");
-  
+  const [selectedPersonality, setSelectedPersonality] = React.useState('AI');
+  const [tempSelectedPersonality, setTempSelectedPersonality] = React.useState(
+    localStorage.getItem('selectedPersonality') || 'AI'
+  );
 
   const storePersonalityInLocalStorage = (selectedPersonality) => {
-    localStorage.setItem("selectedPersonality", selectedPersonality);
+    localStorage.setItem('selectedPersonality', selectedPersonality);
   };
 
   const handleMuteChange = (event) => {
     setIsMuted(event.target.checked);
-    localStorage.setItem("isMuted", event.target.checked);
+    localStorage.setItem('isMuted', event.target.checked);
   };
 
   React.useEffect(() => {
-    const storedMuteStatus = localStorage.getItem("isMuted");
+    const storedMuteStatus = localStorage.getItem('isMuted');
     if (storedMuteStatus) {
-      setIsMuted(storedMuteStatus === "true");
+      setIsMuted(storedMuteStatus === 'true');
     }
   }, []);
 
   React.useEffect(() => {
-    const storedPersonality = localStorage.getItem("selectedPersonality");
+    const storedPersonality = localStorage.getItem('selectedPersonality');
     if (storedPersonality) {
       setSelectedPersonality(storedPersonality);
     }
@@ -106,21 +105,26 @@ export default function AccountMenu() {
           paddingRight: '0',
         }}
       >
+        {/* hamburger animation start */}
         <Tooltip title="Menu">
           <IconButton>
-          <div onClick={handleClick}
-                      aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}>
-        <div
-          className={`${style.menuBtn} ${menuOpen ? style.menuBtnOpen : null}`}
-        >
-          <div className={style.menuBtnBurger}></div>
-        </div>
+            <div
+              onClick={handleClick}
+              aria-controls={open ? 'account-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+            >
+              <div
+                className={`${style.menuBtn} ${
+                  anchorEl ? style.menuBtnOpen : null
+                }`}
+              >
+                <div className={style.menuBtnBurger}></div>
+              </div>
             </div>
-            </IconButton>
-      </Tooltip>
-
+          </IconButton>
+        </Tooltip>
+        {/* hamburger animation end */}
       </Box>
       <Menu
         anchorEl={anchorEl}
