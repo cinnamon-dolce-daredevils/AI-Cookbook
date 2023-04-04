@@ -1,18 +1,14 @@
-Description
-![Javascript](AI-CookBook-Screenshots/javascript.svg)
-
-
+# AI CookBook
 
 ---
 The Pages of AI CookBook
----
 ---
 **`Home Page Dark/Light Mode`**
 ![Home Page Dark Mode](AI-CookBook-Screenshots/homedarkmode.png)
 ![Home Page Light Mode](AI-CookBook-Screenshots/homelightmode.png)
 ---
 ---
-**`Settings Dark/Light Mode`**
+**`Settings Dark/Light Mode, Select Your AI Voice!`**
 ![Settings Dark Mode](AI-CookBook-Screenshots/settingsdarkmode.png)
 ![Settings Light Mode](AI-CookBook-Screenshots/settingslightmode.png)
 ---
@@ -20,6 +16,11 @@ The Pages of AI CookBook
 ---
 **`Add Ingredients Dark Mode`**
 ![Add Ingredients Page Dark Mode](AI-CookBook-Screenshots/addingredients.png)
+---
+
+---
+**`Open Pantry`**
+![Pantry Dark Mode](AI-CookBook-Screenshots/pantry.png)
 ---
 
 ---
