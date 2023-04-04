@@ -6,9 +6,27 @@ Description
 ---
 The Pages of AI CookBook
 ---
-`Login`
-![Login Page Dark Mode]()
-![Login Page Light Mode]()
+
+**`Home Page Dark/Light Mode`**
+![Home Page Dark Mode](AI-CookBook-Screenshots/homedarkmode.png)
+![Home Page Light Mode](AI-CookBook-Screenshots/homelightmode.png)
+---
+
+---
+**`Add Ingredients Dark Mode`**
+![Add Ingredients Page Dark Mode](AI-CookBook-Screenshots/addingredients.png)
+---
+
+---
+**`Login Dark/Light Mode`**
+![Login Page Dark Mode](AI-CookBook-Screenshots/darkmodelogin.png)
+![Login Page Light Mode](AI-CookBook-Screenshots/lightmodelogin.png)
+---
+
+**`Favorites Dark/Light Mode`**
+![Favorite Page Dark Mode](AI-CookBook-Screenshots/favdarkmode.png)
+![Favorite Page Light Mode](AI-CookBook-Screenshots/favlightmode.png)
+---
 
 ---
 Technology
