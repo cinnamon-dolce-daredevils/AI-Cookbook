@@ -9,10 +9,9 @@ import style from '../styles/techCard.module.css';
 
 const TechCard = (props) => {
   let picSize = '150px';
-  
+
   const { src, name, description } = props;
 
-  console.log(src);
   return (
     <>
       <div className={style.techCard}>

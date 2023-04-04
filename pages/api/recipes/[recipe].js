@@ -51,7 +51,7 @@ export default function Recipe() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/images/forkman-removebg.png" className={styles.icon} />
+        <img src="/images/forkman-removebg.png" alt="Fork Man Image" className={styles.icon} />
         <Link href={{
           pathname: '/recipes'}}>
           <div className={styles.back}> Choose Another Recipe</div>
@@ -59,7 +59,7 @@ export default function Recipe() {
 
         <h3>{isLoading ? 'Loading...' : recipe}</h3>
         {isLoading ? (
-          <img src="/images/fridge.gif" />
+          <img src="/images/fridge.gif" alt="Fridge Gif" />
         ) : (
           <h4 className={styles.recipe}>{result}</h4>
         )}

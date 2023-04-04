@@ -3,7 +3,6 @@ import { createClient } from '@supabase/supabase-js';
 import styles from '../../styles/profile.module.css'
 import Link from 'next/link';
 import { Button } from '@mui/material';
-import Box from '@mui/material';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;

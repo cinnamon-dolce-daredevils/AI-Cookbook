@@ -13,7 +13,6 @@ import SimpleGrow from '@/components/Devs';
 import { DevInfo } from '@/script/devInfo';
 import TechCard from '@/components/TechCard';
 import { techInfo } from '../../script/techInfo';
-import { useMute } from "@/components/MuteContext";
 import { useState } from 'react';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#FFFFFF',
@@ -36,7 +35,7 @@ const AboutPage = () => {
     function playAudio(audioPath) {
       const audio = new Audio(audioPath);
       audio.play();
-    } 
+    }
 
     return (
       <Slide
@@ -156,16 +155,15 @@ const AboutPage = () => {
           <Grid container spacing={1}>
             {techInfo.map((tech, index) => {
               return (
-                <>
-                  <Grid item xs={11} md={6} key={index}>
+                <div key={index}>
+                  <Grid item xs={11} md={6}>
                     <TechCard
                       src={tech.image}
                       name={tech.name}
-                      key={index}
                       description={tech.description}
                     />
                   </Grid>
-                </>
+                </div>
               );
             })}
           </Grid>

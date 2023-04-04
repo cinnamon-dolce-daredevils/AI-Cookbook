@@ -9,7 +9,6 @@ import { Avatar, Link, Typography } from '@mui/material';
 import { useTheme } from '@emotion/react';
 import { useMute } from "@/components/MuteContext";
 
-
 export default function SimpleGrow(props) {
     const theme = useTheme()
 	const [checked, setChecked] = React.useState(false);
@@ -19,8 +18,8 @@ export default function SimpleGrow(props) {
 	function playAudio(audioPath) {
 		const audio = new Audio(audioPath);
 		audio.play();
-	  } 	
-    
+	  }
+
 	  const handleClick = () => {
 		if (!isMuted) {
 		  if (checked) {
