@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -96,6 +97,7 @@ export default function AccountMenu() {
   };
 
   return (
+
     <>
       <Box
         sx={{
@@ -233,8 +235,8 @@ export default function AccountMenu() {
               Choose a Color Theme
             </Typography>
 
-            <ThemeChooser />
 
+						<ThemeChooser />
             <form noValidate autoComplete="off">
               <Typography
                 sx={{ color: theme.palette.common.white, fontWeight: 'bold' }}
@@ -310,4 +312,5 @@ export default function AccountMenu() {
       </Menu>
     </>
   );
+
 }
