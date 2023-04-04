@@ -12,6 +12,11 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 )
 
+export const metadata = {
+	title: 'Favorites',
+	description: 'Displays a list of users\' favorite recipes!'
+};
+
 const FavoritesPage = (userId) => {
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavorite, setIsFavorite] = useState(true);

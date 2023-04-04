@@ -23,6 +23,11 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+export const metadata = {
+	title: 'About Page',
+	description: 'Covers Technology and Developers'
+};
+
 const AboutPage = () => {
   let [bongoIsSeen, setBongoIsSeen] = useState(true);
   function SlideIn(props) {
@@ -36,7 +41,7 @@ const AboutPage = () => {
     function playAudio(audioPath) {
       const audio = new Audio(audioPath);
       audio.play();
-    } 
+    }
 
     return (
       <Slide
