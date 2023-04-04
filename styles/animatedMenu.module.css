@@ -37,8 +37,8 @@
 }
 
 .menuBtnBurger{
-    width: 37px;
-    height: 5px;
+    width: 40px;
+    height: 7px;
     background: rgba(165, 42, 42, 0.592);
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
@@ -50,7 +50,7 @@
     content: '';
     position: absolute;
     bottom: 10px;
-    right: 3px;
+    right: 2px;
     width: 35px;
     height: 17px;
     background-color: #e27700;
@@ -62,7 +62,7 @@
 
 .menuBtnBurger::after{
     /* controls bottom bun */
-    right: 3px;
+    right: 2px;
     top: 10px;
     content: '';
     position: absolute;
@@ -102,5 +102,5 @@
 .menuBtnOpen .menuBtnBurger::after{
     transform: rotate(-45deg) translate(40px, 27px);
     transition: all .5s ease-in-out;
-    box-shadow: 0 2px 5px black;
+    box-shadow: 0 1px 1px black;
 }
