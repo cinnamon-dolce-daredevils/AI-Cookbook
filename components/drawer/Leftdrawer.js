@@ -21,12 +21,14 @@ import AccountSettings from './AccountSettings';
 import { useSession } from "@supabase/auth-helpers-react";
 import { createClient } from "@supabase/supabase-js";
 import IngredientDetails from '../IngredientDetails';
+import MenuIcon1 from '../MenuIcon1'
 const drawerWidth = 240;
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 import useSWR from 'swr'
+import { relative } from 'path';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -209,9 +211,7 @@ let refreshRate = 2000
                 display: 'flex',
               }}
             >
-
-
-              <AccountSettings />
+              <AccountSettings/>
             </Box>
           </Toolbar>
         </AppBar>

@@ -1,0 +1,101 @@
+.Body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    /* background-color: blue; */
+}
+.menuBtn{
+    /* background-color: red; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+    /* border: 3px solid gray; */
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 800px){
+    .menuBtn{
+        position: relative;
+    display: flex;
+    left: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+    /* border: 3px solid gray; */
+    border-radius: 5px;
+    }
+}
+
+.menuBtnBurger{
+    width: 37px;
+    height: 5px;
+    background: rgba(165, 42, 42, 0.592);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    transition: all 1s ease-in-out;
+}
+
+.menuBtnBurger::before{ 
+    /* controls top bun */
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    right: 3px;
+    width: 35px;
+    height: 8px;
+    background: #e27700;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    transition: all .5s ease-in-out;
+}
+
+.menuBtnBurger::after{
+    /* controls bottom bun */
+    right: 3px;
+    top: 10px;
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 6px;
+    background:#e27700;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    transition: all .5s ease-in-out;
+}
+
+.menuBtnBurger::before{
+    transform: translateY(-16px);
+}
+
+.menuBtnBurger::after{
+    transform: translateY(16px);
+}
+
+
+/* ANIMATION */
+
+.menuBtnOpen .menuBtnBurger{
+    transform: translateX(-50px);
+    background: transparent;
+    box-shadow: none;
+    transition: all .5s ease-in-out;
+}
+
+.menuBtnOpen .menuBtnBurger::before{
+    transform: rotate(45deg) translate(43px, -25px);
+    transition: all .5s ease-in-out;
+}
+
+.menuBtnOpen .menuBtnBurger::after{
+    transform: rotate(-45deg) translate(40px, 27px);
+    transition: all .5s ease-in-out;
+}
