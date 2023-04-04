@@ -94,7 +94,7 @@ const IngredientDetails = (props) => {
 						onClick={(event) => handleDeleteIcon(event)}
 					>
 						{hoverDelete ? (
-							<DeleteTwoToneIcon sx={{ color: "purple" }} />
+							<DeleteTwoToneIcon sx={{ color: theme.palette.hover.main }} />
 						) : (
 							<DeleteIcon />
 						)}
