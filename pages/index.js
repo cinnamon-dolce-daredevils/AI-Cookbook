@@ -87,7 +87,14 @@ const Home = () => {
 				)}
 			</div>
 			<div>
-				<h1 style={{ width: "100%", textAlign: "center", marginTop: "125px", marginBottom:'50px' }}>
+				<h1
+					style={{
+						width: "100%",
+						textAlign: "center",
+						marginTop: "125px",
+						marginBottom: "50px",
+					}}
+				>
 					Why AI Cookbook?
 				</h1>
 				<Container>
@@ -102,51 +109,45 @@ const Home = () => {
 								/>
 							);
 						})}
-						{session ? (
-							<div className={styles.whyButton}>
-								<h3>
-									{" "}
-									Find out more about it here!
-								</h3>
-								<Link
-									style={{ textDecoration: "none", color: "white" }}
-									href={"/ingredients-recipes"}
-								>
-									<Button
-										sx={{
-											backgroundColor: theme.palette.secondary.main,
-											color: theme.palette.common.white,
-											// margin: "40px",
-											// mt: 3,
-										}}
-									>
-										Add Ingredients
-									</Button>
-								</Link>
-							</div>
-						) : (
-							<div className={styles.whyButton}>
-								<h2 style={{ color: "white" }}>
-									{" "}
-									Start exploring now!
-								</h2>
-								<Link style={{ textDecoration: "none" }} href={"/profile"}>
-									<Button
-										sx={{
-											color: "white",
-											backgroundColor: theme.palette.secondary.main,
-											textDecoration: "none",
-											// margin: "40px",
-										}}
-										variant='contained'
-									>
-										{" "}
-										Signup/Login
-									</Button>
-								</Link>
-							</div>
-						)}
 					</Grid>
+					{session ? (
+						<div className={styles.whyButton}>
+							<h3> Find out more about it here!</h3>
+							<Link
+								style={{ textDecoration: "none", color: "white" }}
+								href={"/ingredients-recipes"}
+							>
+								<Button
+									sx={{
+										backgroundColor: theme.palette.secondary.main,
+										color: theme.palette.common.white,
+										// margin: "40px",
+										// mt: 3,
+									}}
+								>
+									Add Ingredients
+								</Button>
+							</Link>
+						</div>
+					) : (
+						<div className={styles.whyButton}>
+							<h2> Start exploring now!</h2>
+							<Link style={{ textDecoration: "none" }} href={"/profile"}>
+								<Button
+									sx={{
+										color: "white",
+										backgroundColor: theme.palette.secondary.main,
+										textDecoration: "none",
+										// margin: "40px",
+									}}
+									variant='contained'
+								>
+									{" "}
+									Signup/Login
+								</Button>
+							</Link>
+						</div>
+					)}
 				</Container>
 			</div>
 			<div className={styles.parallax}></div>
