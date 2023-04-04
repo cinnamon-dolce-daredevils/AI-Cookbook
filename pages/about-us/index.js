@@ -175,6 +175,7 @@ const AboutPage = () => {
             })}
           </Grid>
           <p className={style.bongos}>
+            <br></br>
             🌴🪘🌴 Bongo sound board provided by FSA Instructor Tim Miller 🌴🪘🌴
           </p>
         </Box>
