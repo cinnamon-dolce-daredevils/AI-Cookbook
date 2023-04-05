@@ -38,7 +38,7 @@
 
 .menuBtnBurger{
     width: 40px;
-    height: 7px;
+    height: 6px;
     background: rgba(165, 42, 42, 0.592);
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
@@ -100,7 +100,8 @@
 }
 
 .menuBtnOpen .menuBtnBurger::after{
-    transform: rotate(-45deg) translate(40px, 27px);
+    /* controls line with shadow on top of other line */
+    transform: rotate(-45deg) translate(38px, 28px);
     transition: all .5s ease-in-out;
     box-shadow: 0 1px 1px black;
 }
