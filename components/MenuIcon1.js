@@ -8,7 +8,6 @@ const MenuIcon1 = () => {
   let [menuOpen, setMenuOpen] = useState(false);
   let handleClick = () => {
     setMenuOpen(!menuOpen);
-    console.log(menuOpen);
   }
   return (
     <>
