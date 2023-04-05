@@ -45,11 +45,11 @@ export default function AccountMenu() {
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const handleSettingsOpen = () => {
     setSettingsOpen(true);
-    console.log(settingsOpen);
+   
   };
   const handleSettingsClose = () => {
     setSettingsOpen(false);
-    console.log(settingsOpen);
+   
   };
   const [selectedPersonality, setSelectedPersonality] = React.useState('AI');
   const [tempSelectedPersonality, setTempSelectedPersonality] = React.useState(
