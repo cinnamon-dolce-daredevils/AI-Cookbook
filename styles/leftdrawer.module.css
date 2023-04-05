@@ -14,17 +14,27 @@
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  margin-left: 20px;
-  font-size: medium;
-  position: relative;
+  margin-right: 25px;
+  background:
+      linear-gradient(to right,
+        rgb(249, 251, 251),
+        rgb(249, 252, 252)),
+      linear-gradient(to right,
+      rgb(182, 244, 146),
+      rgb(51, 139, 147));
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
 }
 
 .links:hover {
-  color:#767b81
+background-size: 0 3px, 100% 3px;
+animation: fill 1s forwards;
    /* change the text color on hover */
 }
 
-.links::after {
+/* .links::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -32,29 +42,29 @@
   width: 0%;
   height: 2px;
   background-color: white;
-  /* set the line color */
+
   transition: width 0.3s ease-in-out;
-  /* add transition effect */
+ 
 }
 
 .links:hover::after {
   width: 100%;
-  /* show the line on hover */
+
   animation: fill 1s forwards;
-  /* add fill animation */
+  
 }
 
 @keyframes fill {
   0% {
     width: 0%;
-    /* start with no width */
+
   }
 
   100% {
     width: 100%;
-    /* end with full width */
+  
   }
-}
+} */
 
 .burgerLink{
   color: white;

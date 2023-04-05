@@ -33,9 +33,9 @@ const AboutPage = () => {
   function SlideIn(props) {
     const { children, window, delay = 0, direction = 'right' } = props;
     const trigger = useScrollTrigger({
-      target: window && window(),
-      disableHysteresis: false,
-      threshold: 0,
+      target: window && Window(),
+      disableHysteresis: true,
+      threshold: 0.5,
     });
 
     function playAudio(audioPath) {
@@ -44,14 +44,14 @@ const AboutPage = () => {
     }
 
     return (
-      <Slide
-        direction={direction}
-        in={trigger}
-        style={{ transitionDelay: `${delay}ms` }}
-      >
-        {children}
-      </Slide>
-    );
+			<Slide
+				direction={direction}
+				in={trigger}
+				style={{ transitionDelay: `${delay}ms` }}
+			>
+				{children}
+			</Slide>
+		);
   }
   return (
 		<>
@@ -99,90 +99,89 @@ const AboutPage = () => {
 
 			<div className={style.parallax}></div>
 			<Box sx={{ minHeight: 700 }}>
-				<SlideIn delay={500}>
+				<SlideIn delay={500} mountOnEnter unmountOnExit>
 					<Typography align='center' variant='h2' my={2}>
 						Meet The Devs
 					</Typography>
 				</SlideIn>
 				<br />
 
-
-
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            overflow: 'auto',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-          }}
-        >
-          {DevInfo.map((dev, index) => {
-            //simpleGrow is in components/Dev.js
-            return (
-              <SlideIn
-                key={index}
-                delay={1000 + index * 500}
-                mountOnEnter
-                unmountOnExit
-              >
-                <Grid sx={{ mb: '100px' }} item xs={5} md={3}>
-                  <SimpleGrow
-                    sx={{ height: '50px' }}
-                    name={dev.name}
-                    description={dev.description}
-                    linkedIn={dev.linkedIn}
-                    gitHub={dev.GitHub}
-                    avatar={dev.avatar}
-                  />
-                </Grid>
-              </SlideIn>
-            );
-          }).reverse()}
-        </Grid>
-      </Box>
-      <div className={`${style.parallax2} ${style.parallax}`}></div>
-      <div style={{ margin: '20px' }}>
-        <div style={{ height: '20px' }}></div>
-        <Typography align="center" variant="h2">
-          Technology Used
-        </Typography>
-        <div style={{ height: '30px' }}></div>
-        <Box
-          sx={{
-            flexGrow: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            m: '2',
-            height: 'auto + 50px',
-          }}
-        >
-          <Grid container spacing={1}>
-            {techInfo.map((tech, index) => {
-              return (
-                <>
-                  <Grid item xs={11} md={6} key={index}>
-                    <TechCard
-                      src={tech.image}
-                      name={tech.name}
-                      key={index}
-                      description={tech.description}
-                    />
-                  </Grid>
-                </>
-              );
-            })}
-          </Grid>
-          <p className={style.bongos}>
-            <br></br>
-            🌴🪘🌴 Bongo sound board provided by FSA Instructor Tim Miller 🌴🪘🌴
-          </p>
-        </Box>
-      </div>
-      <div className={style.parallax3}></div>
-    </>
-  );
+				<Grid
+					container
+					spacing={2}
+					sx={{
+						overflow: "auto",
+						display: "flex",
+						flexDirection: "row",
+						justifyContent: "space-evenly",
+					}}
+				>
+					{DevInfo.map((dev, index) => {
+						//simpleGrow is in components/Dev.js
+						return (
+							<SlideIn
+								key={index}
+								delay={1000 + index * 500}
+								mountOnEnter
+								unmountOnExit
+							>
+								<Grid sx={{ mb: "100px" }} item xs={5} md={3}>
+									<SimpleGrow
+										sx={{ height: "50px" }}
+										name={dev.name}
+										description={dev.description}
+										linkedIn={dev.linkedIn}
+										gitHub={dev.GitHub}
+										avatar={dev.avatar}
+									/>
+								</Grid>
+							</SlideIn>
+						);
+					}).reverse()}
+				</Grid>
+			</Box>
+			<div className={`${style.parallax2} ${style.parallax}`}></div>
+			<div style={{ margin: "20px" }}>
+				<div style={{ height: "20px" }}></div>
+				<Typography align='center' variant='h2'>
+					Technology Used
+				</Typography>
+				<div style={{ height: "30px" }}></div>
+				<Box
+					sx={{
+						flexGrow: 1,
+						display: "flex",
+						flexDirection: "column",
+						m: "2",
+						height: "auto + 50px",
+					}}
+				>
+					<Grid container spacing={1}>
+						{techInfo.map((tech, index) => {
+							return (
+								<>
+									<Grid item xs={11} md={6} key={index}>
+										<TechCard
+											src={tech.image}
+											name={tech.name}
+											key={index}
+											description={tech.description}
+										/>
+									</Grid>
+								</>
+							);
+						})}
+					</Grid>
+					<p className={style.bongos}>
+						<br></br>
+						🌴🪘🌴 Bongo sound board provided by FSA Instructor Tim Miller
+						🌴🪘🌴
+					</p>
+				</Box>
+			</div>
+			<div className={style.parallax3}></div>
+		</>
+	);
 };
 //hello
 
