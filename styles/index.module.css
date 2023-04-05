@@ -52,7 +52,7 @@
   flex-direction: column;
   background-image: url('/images/background/pantryBG.jpg');
     background-size: cover;
-    min-height: 650px;
+    min-height: 1000px;
     width: 100%;
 }
 
