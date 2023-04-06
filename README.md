@@ -32,7 +32,7 @@ Add some ingredients and let the AI generate recipes for you!
 ![Add Ingredients Page Dark Mode](AI-CookBook-Screenshots/addingredients.png)
 ---
 **`Open Pantry That Populates with Ingredients!`**
-![Pantry Dark Mode](AI-CookBook-Screenshots/pantry.png)
+![Pantry Dark Mode](AI-CookBook-Screenshots/pantrydarkmode.png)
 ![Pantry Light Mode](AI-CookBook-Screenshots/pantrylightmode.png)
 ---
 **`Login Dark/Light Mode`**
