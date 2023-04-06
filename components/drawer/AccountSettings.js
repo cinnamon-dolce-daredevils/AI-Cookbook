@@ -29,10 +29,12 @@ import { useMute } from '../MuteContext';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useSession } from '@supabase/auth-helpers-react';
 import style from '../../styles/animatedMenu.module.css';
+import styles from '../../styles/leftdrawer.module.css'
 import MenuIcon1 from '../MenuIcon1';
 import { useState } from 'react';
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LoginIcon from "@mui/icons-material/Login";
+import AddTaskIcon from "@mui/icons-material/AddTask";
 
 export default function AccountMenu() {
   let [menuOpen, setMenuOpen] = useState(false);
@@ -193,33 +195,41 @@ export default function AccountMenu() {
 								</span>
 							</Link>
 						</MenuItem>
+						<div className={styles.burgerLink}>
+							<Link href={"/ingredients-recipes"} className={styles.burgerLink}>
+								<MenuItem
+									sx={{ color: theme.palette.text.primary }}
+									onClick={handleClose}
+								>
+									<AddTaskIcon sx={{ color: "white", mr: 1, mb: 1.5 }} />
+									<span style={{ position: "relative", bottom: "5px" }}>
+										Add Ingredients
+									</span>
+								</MenuItem>
+							</Link>
+						</div>
 					</>
 				) : (
 					<Link style={{ textDecoration: "none" }} href='/profile'>
 						<MenuItem sx={{ color: "white", mr: "auto" }} onClick={handleClose}>
 							<LoginIcon className='Menutext' />{" "}
-							<div style={{ paddingLeft: "10px" }}>Sign up/Login </div>
+							<div style={{ paddingLeft: "10px" }}>Sign up/Login</div>
 						</MenuItem>
 					</Link>
 				)}
-				<MenuItem
-					sx={{ color: theme.palette.text.primary }}
-					onClick={handleClose}
-				>
-					<Link
-						style={{
-							color: "white",
-							textDecoration: "none",
-						}}
-						href={"/about-us"}
-					>
-						<InfoOutlinedIcon sx={{ color: "white", mr: 1 }} />
-						<span style={{ position: "relative", bottom: "5px" }}>
-							{" "}
-							About Us
-						</span>
+				<div className={styles.burgerLink}>
+					<Link href={"/about-us"} className={styles.burgerLink}>
+						<MenuItem
+							sx={{ color: theme.palette.text.primary }}
+							onClick={handleClose}
+						>
+							<InfoOutlinedIcon sx={{ color: "white", mr: 1, mb: 1.5 }} />
+							<span style={{ position: "relative", bottom: "5px" }}>
+								About Us
+							</span>
+						</MenuItem>
 					</Link>
-				</MenuItem>
+				</div>
 				<Divider />
 				<MenuItem onClick={handleSettingsOpen} sx={{ color: "white" }}>
 					<ListItemIcon>
