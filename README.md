@@ -13,7 +13,6 @@
 To start using AI Cookbook, simply visit [aicookbook.app](https://www.aicookbook.app) and create a free account. 
 Add some ingredients and let the AI generate recipes for you!
 ---
-
 ## 💡 Features
 * 🍽️ AI-generated recipes based on your pantry items
 * 🌙 Dark and light modes for a comfortable browsing experience
@@ -21,7 +20,6 @@ Add some ingredients and let the AI generate recipes for you!
 * 🛠️ Customize your pantry to match your real-life inventory
 ---
 ## 📸 Screenshots
----
 **`Home Page Dark/Light Mode`**
 ![Home Page Dark Mode](AI-CookBook-Screenshots/homedarkmode.png)
 ![Home Page Light Mode](AI-CookBook-Screenshots/homelightmode.png)
