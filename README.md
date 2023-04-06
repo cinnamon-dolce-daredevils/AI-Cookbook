@@ -7,7 +7,7 @@
 ![Material UI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
-## AI Cookbook is an innovative web application that combines AI-powered recipe generation with an intuitive user interface. Discover new recipes, manage your pantry, and enjoy a personalized cooking experience with AI CookBook.
+## AI Cookbook is an innovative web application that combines AI-powered recipe generation with an intuitive user interface. Discover new recipes, manage your pantry, and enjoy a personalized cooking experience with AI Cookbook.
 
 ## 🚀 Getting Started
 To start using AI Cookbook, simply visit [aicookbook.app](https://www.aicookbook.app) and create a free account. 
