@@ -67,7 +67,7 @@
 
 .loadingOverlay {
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -237,12 +237,12 @@
   gap: 25px;
 }
 
-.recipe h1,
+/* .recipe h1,
 .recipe h2,
 .recipe h3,
 .recipe p {
   margin-left: 50px;
-}
+} */
 
 .fav {
   display: flex;
