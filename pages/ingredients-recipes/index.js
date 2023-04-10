@@ -445,8 +445,8 @@ export default function IngredientRecipe({ data }) {
 						{audioLoading && (
 							<div className={styles.loadingOverlay}>
 								<div className={styles.loading}>
-									<h1>Loading audio...</h1>
-									<img src='/images/speech.gif' alt="Speech GIF"/>
+									<h3>Loading audio...</h3>
+                  <img style={{width: '350px', height: '350px'}} src='/images/speech.gif' alt="Speech GIF"/>
 								</div>
 							</div>
 						)}
