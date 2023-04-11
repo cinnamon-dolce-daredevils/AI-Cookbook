@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBrowser } from "@fortawesome/free-solid-svg-icons";
+
 export const DevInfo = [
 	{
 		name: "Ryan Pearl",
@@ -12,8 +15,14 @@ export const DevInfo = [
 		description: "Cody is a tech enthusiast who loves diving into new challenges and expanding his knowledge. When he's not busy exploring the world of coding, you can find him playing video games and spending time with his wife, Hannah, and their two adorable dogs, Teach and Duncan.",
 		avatar: "/images/codypic.png",
 		linkedIn: "https://www.linkedin.com/in/codydibella/",
+		customIcon: (
+			<FontAwesomeIcon
+				icon={faBrowser}
+				style={{ color: "#ffffff" }}
+			/>
+		),	
 		GitHub: "https://github.com/CodyDiBella",
-	},
+	},	
 	{
 		name: "Ben Villafranca",
 		description: "Ben is a Marine veteran and college graduate of Rutgers - New Brunswick. He has a background in IT. If he isn't at his computer coding, he's probably running with his dog, Hope, or cooking with his fiance, Ananya.",

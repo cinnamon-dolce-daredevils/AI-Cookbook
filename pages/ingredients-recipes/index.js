@@ -126,6 +126,20 @@ export default function IngredientRecipe({ data }) {
     setExpandedIngredient(null);
   }
 
+function storeGuestPantryData(ingredientData) {
+  let guestPantry = JSON.parse(localStorage.getItem("guestPantry")) || [];
+  guestPantry.push(ingredientData);
+  localStorage.setItem("guestPantry", JSON.stringify(guestPantry));
+}
+
+function getGuestPantryData() {
+  return JSON.parse(localStorage.getItem("guestPantry")) || [];
+}
+
+function clearGuestPantryData() {
+  localStorage.removeItem("guestPantry");
+}
+
   async function handleSuggestionClick(suggestion) {
     setIngredientsInput("");
     setSuggestions([]);
@@ -156,38 +170,49 @@ export default function IngredientRecipe({ data }) {
             break;
         }
       }
-      if (!userId) {
-        console.error("user is not logged in");
-        return;
+      if (userId) {
+        const { error } = await supabase.from("pantry").insert([
+          {
+            suggestion: [
+              {
+                id: ingredientDetails.id,
+                name: ingredientDetails.name,
+                calories: calories,
+                fat: fat,
+                protein: protein,
+                carbs: carbs,
+                image: ingredientDetails.image,
+                amount: ingredientDetails.amount,
+                unit: ingredientDetails.unitShort,
+              },
+            ],
+            userId: userId,
+          },
+        ]);
+      
+        if (error) {
+          console.error("Error inserting data:", error);
+        }
+      } else {
+        const ingredientData = {
+          id: ingredientDetails.id,
+          name: ingredientDetails.name,
+          calories: calories,
+          fat: fat,
+          protein: protein,
+          carbs: carbs,
+          image: ingredientDetails.image,
+          amount: ingredientDetails.amount,
+          unit: ingredientDetails.unitShort,
+        };
+      
+        storeGuestPantryData(ingredientData);
+        setIngredientNames((prevIngredientNames) => [
+          ...prevIngredientNames,
+          ingredientData.name,
+        ]);
       }
-      const { error } = await supabase.from("pantry").insert([
-        {
-          suggestion: [
-            {
-              id: ingredientDetails.id,
-              name: ingredientDetails.name,
-              calories: calories,
-              fat: fat,
-              protein: protein,
-              carbs: carbs,
-              image: ingredientDetails.image,
-              amount: ingredientDetails.amount,
-              unit: ingredientDetails.unitShort,
-            },
-          ],
-          userId: userId,
-        },
-      ]);
-
-      if (error) {
-        console.error("Error inserting data:", error);
-      }
-
-      setIngredientNames((prevIngredientNames) => [
-        ...prevIngredientNames,
-        ingredientDetails.name,
-      ]);
-
+  
       setExpandedIngredient(null);
     } catch (error) {
       console.error(error);

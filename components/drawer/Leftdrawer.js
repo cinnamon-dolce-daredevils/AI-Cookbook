@@ -1,44 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Link from 'next/link';
-import styles from '../../styles/leftdrawer.module.css';
-import KitchenTwoToneIcon from '@mui/icons-material/KitchenTwoTone';
-import Badge from '@mui/material/Badge';
-import pizzamans from '../../public/images/pizzamans.png'
-import Image from 'next/image';
-import dancingLoad from '../../public/images/cute-food-dancing-gif.gif'
-import AccountSettings from './AccountSettings';
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Link from "next/link";
+import styles from "../../styles/leftdrawer.module.css";
+import KitchenTwoToneIcon from "@mui/icons-material/KitchenTwoTone";
+import Badge from "@mui/material/Badge";
+import pizzamans from "../../public/images/pizzamans.png";
+import Image from "next/image";
+import dancingLoad from "../../public/images/cute-food-dancing-gif.gif";
+import AccountSettings from "./AccountSettings";
 import { useSession } from "@supabase/auth-helpers-react";
 import { createClient } from "@supabase/supabase-js";
-import IngredientDetails from '../IngredientDetails';
+import IngredientDetails from "../IngredientDetails";
 const drawerWidth = 240;
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
-import useSWR from 'swr'
+import useSWR from "swr";
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: `-${drawerWidth}px`,
     ...(open && {
-      transition: theme.transitions.create('margin', {
+      transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
@@ -47,81 +47,86 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   })
 );
 
-const ImageContainer = styled('div')({
-  position: 'absolute',
+const ImageContainer = styled("div")({
+  position: "absolute",
   bottom: 0,
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 });
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
+  transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
 }));
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+  justifyContent: "flex-end",
 }));
 
 export default function PersistentDrawerLeft(props) {
-  const {ingredientNames} = props
-const [pantryItems, setPantryItems] = useState([])
+  function getGuestPantryData() {
+    const guestPantryData = localStorage.getItem("guestPantry");
+    return guestPantryData ? JSON.parse(guestPantryData) : null;
+  }  
+  const { ingredientNames } = props;
+  const [pantryItems, setPantryItems] = useState([]);
   const [hidden, setHidden] = useState(false);
 
-
   const theme = useTheme();
-	const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-	const handleDrawerOpen = () => {
-		setOpen(true);
-	};
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-	const handleDrawerClose = () => {
-		setOpen(false);
-	};
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
+  const session = useSession();
+  let userId = session?.user?.id;
 
-const  session  = useSession();
-let userId = session?.user?.id
+  let refreshRate = 2000;
 
+  const fetcher = (url) =>
+    fetch(url, {
+      method: "GET",
+    }).then((res) => res.json());
 
-let refreshRate = 2000
-
-
-	const fetcher = (url) =>
-		fetch(url, {
-			method: "GET",
-		}).then((res) => res.json());
-
-
-	const { data, error } = useSWR(`/api/suggestions?userId=${userId}`, fetcher, {
-		refreshInterval: refreshRate,
-	});
+  const { data, error } = useSWR(`/api/suggestions?userId=${userId}`, fetcher, {
+    refreshInterval: refreshRate,
+  });
 
   useEffect(() => {
-    if(session && userId && data){
-		setPantryItems(data.data)}
-	}, [data]);
+    if (session && userId && data) {
+      setPantryItems(data.data);
+    } else {
+      const guestPantryData = getGuestPantryData();
+      if (guestPantryData) {
+        setPantryItems(guestPantryData);
+      }
+    }
+  }, [data, session, userId]);
 
-	if (error) {
+  if (error) {
     return (
       <div
         style={{
@@ -148,12 +153,13 @@ let refreshRate = 2000
       />
     );
   }
+  
 
   return (
     <>
       <Box
         sx={{
-          display: 'flex'
+          display: "flex",
         }}
       >
         <AppBar
@@ -170,20 +176,17 @@ let refreshRate = 2000
               sx={{
                 mr: 2,
                 backgroundColor: theme.palette.primary,
-                ...(open && { display: 'none' }),
+                ...(open && { display: "none" }),
               }}
             >
-
               {/* fridge badge is below */}
 
               <Badge
                 badgeContent={pantryItems.length}
                 color="error"
                 sx={{
-                  '& .MuiBadge-badge': {
-
-                    background: '#10a37f',
-
+                  "& .MuiBadge-badge": {
+                    background: "#10a37f",
                   },
                 }}
               >
@@ -201,16 +204,14 @@ let refreshRate = 2000
                 AI Cookbook
               </Link>
             </div>
-            <div style={{ position: 'absolute', right: '100px' }}></div>
+            <div style={{ position: "absolute", right: "100px" }}></div>
             <Box
               sx={{
-                position: 'absolute',
-                right: '50px',
-                display: 'flex',
+                position: "absolute",
+                right: "50px",
+                display: "flex",
               }}
             >
-
-
               <AccountSettings />
             </Box>
           </Toolbar>
@@ -220,11 +221,11 @@ let refreshRate = 2000
             sx={{
               width: drawerWidth,
               flexShrink: 0,
-              '& .MuiDrawer-paper': {
+              "& .MuiDrawer-paper": {
                 width: drawerWidth,
-                boxSizing: 'border-box',
+                boxSizing: "border-box",
                 backgroundColor: theme.palette.secondary.main,
-                filter: 'drop-shadow(5px 5px 19px rgba(0, 0, 0, 1))'
+                filter: "drop-shadow(5px 5px 19px rgba(0, 0, 0, 1))",
               },
             }}
             variant="persistent"
@@ -232,9 +233,16 @@ let refreshRate = 2000
             open={open}
           >
             <DrawerHeader>
-              <div sx={{ color: theme.palette.mode==='light'?'white':'black' }}> My Pantry </div>
+              <div
+                sx={{
+                  color: theme.palette.mode === "light" ? "white" : "black",
+                }}
+              >
+                {" "}
+                My Pantry{" "}
+              </div>
               <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'ltr' ? (
+                {theme.direction === "ltr" ? (
                   <ChevronLeftIcon />
                 ) : (
                   <ChevronRightIcon />
@@ -250,10 +258,19 @@ let refreshRate = 2000
               })}
             </List>
             <ImageContainer>
-            {pantryItems.length <= 3 && (
-    <Image src={pizzamans} alt="Click on an ingredient to see it's nutrional facts!" style={{ width: '90%', height: 'auto', margin: 20, filter: 'drop-shadow(5px 5px 9px rgba(0, 0, 0, 1))' }} />
-            )}
-  </ImageContainer>
+              {pantryItems.length <= 3 && (
+                <Image
+                  src={pizzamans}
+                  alt="Click on an ingredient to see it's nutrional facts!"
+                  style={{
+                    width: "90%",
+                    height: "auto",
+                    margin: 20,
+                    filter: "drop-shadow(5px 5px 9px rgba(0, 0, 0, 1))",
+                  }}
+                />
+              )}
+            </ImageContainer>
           </Drawer>
         </div>
         <Main open={open}>
@@ -263,4 +280,3 @@ let refreshRate = 2000
     </>
   );
 }
-
