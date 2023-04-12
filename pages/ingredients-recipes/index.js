@@ -71,10 +71,38 @@ export default function IngredientRecipe({ data }) {
   const [audioUrl, setAudioUrl] = useState(null);
   const [audioLoading, setAudioLoading] = useState(false);
 
+  // const playSelectedRecipe = async () => {
+  //   setAudioLoading(true);
+  //   if (!isMuted) {
+  //   playAudio('/audio/New Recording 5.m4a');}
+  //   try {
+  //     const audioBlob = await textToSpeech(selectedRecipe, selectedPersonality);
+  //     if (audioBlob) {
+  //       const url = URL.createObjectURL(audioBlob);
+  //       setAudioUrl(url);
+  //       setAudioLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error playing the recipe:", error);
+  //     setAudioLoading(false);
+  //   }
+  // };
+
   const playSelectedRecipe = async () => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const nextMonth = (currentMonth + 1) % 12;
+    const nextMonthFirstDay = new Date(currentDate.getFullYear(), nextMonth, 1);
+    const remainingDays = Math.ceil((nextMonthFirstDay - currentDate) / (1000 * 60 * 60 * 24));
+  
+    alert(
+      `We're sorry, but we went over the allotted characters this month for TTS. We're just 4 broke devs that can't afford to go up another tier, please check back in ${remainingDays} days. Thanks for your understanding!`
+    );
+  
     setAudioLoading(true);
     if (!isMuted) {
-    playAudio('/audio/New Recording 5.m4a');}
+      playAudio("/audio/New Recording 5.m4a");
+    }
     try {
       const audioBlob = await textToSpeech(selectedRecipe, selectedPersonality);
       if (audioBlob) {
@@ -87,6 +115,7 @@ export default function IngredientRecipe({ data }) {
       setAudioLoading(false);
     }
   };
+  
 
   useEffect(() => {
     if (selectedRecipe) {
