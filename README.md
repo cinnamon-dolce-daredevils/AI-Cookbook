@@ -1,5 +1,10 @@
 # AI Cookbook 🤖🍲
 
+## Live Demo
+
+👉 [Watch the Live Demo on YouTube](https://youtu.be/P07WfBzrSds?si=SEh_09sO25Yr-769)
+
+
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Next JS](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
